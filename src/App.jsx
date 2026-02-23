@@ -10,6 +10,9 @@ function useIsMobile(bp = 720) {
   return m;
 }
 
+// Height of the sticky Nav bar on mobile (used to anchor MobileProgressNav)
+const MOBILE_NAV_H = 50;
+
 /*
  * CARL NOTES (not rendered):
  * 1. Tagline + personal context: write as one conversational sentence
@@ -256,7 +259,7 @@ function Footer({ isMobile }) {
   );
 }
 
-function Nav({ currentPage, onNavigate, onToast, isMobile }) {
+function Nav({ currentPage, onNavigate, isMobile }) {
   return (
     <nav style={{
       position: "sticky",
@@ -274,15 +277,15 @@ function Nav({ currentPage, onNavigate, onToast, isMobile }) {
         borderBottom: "1px solid #E5E2DC",
       }}>
         <span
-        onClick={() => currentPage === "home" ? onToast("You're on the homepage") : onNavigate("home")}
+        onClick={() => { if (currentPage !== "home") onNavigate("home"); }}
         className="clickable-soft"
-        style={{ fontSize: T.heading, fontWeight: 700, color: "#000", fontFamily: FONT_DISPLAY }}
+        style={{ fontSize: T.heading, fontWeight: 700, color: "#000", fontFamily: FONT_DISPLAY, flexShrink: 0 }}
       >{"Zulpkar Tuerxun"}</span>
-      <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 16 : 28 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 12 : 28, flexWrap: "wrap", justifyContent: "flex-end" }}>
         {PROJECTS.map((p) => (
           <span
             key={p.id}
-            onClick={() => currentPage === "project-" + p.id ? onToast("You're viewing this project") : onNavigate("project-" + p.id)}
+            onClick={() => { if (currentPage !== "project-" + p.id) onNavigate("project-" + p.id); }}
             className="clickable-soft"
             style={{
               fontSize: T.small,
@@ -290,6 +293,7 @@ function Nav({ currentPage, onNavigate, onToast, isMobile }) {
               color: currentPage === "project-" + p.id ? "#000" : "#888",
               padding: "4px 0",
               borderBottom: currentPage === "project-" + p.id ? "1.5px solid #000" : "1.5px solid transparent",
+              whiteSpace: "nowrap",
             }}
           >
             {p.navName}
@@ -318,6 +322,7 @@ function HomePage({ onNavigate, isMobile }) {
   const [pageCursor, setPageCursor] = useState({ x: 0, y: 0, visible: false });
   const [hoveredBtn, setHoveredBtn] = useState(null);
   const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
+  const [pressedId, setPressedId] = useState(null);
 
   return (
     <div
@@ -393,9 +398,14 @@ function HomePage({ onNavigate, isMobile }) {
             <div
               key={p.id}
               onClick={() => onNavigate("project-" + p.id)}
+              onTouchStart={() => setPressedId(p.id)}
+              onTouchEnd={() => setPressedId(null)}
+              onTouchCancel={() => setPressedId(null)}
               style={{
                 paddingTop: idx === 0 ? 2 : 3,
                 paddingBottom: 3,
+                backgroundColor: isMobile && pressedId === p.id ? "#F2EFEA" : "transparent",
+                transition: "background-color 0.1s ease",
               }}
             >
               <div
@@ -698,7 +708,8 @@ function IterationStep({ version, heading }) {
   );
 }
 
-function SideNav({ headings, isMobile }) {
+function SideNav({ headings }) {
+  const isCompact = useIsMobile(1100);
   const [active, setActive] = useState(-1);
   const [visible, setVisible] = useState(false);
 
@@ -729,7 +740,7 @@ function SideNav({ headings, isMobile }) {
     return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); if (rafId) cancelAnimationFrame(rafId); };
   }, [headings]);
 
-  if (isMobile || !visible) return null;
+  if (isCompact || !visible) return null;
 
   return (
     <div style={{
@@ -783,7 +794,8 @@ function SideNav({ headings, isMobile }) {
   );
 }
 
-function MobileProgressNav({ headings, isMobile }) {
+function MobileProgressNav({ headings }) {
+  const isCompact = useIsMobile(1100);
   const [active, setActive] = useState(-1);
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -830,13 +842,13 @@ function MobileProgressNav({ headings, isMobile }) {
     }
   }, [active]);
 
-  if (!isMobile || !visible) return null;
+  if (!isCompact || !visible) return null;
 
   return (
     <>
       {/* Progress bar — pinned under nav */}
       <div style={{
-        position: "fixed", top: 50, left: 0, right: 0,
+        position: "fixed", top: MOBILE_NAV_H, left: 0, right: 0,
         zIndex: 99, height: 3, backgroundColor: "#EDEAE3",
       }}>
         <div style={{
@@ -850,7 +862,7 @@ function MobileProgressNav({ headings, isMobile }) {
       <div
         onClick={() => setShowList(!showList)}
         style={{
-          position: "fixed", top: 53, left: 0, right: 0,
+          position: "fixed", top: MOBILE_NAV_H + 3, left: 0, right: 0,
           zIndex: 98,
           backgroundColor: labelFlash ? "rgba(250,249,247,0.97)" : "rgba(250,249,247,0.92)",
           borderBottom: showList ? "1px solid #E5E2DC" : "none",
@@ -876,7 +888,7 @@ function MobileProgressNav({ headings, isMobile }) {
       {/* Section list dropdown */}
       {showList && (
         <div style={{
-          position: "fixed", top: 80, left: 0, right: 0,
+          position: "fixed", top: MOBILE_NAV_H + 3 + 30, left: 0, right: 0,
           zIndex: 97,
           backgroundColor: "rgba(250,249,247,0.97)",
           borderBottom: "1px solid #E5E2DC",
@@ -1336,8 +1348,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           zIndex: 0,
         }} />
       )}
-      <SideNav headings={sectionHeadings} isMobile={isMobile} />
-      <MobileProgressNav headings={sectionHeadings} isMobile={isMobile} />
+      <SideNav headings={sectionHeadings} />
+      <MobileProgressNav headings={sectionHeadings} />
       {/* === Header — wider, two-column on desktop === */}
       <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "28px 16px 0" : "40px 40px 0" }}>
 
@@ -1454,7 +1466,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "paragraph") {
             if (block.text) {
-              return <p key={i} style={{ fontSize: T.body, color: "#333", lineHeight: 2, margin: 0, whiteSpace: "pre-wrap" }}>{block.text}</p>;
+              return <p key={i} style={{ fontSize: T.body, color: "#333", lineHeight: 1.75, margin: 0, whiteSpace: "pre-wrap" }}>{block.text}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
@@ -1473,12 +1485,24 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     position: "relative",
                   }}
                 >
-                  {/* Clear illustration — no overlay, no filter */}
-                  <div
-                    onClick={() => setLightboxContent(<IllComponent />)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <IllComponent />
+                  {/* On mobile: horizontally scrollable so SVG text remains legible */}
+                  <div style={{
+                    overflowX: isMobile ? "auto" : "visible",
+                    WebkitOverflowScrolling: "touch",
+                  }}>
+                    {isMobile && (
+                      <p style={{ fontSize: 10, color: "#aaa", margin: "0 0 6px 0", textAlign: "center" }}>
+                        {"← 左右滑动查看 / scroll to explore →"}
+                      </p>
+                    )}
+                    <div style={{ minWidth: isMobile ? 600 : "auto" }}>
+                      <div
+                        onClick={() => setLightboxContent(<IllComponent />)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <IllComponent />
+                      </div>
+                    </div>
                   </div>
                   {/* Subtle caption line with expand hint */}
                   <div style={{
@@ -1617,6 +1641,11 @@ function Lightbox({ children, onClose }) {
   const dragStart = useRef({ x: 0, y: 0 });
   const posRef = useRef({ x: 0, y: 0 });
   const hasDragged = useRef(false);
+  const containerRef = useRef(null);
+  const scaleRef = useRef(1);
+  const touchPinch = useRef(null);
+
+  useEffect(() => { scaleRef.current = scale; }, [scale]);
 
   useEffect(() => {
     const onKey = (e) => { if (e.key === "Escape") onClose(); };
@@ -1624,6 +1653,43 @@ function Lightbox({ children, onClose }) {
     document.body.style.overflow = "hidden";
     return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
   }, [onClose]);
+
+  // Pinch-to-zoom for mobile
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const onTouchStart = (e) => {
+      if (e.touches.length === 2) {
+        touchPinch.current = {
+          dist: Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          ),
+          startScale: scaleRef.current,
+        };
+      }
+    };
+    const onTouchMove = (e) => {
+      if (e.touches.length === 2 && touchPinch.current) {
+        e.preventDefault();
+        const dist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        const ratio = dist / touchPinch.current.dist;
+        setScale(Math.min(Math.max(touchPinch.current.startScale * ratio, 0.5), 4));
+      }
+    };
+    const onTouchEnd = () => { touchPinch.current = null; };
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+    };
+  }, []);
 
   const onWheel = (e) => {
     e.preventDefault();
@@ -1644,7 +1710,7 @@ function Lightbox({ children, onClose }) {
     if (!dragging.current) return;
     const nx = e.clientX - dragStart.current.x;
     const ny = e.clientY - dragStart.current.y;
-    if (Math.abs(nx - posRef.current.x) > 3 || Math.abs(ny - posRef.current.y) > 3) {
+    if (Math.abs(nx - posRef.current.x) > 10 || Math.abs(ny - posRef.current.y) > 10) {
       hasDragged.current = true;
     }
     posRef.current = { x: nx, y: ny };
@@ -1653,11 +1719,11 @@ function Lightbox({ children, onClose }) {
 
   const onPointerUp = () => {
     dragging.current = false;
-    if (!hasDragged.current) onClose();
   };
 
   return (
     <div
+      ref={containerRef}
       onWheel={onWheel}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -1736,7 +1802,7 @@ function Lightbox({ children, onClose }) {
             borderRadius: 16,
           }}>
             <span style={{ fontSize: 11, fontWeight: 600, color: "#000" }}>
-              {"Click anywhere \u00B7 ESC \u00B7 \u00D7"}
+              {"ESC \u00B7 \u00D7"}
             </span>
             <span style={{ fontSize: 10, color: "#888" }}>to close</span>
           </div>
@@ -1799,18 +1865,46 @@ function Toast({ message, position, onDone }) {
   );
 }
 
+function getPageFromHash() {
+  const hash = window.location.hash.slice(1);
+  if (!hash || hash === "home") return "home";
+  if (hash.startsWith("project-")) {
+    const id = parseInt(hash.split("-")[1]);
+    if (PROJECTS.find((p) => p.id === id)) return hash;
+  }
+  return "home";
+}
+
 export default function App() {
-  const [page, setPage] = useState("home");
+  const [page, setPage] = useState(getPageFromHash);
   const [toast, setToast] = useState(null);
   const [fade, setFade] = useState(1);
   const pendingNav = useRef(null);
+  const pageRef = useRef(page);
   const isMobile = useIsMobile();
 
+  useEffect(() => { pageRef.current = page; }, [page]);
+
+  // Sync URL hash on navigation
   const navigate = (t) => {
     if (t === page) return;
+    history.pushState(null, "", "#" + t);
     pendingNav.current = t;
     setFade(0);
   };
+
+  // Handle browser back/forward
+  useEffect(() => {
+    const onPop = () => {
+      const t = getPageFromHash();
+      if (t !== pageRef.current) {
+        pendingNav.current = t;
+        setFade(0);
+      }
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   useEffect(() => {
     if (fade === 0 && pendingNav.current) {
@@ -1836,8 +1930,7 @@ export default function App() {
       display: "flex",
       flexDirection: "column",
     }}>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap');`}</style>
-      <Nav currentPage={page} onNavigate={navigate} onToast={showToast} isMobile={isMobile} />
+      <Nav currentPage={page} onNavigate={navigate} isMobile={isMobile} />
       <div style={{ opacity: fade, transition: "opacity 0.25s ease", flex: 1 }}>
         {page === "home" && <HomePage onNavigate={navigate} isMobile={isMobile} />}
         {cp && <ProjectPage project={cp} onNavigate={navigate} onToast={showToast} isMobile={isMobile} />}
