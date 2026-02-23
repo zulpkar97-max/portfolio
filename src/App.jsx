@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 
 function useIsMobile(bp = 720) {
   const [m, setM] = useState(false);
@@ -316,6 +316,8 @@ function HomePage({ onNavigate, isMobile }) {
   const [hoveredId, setHoveredId] = useState(null);
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
   const [pageCursor, setPageCursor] = useState({ x: 0, y: 0, visible: false });
+  const [hoveredBtn, setHoveredBtn] = useState(null);
+  const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
 
   return (
     <div
@@ -392,8 +394,8 @@ function HomePage({ onNavigate, isMobile }) {
               key={p.id}
               onClick={() => onNavigate("project-" + p.id)}
               style={{
-                paddingTop: idx === 0 ? 4 : 6,
-                paddingBottom: 6,
+                paddingTop: idx === 0 ? 2 : 3,
+                paddingBottom: 3,
               }}
             >
               <div
@@ -422,8 +424,8 @@ function HomePage({ onNavigate, isMobile }) {
                     gridTemplateColumns: "minmax(0, 1fr) auto",
                     columnGap: 32,
                     alignItems: "center",
-                    padding: "18px 20px",
-                    borderRadius: 14,
+                    padding: "28px 20px",
+                    borderRadius: 0,
                     border: "1px solid #E5E2DC",
                     backgroundColor: isHovered ? "#111111" : "#FAF9F7",
                     boxShadow: isHovered ? "0 18px 40px rgba(0,0,0,0.16)" : "none",
@@ -604,30 +606,52 @@ function HomePage({ onNavigate, isMobile }) {
           gap: 12,
           justifyContent: "center",
         }}>
-          <span style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "8px 18px",
-            borderRadius: 999,
-            border: "1px solid #2A2A2A",
-            fontSize: T.small,
-            color: "#2A2A2A",
-            cursor: "default",
-          }}>
-            {"【填你的邮箱】"}
-          </span>
-          <span style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "8px 18px",
-            borderRadius: 999,
-            border: "1px solid #D5D0C8",
-            fontSize: T.small,
-            color: "#777",
-            cursor: "default",
-          }}>
+          <a
+            href="mailto:zulpkar97@gmail.com"
+            onMouseEnter={(e) => { setHoveredBtn("email"); setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
+            onMouseMove={(e) => setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })}
+            onMouseLeave={() => setHoveredBtn(null)}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "8px 18px",
+              borderRadius: 0,
+              border: hoveredBtn === "email" ? "1px solid #111" : "1px solid #2A2A2A",
+              fontSize: T.small,
+              color: hoveredBtn === "email" ? "#fff" : "#2A2A2A",
+              cursor: "pointer",
+              textDecoration: "none",
+              backgroundColor: hoveredBtn === "email" ? "#111" : "transparent",
+              backgroundImage: hoveredBtn === "email"
+                ? `radial-gradient(circle at ${btnPos.x}px ${btnPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))`
+                : "none",
+              transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
+            }}
+          >
+            {"zulpkar97@gmail.com"}
+          </a>
+          <span
+            onMouseEnter={(e) => { setHoveredBtn("link"); setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
+            onMouseMove={(e) => setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })}
+            onMouseLeave={() => setHoveredBtn(null)}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "8px 18px",
+              borderRadius: 0,
+              border: hoveredBtn === "link" ? "1px solid #111" : "1px solid #D5D0C8",
+              fontSize: T.small,
+              color: hoveredBtn === "link" ? "#fff" : "#777",
+              cursor: "pointer",
+              backgroundColor: hoveredBtn === "link" ? "#111" : "transparent",
+              backgroundImage: hoveredBtn === "link"
+                ? `radial-gradient(circle at ${btnPos.x}px ${btnPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))`
+                : "none",
+              transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
+            }}
+          >
             {"【LinkedIn / 个人网站等】"}
           </span>
         </div>
@@ -679,12 +703,12 @@ function SideNav({ headings, isMobile }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
+    let rafId = null;
+    const compute = () => {
       const els = headings.map((_, i) => document.getElementById("section-" + i));
       const navH = 60;
       let found = -1;
-      // If scrolled to bottom, activate last section
-      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
+      const atBottom = window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
       if (atBottom && headings.length > 0) {
         found = headings.length - 1;
       } else {
@@ -697,10 +721,12 @@ function SideNav({ headings, isMobile }) {
       }
       setActive(found);
       setVisible(found >= 0);
+      rafId = null;
     };
-    window.addEventListener("scroll", onScroll);
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(compute); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const t = setTimeout(compute, 100);
+    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); if (rafId) cancelAnimationFrame(rafId); };
   }, [headings]);
 
   if (isMobile || !visible) return null;
@@ -766,11 +792,12 @@ function MobileProgressNav({ headings, isMobile }) {
   const prevActive = useRef(-1);
 
   useEffect(() => {
-    const onScroll = () => {
+    let rafId = null;
+    const compute = () => {
       const els = headings.map((_, i) => document.getElementById("section-" + i));
       const navH = 60;
       let found = -1;
-      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
+      const atBottom = window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
       if (atBottom && headings.length > 0) {
         found = headings.length - 1;
       } else {
@@ -783,14 +810,14 @@ function MobileProgressNav({ headings, isMobile }) {
       }
       setActive(found);
       setVisible(found >= 0);
-
-      // Calculate reading progress
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(docH > 0 ? Math.min(window.scrollY / docH, 1) : 0);
+      rafId = null;
     };
-    window.addEventListener("scroll", onScroll);
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(compute); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const t = setTimeout(compute, 100);
+    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); if (rafId) cancelAnimationFrame(rafId); };
   }, [headings]);
 
   // Flash the label when section changes
@@ -1267,19 +1294,24 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
   const nextProject = hasNext ? PROJECTS.find((p) => p.id === project.id + 1) : null;
   const [lightboxContent, setLightboxContent] = useState(null);
   const [pageCursor, setPageCursor] = useState({ x: 0, y: 0, visible: false });
+  const [hoveredNav, setHoveredNav] = useState(null);
+  const [navPos, setNavPos] = useState({ x: 0, y: 0 });
 
-  // Extract headings for side nav
-  const sectionHeadings = [];
-  let sectionIndex = 0;
-  const bodyWithIds = project.bodyStructure.map((block, i) => {
-    if (block.type === "heading" || block.type === "iteration-step") {
-      const fullLabel = block.type === "heading" ? block.text : block.heading;
-      const navLabel = block.navLabel || fullLabel;
-      sectionHeadings.push(navLabel);
-      return { ...block, sectionId: sectionIndex++ };
-    }
-    return block;
-  });
+  // Extract headings for side nav — memoized so SideNav/MobileProgressNav
+  // don't re-attach scroll listeners on every parent render
+  const { sectionHeadings, bodyWithIds } = useMemo(() => {
+    const headings = [];
+    let idx = 0;
+    const body = project.bodyStructure.map((block) => {
+      if (block.type === "heading" || block.type === "iteration-step") {
+        const fullLabel = block.type === "heading" ? block.text : block.heading;
+        headings.push(block.navLabel || fullLabel);
+        return { ...block, sectionId: idx++ };
+      }
+      return block;
+    });
+    return { sectionHeadings: headings, bodyWithIds: body };
+  }, [project.bodyStructure]);
 
   return (
     <div
@@ -1532,26 +1564,38 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       }}>
         <div
           onClick={hasPrev ? () => onNavigate("project-" + prevProject.id) : () => onToast("This is the first project", "bottom")}
-          className="clickable-soft"
+          onMouseEnter={(e) => { if (hasPrev) { setHoveredNav("prev"); setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); } }}
+          onMouseMove={(e) => { if (hoveredNav === "prev") setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
+          onMouseLeave={() => setHoveredNav(null)}
           style={{
             border: hasPrev ? "1px solid #E5E2DC" : "1px dashed #E5E2DC",
             padding: "14px 20px",
+            cursor: hasPrev ? "pointer" : "default",
+            backgroundColor: hoveredNav === "prev" ? "#111" : "transparent",
+            backgroundImage: hoveredNav === "prev" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
+            transition: "background-color 0.2s ease",
           }}
         >
-          <span style={{ fontSize: T.small, color: hasPrev ? "#999" : "#ccc", display: "block" }}>{"\u2190 Previous"}</span>
-          <span style={{ fontSize: T.body, fontWeight: 500, color: hasPrev ? "#000" : "#ccc" }}>{hasPrev ? prevProject.name : "First project"}</span>
+          <span style={{ fontSize: T.small, color: hoveredNav === "prev" ? "rgba(255,255,255,0.5)" : (hasPrev ? "#999" : "#ccc"), display: "block", transition: "color 0.2s ease" }}>{"\u2190 Previous"}</span>
+          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "prev" ? "#fff" : (hasPrev ? "#000" : "#ccc"), transition: "color 0.2s ease" }}>{hasPrev ? prevProject.name : "First project"}</span>
         </div>
         <div
           onClick={hasNext ? () => onNavigate("project-" + nextProject.id) : () => onToast("This is the last project", "bottom")}
-          className="clickable-soft"
+          onMouseEnter={(e) => { if (hasNext) { setHoveredNav("next"); setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); } }}
+          onMouseMove={(e) => { if (hoveredNav === "next") setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
+          onMouseLeave={() => setHoveredNav(null)}
           style={{
             border: hasNext ? "1px solid #E5E2DC" : "1px dashed #E5E2DC",
             padding: "14px 20px",
             textAlign: isMobile ? "left" : "right",
+            cursor: hasNext ? "pointer" : "default",
+            backgroundColor: hoveredNav === "next" ? "#111" : "transparent",
+            backgroundImage: hoveredNav === "next" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
+            transition: "background-color 0.2s ease",
           }}
         >
-          <span style={{ fontSize: T.small, color: hasNext ? "#999" : "#ccc", display: "block" }}>{"Next \u2192"}</span>
-          <span style={{ fontSize: T.body, fontWeight: 500, color: hasNext ? "#000" : "#ccc" }}>{hasNext ? nextProject.name : "Last project"}</span>
+          <span style={{ fontSize: T.small, color: hoveredNav === "next" ? "rgba(255,255,255,0.5)" : (hasNext ? "#999" : "#ccc"), display: "block", transition: "color 0.2s ease" }}>{"Next \u2192"}</span>
+          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "next" ? "#fff" : (hasNext ? "#000" : "#ccc"), transition: "color 0.2s ease" }}>{hasNext ? nextProject.name : "Last project"}</span>
         </div>
       </nav>
       </div>
@@ -1731,12 +1775,14 @@ function BackToTop() {
 
 function Toast({ message, position, onDone }) {
   const [phase, setPhase] = useState("in");
+  const onDoneRef = useRef(onDone);
+  useEffect(() => { onDoneRef.current = onDone; }, [onDone]);
   useEffect(() => {
     const fadeInDone = setTimeout(() => setPhase("visible"), 20);
     const startOut = setTimeout(() => setPhase("out"), 1600);
-    const done = setTimeout(onDone, 2000);
+    const done = setTimeout(() => onDoneRef.current(), 2000);
     return () => { clearTimeout(fadeInDone); clearTimeout(startOut); clearTimeout(done); };
-  }, [onDone]);
+  }, []);
   const posStyle = position === "bottom"
     ? { bottom: 80 }
     : { top: 64 };
