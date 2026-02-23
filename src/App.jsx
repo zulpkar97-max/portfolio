@@ -172,43 +172,70 @@ const PROJECTS = [
   },
   {
     id: 3,
-    name: "项目3名称待定",
+    name: "18语种AI翻译系统",
     navName: "项目3",
-    roleLine: "【角色待定】 // 【时间待定】",
-    summary: "【一句话概述，从正文提取】",
-    cardSummary: "【卡片摘要待定稿】",
-    cardTag: "【关键数字待定】",
+    roleLine: "AI产品负责人 // 2024–2025",
+    summary: "从娜娜项目衍生：通过内部调研识别跨国翻译痛点，从0搭建覆盖18语种的AI翻译系统，独立完成从MVP到飞书集成的全链路迭代。",
+    cardSummary: "从娜娜项目衍生的AI落地扩散——识别政企部门18语种翻译痛点，从MVP迭代到支持文件上传、格式转换、飞书集成的完整翻译系统。",
+    cardTag: "AI产品 · 0→1",
     layoutMode: "iteration",
     metricsMode: "numbers",
     metrics: [
-      { number: "【数字待定】", label: "【指标1待定】" },
-      { number: "【数字待定】", label: "【指标2待定】" },
-      { number: "【数字待定】", label: "【指标3待定】" },
+      { number: "18", label: "Languages supported" },
+      { number: "5", label: "Iteration steps" },
+      { number: "4", label: "Business scenarios" },
     ],
+    teamInfo: "2人核心团队（我 + 实习生1名）",
     illustrations: [
-      { name: "线性迭代流程图", type: "流程图", note: "迭代过程=结果证明" },
+      { name: "线性迭代流程图", type: "流程图", note: "从MVP到business-ready的五步迭代路径与关键决策节点" },
     ],
     bodyStructure: [
-      { type: "heading", text: "【正文小标题 · 段落一】" },
-      { type: "paragraph" },
-      { type: "iteration-step", version: "阶段1", heading: "【搭建bot相关段落】" },
-      { type: "paragraph" },
-      { type: "screenshot-inline", label: "飞书机器人运行界面", note: "正文讲搭建bot时" },
-      { type: "screenshot-inline", label: "开发者署名「卡尔」", note: "同上或紧跟其后" },
-      { type: "iteration-step", version: "阶段2", heading: "【翻译产出相关段落】" },
-      { type: "paragraph" },
+      // === 背景 ===
+      { type: "heading", text: "从一次内部培训开始的AI落地", navLabel: "背景" },
+      { type: "paragraph", text: "娜娜项目上线后，我在公司内部做了一场AI培训宣讲，主题是鼓励大家用Coze平台搭建自己的工作流。我当时的想法很简单——娜娜证明了AI在实际业务中能用，但如果只有我一个人在推，AI在公司内部的落地就始终是孤例。我希望更多人看到这个可能性。" },
+      { type: "paragraph", text: "培训结束后我做了用户调研，收到了一条让我停下来的反馈：政企部门说跨国业务的翻译特别痛苦。他们的业务覆盖十八种语言，但市面上很难找到一家供应商能同时处理这么多语种且价格合理，实际操作是每两三种语言找一家不同的外包公司。成本高是一方面，更大的问题是对接复杂——十八种语言意味着要同时管理多条外包线，沟通成本和出错概率都在翻倍增长。" },
+      { type: "paragraph", text: "我当时的判断是：这件事很适合用AI解决。原因有三点。第一，翻译是高度标准化的输入输出任务，AI大模型在这个场景下的能力已经足够成熟。第二，痛点不在翻译质量本身，而在多语种并行处理的效率和成本——这恰好是AI工作流最擅长解决的问题。第三，如果做成了，受益的不只是政企部门，公司所有全球业务线都有同样的需求。" },
+      { type: "paragraph", text: "我带着初步方案去找了技术总监。确认技术上可行之后，我开始动手。" },
+
+      // === 迭代过程 ===
+      { type: "iteration-step", version: "Step 1", heading: "MVP: 跑通中英文纯文本互换", navLabel: "MVP" },
+      { type: "paragraph", text: "最简单的 input/output，目的只有一个——验证翻译逻辑在 Coze 工作流里能不能跑通。这一步不追求完美，只追求「能用」。" },
+
+      { type: "iteration-step", version: "Step 2", heading: "API 选型", navLabel: "API选型" },
+      { type: "paragraph", text: "这一步我花了比较多时间权衡。评估维度有三个：业务量适配度（我们的翻译量级适合哪种计费模式）、价格（在合适的前提下找最便宜的）、翻译准确度。三者不可能都是最优解，我需要找到平衡点。最终选定了在我们的业务量级下性价比最高的方案。" },
+
+      { type: "iteration-step", version: "Step 3", heading: "从文本到文件，从政企到全公司", navLabel: "产品升级" },
+      { type: "paragraph", text: "MVP跑通之后我发现两件事。第一，翻译需求不只存在于政企部门——公司全球业务线都有「随手放进去就能翻」的需求，用户范围比我最初预想的大得多。第二，用户实际工作中处理的不是一句一句的文本，而是整份文档。这两个发现改变了我对产品边界的判断：这不是一个给政企部门用的小工具，而是需要支持文件级批量处理的通用翻译系统。产品定位的升级直接决定了后续所有功能的设计方向。" },
+
+      { type: "iteration-step", version: "Step 4", heading: "格式转换——整个项目最难的环节", navLabel: "格式突破" },
+      { type: "paragraph", text: "问题在于：Excel输入只能Excel输出，Markdown同理，现有的Coze插件都做不到跨格式转换。但用户的真实需求是灵活的——他们希望文本输入之后，可以选择输出为Excel、云文档或其他格式。这里我面对一个选择：是接受技术限制、告诉用户「输入什么格式就输出什么格式」，还是想办法突破？我选择后者，因为如果用户还得自己做格式转换，这个系统的实际使用门槛并没有真正降下来。我把需求定义清楚后交给技术团队，他们用Coze的代码插件功能开发了自定义插件来解决这个问题。" },
+
+      { type: "iteration-step", version: "Step 5", heading: "飞书集成与前端搭建", navLabel: "整合上线" },
+      { type: "paragraph", text: "格式问题解决之后，下一个判断是：怎样才算「真正好用」？我的标准是用户拿来就能用，不需要任何额外操作。所以我推动了飞书集成——翻译完成后自动生成文档、直接写入对应人的文档库，省去转换和上传步骤。前端方面，因为这是一个公益性项目，没有独立的前端开发人力，我自己用低代码平台搭建了用户界面，包括单语种和多语种两个入口。这一步的判断不复杂，但它决定了最终产出是「能跑的demo」还是「同事们愿意打开来用的工具」。" },
+      { type: "screenshot-inline", label: "飞书云表格18语种产出", note: "实际翻译产出，展示系统覆盖的语言范围" },
+      { type: "screenshot-inline", label: "自搭前端界面", note: "低代码平台搭建的用户界面（单语种 / 多语种两个入口）" },
+
       { type: "illustration", index: 0 },
-      { type: "screenshot-inline", label: "飞书云表格18语种产出", note: "正文讲翻译产出时" },
-      { type: "iteration-step", version: "阶段3", heading: "【没有前端资源自己解决】" },
-      { type: "paragraph" },
-      { type: "screenshot-inline", label: "自搭前端", note: "正文讲「没有前端资源自己解决」时" },
-      { type: "iteration-step", version: "阶段4", heading: "【版本演进相关段落】" },
-      { type: "paragraph" },
-      { type: "screenshot-inline", label: "版本迭代标签（V2/V3/V5）+ 语言选择列表", note: "正文讲版本演进时" },
+
+      // === 调试 ===
+      { type: "heading", text: "调试：最痛苦的部分", navLabel: "调试" },
+      { type: "paragraph", text: "坦白说，整个迭代过程中最让我崩溃的不是产品设计，而是调试。\n\n我不懂代码。但Coze工作流的调试不是「点一下就跑通」的事情——系统频繁报错，报错信息对我来说就是一堆看不懂的技术术语。我的做法是逼自己查资料、逐条读报错信息、试不同的节点组合、调整工作流搭配、切换节点，反复排查。没有人帮我做这件事，因为这个项目的团队只有我和一个实习生——实习生负责记录报错信息、汇报进展、编写提示词初稿（由我审核定稿）、知识库维护更新等基础工作，但核心的架构决策和排错方向都是我在定。\n\n这个过程极其痛苦，但它让我理解了一件事：AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」——至少能读懂报错信息意味着什么，能判断问题出在哪个环节，能跟工程师说清楚「我需要你在这个节点上做什么」。" },
+      { type: "screenshot-inline", label: "Coze工作流运行界面", note: "工作流实际运行状态与节点结构" },
+
+      // === 结果 ===
+      { type: "heading", text: "结果", navLabel: "结果" },
+      { type: "paragraph", text: "系统正式投入公司使用，覆盖十八个语种的翻译需求。实际产出是标准化的多语种Excel表格——中文内容可以一次性转换为英语、泰语、土耳其语、马来语、缅甸语、越南语、印尼语、葡萄牙语、俄语、高棉语、菲律宾语、西班牙语等十八种目标语言。相比之前分找多家外包公司的模式，显著降低了人工翻译成本，同时把多语种并行处理的效率从「逐条对接」提升到了「一次完成」。" },
+
+      // === 回头看 ===
+      { type: "heading", text: "回头看", navLabel: "回头看" },
+      { type: "paragraph", text: "如果说娜娜项目让我证明了「我能从零做出一个AI产品」，翻译系统让我看到的是另一件事——一个人做出一个AI产品不够，关键是能不能让AI能力在组织内部扩散开来。" },
+      { type: "paragraph", text: "回头看整个链条：我先做了娜娜，然后做内部培训把经验推出去，通过培训后的调研发现了翻译场景，判断值得做之后从MVP迭代到完整系统。而这还没结束——在同一时期，我还在Coze平台上搭建了财务报销助手和多Agent架构的营销问答系统，覆盖了社区、翻译、财务、营销四个完全不同的业务场景。" },
+      { type: "paragraph", text: "这个过程让我意识到，AI在组织内部的落地不是一个项目一个项目单独发生的。它需要有人先做出第一个成功案例打开局面，再主动把能力和方法推广出去，再持续识别新的场景、判断优先级、推动落地。这个「推动者」的角色，技术能力不是门槛——公司有比我强得多的工程师——门槛是对业务场景的判断力，以及愿意主动去推的意愿。" },
+      { type: "paragraph", text: "但我也清楚，目前我做这些判断基本靠经验积累和直觉驱动。翻译系统之所以成功，一部分是判断准确，一部分是场景本身足够标准化、容错空间大。如果场景更复杂、风险更高，纯靠直觉是不够的。我需要系统性的方法论支撑——不是学怎么用Coze搭工作流，而是学怎么评估一个AI场景的可行性、优先级和投入产出比。这是我想通过硕士阶段补上的东西。" },
     ],
     supportingScreenshots: [
-      { label: "Coze平台能力评估", proves: "技术选型决策过程" },
-      { label: "工作流实际运行", proves: "自动化流程运行状态" },
+      { label: "Coze平台工作流节点视图", proves: "工作流架构与迭代过程" },
+      { label: "飞书机器人开发者署名", proves: "实际落地部署证明" },
     ],
   },
 ];
@@ -1152,11 +1179,132 @@ function InfoHub() {
   );
 }
 
+/* ===== Illustration: Linear Iteration Flow (Project 3) ===== */
+
+function LinearIterationFlow() {
+  const ff = "'DM Sans', sans-serif";
+  return (
+    <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
+      <defs>
+        <marker id="lif-step" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+          <path d="M 0 0 L 7 2.5 L 0 5 Z" fill="#B8B0A3"/>
+        </marker>
+        <marker id="lif-axis" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill="#B8B0A3"/>
+        </marker>
+      </defs>
+
+      {/* Title */}
+      <text x="450" y="26" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="600" letterSpacing="0.1em" fill="#908D86">
+        {"LINEAR ITERATION FLOW \u2014 FROM MVP TO BUSINESS-READY PRODUCT"}
+      </text>
+
+      {/* Step 1 */}
+      <rect x="25" y="52" width="130" height="210" rx="4" fill="#EDEAE3"/>
+      <text x="90" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#9A9590">{"STEP 1"}</text>
+      <text x="90" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"MVP: Text"}</text>
+      <text x="90" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Translation"}</text>
+      <line x1="55" y1="123" x2="125" y2="123" stroke="#D6D1C8" strokeWidth="1.2"/>
+      <text x="90" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#5a5a5a">
+        <tspan x="90" y="143">{"CN\u21D4EN plain text"}</tspan>
+        <tspan x="90" dy="15">{"\u2014"}</tspan>
+        <tspan x="90" dy="15">{"\u201CCan it work?\u201D"}</tspan>
+      </text>
+
+      {/* Arrow 1→2 */}
+      <line x1="160" y1="157" x2="178" y2="157" stroke="#B8B0A3" strokeWidth="2" markerEnd="url(#lif-step)"/>
+
+      {/* Step 2 */}
+      <rect x="185" y="52" width="130" height="210" rx="4" fill="#E3DFD6"/>
+      <text x="250" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#9A9590">{"STEP 2"}</text>
+      <text x="250" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"API"}</text>
+      <text x="250" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Selection"}</text>
+      <line x1="215" y1="123" x2="285" y2="123" stroke="#C8C0B4" strokeWidth="1.2"/>
+      <text x="250" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#5a5a5a">
+        <tspan x="250" y="143">{"3 trade-offs:"}</tspan>
+        <tspan x="250" dy="15">{"volume fit / cost"}</tspan>
+        <tspan x="250" dy="15">{"/ accuracy"}</tspan>
+      </text>
+
+      {/* Arrow 2→3 */}
+      <line x1="320" y1="157" x2="338" y2="157" stroke="#B8B0A3" strokeWidth="2" markerEnd="url(#lif-step)"/>
+
+      {/* Step 3 — Pivot */}
+      <rect x="345" y="52" width="130" height="210" rx="4" fill="#D6D1C8"/>
+      <rect x="373" y="44" width="64" height="18" rx="9" fill="#7A8BA8"/>
+      <text x="405" y="56" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="700" letterSpacing="0.06em" fill="#ffffff">{"PIVOT POINT"}</text>
+      <text x="410" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#8A857E">{"STEP 3"}</text>
+      <text x="410" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Text \u2192 File"}</text>
+      <text x="410" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Dept \u2192 Company"}</text>
+      <line x1="375" y1="123" x2="445" y2="123" stroke="#B8B0A3" strokeWidth="1.2"/>
+      <text x="410" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#5a5a5a">
+        <tspan x="410" y="143">{"Product scope"}</tspan>
+        <tspan x="410" dy="15">{"redefined: internal"}</tspan>
+        <tspan x="410" dy="15">{"tool \u2192 company-"}</tspan>
+        <tspan x="410" dy="15">{"wide system"}</tspan>
+      </text>
+
+      {/* Arrow 3→4 */}
+      <line x1="480" y1="157" x2="498" y2="157" stroke="#B8B0A3" strokeWidth="2" markerEnd="url(#lif-step)"/>
+
+      {/* Step 4 — Hardest */}
+      <rect x="505" y="52" width="130" height="210" rx="4" fill="#B8B0A3" stroke="#2A2A2A" strokeWidth="2.5"/>
+      <rect x="516" y="44" width="108" height="18" rx="9" fill="#2A2A2A"/>
+      <text x="570" y="56" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="700" letterSpacing="0.06em" fill="#ffffff">{"HARDEST CHALLENGE"}</text>
+      <text x="570" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#7A756E">{"STEP 4"}</text>
+      <text x="570" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Format"}</text>
+      <text x="570" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Conversion"}</text>
+      <line x1="535" y1="123" x2="605" y2="123" stroke="#9A9590" strokeWidth="1.2"/>
+      <text x="570" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#3a3a3a">
+        <tspan x="570" y="143">{"Accept limitation"}</tspan>
+        <tspan x="570" dy="15">{"or break through?"}</tspan>
+        <tspan x="570" dy="15">{"\u2192 Custom Coze"}</tspan>
+        <tspan x="570" dy="15">{"plugin"}</tspan>
+      </text>
+
+      {/* Arrow 4→5 */}
+      <line x1="640" y1="157" x2="658" y2="157" stroke="#B8B0A3" strokeWidth="2" markerEnd="url(#lif-step)"/>
+
+      {/* Step 5 */}
+      <rect x="665" y="52" width="130" height="210" rx="4" fill="#2A2A2A"/>
+      <text x="730" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#8A8A8A">{"STEP 5"}</text>
+      <text x="730" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#ffffff">{"Feishu Integration"}</text>
+      <text x="730" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#ffffff">{"+ Frontend"}</text>
+      <line x1="695" y1="123" x2="765" y2="123" stroke="#4a4a4a" strokeWidth="1.2"/>
+      <text x="730" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#cccccc">
+        <tspan x="730" y="143">{"Standard:"}</tspan>
+        <tspan x="730" dy="15">{"\u201CReady to use,"}</tspan>
+        <tspan x="730" dy="15">{"zero extra steps\u201D"}</tspan>
+      </text>
+
+      {/* Bottom axis */}
+      <line x1="60" y1="310" x2="800" y2="310" stroke="#B8B0A3" strokeWidth="1.5" markerEnd="url(#lif-axis)"/>
+      <text x="60" y="336" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.08em" fill="#9A9590">{"TECHNICAL VALIDATION"}</text>
+      <text x="800" y="336" textAnchor="end" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.08em" fill="#2A2A2A">{"BUSINESS-READY PRODUCT"}</text>
+
+      {/* Axis dots */}
+      <circle cx="90" cy="310" r="3" fill="#EDEAE3" stroke="#B8B0A3" strokeWidth="1"/>
+      <circle cx="250" cy="310" r="3" fill="#E3DFD6" stroke="#B8B0A3" strokeWidth="1"/>
+      <circle cx="410" cy="310" r="3" fill="#D6D1C8" stroke="#B8B0A3" strokeWidth="1"/>
+      <circle cx="570" cy="310" r="3" fill="#B8B0A3" stroke="#7A756E" strokeWidth="1"/>
+      <circle cx="730" cy="310" r="3" fill="#2A2A2A" stroke="#2A2A2A" strokeWidth="1"/>
+
+      {/* Vertical connectors */}
+      <line x1="90" y1="262" x2="90" y2="307" stroke="#D6D1C8" strokeWidth="1" strokeDasharray="3,3"/>
+      <line x1="250" y1="262" x2="250" y2="307" stroke="#D6D1C8" strokeWidth="1" strokeDasharray="3,3"/>
+      <line x1="410" y1="262" x2="410" y2="307" stroke="#D6D1C8" strokeWidth="1" strokeDasharray="3,3"/>
+      <line x1="570" y1="262" x2="570" y2="307" stroke="#D6D1C8" strokeWidth="1" strokeDasharray="3,3"/>
+      <line x1="730" y1="262" x2="730" y2="307" stroke="#D6D1C8" strokeWidth="1" strokeDasharray="3,3"/>
+    </svg>
+  );
+}
+
 const ILLUSTRATION_MAP = {
-  "\u53CC\u8F68\u65F6\u95F4\u8F74": DualTrackTimeline,
-  "\u516D\u6A21\u5757\u4FE1\u606F\u67A2\u7EBD": InfoHub,
-  "\u8BCA\u65AD\u6F0F\u6597\u56FE": DiagnosticFunnel,
-  "\u4E09\u671F\u9012\u8FDB\u56FE": ThreePhaseRoadmap,
+  "双轨时间轴": DualTrackTimeline,
+  "六模块信息枢纽": InfoHub,
+  "诊断漏斗图": DiagnosticFunnel,
+  "三期递进图": ThreePhaseRoadmap,
+  "线性迭代流程图": LinearIterationFlow,
 };
 
 /* ===== Illustration: Diagnostic Funnel (Project 2) ===== */
