@@ -1,0 +1,27 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100%;
+}
+
+/* 临时：统一去掉所有圆角，方便整体对齐风格 */
+* {
+  border-radius: 0 !important;
+}
+
+/* 统一可点击元素的 hover 反馈 */
+.clickable-soft {
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.clickable-soft:hover {
+  opacity: 0.7;
+  transform: translateY(-1px);
+}
