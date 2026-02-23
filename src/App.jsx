@@ -39,12 +39,14 @@ const FONT_DISPLAY = "'DM Serif Display', serif";
 const PROJECTS = [
   {
     id: 1,
-    name: "项目1名称待定",
-    navName: "项目1",
+    name: "不是人的问题，是系统的问题",
+    navName: "01",
     roleLine: "【角色待定】 // 2023–2024",
     summary: "【一句话概述待定稿】",
-    cardSummary: "【卡片摘要待定稿】",
+    cardSummary: "合同快丢了，所有人在互相指责。我没有急着出方案，先拿7天做了15次一对一访谈——拼完所有人的说法，看到了一个谁都没意识到的问题。",
     cardTag: "【关键标签待定】",
+    cardImage: "/images/collab-system-interaction.jpg",
+    cardHighlights: ["从零搭建协作系统", "百万级合同挽回", "全公司SOP"],
     layoutMode: "linear",
     metricsMode: "state-change",
     stateBefore: "【介入前状态待定】",
@@ -77,7 +79,7 @@ const PROJECTS = [
       { type: "paragraph", text: "我回到三个最基本的问题来推导。问题本质是什么？——信息不对称、流程不清晰、责任不明确。最小可行方案是什么？——用一份结构化的中枢文档，把所有信息、流程、责任固定下来。怎么保证执行？——规则公开透明，所有人只有一个信息来源。" },
       { type: "paragraph", text: "基于这个逻辑，我设计了六个模块：变更日志——强制记录所有改动，任何人都能追溯历史，解决\u201C我改了但你不知道\u201D的问题；资产归集——把环境链接、文档、第三方平台凭证集中管理，终结\u201C那个链接在哪\u201D的重复提问；组织职责——列清每个人的角色和职责边界，终结\u201C这个问题该找谁\u201D的困惑；需求全生命周期管理——这是核心模块，所有需求必须进入统一的需求池，经过\u201C待评估/已排期/开发中/已完成/已拒绝\u201D的完整状态流转，拒绝必须写明原因，决策过程透明可追溯；迭代发布——每次发版前生成发布清单，明确本次上线什么、修复了什么；验收走查——为每个页面建独立走查表，并列放设计稿和前端还原截图，把主观验收变成可比对、可追溯的结构化流程。" },
       { type: "illustration", index: 1 },
-      { type: "screenshot-inline", label: "飞书多维表格目录结构 + 协作流程图", note: "正文讲六模块系统时" },
+      { type: "screenshot-inline", label: "飞书多维表格目录结构 + 协作流程图", note: "正文讲六模块系统时", src: "/images/collab-system-interaction.jpg" },
       { type: "paragraph", text: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。" },
       { type: "paragraph", text: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。" },
       { type: "paragraph", text: "结果是：这套协作系统直接支撑了二期的顺利交付，差点丢掉的合同被挽回来了。客户签下了二期。之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部先用，效果验证后其他团队认可跟进，最终成为全公司标准SOP。" },
@@ -91,7 +93,7 @@ const PROJECTS = [
       { type: "paragraph", text: "所有准备工作做完，我才开始跟客户沟通。我预判客户一定会抗拒——外包方提议加新功能，客户的第一反应通常是怀疑动机。所以我的预案策略是：方案足够详细，方向、内容、时间节点全部明确；同时设计退出机制，数据不好随时可以撤，分散客户的决策压力。" },
       { type: "paragraph", text: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。" },
       { type: "paragraph", text: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。" },
-      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时" },
+      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "/images/nana-ai-chat.jpg" },
       { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因是原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。" },
 
       // === 回头看 ===
@@ -101,19 +103,21 @@ const PROJECTS = [
       { type: "paragraph", text: "但这些判断都是靠经验和直觉驱动的，缺少系统性的方法论支撑。我能从零设计一套协作系统，但说不清楚它背后的理论框架；我能识别AI落地机会并推动客户买单，但对AI产品管理的完整知识体系还有明显的缺口。这也是我想进一步深入学习的原因——把散装的实践经验，整合进一个专业的、可复用的框架里。" },
     ],
     supportingScreenshots: [
+      { label: "四层技术架构", proves: "技术选型全景", src: "/images/nana-tech-architecture.jpg", featured: true },
       { label: "看板运行状态", proves: "系统日常运行状态" },
-      { label: "四层技术架构", proves: "技术选型全景" },
       { label: "空间化PRD", proves: "信息架构实际产出" },
     ],
   },
   {
     id: 2,
-    name: "项目2名称待定",
-    navName: "项目2",
+    name: "客户说改UI，但UI不是问题",
+    navName: "02",
     roleLine: "【角色待定】 // 2025",
     summary: "【一句话概述待定稿】",
-    cardSummary: "【卡片摘要待定稿】",
+    cardSummary: "订单范围是UI迭代，没有人让我做全站走查，更没有人让我自掏腰包找三四十个用户做访谈。但我需要先搞清楚这个产品到底卡在哪——走查报告和三期规划是未收费主动交出去的，拿着它直接过了客户VP的审批。",
     cardTag: "【关键数字待定】",
+    cardImage: null,
+    cardHighlights: ["¥10万→¥150万", "三期产品规划", "20人执行团队"],
     layoutMode: "before-after",
     metricsMode: "numbers",
     metrics: [
@@ -172,12 +176,14 @@ const PROJECTS = [
   },
   {
     id: 3,
-    name: "18语种AI翻译系统",
-    navName: "项目3",
+    name: "AI落地最难的部分，不是技术",
+    navName: "03",
     roleLine: "AI产品负责人 // 2024–2025",
     summary: "从娜娜项目衍生：通过内部调研识别跨国翻译痛点，从0搭建覆盖18语种的AI翻译系统，独立完成从MVP到飞书集成的全链路迭代。",
-    cardSummary: "从娜娜项目衍生的AI落地扩散——识别政企部门18语种翻译痛点，从MVP迭代到支持文件上传、格式转换、飞书集成的完整翻译系统。",
+    cardSummary: "第一个AI产品上线后，我在公司做了一轮AI培训，但目的不是教人用工具——我想知道哪些业务场景真正值得用AI重做。挨个部门聊完之后，从十几个候选里筛出了翻译：需求高频、流程标准化、容错空间大。判断完该不该做，剩下的就是做。",
     cardTag: "AI产品 · 0→1",
+    cardImage: null,
+    cardHighlights: ["18语种翻译系统", "节省十几万翻译成本", "2人团队"],
     layoutMode: "iteration",
     metricsMode: "numbers",
     metrics: [
@@ -287,6 +293,7 @@ function Footer({ isMobile }) {
 }
 
 function Nav({ currentPage, onNavigate, isMobile }) {
+  const [hovered, setHovered] = useState(null);
   return (
     <nav style={{
       position: "sticky",
@@ -301,36 +308,58 @@ function Nav({ currentPage, onNavigate, isMobile }) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderBottom: "1px solid #E5E2DC",
+        borderBottom: "1px solid #EDEAE6",
       }}>
         <span
-        onClick={() => { if (currentPage !== "home") onNavigate("home"); }}
-        className="clickable-soft"
-        style={{ fontSize: T.heading, fontWeight: 700, color: "#000", fontFamily: FONT_DISPLAY, flexShrink: 0 }}
-      >{"Zulpkar Tuerxun"}</span>
-      <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 12 : 28, flexWrap: "wrap", justifyContent: "flex-end" }}>
-        {PROJECTS.map((p) => (
-          <span
-            key={p.id}
-            onClick={() => { if (currentPage !== "project-" + p.id) onNavigate("project-" + p.id); }}
-            className="clickable-soft"
-            style={{
-              fontSize: T.small,
-              fontWeight: 400,
-              color: currentPage === "project-" + p.id ? "#000" : "#888",
-              padding: "4px 0",
-              borderBottom: currentPage === "project-" + p.id ? "1.5px solid #000" : "1.5px solid transparent",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {p.navName}
-          </span>
-        ))}
-        {!isMobile && <span style={{ color: "#E5E2DC", fontSize: T.small }}>|</span>}
+          onClick={() => { if (currentPage !== "home") onNavigate("home"); }}
+          onMouseEnter={() => setHovered("home")}
+          onMouseLeave={() => setHovered(null)}
+          style={{
+            fontSize: T.heading,
+            fontWeight: 700,
+            color: hovered === "home" ? "#FAF9F7" : "#000",
+            fontFamily: FONT_DISPLAY,
+            flexShrink: 0,
+            cursor: "pointer",
+            padding: "4px 12px",
+            borderRadius: 0,
+            backgroundColor: hovered === "home" ? "#111111" : "transparent",
+            transition: "color 0.2s ease, background-color 0.2s ease",
+          }}
+        >{"Zulpkar Tuerxun"}</span>
+      <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 12 : 6, flexWrap: "wrap", justifyContent: "flex-end" }}>
+        {PROJECTS.map((p) => {
+          const isActive = currentPage === "project-" + p.id;
+          const isItemHovered = hovered === p.id;
+          return (
+            <span
+              key={p.id}
+              onClick={() => { if (!isActive) onNavigate("project-" + p.id); }}
+              onMouseEnter={() => setHovered(p.id)}
+              onMouseLeave={() => setHovered(null)}
+              style={{
+                fontSize: T.small,
+                fontFamily: FONT_DISPLAY,
+                fontWeight: isActive ? 600 : 400,
+                color: isItemHovered ? "#FAF9F7" : isActive ? "#000" : "#888",
+                padding: "4px 10px",
+                backgroundColor: isItemHovered ? "#111111" : isActive ? "#F2EFEA" : "transparent",
+                borderRadius: 0,
+                whiteSpace: "nowrap",
+                cursor: "pointer",
+                transition: "color 0.2s ease, background-color 0.2s ease",
+              }}
+            >
+              {p.navName}
+            </span>
+          );
+        })}
+        {!isMobile && <span style={{ color: "#E5E2DC", fontSize: T.small, margin: "0 4px" }}>|</span>}
         <span style={{
           fontSize: T.small, color: "#ccc",
           cursor: "not-allowed", userSelect: "none",
           whiteSpace: "nowrap",
+          padding: "4px 10px",
         }}>
           {"EN / 中"}
         </span>
@@ -379,44 +408,51 @@ function HomePage({ onNavigate, isMobile }) {
         />
       )}
       {/* === Hero/Tagline === */}
-      <div style={{ maxWidth: maxW, margin: "0 auto" }}>
-        <section style={{
-          padding: isMobile ? "36px 16px 16px" : "64px 40px 20px",
-          textAlign: "center",
+      <div style={{ maxWidth: maxW, margin: "0 auto", padding: isMobile ? "24px 16px 0" : "40px 40px 0", textAlign: "center" }}>
+        <h1 style={{
+          margin: "0 auto",
+          maxWidth: 580,
+          fontFamily: FONT_DISPLAY,
+          lineHeight: 1.5,
         }}>
-          <h1 style={{
-            fontSize: isMobile ? 28 : 38,
+          <span style={{
+            fontSize: isMobile ? 22 : 28,
+            fontWeight: 400,
+            color: "#8A8276",
+          }}>{"产品、设计、项目管理、客户···"}</span>
+          <br />
+          <span style={{
+            fontSize: isMobile ? 24 : 30,
             fontWeight: 400,
             color: "#2A2A2A",
-            lineHeight: 1.4,
-            margin: 0,
-            maxWidth: 540,
-            fontFamily: FONT_DISPLAY,
-          }}>
-            {"\u3010\u4E00\u53E5\u8BDD\u5B9A\u4F4D\u5F85\u5B9A\u7A3F\u3011"}
-          </h1>
-          <p style={{
-            fontSize: T.small, color: "#B8B0A3",
-            marginTop: 12, lineHeight: 1.5,
-          }}>
-            {"\u3010\u4E00\u884C context\uFF1A\u5982 6 years in gaming tech \u00B7 transitioning to HCI / AI product \u00B7 speaks 4 languages\u3011"}
-          </p>
-        </section>
+          }}>{"现在收拢成一个方向："}</span>
+          <span style={{
+            fontSize: isMobile ? 36 : 48,
+            fontWeight: 700,
+            color: "#FAF9F7",
+            backgroundColor: "#111111",
+            padding: "0 14px 0 10px",
+            display: "inline-block",
+            lineHeight: 1.2,
+          }}>{"AI PM"}</span>
+        </h1>
       </div>
 
-      {/* === Curatorial line === */}
-      <div style={{ maxWidth: maxW, margin: "0 auto", padding: isMobile ? "0 16px" : "0 40px", textAlign: "center" }}>
+      {/* === Curatorial line — belongs to card section, not hero === */}
+      <div style={{ maxWidth: maxW, margin: "0 auto", padding: isMobile ? "0 16px" : "0 40px" }}>
         <p style={{
-          fontSize: T.body, color: "#B8B0A3",
-          margin: "0 auto 24px", lineHeight: 1.7,
-          maxWidth: 480,
+          fontSize: 12, color: "#8A8276", fontWeight: 500,
+          margin: 0, lineHeight: 1.5, marginBottom: isMobile ? 16 : 24,
+          letterSpacing: "0.04em",
+          paddingTop: 0,
+          marginTop: isMobile ? 24 : 36,
         }}>
-          {"\u3010\u7B56\u5C55\u8BED\u5F85\u5B9A\u7A3F\uFF1A\u4E00\u53E5\u8BDD\uFF0C\u70B9\u51FA\u4E09\u4E2A\u9879\u76EE\u653E\u5728\u4E00\u8D77\u8BF4\u660E\u4EC0\u4E48\u3011"}
+          {"三个项目，做的事越来越不一样——但切入点始终一样：先把问题拆对。"}
         </p>
       </div>
 
-      {/* === Project Entries — simplified, higher-contrast rows === */}
-      <div style={{ marginTop: isMobile ? 20 : 28, marginBottom: isMobile ? 24 : 32 }}>
+      {/* === Project Entries === */}
+      <div style={{ marginTop: 0, marginBottom: isMobile ? 24 : 32 }}>
         {PROJECTS.map((p, idx) => {
           const isHovered = hoveredId === p.id;
           const timeStr = p.roleLine.split(" // ")[1] || "";
@@ -424,31 +460,30 @@ function HomePage({ onNavigate, isMobile }) {
           return (
             <div
               key={p.id}
-              onClick={() => onNavigate("project-" + p.id)}
               onTouchStart={() => setPressedId(p.id)}
               onTouchEnd={() => setPressedId(null)}
               onTouchCancel={() => setPressedId(null)}
               style={{
-                paddingTop: idx === 0 ? 2 : 3,
-                paddingBottom: 3,
+                paddingTop: 0,
+                paddingBottom: 0,
                 backgroundColor: isMobile && pressedId === p.id ? "#F2EFEA" : "transparent",
                 transition: "background-color 0.1s ease",
               }}
             >
               <div
-                onMouseEnter={() => setHoveredId(p.id)}
-                onMouseLeave={() => setHoveredId(null)}
                 style={{
                   maxWidth: maxW,
                   margin: "0 auto",
-                  padding: isMobile ? "22px 16px" : "26px 40px",
+                  padding: isMobile ? "16px 16px" : "6px 40px",
                   minHeight: 120,
-                  cursor: "pointer",
                 }}
               >
-              {/* Desktop: two-column layout — text left, meta right */}
+              {/* Desktop: number anchor + text + arrow */}
               {!isMobile ? (
                 <div
+                  onClick={() => onNavigate("project-" + p.id)}
+                  onMouseEnter={() => setHoveredId(p.id)}
+                  onMouseLeave={() => setHoveredId(null)}
                   onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
                     setHoverPos({
@@ -458,47 +493,47 @@ function HomePage({ onNavigate, isMobile }) {
                   }}
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "minmax(0, 1fr) auto",
-                    columnGap: 32,
+                    gridTemplateColumns: "90px 1fr auto",
+                    columnGap: 24,
                     alignItems: "center",
-                    padding: "28px 20px",
+                    padding: "28px 24px",
                     borderRadius: 0,
                     border: "1px solid #E5E2DC",
                     backgroundColor: isHovered ? "#111111" : "#FAF9F7",
                     boxShadow: isHovered ? "0 18px 40px rgba(0,0,0,0.16)" : "none",
-                    transition: "background-color 0.2s ease, box-shadow 0.2s ease",
+                    transition: "background-color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease",
                     backgroundImage: isHovered
                       ? `radial-gradient(circle at ${hoverPos.x}px ${hoverPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))`
                       : "none",
                   }}
                 >
-                  {/* Left: text block */}
+                  {/* Left: large number as visual anchor */}
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}>
+                    <span style={{
+                      fontSize: 52,
+                      fontFamily: FONT_DISPLAY,
+                      fontWeight: 700,
+                      color: isHovered ? "rgba(255,255,255,0.2)" : "#E0DCD5",
+                      lineHeight: 1,
+                      letterSpacing: "-0.02em",
+                      userSelect: "none",
+                      transition: "color 0.4s ease",
+                    }}>{String(idx + 1).padStart(2, "0")}</span>
+                  </div>
+
+                  {/* Center: text block */}
                   <div style={{ minWidth: 0 }}>
-                    {/* Small index + tag */}
-                    <div style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 10,
-                      marginBottom: 6,
-                    }}>
+                    {/* Year */}
+                    <div style={{ marginBottom: 6 }}>
                       <span style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        width: 22,
-                        height: 22,
-                        borderRadius: "999px",
-                        border: "1px solid #D5D0C8",
-                        fontSize: 11,
-                        color: "#777",
-                      }}>{String(idx + 1).padStart(2, "0")}</span>
-                      <span style={{
-                        fontSize: 11,
-                        fontWeight: 600,
-                        color: isHovered ? "#FAF9F7" : ACCENT,
-                        letterSpacing: "0.04em",
-                        textTransform: "uppercase",
-                      }}>{p.cardTag}</span>
+                        fontSize: T.small,
+                        color: isHovered ? "rgba(255,255,255,0.6)" : "#B8B0A3",
+                        transition: "color 0.4s ease",
+                      }}>{timeStr}</span>
                     </div>
 
                     {/* Title */}
@@ -514,24 +549,39 @@ function HomePage({ onNavigate, isMobile }) {
                     {/* Summary */}
                     <p style={{
                       fontSize: T.body,
-                      color: isHovered ? "#D7D3CB" : "#888",
+                      color: isHovered ? "rgba(255,255,255,0.75)" : "#888",
                       margin: 0,
-                      lineHeight: 1.7,
+                      lineHeight: 1.65,
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
                     }}>{p.cardSummary}</p>
+
+                    {/* Highlights chips */}
+                    {p.cardHighlights && p.cardHighlights.length > 0 && (
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10 }}>
+                        {p.cardHighlights.map((h, hi) => (
+                          <span key={hi} style={{
+                            fontSize: 12,
+                            color: isHovered ? "rgba(255,255,255,0.65)" : "#666",
+                            backgroundColor: isHovered ? "transparent" : "#F2EFEA",
+                            border: isHovered ? "1px solid rgba(255,255,255,0.3)" : "1px solid transparent",
+                            borderRadius: 0,
+                            padding: "3px 10px",
+                            lineHeight: 1.5,
+                            transition: "color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease",
+                          }}>{h}</span>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
-                  {/* Right: time + arrow */}
+                  {/* Right: arrow */}
                   <div style={{
                     display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-end",
-                    gap: 10,
+                    alignItems: "center",
                   }}>
-                    <span style={{
-                      fontSize: T.small,
-                      color: isHovered ? "#E5E2DC" : "#B8B0A3",
-                      whiteSpace: "nowrap",
-                    }}>{timeStr}</span>
                     <div style={{
                       width: 32,
                       height: 32,
@@ -555,33 +605,22 @@ function HomePage({ onNavigate, isMobile }) {
               ) : (
                 /* Mobile: stacked but compact */
                 <div>
-                  {/* Tag + index + time */}
+                  {/* Number + time */}
                   <div style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                     marginBottom: 8,
                   }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <span style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        width: 20,
-                        height: 20,
-                        borderRadius: "999px",
-                        border: "1px solid #D5D0C8",
-                        fontSize: 10,
-                        color: "#777",
-                      }}>{String(idx + 1).padStart(2, "0")}</span>
-                      <span style={{
-                        fontSize: 11,
-                        fontWeight: 600,
-                        color: ACCENT,
-                        letterSpacing: "0.04em",
-                        textTransform: "uppercase",
-                      }}>{p.cardTag}</span>
-                    </div>
+                    <span style={{
+                      fontSize: 28,
+                      fontFamily: FONT_DISPLAY,
+                      fontWeight: 700,
+                      color: "#E0DCD5",
+                      lineHeight: 1,
+                      letterSpacing: "-0.02em",
+                      userSelect: "none",
+                    }}>{String(idx + 1).padStart(2, "0")}</span>
                     <span style={{ fontSize: T.small, color: "#B8B0A3" }}>{timeStr}</span>
                   </div>
 
@@ -600,6 +639,22 @@ function HomePage({ onNavigate, isMobile }) {
                     margin: 0,
                     lineHeight: 1.7,
                   }}>{p.cardSummary}</p>
+
+                  {/* Highlights chips */}
+                  {p.cardHighlights && p.cardHighlights.length > 0 && (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10 }}>
+                      {p.cardHighlights.map((h, hi) => (
+                        <span key={hi} style={{
+                          fontSize: 11,
+                          color: "#666",
+                          backgroundColor: "#F2EFEA",
+                          borderRadius: 0,
+                          padding: "3px 9px",
+                          lineHeight: 1.5,
+                        }}>{h}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
               </div>
@@ -613,7 +668,6 @@ function HomePage({ onNavigate, isMobile }) {
         maxWidth: maxW,
         margin: "0 auto",
         padding: isMobile ? "24px 16px 28px" : "28px 40px 32px",
-        borderTop: "1px solid #E5E2DC",
         textAlign: "center",
       }}>
         <h2 style={{
@@ -623,7 +677,7 @@ function HomePage({ onNavigate, isMobile }) {
           color: "#2A2A2A",
           margin: 0,
         }}>
-          {"下一步：如果你想进一步了解我"}
+          {"Let's Talk"}
         </h2>
         <p style={{
           fontSize: T.body,
@@ -635,7 +689,7 @@ function HomePage({ onNavigate, isMobile }) {
           marginLeft: "auto",
           marginRight: "auto",
         }}>
-          {"【面向招生官的一句话，比如：如需查看完整作品集或更多背景材料，可以通过下列方式联系我。】"}
+          {"野路子走了近5年，下一步是把经验系统化。"}<br />{"2027年秋季，我准备回到学校。"}
         </p>
         <div style={{
           display: "flex",
@@ -678,9 +732,9 @@ function HomePage({ onNavigate, isMobile }) {
               justifyContent: "center",
               padding: "8px 18px",
               borderRadius: 0,
-              border: hoveredBtn === "link" ? "1px solid #111" : "1px solid #D5D0C8",
+              border: hoveredBtn === "link" ? "1px solid #111" : "1px solid #2A2A2A",
               fontSize: T.small,
-              color: hoveredBtn === "link" ? "#fff" : "#777",
+              color: hoveredBtn === "link" ? "#fff" : "#2A2A2A",
               cursor: "pointer",
               backgroundColor: hoveredBtn === "link" ? "#111" : "transparent",
               backgroundImage: hoveredBtn === "link"
@@ -1682,6 +1736,24 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           }
 
           if (block.type === "screenshot-inline") {
+            if (block.src) {
+              return (
+                <div key={i} style={{ margin: "32px 0" }}>
+                  <img
+                    src={block.src}
+                    alt={block.label}
+                    style={{
+                      width: "100%",
+                      borderRadius: 0,
+                      display: "block",
+                    }}
+                  />
+                  {block.note && (
+                    <p style={{ fontSize: T.small, color: "#999", marginTop: 8, textAlign: "center" }}>{block.note}</p>
+                  )}
+                </div>
+              );
+            }
             return (
               <PlaceholderBox key={i} label={block.label} sublabel={block.note} height={200} />
             );
@@ -1700,31 +1772,52 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       </div>
 
       {/* === Supporting Screenshots === */}
-      {project.supportingScreenshots.length > 0 && (
-        <section style={{ marginTop: 72, paddingTop: 36, borderTop: "1px solid #E5E2DC" }}>
-          <h3 style={{ fontSize: T.small, fontWeight: 600, color: "#000", margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5 }}>
-            {"System in Action"}
-          </h3>
-          <p style={{ fontSize: T.small, color: "#999", marginBottom: 24 }}>
-            {"Evidence of live deployment"}
-          </p>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: 20,
+      {project.supportingScreenshots.length > 0 && (() => {
+        const featured = project.supportingScreenshots.filter(s => s.featured);
+        const rest = project.supportingScreenshots.filter(s => !s.featured);
+        const renderCard = (s, i) => (
+          <div key={i} style={{
+            background: "#fff",
+            borderRadius: 0,
+            border: "1px solid #EDEAE3",
+            overflow: "hidden",
           }}>
-            {project.supportingScreenshots.map((s, i) => (
-              <div key={i}>
-                <PlaceholderBox label={s.label} height={180} />
-                <div style={{ padding: "10px 2px 0" }}>
-                  <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{s.label}</p>
-                  <p style={{ fontSize: T.small, color: "#999", margin: "2px 0 0" }}>{s.proves}</p>
-                </div>
+            {s.src ? (
+              <img src={s.src} alt={s.label} style={{ width: "100%", display: "block" }} />
+            ) : (
+              <PlaceholderBox label={s.label} height={220} />
+            )}
+            <div style={{ padding: "14px 16px 16px" }}>
+              <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{s.label}</p>
+              <p style={{ fontSize: T.small, color: "#999", margin: "4px 0 0" }}>{s.proves}</p>
+            </div>
+          </div>
+        );
+        return (
+          <section style={{ marginTop: 72, paddingTop: 36, borderTop: "1px solid #E5E2DC" }}>
+            <h3 style={{ fontSize: T.small, fontWeight: 600, color: "#000", margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5 }}>
+              {"System in Action"}
+            </h3>
+            <p style={{ fontSize: T.small, color: "#999", marginBottom: 24 }}>
+              {"Evidence of live deployment"}
+            </p>
+            {featured.map((s, i) => (
+              <div key={"f" + i} style={{ marginBottom: 20 }}>
+                {renderCard(s, i)}
               </div>
             ))}
-          </div>
-        </section>
-      )}
+            {rest.length > 0 && (
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: 20,
+              }}>
+                {rest.map((s, i) => renderCard(s, i))}
+              </div>
+            )}
+          </section>
+        );
+      })()}
 
 
       {/* === Prev / Next Nav === */}
@@ -1905,7 +1998,7 @@ function Lightbox({ children, onClose }) {
           <div style={{
             display: "flex", gap: 16, alignItems: "center",
             backgroundColor: "rgba(0,0,0,0.45)", padding: "6px 16px",
-            borderRadius: 16,
+            borderRadius: 0,
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -1928,7 +2021,7 @@ function Lightbox({ children, onClose }) {
           <div style={{
             display: "flex", gap: 8, alignItems: "center",
             backgroundColor: "rgba(255,255,255,0.95)", padding: "6px 18px",
-            borderRadius: 16,
+            borderRadius: 0,
           }}>
             {/* Click / cursor icon */}
             <svg width="12" height="12" viewBox="0 0 24 24" fill="#000" stroke="none">
