@@ -45,7 +45,7 @@ const PROJECTS = [
     summary: "【一句话概述待定稿】",
     cardSummary: "合同快丢了，所有人在互相指责。我没有急着出方案，先拿7天做了15次一对一访谈——拼完所有人的说法，看到了一个谁都没意识到的问题。",
     cardTag: "【关键标签待定】",
-    cardImage: "/images/collab-system-interaction.jpg",
+    cardImage: "images/collab-system-interaction.jpg",
     cardHighlights: ["从零搭建协作系统", "百万级合同挽回", "全公司SOP"],
     layoutMode: "linear",
     metricsMode: "state-change",
@@ -68,7 +68,14 @@ const PROJECTS = [
       { type: "heading", text: "诊断：先搞清楚问题出在哪", navLabel: "诊断" },
       { type: "paragraph", text: "面对这个局面，我没有急着想方案。我做的第一件事是回溯过去几个月积累的所有历史会议纪要和语音记录，把反复出现的争论点、矛盾点逐条标注出来，形成了一组初步假设：问题可能不是某个人或某个环节的问题，而是整个协作方式承载不了这个项目的复杂度。" },
       { type: "paragraph", text: "带着这些假设，我跟团队里不同角色做了15次一对一访谈。不是问卷，不是群体会议，是把人一个一个叫到办公室，正式坐下来，录音，开放式提问：\u201C你觉得现在最大的问题是什么？你需要什么样的支持？\u201D" },
-      { type: "paragraph", text: "我拿到了几乎一致的诊断线索：\n\n前端开发说：\u201C需求总是不明确，我不知道做到什么程度算完成。\u201D后端开发说：\u201C我不知道前端在做什么，经常重复开发。\u201D设计师说：\u201C我的稿子改了，但不知道开发有没有看到新版本。\u201D客户方说：\u201C我提的需求，不知道有没有进入开发流程。\u201D技术部领导说：\u201C我看不到整体进度，不知道哪里卡住了。\u201D" },
+      { type: "paragraph", text: "我拿到了几乎一致的诊断线索：" },
+      { type: "quote-list", items: [
+        { role: "前端开发", text: "需求总是不明确，我不知道做到什么程度算完成。" },
+        { role: "后端开发", text: "我不知道前端在做什么，经常重复开发。" },
+        { role: "设计师",   text: "我的稿子改了，但不知道开发有没有看到新版本。" },
+        { role: "客户方",   text: "我提的需求，不知道有没有进入开发流程。" },
+        { role: "技术部领导", text: "我看不到整体进度，不知道哪里卡住了。" },
+      ]},
       { type: "paragraph", text: "每个人描述的症状不一样，但根源指向同一件事：信息在人和人之间流转不了。不是谁不愿意干活，是现有的群聊式协作方式，在一两周短项目里勉强能用，但放到两年长线项目里完全崩溃了。不是人的问题，是系统的问题。" },
       { type: "illustration", index: 0 },
 
@@ -77,9 +84,17 @@ const PROJECTS = [
       { type: "paragraph", text: "确认了问题根源之后，我给自己设了三条硬约束：零成本——只用公司已有的飞书文档，不引入新工具；零学习成本——团队不需要学新东西，打开文档就能用；立即见效——没有时间搞试点推广，必须一上来就全员切换。" },
       { type: "paragraph", text: "这三条约束是现实倒逼出来的。公司没有预算买新工具，团队也没有时间和意愿去学一套陌生的系统。如果方案不能在现有条件下直接落地，就等于没有方案。" },
       { type: "paragraph", text: "我回到三个最基本的问题来推导。问题本质是什么？——信息不对称、流程不清晰、责任不明确。最小可行方案是什么？——用一份结构化的中枢文档，把所有信息、流程、责任固定下来。怎么保证执行？——规则公开透明，所有人只有一个信息来源。" },
-      { type: "paragraph", text: "基于这个逻辑，我设计了六个模块：变更日志——强制记录所有改动，任何人都能追溯历史，解决\u201C我改了但你不知道\u201D的问题；资产归集——把环境链接、文档、第三方平台凭证集中管理，终结\u201C那个链接在哪\u201D的重复提问；组织职责——列清每个人的角色和职责边界，终结\u201C这个问题该找谁\u201D的困惑；需求全生命周期管理——这是核心模块，所有需求必须进入统一的需求池，经过\u201C待评估/已排期/开发中/已完成/已拒绝\u201D的完整状态流转，拒绝必须写明原因，决策过程透明可追溯；迭代发布——每次发版前生成发布清单，明确本次上线什么、修复了什么；验收走查——为每个页面建独立走查表，并列放设计稿和前端还原截图，把主观验收变成可比对、可追溯的结构化流程。" },
+      { type: "paragraph", text: "基于这个逻辑，我设计了六个模块：" },
+      { type: "module-list", items: [
+        { name: "变更日志",           desc: "强制记录所有改动，任何人都能追溯历史，解决「我改了但你不知道」的问题。" },
+        { name: "资产归集",           desc: "把环境链接、文档、第三方平台凭证集中管理，终结「那个链接在哪」的重复提问。" },
+        { name: "组织职责",           desc: "列清每个人的角色和职责边界，终结「这个问题该找谁」的困惑。" },
+        { name: "需求全生命周期管理", desc: "核心模块。所有需求进入统一需求池，经过「待评估 / 已排期 / 开发中 / 已完成 / 已拒绝」完整状态流转，拒绝必须写明原因，决策过程透明可追溯。" },
+        { name: "迭代发布",           desc: "每次发版前生成发布清单，明确本次上线什么、修复了什么。" },
+        { name: "验收走查",           desc: "为每个页面建独立走查表，并列放设计稿和前端还原截图，把主观验收变成可比对、可追溯的结构化流程。" },
+      ]},
       { type: "illustration", index: 1 },
-      { type: "screenshot-inline", label: "飞书多维表格目录结构 + 协作流程图", note: "正文讲六模块系统时", src: "/images/collab-system-interaction.jpg" },
+      { type: "screenshot-inline", label: "飞书多维表格目录结构 + 协作流程图", note: "正文讲六模块系统时", src: "images/collab-system-interaction.jpg" },
       { type: "paragraph", text: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。" },
       { type: "paragraph", text: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。" },
       { type: "paragraph", text: "结果是：这套协作系统直接支撑了二期的顺利交付，差点丢掉的合同被挽回来了。客户签下了二期。之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部先用，效果验证后其他团队认可跟进，最终成为全公司标准SOP。" },
@@ -93,7 +108,7 @@ const PROJECTS = [
       { type: "paragraph", text: "所有准备工作做完，我才开始跟客户沟通。我预判客户一定会抗拒——外包方提议加新功能，客户的第一反应通常是怀疑动机。所以我的预案策略是：方案足够详细，方向、内容、时间节点全部明确；同时设计退出机制，数据不好随时可以撤，分散客户的决策压力。" },
       { type: "paragraph", text: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。" },
       { type: "paragraph", text: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。" },
-      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "/images/nana-ai-chat.jpg" },
+      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "images/nana-ai-chat.jpg" },
       { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因是原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。" },
 
       // === 回头看 ===
@@ -103,7 +118,7 @@ const PROJECTS = [
       { type: "paragraph", text: "但这些判断都是靠经验和直觉驱动的，缺少系统性的方法论支撑。我能从零设计一套协作系统，但说不清楚它背后的理论框架；我能识别AI落地机会并推动客户买单，但对AI产品管理的完整知识体系还有明显的缺口。这也是我想进一步深入学习的原因——把散装的实践经验，整合进一个专业的、可复用的框架里。" },
     ],
     supportingScreenshots: [
-      { label: "四层技术架构", proves: "技术选型全景", src: "/images/nana-tech-architecture.jpg", featured: true },
+      { label: "四层技术架构", proves: "技术选型全景", src: "images/nana-tech-architecture.jpg", featured: true },
       { label: "看板运行状态", proves: "系统日常运行状态" },
       { label: "空间化PRD", proves: "信息架构实际产出" },
     ],
@@ -598,6 +613,8 @@ function HomePage({ onNavigate, isMobile }) {
                       <span style={{
                         fontSize: 18,
                         color: isHovered ? "#111111" : "#2A2A2A",
+                        cursor: "pointer",
+                        userSelect: "none",
                       }}>{"\u2192"}</span>
                     </div>
                   </div>
@@ -1671,6 +1688,47 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               return <p key={i} style={{ fontSize: T.body, color: "#333", lineHeight: 1.75, margin: 0, whiteSpace: "pre-wrap", maxWidth: 680 }}>{block.text}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
+          }
+
+          if (block.type === "quote-list") {
+            return (
+              <div key={i} style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 680 }}>
+                {block.items.map((q, qi) => (
+                  <div key={qi} style={{
+                    display: "flex", gap: 16, alignItems: "flex-start",
+                    borderLeft: "2px solid #E5E2DC", paddingLeft: 16,
+                  }}>
+                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#888", minWidth: 72, flexShrink: 0 }}>
+                      {q.role}
+                    </span>
+                    <span style={{ fontSize: T.body, color: "#444", lineHeight: 1.65 }}>
+                      {"\u201C"}{q.text}{"\u201D"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            );
+          }
+
+          if (block.type === "module-list") {
+            return (
+              <div key={i} style={{ display: "flex", flexDirection: "column", maxWidth: 680 }}>
+                {block.items.map((m, mi) => (
+                  <div key={mi} style={{
+                    display: "flex", gap: 20, alignItems: "baseline",
+                    padding: "14px 0",
+                    borderBottom: mi < block.items.length - 1 ? "1px solid #F0EDE8" : "none",
+                  }}>
+                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#111", minWidth: 120, flexShrink: 0 }}>
+                      {m.name}
+                    </span>
+                    <span style={{ fontSize: T.body, color: "#555", lineHeight: 1.7 }}>
+                      {m.desc}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            );
           }
 
           if (block.type === "illustration") {
