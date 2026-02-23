@@ -1507,7 +1507,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           style={{ fontSize: T.small, color: "#999", cursor: "pointer", display: "inline-block", marginBottom: 28 }}
         >{"\u2190 All projects"}</span>
 
-        <header style={{ marginBottom: 0, paddingBottom: 36, borderBottom: "1px solid #E5E2DC" }}>
+        <header style={{ marginBottom: 0, paddingBottom: 20, borderBottom: "1px solid #E5E2DC" }}>
           {/* Title — full width */}
           <h1 style={{ fontSize: T.title, fontWeight: 700, margin: 0, color: "#000", lineHeight: 1.25, fontFamily: FONT_DISPLAY }}>
             {project.name}
@@ -1546,7 +1546,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "24px 16px 0" : "28px 40px 0" }}>
         <div style={{
           borderBottom: "1px solid #E5E2DC",
-          paddingBottom: 28, marginBottom: 48,
+          paddingBottom: 28, marginBottom: 24,
         }}>
           {project.metricsMode === "state-change" ? (
             <div style={{
@@ -1596,7 +1596,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       </div>
 
       {/* === Body — narrower for reading === */}
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 32px 80px" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 40px 80px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 36 }}>
         {bodyWithIds.map((block, i) => {
 
@@ -1614,7 +1614,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "paragraph") {
             if (block.text) {
-              return <p key={i} style={{ fontSize: T.body, color: "#333", lineHeight: 1.75, margin: 0, whiteSpace: "pre-wrap" }}>{block.text}</p>;
+              return <p key={i} style={{ fontSize: T.body, color: "#333", lineHeight: 1.75, margin: 0, whiteSpace: "pre-wrap", maxWidth: 680 }}>{block.text}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
@@ -1624,7 +1624,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             const IllComponent = ILLUSTRATION_MAP[ill.name];
             if (IllComponent) {
               // Break out of 720px body into ~960px for breathing room
-              const breakoutPx = isMobile ? 0 : 120;
+              const breakoutPx = isMobile ? 0 : 60;
               return (
                 <div
                   key={i}
@@ -1867,6 +1867,7 @@ function Lightbox({ children, onClose }) {
 
   const onPointerUp = () => {
     dragging.current = false;
+    if (!hasDragged.current) onClose();
   };
 
   return (
@@ -1883,26 +1884,6 @@ function Lightbox({ children, onClose }) {
         touchAction: "none", userSelect: "none",
       }}
     >
-      {/* Top-right close button — always visible, prominent */}
-      <div
-        onClick={(e) => { e.stopPropagation(); onClose(); }}
-        style={{
-          position: "fixed", top: 20, right: 24, zIndex: 510,
-          display: "flex", alignItems: "center", gap: 8,
-          backgroundColor: "rgba(255,255,255,0.95)",
-          padding: "8px 16px",
-          borderRadius: 20,
-          cursor: "pointer",
-          pointerEvents: "auto",
-          boxShadow: "0 2px 12px rgba(0,0,0,0.2)",
-        }}
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-        <span style={{ fontSize: 12, fontWeight: 600, color: "#000" }}>Close</span>
-      </div>
       <div style={{
         position: "absolute", top: "50%", left: "50%",
         transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) scale(${scale})`,
@@ -1945,12 +1926,16 @@ function Lightbox({ children, onClose }) {
           </div>
           {/* Exit group — prominent */}
           <div style={{
-            display: "flex", gap: 12, alignItems: "center",
+            display: "flex", gap: 8, alignItems: "center",
             backgroundColor: "rgba(255,255,255,0.95)", padding: "6px 18px",
             borderRadius: 16,
           }}>
+            {/* Click / cursor icon */}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#000" stroke="none">
+              <path d="M4 2l16 10-8 2-4 8L4 2z" />
+            </svg>
             <span style={{ fontSize: 11, fontWeight: 600, color: "#000" }}>
-              {"ESC \u00B7 \u00D7"}
+              {"Click \u00B7 ESC \u00B7 \u00D7"}
             </span>
             <span style={{ fontSize: 10, color: "#888" }}>to close</span>
           </div>
