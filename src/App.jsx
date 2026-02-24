@@ -222,10 +222,10 @@ const PROJECTS = [
     name: "AI落地最难的部分，不是技术",
     navName: "03",
     roleLine: "AI产品负责人 // 2024–2025",
-    summary: "从娜娜项目衍生：通过内部调研识别跨国翻译痛点，从0搭建覆盖18语种的AI翻译系统，独立完成从MVP到飞书集成的全链路迭代。",
+    summary: "做完公司第一个AI产品后，我做了一场内部培训，培训后的调研发现了一个没人注意到的痛点——跨国业务的18语种翻译全靠分包，成本高、对接乱，带着一个实习生，从零把它做成了落地成品。",
     cardSummary: "第一个AI产品上线后，我在公司做了一轮AI培训，但目的不是教人用工具——我想知道哪些业务场景真正值得用AI重做。挨个部门聊完之后，从十几个候选里筛出了翻译：需求高频、流程标准化、容错空间大。判断完该不该做，剩下的就是做。",
     cardTag: "AI产品 · 0→1",
-    cardImage: null,
+    cardImage: "images/case3-18lang-output.png",
     cardHighlights: ["18语种翻译系统", "节省十几万翻译成本", "2人团队"],
     layoutMode: "iteration",
     metricsMode: "numbers",
@@ -234,24 +234,31 @@ const PROJECTS = [
       { number: "5", label: "Iteration steps" },
       { number: "4", label: "Business scenarios" },
     ],
-    teamInfo: "2人核心团队（我 + 实习生1名）",
-    context: "【待定】",
-    skillTags: ["【待定】"],
-    skillTagJumps: {},
+    teamInfo: "2人（我 + 1名实习生）",
+    context: "无人要求，自主立项",
+    skillTags: ["场景识别", "可行性判断", "迭代落地", "执行韧性"],
+    skillTagJumps: {
+      "场景识别": { scrollTo: 1, borderRange: [1, 3], keySentence: "十八种语言意味着要同时管理多条外包线", keyBlock: 2 },
+      "可行性判断": { scrollTo: 3, borderRange: [3, 4], keySentence: "翻译是高度标准化的输入输出任务", keyBlock: 3 },
+      "迭代落地": { scrollTo: 7, borderRange: [5, 18], keySentence: "这不是一个给政企部门用的小工具，而是需要支持文件级批量处理的通用翻译系统", keyBlock: 10 },
+      "执行韧性": { scrollTo: 20, borderRange: [20, 21], keySentence: "AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」", keyBlock: 20 },
+    },
     illustrations: [
       { name: "线性迭代流程图", type: "流程图", note: "从MVP到business-ready的五步迭代路径与关键决策节点" },
     ],
     bodyStructure: [
-      // === 背景 ===
+      // === 起源段 === Block 0-4
       { type: "heading", text: "从一次内部培训开始的AI落地", navLabel: "背景" },
       { type: "paragraph", text: "娜娜项目上线后，我在公司内部做了一场AI培训宣讲，主题是鼓励大家用Coze平台搭建自己的工作流。我当时的想法很简单——娜娜证明了AI在实际业务中能用，但如果只有我一个人在推，AI在公司内部的落地就始终是孤例。我希望更多人看到这个可能性。" },
       { type: "paragraph", text: "培训结束后我做了用户调研，收到了一条让我停下来的反馈：政企部门说跨国业务的翻译特别痛苦。他们的业务覆盖十八种语言，但市面上很难找到一家供应商能同时处理这么多语种且价格合理，实际操作是每两三种语言找一家不同的外包公司。成本高是一方面，更大的问题是对接复杂——十八种语言意味着要同时管理多条外包线，沟通成本和出错概率都在翻倍增长。" },
       { type: "paragraph", text: "我当时的判断是：这件事很适合用AI解决。原因有三点。第一，翻译是高度标准化的输入输出任务，AI大模型在这个场景下的能力已经足够成熟。第二，痛点不在翻译质量本身，而在多语种并行处理的效率和成本——这恰好是AI工作流最擅长解决的问题。第三，如果做成了，受益的不只是政企部门，公司所有全球业务线都有同样的需求。" },
       { type: "paragraph", text: "我带着初步方案去找了技术总监。确认技术上可行之后，我开始动手。" },
 
-      // === 迭代过程 ===
+      // === 五步迭代段 === Block 5-18
       { type: "iteration-step", version: "Step 1", heading: "MVP: 跑通中英文纯文本互换", navLabel: "MVP" },
       { type: "paragraph", text: "最简单的 input/output，目的只有一个——验证翻译逻辑在 Coze 工作流里能不能跑通。这一步不追求完美，只追求「能用」。" },
+      { type: "paragraph", text: "MVP跑通后，我系统性地调查了Coze平台的功能边界和界面限制，再基于调查结果做后续的架构决策。" },
+      { type: "screenshot-inline", label: "Platform capability audit", note: "系统性调查平台功能边界和界面限制", src: "images/case3-platform-audit.png" },
 
       { type: "iteration-step", version: "Step 2", heading: "API 选型", navLabel: "API选型" },
       { type: "paragraph", text: "这一步我花了比较多时间权衡。评估维度有三个：业务量适配度（我们的翻译量级适合哪种计费模式）、价格（在合适的前提下找最便宜的）、翻译准确度。三者不可能都是最优解，我需要找到平衡点。最终选定了在我们的业务量级下性价比最高的方案。" },
@@ -264,21 +271,27 @@ const PROJECTS = [
 
       { type: "iteration-step", version: "Step 5", heading: "飞书集成与前端搭建", navLabel: "整合上线" },
       { type: "paragraph", text: "格式问题解决之后，下一个判断是：怎样才算「真正好用」？我的标准是用户拿来就能用，不需要任何额外操作。所以我推动了飞书集成——翻译完成后自动生成文档、直接写入对应人的文档库，省去转换和上传步骤。前端方面，因为这是一个公益性项目，没有独立的前端开发人力，我自己用低代码平台搭建了用户界面，包括单语种和多语种两个入口。这一步的判断不复杂，但它决定了最终产出是「能跑的demo」还是「同事们愿意打开来用的工具」。" },
-      { type: "screenshot-inline", label: "飞书云表格18语种产出", note: "实际翻译产出，展示系统覆盖的语言范围" },
-      { type: "screenshot-inline", label: "自搭前端界面", note: "低代码平台搭建的用户界面（单语种 / 多语种两个入口）" },
+      { type: "screenshot-group", items: [
+        { src: "images/case3-workflow-nodes.jpg", label: "工作流节点近景", note: "Coze工作流节点结构与运行状态" },
+        { src: "images/case3-workflow-full.jpg", label: "工作流全景 + 语种列表", note: "完整工作流架构与18语种并行处理" },
+      ]},
+      { type: "screenshot-inline", label: "自搭前端界面", note: "低代码平台搭建的用户界面（单语种 / 多语种两个入口）", src: "images/case3-frontend-ui.jpg" },
 
       { type: "illustration", index: 0 },
 
-      // === 调试 ===
+      // === 调试段 === Block 19-21
       { type: "heading", text: "调试：最痛苦的部分", navLabel: "调试" },
       { type: "paragraph", text: "坦白说，整个迭代过程中最让我崩溃的不是产品设计，而是调试。\n\n我不懂代码。但Coze工作流的调试不是「点一下就跑通」的事情——系统频繁报错，报错信息对我来说就是一堆看不懂的技术术语。我的做法是逼自己查资料、逐条读报错信息、试不同的节点组合、调整工作流搭配、切换节点，反复排查。没有人帮我做这件事，因为这个项目的团队只有我和一个实习生——实习生负责记录报错信息、汇报进展、编写提示词初稿（由我审核定稿）、知识库维护更新等基础工作，但核心的架构决策和排错方向都是我在定。\n\n这个过程极其痛苦，但它让我理解了一件事：AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」——至少能读懂报错信息意味着什么，能判断问题出在哪个环节，能跟工程师说清楚「我需要你在这个节点上做什么」。" },
-      { type: "screenshot-inline", label: "Coze工作流运行界面", note: "工作流实际运行状态与节点结构" },
 
-      // === 结果 ===
+      // === 结果段 === Block 22-24
       { type: "heading", text: "结果", navLabel: "结果" },
       { type: "paragraph", text: "系统正式投入公司使用，覆盖十八个语种的翻译需求。实际产出是标准化的多语种Excel表格——中文内容可以一次性转换为英语、泰语、土耳其语、马来语、缅甸语、越南语、印尼语、葡萄牙语、俄语、高棉语、菲律宾语、西班牙语等十八种目标语言。相比之前分找多家外包公司的模式，显著降低了人工翻译成本，同时把多语种并行处理的效率从「逐条对接」提升到了「一次完成」。" },
+      { type: "screenshot-group", items: [
+        { src: "images/case3-18lang-output.png", label: "飞书云表格18语种产出", note: "实际翻译产出，展示系统覆盖的语言范围" },
+        { src: "images/case3-feishu-bot.png", label: "飞书机器人实际使用", note: "接入飞书方便同事快捷使用" },
+      ]},
 
-      // === 回头看 ===
+      // === 回头看 === Block 25-29
       { type: "heading", text: "回头看", navLabel: "回头看" },
       { type: "paragraph", text: "如果说娜娜项目让我证明了「我能从零做出一个AI产品」，翻译系统让我看到的是另一件事——一个人做出一个AI产品不够，关键是能不能让AI能力在组织内部扩散开来。" },
       { type: "paragraph", text: "回头看整个链条：我先做了娜娜，然后做内部培训把经验推出去，通过培训后的调研发现了翻译场景，判断值得做之后从MVP迭代到完整系统。而这还没结束——在同一时期，我还在Coze平台上搭建了财务报销助手和多Agent架构的营销问答系统，覆盖了社区、翻译、财务、营销四个完全不同的业务场景。" },
