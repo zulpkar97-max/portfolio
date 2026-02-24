@@ -41,7 +41,7 @@ const PROJECTS = [
     id: 1,
     name: "不是人的问题，是系统的问题",
     navName: "01",
-    roleLine: "【角色待定】 // 【时间待定】",
+    roleLine: "【角色待定】 // 2023–2024",
     summary: "【一句话概述待定稿】",
     cardSummary: "合同快丢了，所有人在互相指责。我没有急着出方案，先拿7天做了15次一对一访谈——拼完所有人的说法，看到了一个谁都没意识到的问题。",
     cardTag: "【关键标签待定】",
@@ -51,7 +51,7 @@ const PROJECTS = [
     metricsMode: "state-change",
     stateBefore: "【介入前状态待定】",
     stateAfter: "【交付后状态待定】",
-    teamInfo: "【团队信息待定】",
+    teamInfo: "核心团队约15人 · 跨团队协调近百人",
     illustrations: [
       { name: "双轨时间轴", type: "时间线", note: "覆盖从危机诊断到AI上线的完整双线叙事" },
       { name: "六模块信息枢纽", type: "架构图", note: "覆盖协作系统的信息流动设计逻辑" },
@@ -63,7 +63,6 @@ const PROJECTS = [
       { type: "paragraph", text: "这个项目的复杂度远超我们过往经验。公司之前做的都是一两周就能结束的H5活动和小型游戏页面，从未接过这种体量的长线项目。我当时也没有接触过行业内已有的成熟专业协作工具——不知道它们的存在，更没有任何标准化流程的经验可以参照。" },
       { type: "paragraph", text: "一期开发过程中，团队协作迅速恶化。所有沟通靠群聊，关键信息被海量消息淹没；成员之间私聊解决问题，信息无法同步；需求描述模糊导致频繁返工；设计稿和技术文档散落各处，版本混乱；没人说得清谁负责什么，进度也完全不透明。团队情绪很差，频繁争吵，没有人想继续做这个项目。" },
       { type: "paragraph", text: "春节前，客户方的产品负责人对团队专业度提出严重质疑，明确表示考虑终止合作。我只剩7到8天的春节假期来挽回这件事。" },
-      { type: "illustration", index: 0 },
 
       // === 诊断 ===
       { type: "heading", text: "诊断：先搞清楚问题出在哪", navLabel: "诊断" },
@@ -78,12 +77,13 @@ const PROJECTS = [
         { role: "技术部领导", text: "我看不到整体进度，不知道哪里卡住了。" },
       ]},
       { type: "paragraph", text: "每个人描述的症状不一样，但根源指向同一件事：信息在人和人之间流转不了。不是谁不愿意干活，是现有的群聊式协作方式，在一两周短项目里勉强能用，但放到两年长线项目里完全崩溃了。不是人的问题，是系统的问题。" },
+      { type: "illustration", index: 0 },
 
       // === 设计 ===
       { type: "heading", text: "设计：用现有条件从零搭一套协作系统", navLabel: "设计" },
       { type: "paragraph", text: "确认了问题根源之后，我给自己设了三条硬约束：零成本——只用公司已有的飞书文档，不引入新工具；零学习成本——团队不需要学新东西，打开文档就能用；立即见效——没有时间搞试点推广，必须一上来就全员切换。" },
       { type: "paragraph", text: "这三条约束是现实倒逼出来的。公司没有预算买新工具，团队也没有时间和意愿去学一套陌生的系统。如果方案不能在现有条件下直接落地，就等于没有方案。" },
-      { type: "paragraph", text: "我回到三个最基本的问题来推导。问题本质是什么？——所有症状指向同一件事：没有单一信息源。最小可行方案是什么？——用一份结构化的中枢文档，把所有信息、流程、责任固定下来。怎么保证执行？——规则公开透明，所有人只有一个信息来源。" },
+      { type: "paragraph", text: "我回到三个最基本的问题来推导。问题本质是什么？——信息不对称、流程不清晰、责任不明确。最小可行方案是什么？——用一份结构化的中枢文档，把所有信息、流程、责任固定下来。怎么保证执行？——规则公开透明，所有人只有一个信息来源。" },
       { type: "paragraph", text: "基于这个逻辑，我设计了六个模块：" },
       { type: "module-list", items: [
         { name: "变更日志",           desc: "强制记录所有改动，任何人都能追溯历史，解决「我改了但你不知道」的问题。" },
@@ -94,6 +94,7 @@ const PROJECTS = [
         { name: "验收走查",           desc: "为每个页面建独立走查表，并列放设计稿和前端还原截图，把主观验收变成可比对、可追溯的结构化流程。" },
       ]},
       { type: "illustration", index: 1 },
+      { type: "screenshot-inline", label: "飞书多维表格目录结构 + 协作流程图", note: "正文讲六模块系统时", src: "images/collab-system-interaction.jpg" },
       { type: "paragraph", text: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。" },
       { type: "paragraph", text: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。" },
       { type: "paragraph", text: "结果是：这套协作系统直接支撑了二期的顺利交付，差点丢掉的合同被挽回来了。客户签下了二期。之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部先用，效果验证后其他团队认可跟进，最终成为全公司标准SOP。" },
@@ -107,22 +108,25 @@ const PROJECTS = [
       // === 转折 ===
       { type: "heading", text: "转折：在同一个项目里识别AI落地机会", navLabel: "转折" },
       { type: "paragraph", text: "二期进入查漏补缺阶段时，DeepSeek刚刚发布，成本极低、性能很强。我判断这个技术可以用在社区场景里——如果给微社区接入一个AI攻略助手，能直接提升用户停留时长和使用频率，这正是客户最核心的诉求。" },
-      { type: "paragraph", text: "但我没有直接去找客户。我做的第一件事是确认技术可行性。我绕过了项目经理，直接找技术总监。原因很现实：按这个方案前期肯定亏损，项目经理受限于预算考核，这个想法大概率在萌芽阶段就会被否掉。我需要技术总监帮我确认可行性，也需要他帮忙推动资源支持。确认技术可行后，我做了人力资源预估和管理端需求梳理，准备齐全才开始跟客户沟通。" },
-      { type: "paragraph", text: "我预判客户一定会抗拒——外包方提议加新功能，客户的第一反应通常是怀疑动机。所以我的策略是：方案足够详细，同时设计退出机制，数据不好随时可以撤，分散客户的决策压力。第一次pitch探口风，客户不确定，回去跟Leader讨论。Leader要求出交互设计。这里有一个关键动作：我用业余时间自己做了交互设计，没有跟公司报备。项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常要收费，我自己承担了这个成本。" },
-      { type: "paragraph", text: "第二次pitch带着完整方案，最终在正式沟通会上完成集体宣讲。客户拿着方案找VP要预算——VP批了。从第一次pitch到审批通过，大约一个半月。" },
-      { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，上线后服务了2000多名用户。调试中遇到的最大问题是知识库检索不准：同一个问题测试20次，初始版本仅5次命中正确内容，12次返回错误信息。我判断根因不是模型能力问题，而是知识库的信息架构——原来把每个英雄的所有信息作为一个大块存入，搜索引擎无法精准命中。我重新设计了切片方式，优化后同样的测试20次全部准确命中。" },
-      { type: "screenshot-group", items: [
-        { src: "images/为架构系统设计的交互图思路.png", label: "交互图思路", note: "为架构系统设计的交互方案" },
-        { src: "images/娜娜-裁切版.jpg", label: "娜娜AI界面", note: "最终产品运行界面" },
-      ]},
+      { type: "paragraph", text: "但我没有直接去找客户。我做的第一件事是确认这件事在技术上能不能落地。我绕过了项目经理，直接找技术总监。原因很现实：按这个方案前期肯定亏损，项目经理受限于预算考核，这个想法大概率在萌芽阶段就会被否掉。我需要技术总监帮我确认可行性，也需要他帮忙推动资源支持。" },
+      { type: "paragraph", text: "我直接坐到技术总监旁边，一起研究Coze平台的技术文档。我看不懂代码，但我能识别哪些环节可能有技术风险，然后逐一向他确认。确认技术可行后，我做了人力资源预估：前端约1.5人，后端2人。同时梳理了管理端需求——活动管理、英雄信息输入、知识库维护，这些是客户运营必须的能力。" },
+      { type: "paragraph", text: "所有准备工作做完，我才开始跟客户沟通。我预判客户一定会抗拒——外包方提议加新功能，客户的第一反应通常是怀疑动机。所以我的预案策略是：方案足够详细，方向、内容、时间节点全部明确；同时设计退出机制，数据不好随时可以撤，分散客户的决策压力。" },
+      { type: "paragraph", text: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。" },
+      { type: "paragraph", text: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。" },
+      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "images/nana-ai-chat.jpg" },
+      { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因是原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。" },
 
       // === 回头看 ===
       { type: "heading", text: "回头看：这两件事教会我什么", navLabel: "回头看" },
       { type: "paragraph", text: "这个项目里我做了两件性质不同但逻辑相通的事。协作系统是在危机中被动响应——团队要崩了，我必须找到问题并解出来。娜娜是在稳定期主动进攻——我识别到一个技术机会，判断它能创造价值，然后推动它落地。" },
       { type: "paragraph", text: "两件事的共同点是：在每个关键节点，我的判断比我的执行更重要。判断\u201C不是人的问题是系统的问题\u201D决定了协作系统的方向；判断\u201CDeepSeek能用在社区场景\u201D决定了AI线的启动；判断\u201C先找技术总监不找项目经理\u201D决定了娜娜项目能活过萌芽期。" },
-      { type: "paragraph", text: "但这些判断都是靠经验和直觉驱动的。协作系统做完之后我才知道，行业内早就有成熟工具在做类似的事——我从问题本身一步步推导出来的东西，和它们的底层逻辑高度一致。我能做出来，但做的时候说不清它叫什么、为什么这么做是对的。娜娜也一样：我能判断知识库架构有问题，能重新设计切片方式让检索准确率从25%到100%，但整个过程靠的是反复试错，不是方法论。" },
+      { type: "paragraph", text: "但这些判断都是靠经验和直觉驱动的，缺少系统性的方法论支撑。我能从零设计一套协作系统，但说不清楚它背后的理论框架；我能识别AI落地机会并推动客户买单，但对AI产品管理的完整知识体系还有明显的缺口。这也是我想进一步深入学习的原因——把散装的实践经验，整合进一个专业的、可复用的框架里。" },
     ],
-    supportingScreenshots: [],
+    supportingScreenshots: [
+      { label: "四层技术架构", proves: "技术选型全景", src: "images/nana-tech-architecture.jpg", featured: true },
+      { label: "看板运行状态", proves: "系统日常运行状态" },
+      { label: "空间化PRD", proves: "信息架构实际产出" },
+    ],
   },
   {
     id: 2,
@@ -1176,107 +1180,143 @@ function ReadingProgressBar() {
 /* ===== Illustration: Dual-Track Timeline (Project 1) ===== */
 
 function DualTrackTimeline() {
-  const ff = "'Inter', sans-serif";
+  const ff = "'DM Sans', sans-serif";
+  // Track colors
+  const blue = "#2B5EA7";
+  const blueLight = "#C6D8EF";
+  const orange = "#D97B0D";
+  const orangeLight = "#F5DFC0";
+  const resultGray = "#666";
   return (
-    <svg viewBox="0 0 1020 480" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
+    <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
       <defs>
-        <marker id="dt-arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-          <path d="M 0 0 L 7 2.5 L 0 5 Z" fill="#aaa"/>
+        <marker id="dt-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill={blue}/>
+        </marker>
+        <marker id="dt-orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill={orange}/>
+        </marker>
+        <marker id="dt-pivot" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill="#555"/>
         </marker>
       </defs>
-      <text x="510" y="24" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="600" letterSpacing="0.1em" fill="#999">DUAL-TRACK TIMELINE — COLLABORATION SYSTEM + NANA AI</text>
-      {/* Legend */}
-      <rect x="280" y="38" width="10" height="10" rx="2" fill="#000"/>
-      <text x="296" y="47" fontFamily={ff} fontSize="9.5" fontWeight="600" fill="#999">TRACK A: COLLABORATION</text>
-      <rect x="466" y="38" width="10" height="10" rx="2" fill="#aaa"/>
-      <text x="482" y="47" fontFamily={ff} fontSize="9.5" fontWeight="600" fill="#999">TRACK B: NANA AI</text>
-      <circle cx="620" cy="43" r="5" fill="#000"/>
-      <text x="631" y="47" fontFamily={ff} fontSize="9.5" fontWeight="600" fill="#999">{"\u2605 CORE DECISION"}</text>
-      <circle cx="755" cy="43" r="5" fill="#888"/>
-      <text x="766" y="47" fontFamily={ff} fontSize="9.5" fontWeight="600" fill="#999">{"\u25C6 KEY RESULT"}</text>
-      {/* Phase backgrounds — distinct contrast */}
-      <rect x="50" y="60" width="300" height="390" fill="#f0f0f0" opacity="0.7"/>
-      <rect x="352" y="60" width="370" height="390" fill="#e2e2e2" opacity="0.7"/>
-      <rect x="724" y="60" width="246" height="390" fill="#f0f0f0" opacity="0.7"/>
-      {/* Phase headers */}
-      <text x="200" y="80" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.1em" fill="#999">{"PHASE 1: CRISIS & DIAGNOSIS"}</text>
-      <text x="200" y="94" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="500" fill="#aaa">{"2023 \u2192 early 2024"}</text>
-      <text x="537" y="80" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.1em" fill="#999">{"PHASE 2: SYSTEM DESIGN & DELIVERY \u2194 AI OPPORTUNITY"}</text>
-      <text x="537" y="94" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="500" fill="#aaa">2024 (overlapping transition)</text>
-      <text x="847" y="80" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.1em" fill="#999">PHASE 3: AI LAUNCH</text>
-      <text x="847" y="94" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="500" fill="#aaa">{"\u2192 2025"}</text>
-      {/* Dividers */}
-      <line x1="351" y1="60" x2="351" y2="450" stroke="#ccc" strokeWidth="1" strokeDasharray="4,4"/>
-      <line x1="723" y1="60" x2="723" y2="450" stroke="#ccc" strokeWidth="1" strokeDasharray="4,4"/>
-      {/* Track labels */}
-      <text x="30" y="190" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.1em" fill="#000" transform="rotate(-90, 30, 190)" textAnchor="middle">TRACK A</text>
-      <text x="30" y="360" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.1em" fill="#aaa" transform="rotate(-90, 30, 360)" textAnchor="middle">TRACK B</text>
-      <line x1="50" y1="258" x2="970" y2="258" stroke="#ddd" strokeWidth="1"/>
-      {/* === TRACK A === */}
-      {/* Node 1 */}
-      <rect x="70" y="112" width="200" height="46" fill="#f4f4f4" stroke="#e0e0e0" strokeWidth="1.5"/>
-      <circle cx="86" cy="132" r="10" fill="#000"/>
-      <text x="86" y="136" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">1</text>
-      <text x="102" y="136" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Collaboration Breakdown</text>
-      {/* Node 2 ★ */}
-      <rect x="70" y="176" width="260" height="46" fill="#f4f4f4" stroke="#000" strokeWidth="2.5"/>
-      <circle cx="86" cy="196" r="10" fill="#000"/>
-      <text x="86" y="200" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">2</text>
-      <rect x="100" y="183" width="36" height="14" rx="7" fill="#000"/>
-      <text x="118" y="193" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.08em" fill="#fff">{"\u2605 CORE"}</text>
-      <text x="142" y="196" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Structural Diagnosis</text>
+
+      {/* === Legend === */}
+      <rect x="20" y="8" width="10" height="10" rx="2" fill={blue}/>
+      <text x="34" y="17" fontFamily={ff} fontSize="9" fontWeight="600" fill="#666">Track A: Collaboration</text>
+      <rect x="175" y="8" width="10" height="10" rx="2" fill={orange}/>
+      <text x="189" y="17" fontFamily={ff} fontSize="9" fontWeight="600" fill="#666">Track B: Nana AI</text>
+      <text x="316" y="17" fontFamily={ff} fontSize="9" fontWeight="600" fill="#666">{"\u2605 Core Decision"}</text>
+      <text x="414" y="17" fontFamily={ff} fontSize="9" fontWeight="600" fill="#666">{"\u25C6 Key Result"}</text>
+
+      {/* === Time axis === */}
+      <text x="20" y="40" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#999">2023</text>
+      <text x="200" y="40" fontFamily={ff} fontSize="8.5" fontWeight="500" fill="#bbb">Early 2024</text>
+      <text x="668" y="40" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#999">{"\u2192 2025"}</text>
+      <line x1="50" y1="37" x2="660" y2="37" stroke="#e0e0e0" strokeWidth="1"/>
+
+      {/* === Phase labels === */}
+      <text x="110" y="56" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.08em" fill="#bbb">PHASE 1</text>
+      <text x="370" y="56" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.08em" fill="#bbb">PHASE 2</text>
+      <text x="640" y="56" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.08em" fill="#bbb">PHASE 3</text>
+
+      {/* Phase 1→2 divider (light dashed) */}
+      <line x1="215" y1="48" x2="215" y2="390" stroke="#e8e8e8" strokeWidth="1" strokeDasharray="4,4"/>
+
+      {/* === Track divider === */}
+      <line x1="20" y1="230" x2="700" y2="230" stroke="#e0e0e0" strokeWidth="1"/>
+      <text x="12" y="150" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.06em" fill={blue} transform="rotate(-90, 12, 150)" textAnchor="middle">TRACK A</text>
+      <text x="12" y="320" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.06em" fill={orange} transform="rotate(-90, 12, 320)" textAnchor="middle">TRACK B</text>
+
+      {/* ====== TRACK A ====== */}
+
+      {/* Node 1 — Normal */}
+      <rect x="30" y="70" width="160" height="44" rx="3" fill="#fff" stroke={blueLight} strokeWidth="1.5"/>
+      <circle cx="46" cy="92" r="10" fill={blue}/>
+      <text x="46" y="96" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">1</text>
+      <text x="62" y="96" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Collaboration Breakdown</text>
+
       {/* Arrow 1→2 */}
-      <line x1="170" y1="158" x2="170" y2="174" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#dt-arr)"/>
-      {/* Node 3 */}
-      <rect x="370" y="112" width="220" height="46" fill="#ebebeb" stroke="#e0e0e0" strokeWidth="1.5"/>
-      <circle cx="386" cy="132" r="10" fill="#000"/>
-      <text x="386" y="136" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">3</text>
-      <text x="402" y="136" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Six-Module System</text>
-      {/* Arrow 2→3: orthogonal right-then-up */}
-      <polyline points="330,199 352,199 352,135 368,135" fill="none" stroke="#aaa" strokeWidth="1.5" strokeDasharray="4,3" markerEnd="url(#dt-arr)"/>
-      {/* Node 4 ◆ */}
-      <rect x="604" y="112" width="200" height="46" fill="#f4f4f4" stroke="#888" strokeWidth="2"/>
-      <circle cx="620" cy="132" r="10" fill="#888"/>
-      <text x="620" y="136" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">4</text>
-      <rect x="634" y="119" width="46" height="14" rx="7" fill="#888"/>
-      <text x="657" y="129" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.08em" fill="#fff">{"\u25C6 RESULT"}</text>
-      <text x="686" y="136" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Client Re-commits</text>
+      <line x1="110" y1="114" x2="110" y2="130" stroke={blue} strokeWidth="1.5" markerEnd="url(#dt-blue)"/>
+
+      {/* Node 2 — CORE */}
+      <rect x="30" y="138" width="160" height="56" rx="3" fill="#fff" stroke={blue} strokeWidth="2.5"/>
+      <circle cx="46" cy="155" r="10" fill={blue}/>
+      <text x="46" y="159" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">2</text>
+      <rect x="60" y="148" width="40" height="14" rx="7" fill={blue}/>
+      <text x="80" y="158" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u2605 CORE"}</text>
+      <text x="106" y="158" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Structural Diagnosis</text>
+      <text x="46" y="180" fontFamily={ff} fontSize="9" fontWeight="500" fill="#666">{"System failure, not people"}</text>
+
+      {/* Arrow 2→3 (cross-phase, dashed) */}
+      <line x1="190" y1="166" x2="238" y2="92" stroke={blue} strokeWidth="1.5" strokeDasharray="6,4" markerEnd="url(#dt-blue)"/>
+
+      {/* Node 3 — Normal */}
+      <rect x="244" y="70" width="160" height="44" rx="3" fill="#fff" stroke={blueLight} strokeWidth="1.5"/>
+      <circle cx="260" cy="92" r="10" fill={blue}/>
+      <text x="260" y="96" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">3</text>
+      <text x="276" y="96" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Six-Module System</text>
+
       {/* Arrow 3→4 */}
-      <line x1="592" y1="135" x2="602" y2="135" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#dt-arr)"/>
-      {/* Node 5 */}
-      <rect x="604" y="176" width="200" height="46" fill="#ebebeb" stroke="#e0e0e0" strokeWidth="1.5"/>
-      <circle cx="620" cy="196" r="10" fill="#000"/>
-      <text x="620" y="200" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">5</text>
-      <text x="636" y="200" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Company-wide SOP</text>
+      <line x1="404" y1="92" x2="430" y2="92" stroke={blue} strokeWidth="1.5" markerEnd="url(#dt-blue)"/>
+
+      {/* Node 4 — RESULT */}
+      <rect x="436" y="70" width="160" height="44" rx="3" fill="#fff" stroke={resultGray} strokeWidth="2" strokeDasharray="6,3"/>
+      <circle cx="452" cy="92" r="10" fill={resultGray}/>
+      <text x="452" y="96" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">4</text>
+      <rect x="466" y="79" width="52" height="14" rx="7" fill={resultGray}/>
+      <text x="492" y="89" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u25C6 RESULT"}</text>
+      <text x="468" y="106" fontFamily={ff} fontSize="9" fontWeight="500" fill="#666">Client Re-commits</text>
+
       {/* Arrow 4→5 */}
-      <line x1="700" y1="158" x2="700" y2="174" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#dt-arr)"/>
-      {/* === TRACK B === */}
-      {/* Node 6 ★ */}
-      <rect x="370" y="286" width="210" height="46" fill="#e0e0e0" stroke="#000" strokeWidth="2.5"/>
-      <circle cx="386" cy="306" r="10" fill="#000"/>
-      <text x="386" y="310" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">6</text>
-      <rect x="400" y="293" width="36" height="14" rx="7" fill="#000"/>
-      <text x="418" y="303" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.08em" fill="#fff">{"\u2605 CORE"}</text>
-      <text x="442" y="306" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Identifies AI Opportunity</text>
-      {/* Node 7 ★ */}
-      <rect x="370" y="350" width="210" height="46" fill="#e0e0e0" stroke="#000" strokeWidth="2.5"/>
-      <circle cx="386" cy="370" r="10" fill="#000"/>
-      <text x="386" y="374" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">7</text>
-      <rect x="400" y="357" width="36" height="14" rx="7" fill="#000"/>
-      <text x="418" y="367" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.08em" fill="#fff">{"\u2605 CORE"}</text>
-      <text x="442" y="370" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Validates Feasibility</text>
+      <line x1="516" y1="114" x2="516" y2="140" stroke={blue} strokeWidth="1.5" markerEnd="url(#dt-blue)"/>
+
+      {/* Node 5 — Normal */}
+      <rect x="436" y="148" width="160" height="44" rx="3" fill="#fff" stroke={blueLight} strokeWidth="1.5"/>
+      <circle cx="452" cy="170" r="10" fill={blue}/>
+      <text x="452" y="174" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">5</text>
+      <text x="468" y="174" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Company-wide SOP</text>
+
+      {/* ====== PIVOT CONNECTOR 4→6 ====== */}
+      <path d="M 516 114 L 516 230 L 360 230 L 360 260" fill="none" stroke="#555" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#dt-pivot)"/>
+      <rect x="340" y="218" width="300" height="18" rx="9" fill="none" stroke="none"/>
+      <text x="530" y="222" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="600" fontStyle="italic" fill="#888">{"Stable delivery builds trust \u2192 enables AI proposal"}</text>
+
+      {/* ====== TRACK B ====== */}
+
+      {/* Node 6 — CORE */}
+      <rect x="280" y="268" width="160" height="56" rx="3" fill="#fff" stroke={orange} strokeWidth="2.5"/>
+      <circle cx="296" cy="285" r="10" fill={orange}/>
+      <text x="296" y="289" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">6</text>
+      <rect x="310" y="278" width="40" height="14" rx="7" fill={orange}/>
+      <text x="330" y="288" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u2605 CORE"}</text>
+      <text x="356" y="288" fontFamily={ff} fontSize="10.5" fontWeight="700" fill="#1a1a1a">Identifies AI Opp.</text>
+      <text x="296" y="310" fontFamily={ff} fontSize="9" fontWeight="500" fill="#666">{"DeepSeek \u2192 community scenario fit"}</text>
+
       {/* Arrow 6→7 */}
-      <line x1="475" y1="332" x2="475" y2="348" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#dt-arr)"/>
-      {/* Node 8 ◆ */}
-      <rect x="744" y="286" width="200" height="46" fill="#f4f4f4" stroke="#888" strokeWidth="2"/>
-      <circle cx="760" cy="306" r="10" fill="#888"/>
-      <text x="760" y="310" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">8</text>
-      <rect x="774" y="293" width="46" height="14" rx="7" fill="#888"/>
-      <text x="797" y="303" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.08em" fill="#fff">{"\u25C6 RESULT"}</text>
-      <text x="826" y="306" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Nana AI Launches</text>
-      <text x="760" y="348" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#777">{"VP approved \u2192 2,000+ users"}</text>
-      {/* Arrow 7→8: orthogonal up-then-right */}
-      <polyline points="580,373 580,309 742,309" fill="none" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#dt-arr)"/>
+      <line x1="440" y1="296" x2="468" y2="296" stroke={orange} strokeWidth="1.5" markerEnd="url(#dt-orange)"/>
+
+      {/* Node 7 — CORE */}
+      <rect x="474" y="268" width="160" height="56" rx="3" fill="#fff" stroke={orange} strokeWidth="2.5"/>
+      <circle cx="490" cy="285" r="10" fill={orange}/>
+      <text x="490" y="289" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">7</text>
+      <rect x="504" y="278" width="40" height="14" rx="7" fill={orange}/>
+      <text x="524" y="288" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u2605 CORE"}</text>
+      <text x="550" y="288" fontFamily={ff} fontSize="10.5" fontWeight="700" fill="#1a1a1a">Validates Feasibility</text>
+      <text x="490" y="310" fontFamily={ff} fontSize="9" fontWeight="500" fill="#666">{"Tech Director first, then budget"}</text>
+
+      {/* Arrow 7→8 (cross-phase, dashed) */}
+      <line x1="634" y1="296" x2="540" y2="360" stroke={orange} strokeWidth="1.5" strokeDasharray="6,4"/>
+      <line x1="540" y1="348" x2="540" y2="360" stroke={orange} strokeWidth="1.5" markerEnd="url(#dt-orange)"/>
+
+      {/* Node 8 — RESULT (black fill) */}
+      <rect x="468" y="348" width="190" height="46" rx="3" fill="#111" stroke="#111" strokeWidth="1.5"/>
+      <circle cx="484" cy="365" r="10" fill={resultGray}/>
+      <text x="484" y="369" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">8</text>
+      <rect x="498" y="356" width="52" height="14" rx="7" fill={resultGray}/>
+      <text x="524" y="366" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u25C6 RESULT"}</text>
+      <text x="556" y="367" fontFamily={ff} fontSize="10.5" fontWeight="700" fill="#fff">Nana AI Launches</text>
+      <text x="498" y="385" fontFamily={ff} fontSize="9" fontWeight="500" fill="#999">{"VP approved \u2192 2,000+ users"}</text>
     </svg>
   );
 }
@@ -1284,91 +1324,100 @@ function DualTrackTimeline() {
 /* ===== Illustration: Six-Module Information Hub (Project 1) ===== */
 
 function InfoHub() {
-  const ff = "'Inter', sans-serif";
+  const ff = "'DM Sans', sans-serif";
   return (
-    <svg viewBox="0 0 920 480" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
+    <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
       <defs>
-        <marker id="ih-gov" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-          <path d="M 0 0 L 7 2.5 L 0 5 Z" fill="#000"/>
+        <marker id="ih-gov" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill="#000"/>
         </marker>
-        <marker id="ih-delRev" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto">
-          <path d="M 7 0 L 0 2.5 L 7 5 Z" fill="#aaa"/>
-        </marker>
-        <marker id="ih-loop" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto">
-          <path d="M 7 0 L 0 2.5 L 7 5 Z" fill="#5B8C7E"/>
+        <marker id="ih-gov-rev" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+          <path d="M 8 0 L 0 3 L 8 6 Z" fill="#aaa"/>
         </marker>
       </defs>
-      {/* Title */}
-      <text x="460" y="22" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="600" letterSpacing="0.1em" fill="#999">SIX-MODULE INFORMATION HUB — COLLABORATION SYSTEM DESIGN LOGIC</text>
-      {/* Legend */}
-      <rect x="240" y="34" width="10" height="10" rx="2" fill="#000"/>
-      <text x="256" y="43" fontFamily={ff} fontSize="9.5" fontWeight="600" fill="#999">{"GOVERNANCE (demand flows in \u2192)"}</text>
-      <rect x="442" y="34" width="10" height="10" rx="2" fill="#aaa"/>
-      <text x="458" y="43" fontFamily={ff} fontSize="9.5" fontWeight="600" fill="#999">{"(\u2190 output flows back)"}</text>
-      <rect x="610" y="34" width="10" height="10" rx="2" fill="#5B8C7E"/>
-      <text x="626" y="43" fontFamily={ff} fontSize="9.5" fontWeight="600" fill="#999">FEEDBACK LOOP</text>
-      {/* Zones */}
-      <rect x="20" y="62" width="100" height="340" rx="0" fill="#f4f4f4" stroke="#e0e0e0" strokeWidth="1"/>
-      <text x="70" y="228" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="700" fill="#000">Client</text>
-      <text x="70" y="248" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="500" fill="#999">Demands &</text>
-      <text x="70" y="263" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="500" fill="#999">Deliveries</text>
-      <rect x="800" y="62" width="100" height="340" rx="0" fill="#f4f4f4" stroke="#e0e0e0" strokeWidth="1"/>
-      <text x="850" y="222" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="700" fill="#000">Execution</text>
-      <text x="850" y="240" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="500" fill="#999">Frontend · Backend</text>
-      <text x="850" y="256" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="500" fill="#999">Design · QA</text>
-      {/* Governance layer label */}
-      <text x="460" y="82" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="600" letterSpacing="0.06em" fill="#999">{"GOVERNANCE LAYER — DEMAND FLOWS IN \u2192"}</text>
-      <line x1="150" y1="88" x2="770" y2="88" stroke="#e0e0e0" strokeWidth="1"/>
-      {/* Requirement Lifecycle */}
-      <rect x="150" y="98" width="280" height="56" fill="#fafafa" stroke="#000" strokeWidth="2"/>
-      <rect x="150" y="98" width="280" height="26" fill="#000"/>
-      <rect x="150" y="116" width="280" height="8" fill="#000"/>
-      <text x="165" y="116" fontFamily={ff} fontSize="13" fontWeight="700" fill="#fff">Requirement Lifecycle</text>
-      <rect x="360" y="102" width="58" height="14" rx="7" fill="#888"/>
-      <text x="389" y="112" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="600" fill="#fff">CORE</text>
-      {/* Arrow Client→Req Lifecycle */}
-      <line x1="120" y1="143" x2="148" y2="143" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
+
+      {/* === Legend + Core Rule (top row) === */}
+      <line x1="20" y1="12" x2="40" y2="12" stroke="#000" strokeWidth="1.5"/>
+      <text x="44" y="15" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#666">{"\u2192 Governance (demand in)"}</text>
+      <line x1="195" y1="12" x2="215" y2="12" stroke="#aaa" strokeWidth="1.5"/>
+      <text x="219" y="15" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#666">{"\u2190 Delivery (output back)"}</text>
+      <text x="410" y="15" fontFamily={ff} fontSize="8.5" fontWeight="700" fill="#333">{"\u201CIf it\u2019s not in the formal tracker, it doesn\u2019t exist\u201D"}</text>
+
+      {/* === Three zone backgrounds === */}
+      {/* Client zone */}
+      <rect x="0" y="30" width="60" height="290" fill="#EDF2F7"/>
+      <text x="30" y="175" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#4A5568" transform="rotate(-90, 30, 175)">CLIENT</text>
+      {/* Hub zone (white — default) */}
+      {/* Execution zone */}
+      <rect x="660" y="30" width="60" height="290" fill="#F5F5F5"/>
+      <text x="690" y="175" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#666" transform="rotate(90, 690, 175)">EXECUTION</text>
+
+      {/* === GOVERNANCE LAYER === */}
+      <text x="360" y="46" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.08em" fill="#bbb">{"GOVERNANCE \u2014 DEMAND FLOWS IN \u2192"}</text>
+      <line x1="80" y1="52" x2="640" y2="52" stroke="#e8e8e8" strokeWidth="1"/>
+
+      {/* Entrance annotation */}
+      <text x="82" y="72" fontFamily={ff} fontSize="8" fontWeight="500" fontStyle="italic" fill="#999">Only formal submissions enter</text>
+      <text x="82" y="82" fontFamily={ff} fontSize="8" fontWeight="500" fontStyle="italic" fill="#999">{"— all other channels ignored"}</text>
+
+      {/* Arrow Client → Requirement Lifecycle */}
+      <line x1="60" y1="100" x2="88" y2="100" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
+
+      {/* Requirement Lifecycle — CORE, widest box */}
+      <rect x="96" y="62" width="280" height="80" fill="#fff" stroke="#000" strokeWidth="2" rx="2"/>
+      <rect x="96" y="62" width="280" height="20" fill="#111" rx="2"/>
+      <text x="108" y="76" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Requirement Lifecycle</text>
+      <rect x="296" y="65" width="44" height="14" rx="7" fill="#666"/>
+      <text x="318" y="75" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">CORE</text>
+      <text x="108" y="102" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#555">GATEWAY & ENGINE</text>
+
+      {/* Arrow Req → Role Map */}
+      <line x1="376" y1="100" x2="408" y2="100" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
+
       {/* Role Map */}
-      <rect x="490" y="98" width="240" height="56" fill="#fafafa" stroke="#000" strokeWidth="1.5"/>
-      <rect x="490" y="98" width="240" height="26" fill="#000"/>
-      <rect x="490" y="116" width="240" height="8" fill="#000"/>
-      <text x="505" y="116" fontFamily={ff} fontSize="13" fontWeight="700" fill="#fff">Role Map</text>
-      {/* Arrow Req Lifecycle→Role Map */}
-      <line x1="430" y1="143" x2="488" y2="143" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
-      {/* Arrow Role Map→Execution */}
-      <line x1="730" y1="143" x2="798" y2="143" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
-      {/* Delivery layer label */}
-      <text x="460" y="188" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="600" letterSpacing="0.06em" fill="#999">{"← OUTPUT FLOWS BACK — DELIVERY LAYER"}</text>
-      <line x1="150" y1="194" x2="770" y2="194" stroke="#e0e0e0" strokeWidth="1"/>
+      <rect x="416" y="62" width="200" height="80" fill="#fff" stroke="#000" strokeWidth="1.5" rx="2"/>
+      <rect x="416" y="62" width="200" height="20" fill="#111" rx="2"/>
+      <text x="428" y="76" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Role Map</text>
+      <text x="428" y="102" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#555">ROUTER</text>
+
+      {/* Arrow Role Map → Execution */}
+      <line x1="616" y1="100" x2="658" y2="100" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
+
+      {/* === DELIVERY LAYER === */}
+      <text x="360" y="168" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.08em" fill="#bbb">{"\u2190 OUTPUT FLOWS BACK \u2014 DELIVERY"}</text>
+      <line x1="80" y1="174" x2="640" y2="174" stroke="#e8e8e8" strokeWidth="1"/>
+
+      {/* Arrow Execution → Release Mgmt */}
+      <line x1="658" y1="220" x2="624" y2="220" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-gov-rev)"/>
+
       {/* Release Management */}
-      <rect x="490" y="204" width="240" height="56" fill="#fafafa" stroke="#aaa" strokeWidth="1.5"/>
-      <rect x="490" y="204" width="240" height="26" fill="#aaa"/>
-      <rect x="490" y="222" width="240" height="8" fill="#aaa"/>
-      <text x="505" y="222" fontFamily={ff} fontSize="13" fontWeight="700" fill="#fff">Release Management</text>
+      <rect x="416" y="184" width="200" height="72" fill="#fff" stroke="#aaa" strokeWidth="1.5" rx="2"/>
+      <rect x="416" y="184" width="200" height="20" fill="#aaa" rx="2"/>
+      <text x="428" y="198" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Release Management</text>
+      <text x="428" y="224" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#888">PACKAGING</text>
+
+      {/* Arrow Release → Acceptance */}
+      <line x1="416" y1="220" x2="384" y2="220" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-gov-rev)"/>
+
       {/* Acceptance Review */}
-      <rect x="150" y="204" width="280" height="56" fill="#fafafa" stroke="#aaa" strokeWidth="1.5"/>
-      <rect x="150" y="204" width="280" height="26" fill="#aaa"/>
-      <rect x="150" y="222" width="280" height="8" fill="#aaa"/>
-      <text x="165" y="222" fontFamily={ff} fontSize="13" fontWeight="700" fill="#fff">Acceptance Review</text>
-      {/* Delivery arrows */}
-      <line x1="488" y1="249" x2="432" y2="249" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-delRev)"/>
-      <line x1="798" y1="249" x2="732" y2="249" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-delRev)"/>
-      <line x1="148" y1="249" x2="120" y2="249" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-delRev)"/>
-      {/* Feedback loop — accent color, solid */}
-      <path d="M 290 262 C 290 300, 135 300, 135 190 C 135 150, 148 135, 148 130" fill="none" stroke="#5B8C7E" strokeWidth="2" markerEnd="url(#ih-loop)"/>
-      <rect x="56" y="308" width="200" height="22" rx="11" fill="none" stroke="#5B8C7E" strokeWidth="1.2"/>
-      <text x="156" y="323" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="600" fill="#5B8C7E">{"Review issues \u2192 back to requirement pool"}</text>
-      {/* Base layer */}
-      <rect x="150" y="360" width="580" height="70" fill="#fafafa" stroke="#e0e0e0" strokeWidth="1.2"/>
-      <rect x="155" y="365" width="80" height="18" rx="0" fill="#e0e0e0"/>
-      <text x="195" y="377" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="600" fill="#666">BASE LAYER</text>
-      <text x="248" y="377" fontFamily={ff} fontSize="10" fontWeight="500" fill="#999">{"Always on \u00B7 spans entire system"}</text>
-      <rect x="165" y="390" width="260" height="32" fill="#fff" stroke="#e0e0e0" strokeWidth="1"/>
-      <text x="180" y="411" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Change Log</text>
-      <text x="275" y="411" fontFamily={ff} fontSize="10" fontWeight="500" fill="#999">— Every action recorded</text>
-      <rect x="445" y="390" width="270" height="32" fill="#fff" stroke="#e0e0e0" strokeWidth="1"/>
-      <text x="460" y="411" fontFamily={ff} fontSize="13" fontWeight="700" fill="#000">Asset Repository</text>
-      <text x="566" y="411" fontFamily={ff} fontSize="10" fontWeight="500" fill="#999">— Links, docs, credentials</text>
+      <rect x="96" y="184" width="280" height="72" fill="#fff" stroke="#aaa" strokeWidth="1.5" rx="2"/>
+      <rect x="96" y="184" width="280" height="20" fill="#aaa" rx="2"/>
+      <text x="108" y="198" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Acceptance Review</text>
+      <text x="108" y="224" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#888">QUALITY GATE</text>
+
+      {/* Arrow Acceptance → Client */}
+      <line x1="96" y1="220" x2="62" y2="220" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-gov-rev)"/>
+
+      {/* === Feedback loop: Acceptance Review → Requirement Lifecycle === */}
+      <path d="M 236 256 L 236 278 L 82 278 L 82 130 L 94 130" fill="none" stroke="#000" strokeWidth="1.5" strokeDasharray="5,4" opacity="0.5" markerEnd="url(#ih-gov)"/>
+      <text x="170" y="292" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="600" fontStyle="italic" fill="#999">Issues feed back into requirement pool</text>
+
+      {/* === BASE LAYER === */}
+      <rect x="96" y="310" width="520" height="50" fill="#fafafa" stroke="#e0e0e0" strokeWidth="1" rx="2"/>
+      <text x="236" y="335" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="700" fill="#333">Change Log</text>
+      <line x1="356" y1="318" x2="356" y2="352" stroke="#e0e0e0" strokeWidth="1"/>
+      <text x="476" y="335" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="700" fill="#333">Asset Repository</text>
+      <text x="356" y="354" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="500" fill="#aaa">{"Always on \u00B7 spans entire system"}</text>
     </svg>
   );
 }
