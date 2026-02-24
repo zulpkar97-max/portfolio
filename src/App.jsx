@@ -41,17 +41,25 @@ const PROJECTS = [
     id: 1,
     name: "不是人的问题，是系统的问题",
     navName: "01",
-    roleLine: "【角色待定】 // 2023–2024",
-    summary: "【一句话概述待定稿】",
+    roleLine: "危机接管者 // 2023–2024",
+    summary: "春节7天，从零搭出一套协作系统救回百万合同——之后又在同一项目里推动了公司首个AI智能体上线。",
     cardSummary: "合同快丢了，所有人在互相指责。我没有急着出方案，先拿7天做了15次一对一访谈——拼完所有人的说法，看到了一个谁都没意识到的问题。",
-    cardTag: "【关键标签待定】",
+    cardTag: "公司首个长线项目",
+    skillTags: ["系统诊断", "约束下决策", "流程设计", "AI落地"],
+    skillTagJumps: {
+      "系统诊断":  { scrollTo: 6,  borderRange: [5, 11],  keySentence: "不是人的问题，是系统的问题。", keyBlock: 10 },
+      "约束下决策": { scrollTo: 13, borderRange: [13, 14], keySentence: "我给自己设了三条硬约束", keyBlock: 13 },
+      "流程设计":  { scrollTo: 16, borderRange: [16, 20], keySentence: "六个模块不是拍脑袋拆的", keyBlock: 20 },
+      "AI落地":   { scrollTo: 26, borderRange: [25, 33], keySentence: "知识库的信息架构", keyBlock: 33 },
+    },
+    context: "公司首个长线项目",
     cardImage: "images/collab-system-interaction.jpg",
     cardHighlights: ["从零搭建协作系统", "百万级合同挽回", "全公司SOP"],
     layoutMode: "linear",
     metricsMode: "state-change",
-    stateBefore: "【介入前状态待定】",
-    stateAfter: "【交付后状态待定】",
-    teamInfo: "核心团队约15人 · 跨团队协调近百人",
+    stateBefore: "互相指责 · 信息淹没 · 职责不清",
+    stateAfter: "单一信息源 · 状态全程可追溯 · 角色权责锁定",
+    teamInfo: "核心15人，协调近百人",
     illustrations: [
       { name: "双轨时间轴", type: "时间线", note: "覆盖从危机诊断到AI上线的完整双线叙事" },
       { name: "六模块信息枢纽", type: "架构图", note: "覆盖协作系统的信息流动设计逻辑" },
@@ -132,7 +140,7 @@ const PROJECTS = [
     id: 2,
     name: "客户说改UI，但UI不是问题",
     navName: "02",
-    roleLine: "【角色待定】 // 2025",
+    roleLine: "自发介入者 // 2025",
     summary: "【一句话概述待定稿】",
     cardSummary: "订单范围是UI迭代，没有人让我做全站走查，更没有人让我自掏腰包找三四十个用户做访谈。但我需要先搞清楚这个产品到底卡在哪——走查报告和三期规划是未收费主动交出去的，拿着它直接过了客户VP的审批。",
     cardTag: "【关键数字待定】",
@@ -146,6 +154,9 @@ const PROJECTS = [
       { number: "15\u00D7", label: "订单扩展倍数" },
     ],
     teamInfo: "内部团队20人",
+    context: "【待定】",
+    skillTags: ["【待定】"],
+    skillTagJumps: {},
     illustrations: [
       { name: "诊断漏斗图", type: "漏斗图", note: "覆盖诊断链（从表象到根因）" },
       { name: "三期递进图", type: "路线图", note: "覆盖落地路径和商业结果" },
@@ -212,6 +223,9 @@ const PROJECTS = [
       { number: "4", label: "Business scenarios" },
     ],
     teamInfo: "2人核心团队（我 + 实习生1名）",
+    context: "【待定】",
+    skillTags: ["【待定】"],
+    skillTagJumps: {},
     illustrations: [
       { name: "线性迭代流程图", type: "流程图", note: "从MVP到business-ready的五步迭代路径与关键决策节点" },
     ],
@@ -459,16 +473,27 @@ function HomePage({ onNavigate, isMobile }) {
           lineHeight: 1.5,
         }}>
           <span style={{
-            fontSize: isMobile ? 22 : 28,
+            fontSize: isMobile ? 16 : 20,
             fontWeight: 400,
             color: "#8A8276",
-          }}>{"产品、设计、项目管理、客户···"}</span>
+            letterSpacing: "0.02em",
+          }}>{"产品、设计、项目管理、客户 \u00B7\u00B7\u00B7  收拢成一个 "}</span>
+          <span style={{
+            fontSize: isMobile ? 16 : 20,
+            fontWeight: 700,
+            color: "#000",
+          }}>{"PM"}</span>
+          <span style={{
+            fontSize: isMobile ? 16 : 20,
+            fontWeight: 400,
+            color: "#8A8276",
+          }}>{" 底座"}</span>
           <br />
           <span style={{
             fontSize: isMobile ? 24 : 30,
             fontWeight: 400,
             color: "#2A2A2A",
-          }}>{"现在收拢成一个方向："}</span>
+          }}>{"下一步方向："}</span>
           <span style={{
             fontSize: isMobile ? 36 : 48,
             fontWeight: 700,
@@ -477,7 +502,7 @@ function HomePage({ onNavigate, isMobile }) {
             padding: "0 14px 0 10px",
             display: "inline-block",
             lineHeight: 1.2,
-          }}>{"AI PM"}</span>
+          }}>{"AI"}</span>
         </h1>
       </div>
 
@@ -649,7 +674,7 @@ function HomePage({ onNavigate, isMobile }) {
                 </div>
               ) : (
                 /* Mobile: stacked but compact */
-                <div>
+                <div onClick={() => onNavigate("project-" + p.id)} style={{ cursor: "pointer" }}>
                   {/* Number + time */}
                   <div style={{
                     display: "flex",
@@ -834,10 +859,11 @@ function IterationStep({ version, heading }) {
   );
 }
 
-function SideNav({ headings, onNavigate }) {
+function SideNav({ headings, onNavigate, prevProjectId }) {
   const isCompact = useIsMobile(1100);
   const [active, setActive] = useState(-1);
   const [visible, setVisible] = useState(false);
+  const [hoveredIdx, setHoveredIdx] = useState(null);
 
   useEffect(() => {
     let rafId = null;
@@ -870,20 +896,22 @@ function SideNav({ headings, onNavigate }) {
 
   return (
     <>
-      {/* Back link — always visible on desktop detail pages */}
-      <div style={{
-        position: "fixed",
-        top: 72,
-        right: "max(16px, calc((100% - 720px) / 2 - 140px))",
-        zIndex: 50,
-        pointerEvents: "auto",
-        textAlign: "right",
-      }}>
-        <span
-          onClick={() => onNavigate("home")}
-          className="clickable-soft"
-          style={{ fontSize: T.small, color: "#bbb", cursor: "pointer" }}
-        >{"← All"}</span>
+      {/* Back button — 40x40 box, navigates to prev project */}
+      <div
+        onClick={() => onNavigate(prevProjectId ? "project-" + prevProjectId : "home")}
+        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#FAF9F7"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#FAF9F7"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
+        style={{
+          position: "fixed", top: 72,
+          right: "max(16px, calc((100% - 720px) / 2 - 140px))",
+          zIndex: 50, pointerEvents: "auto",
+          width: 40, height: 40,
+          border: "1px solid #E5E2DC", backgroundColor: "#FAF9F7",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
+        }}
+      >
+        <span style={{ fontSize: 14, color: "#666", transition: "color 0.2s ease" }}>{"\u2190"}</span>
       </div>
 
       {/* Section nav — slides in once body is scrolled into view */}
@@ -906,16 +934,22 @@ function SideNav({ headings, onNavigate }) {
                   const el = document.getElementById("section-" + i);
                   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
                 }}
-                className="clickable-soft"
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
                 style={{
                   fontSize: active === i ? T.body : T.small,
                   lineHeight: 1,
-                  color: active === i ? "#000" : "#ccc",
+                  color: (hoveredIdx === i || active === i) ? (hoveredIdx === i ? "#FAF9F7" : "#000") : "#ccc",
+                  backgroundColor: hoveredIdx === i ? "#111" : "transparent",
                   fontWeight: active === i ? 700 : 500,
                   padding: "10px 12px 10px 8px",
                   whiteSpace: "nowrap",
+                  minWidth: 68,
+                  textAlign: "center",
                   transform: active === i ? "translateX(-4px)" : "translateX(0)",
                   pointerEvents: "auto",
+                  cursor: "pointer",
+                  transition: "background-color 0.2s ease, color 0.2s ease",
                 }}
               >
                 {h}
@@ -1213,7 +1247,7 @@ function DualTrackTimeline() {
       <text x="20" y="40" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#999">2023</text>
       <text x="200" y="40" fontFamily={ff} fontSize="8.5" fontWeight="500" fill="#bbb">Early 2024</text>
       <text x="668" y="40" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#999">{"\u2192 2025"}</text>
-      <line x1="50" y1="37" x2="660" y2="37" stroke="#e0e0e0" strokeWidth="1"/>
+      <line x1="50" y1="37" x2="660" y2="37" stroke="#D5D0C8" strokeWidth="1"/>
 
       {/* === Phase labels === */}
       <text x="110" y="56" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.08em" fill="#bbb">PHASE 1</text>
@@ -1224,14 +1258,14 @@ function DualTrackTimeline() {
       <line x1="215" y1="48" x2="215" y2="390" stroke="#e8e8e8" strokeWidth="1" strokeDasharray="4,4"/>
 
       {/* === Track divider === */}
-      <line x1="20" y1="230" x2="700" y2="230" stroke="#e0e0e0" strokeWidth="1"/>
+      <line x1="20" y1="230" x2="700" y2="230" stroke="#D5D0C8" strokeWidth="1"/>
       <text x="12" y="150" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.06em" fill={blue} transform="rotate(-90, 12, 150)" textAnchor="middle">TRACK A</text>
       <text x="12" y="320" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.06em" fill={orange} transform="rotate(-90, 12, 320)" textAnchor="middle">TRACK B</text>
 
       {/* ====== TRACK A ====== */}
 
       {/* Node 1 — Normal */}
-      <rect x="30" y="70" width="160" height="44" rx="3" fill="#fff" stroke={blueLight} strokeWidth="1.5"/>
+      <rect x="30" y="70" width="160" height="44" rx="3" fill="#FAF9F7" stroke={blueLight} strokeWidth="1.5"/>
       <circle cx="46" cy="92" r="10" fill={blue}/>
       <text x="46" y="96" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">1</text>
       <text x="62" y="96" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Collaboration Breakdown</text>
@@ -1240,7 +1274,7 @@ function DualTrackTimeline() {
       <line x1="110" y1="114" x2="110" y2="130" stroke={blue} strokeWidth="1.5" markerEnd="url(#dt-blue)"/>
 
       {/* Node 2 — CORE */}
-      <rect x="30" y="138" width="160" height="56" rx="3" fill="#fff" stroke={blue} strokeWidth="2.5"/>
+      <rect x="30" y="138" width="160" height="56" rx="3" fill="#FAF9F7" stroke={blue} strokeWidth="2.5"/>
       <circle cx="46" cy="155" r="10" fill={blue}/>
       <text x="46" y="159" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">2</text>
       <rect x="60" y="148" width="40" height="14" rx="7" fill={blue}/>
@@ -1252,7 +1286,7 @@ function DualTrackTimeline() {
       <line x1="190" y1="166" x2="238" y2="92" stroke={blue} strokeWidth="1.5" strokeDasharray="6,4" markerEnd="url(#dt-blue)"/>
 
       {/* Node 3 — Normal */}
-      <rect x="244" y="70" width="160" height="44" rx="3" fill="#fff" stroke={blueLight} strokeWidth="1.5"/>
+      <rect x="244" y="70" width="160" height="44" rx="3" fill="#FAF9F7" stroke={blueLight} strokeWidth="1.5"/>
       <circle cx="260" cy="92" r="10" fill={blue}/>
       <text x="260" y="96" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">3</text>
       <text x="276" y="96" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Six-Module System</text>
@@ -1261,7 +1295,7 @@ function DualTrackTimeline() {
       <line x1="404" y1="92" x2="430" y2="92" stroke={blue} strokeWidth="1.5" markerEnd="url(#dt-blue)"/>
 
       {/* Node 4 — RESULT */}
-      <rect x="436" y="70" width="160" height="44" rx="3" fill="#fff" stroke={resultGray} strokeWidth="2" strokeDasharray="6,3"/>
+      <rect x="436" y="70" width="160" height="44" rx="3" fill="#FAF9F7" stroke={resultGray} strokeWidth="2" strokeDasharray="6,3"/>
       <circle cx="452" cy="92" r="10" fill={resultGray}/>
       <text x="452" y="96" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">4</text>
       <rect x="466" y="79" width="52" height="14" rx="7" fill={resultGray}/>
@@ -1272,7 +1306,7 @@ function DualTrackTimeline() {
       <line x1="516" y1="114" x2="516" y2="140" stroke={blue} strokeWidth="1.5" markerEnd="url(#dt-blue)"/>
 
       {/* Node 5 — Normal */}
-      <rect x="436" y="148" width="160" height="44" rx="3" fill="#fff" stroke={blueLight} strokeWidth="1.5"/>
+      <rect x="436" y="148" width="160" height="44" rx="3" fill="#FAF9F7" stroke={blueLight} strokeWidth="1.5"/>
       <circle cx="452" cy="170" r="10" fill={blue}/>
       <text x="452" y="174" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">5</text>
       <text x="468" y="174" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Company-wide SOP</text>
@@ -1285,7 +1319,7 @@ function DualTrackTimeline() {
       {/* ====== TRACK B ====== */}
 
       {/* Node 6 — CORE */}
-      <rect x="280" y="268" width="160" height="56" rx="3" fill="#fff" stroke={orange} strokeWidth="2.5"/>
+      <rect x="280" y="268" width="160" height="56" rx="3" fill="#FAF9F7" stroke={orange} strokeWidth="2.5"/>
       <circle cx="296" cy="285" r="10" fill={orange}/>
       <text x="296" y="289" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">6</text>
       <rect x="310" y="278" width="40" height="14" rx="7" fill={orange}/>
@@ -1297,7 +1331,7 @@ function DualTrackTimeline() {
       <line x1="440" y1="296" x2="468" y2="296" stroke={orange} strokeWidth="1.5" markerEnd="url(#dt-orange)"/>
 
       {/* Node 7 — CORE */}
-      <rect x="474" y="268" width="160" height="56" rx="3" fill="#fff" stroke={orange} strokeWidth="2.5"/>
+      <rect x="474" y="268" width="160" height="56" rx="3" fill="#FAF9F7" stroke={orange} strokeWidth="2.5"/>
       <circle cx="490" cy="285" r="10" fill={orange}/>
       <text x="490" y="289" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">7</text>
       <rect x="504" y="278" width="40" height="14" rx="7" fill={orange}/>
@@ -1364,7 +1398,7 @@ function InfoHub() {
       <line x1="60" y1="100" x2="88" y2="100" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
 
       {/* Requirement Lifecycle — CORE, widest box */}
-      <rect x="96" y="62" width="280" height="80" fill="#fff" stroke="#000" strokeWidth="2" rx="2"/>
+      <rect x="96" y="62" width="280" height="80" fill="#FAF9F7" stroke="#000" strokeWidth="2" rx="2"/>
       <rect x="96" y="62" width="280" height="20" fill="#111" rx="2"/>
       <text x="108" y="76" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Requirement Lifecycle</text>
       <rect x="296" y="65" width="44" height="14" rx="7" fill="#666"/>
@@ -1375,7 +1409,7 @@ function InfoHub() {
       <line x1="376" y1="100" x2="408" y2="100" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
 
       {/* Role Map */}
-      <rect x="416" y="62" width="200" height="80" fill="#fff" stroke="#000" strokeWidth="1.5" rx="2"/>
+      <rect x="416" y="62" width="200" height="80" fill="#FAF9F7" stroke="#000" strokeWidth="1.5" rx="2"/>
       <rect x="416" y="62" width="200" height="20" fill="#111" rx="2"/>
       <text x="428" y="76" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Role Map</text>
       <text x="428" y="102" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#555">ROUTER</text>
@@ -1391,7 +1425,7 @@ function InfoHub() {
       <line x1="658" y1="220" x2="624" y2="220" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-gov-rev)"/>
 
       {/* Release Management */}
-      <rect x="416" y="184" width="200" height="72" fill="#fff" stroke="#aaa" strokeWidth="1.5" rx="2"/>
+      <rect x="416" y="184" width="200" height="72" fill="#FAF9F7" stroke="#aaa" strokeWidth="1.5" rx="2"/>
       <rect x="416" y="184" width="200" height="20" fill="#aaa" rx="2"/>
       <text x="428" y="198" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Release Management</text>
       <text x="428" y="224" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#888">PACKAGING</text>
@@ -1400,7 +1434,7 @@ function InfoHub() {
       <line x1="416" y1="220" x2="384" y2="220" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-gov-rev)"/>
 
       {/* Acceptance Review */}
-      <rect x="96" y="184" width="280" height="72" fill="#fff" stroke="#aaa" strokeWidth="1.5" rx="2"/>
+      <rect x="96" y="184" width="280" height="72" fill="#FAF9F7" stroke="#aaa" strokeWidth="1.5" rx="2"/>
       <rect x="96" y="184" width="280" height="20" fill="#aaa" rx="2"/>
       <text x="108" y="198" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Acceptance Review</text>
       <text x="108" y="224" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#888">QUALITY GATE</text>
@@ -1413,9 +1447,9 @@ function InfoHub() {
       <text x="170" y="292" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="600" fontStyle="italic" fill="#999">Issues feed back into requirement pool</text>
 
       {/* === BASE LAYER === */}
-      <rect x="96" y="310" width="520" height="50" fill="#fafafa" stroke="#e0e0e0" strokeWidth="1" rx="2"/>
+      <rect x="96" y="310" width="520" height="50" fill="#FAF9F7" stroke="#D5D0C8" strokeWidth="1" rx="2"/>
       <text x="236" y="335" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="700" fill="#333">Change Log</text>
-      <line x1="356" y1="318" x2="356" y2="352" stroke="#e0e0e0" strokeWidth="1"/>
+      <line x1="356" y1="318" x2="356" y2="352" stroke="#D5D0C8" strokeWidth="1"/>
       <text x="476" y="335" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="700" fill="#333">Asset Repository</text>
       <text x="356" y="354" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="500" fill="#aaa">{"Always on \u00B7 spans entire system"}</text>
     </svg>
@@ -1561,15 +1595,15 @@ function DiagnosticFunnel() {
         {"DIAGNOSTIC FUNNEL \u2014 FROM \u201CFIX THE UI\u201D TO PRODUCT REPOSITIONING"}
       </text>
       {/* Layer 1: Surface Request */}
-      <path d="M 170,60 L 690,60 L 670,142 L 190,142 Z" fill="#f4f4f4"/>
+      <path d="M 170,60 L 690,60 L 670,142 L 190,142 Z" fill="#F2EFEA"/>
       <text x="430" y="94" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#999">SURFACE REQUEST</text>
       <text x="430" y="116" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">{"\u201CFix the UI\u201D (\u00A5100K)"}</text>
       {/* Layer 2: First-Pass Walkthrough */}
-      <path d="M 190,149 L 670,149 L 655,231 L 205,231 Z" fill="#ebebeb"/>
+      <path d="M 190,149 L 670,149 L 655,231 L 205,231 Z" fill="#EDEAE3"/>
       <text x="430" y="183" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#999">FIRST-PASS WALKTHROUGH</text>
       <text x="430" y="205" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">{"Fragmented UX across homepage & editor"}</text>
       {/* Layer 3: Pattern Recognition */}
-      <path d="M 205,238 L 655,238 L 644,320 L 216,320 Z" fill="#e0e0e0"/>
+      <path d="M 205,238 L 655,238 L 644,320 L 216,320 Z" fill="#D5D0C8"/>
       <text x="430" y="268" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#888">PATTERN RECOGNITION</text>
       <text x="430" y="288" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">
         <tspan x="430" dy="0">Content display vs. tool functionality</tspan>
@@ -1637,10 +1671,10 @@ function ThreePhaseRoadmap() {
         {"THREE-PHASE ROADMAP \u2014 FROM UI ORDER TO PRODUCT RECONSTRUCTION"}
       </text>
       {/* Phase 1 */}
-      <rect x="60" y="60" width="210" height="200" fill="#f4f4f4"/>
+      <rect x="60" y="60" width="210" height="200" fill="#F2EFEA"/>
       <text x="165" y="90" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#999">PHASE 1</text>
       <text x="165" y="114" textAnchor="middle" fontFamily={ff} fontSize="14" fontWeight="700" fill="#000">Vertical UX Fix</text>
-      <line x1="120" y1="128" x2="210" y2="128" stroke="#e0e0e0" strokeWidth="1.5"/>
+      <line x1="120" y1="128" x2="210" y2="128" stroke="#D5D0C8" strokeWidth="1.5"/>
       <text x="165" y="152" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#666">
         <tspan x="165" dy="0">Optimize upload flow</tspan>
         <tspan x="165" dy="18">and info architecture.</tspan>
@@ -1650,7 +1684,7 @@ function ThreePhaseRoadmap() {
       {/* Arrow 1→2 */}
       <line x1="278" y1="160" x2="294" y2="160" stroke="#aaa" strokeWidth="2" markerEnd="url(#rm-arr)"/>
       {/* Phase 2 */}
-      <rect x="300" y="60" width="210" height="200" fill="#e0e0e0"/>
+      <rect x="300" y="60" width="210" height="200" fill="#EDEAE3"/>
       <text x="405" y="90" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#888">PHASE 2</text>
       <text x="405" y="114" textAnchor="middle" fontFamily={ff} fontSize="14" fontWeight="700" fill="#000">Horizontal Adapt</text>
       <line x1="360" y1="128" x2="450" y2="128" stroke="#aaa" strokeWidth="1.5"/>
@@ -1692,7 +1726,7 @@ function ThreePhaseRoadmap() {
 
 function ProjectPage({ project, onNavigate, onToast, isMobile }) {
   const hasPrev = project.id > 1;
-  const hasNext = project.id < 3;
+  const hasNext = project.id < PROJECTS.length;
   const prevProject = hasPrev ? PROJECTS.find((p) => p.id === project.id - 1) : null;
   const nextProject = hasNext ? PROJECTS.find((p) => p.id === project.id + 1) : null;
   const [lightboxContent, setLightboxContent] = useState(null);
@@ -1705,16 +1739,57 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
   const { sectionHeadings, bodyWithIds } = useMemo(() => {
     const headings = [];
     let idx = 0;
-    const body = project.bodyStructure.map((block) => {
+    const body = project.bodyStructure.map((block, bodyIdx) => {
       if (block.type === "heading" || block.type === "iteration-step") {
         const fullLabel = block.type === "heading" ? block.text : block.heading;
         headings.push(block.navLabel || fullLabel);
-        return { ...block, sectionId: idx++ };
+        return { ...block, sectionId: idx++, bodyIndex: bodyIdx };
       }
-      return block;
+      return { ...block, bodyIndex: bodyIdx };
     });
     return { sectionHeadings: headings, bodyWithIds: body };
   }, [project.bodyStructure]);
+
+  // --- Skill tag jump state ---
+  const [activeTagJump, setActiveTagJump] = useState(null);
+  const highlightTimers = useRef([]);
+
+  const handleTagClick = useCallback((tag) => {
+    const jumpData = project.skillTagJumps && project.skillTagJumps[tag];
+    if (!jumpData) return;
+    highlightTimers.current.forEach((t) => clearTimeout(t));
+    highlightTimers.current = [];
+    setActiveTagJump({ tag, ...jumpData, sentencePhase: "mounting" });
+    requestAnimationFrame(() => {
+      const el = document.getElementById("body-block-" + jumpData.scrollTo);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      requestAnimationFrame(() => {
+        setActiveTagJump((prev) => prev && { ...prev, sentencePhase: "in" });
+      });
+    });
+    highlightTimers.current.push(
+      setTimeout(() => { setActiveTagJump((prev) => prev && { ...prev, sentencePhase: "out" }); }, 3000)
+    );
+    highlightTimers.current.push(
+      setTimeout(() => { setActiveTagJump((prev) => prev && { ...prev, sentencePhase: "done" }); }, 4000)
+    );
+  }, [project.skillTagJumps]);
+
+  useEffect(() => {
+    if (!activeTagJump) return;
+    const handleScroll = () => {
+      const el = document.getElementById("body-block-" + activeTagJump.scrollTo);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) {
+        highlightTimers.current.forEach((t) => clearTimeout(t));
+        highlightTimers.current = [];
+        setActiveTagJump(null);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [activeTagJump]);
 
   return (
     <div
@@ -1740,59 +1815,80 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         }} />
       )}
       <ReadingProgressBar />
-      <SideNav headings={sectionHeadings} onNavigate={onNavigate} />
+      <SideNav headings={sectionHeadings} onNavigate={onNavigate} prevProjectId={prevProject ? prevProject.id : null} />
       <MobileProgressNav headings={sectionHeadings} />
       {/* === Header — wider, two-column on desktop === */}
       <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "28px 16px 0" : "40px 0 0" }}>
 
         {/* Back link — shown on mobile only; desktop uses SideNav back link */}
         {isMobile && (
-          <span
+          <div
             onClick={() => onNavigate("home")}
-            style={{ fontSize: T.small, color: "#999", cursor: "pointer", display: "inline-block", marginBottom: 28 }}
-          >{"\u2190 All projects"}</span>
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#FAF9F7"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#FAF9F7"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
+            style={{
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              width: 40, height: 40,
+              border: "1px solid #E5E2DC", backgroundColor: "#FAF9F7",
+              cursor: "pointer", marginBottom: 28,
+              transition: "background-color 0.2s ease, border-color 0.2s ease",
+            }}
+          >
+            <span style={{ fontSize: 14, color: "#666", transition: "color 0.2s ease" }}>{"\u2190"}</span>
+          </div>
         )}
 
-        <header style={{ marginBottom: 0, paddingBottom: 20, borderBottom: "1px solid #E5E2DC" }}>
-          {/* Title — full width */}
-          <h1 style={{ fontSize: T.title, fontWeight: 700, margin: 0, color: "#000", lineHeight: 1.25, fontFamily: FONT_DISPLAY }}>
+        <header style={{ marginBottom: 0, paddingBottom: 0 }}>
+          {/* Beat 1: Title + metadata + tags */}
+          <h1 style={{ fontSize: T.title, fontWeight: 700, margin: 0, color: "#000", lineHeight: 1.25, fontFamily: FONT_DISPLAY, textAlign: "center" }}>
             {project.name}
           </h1>
-
-          {/* Metadata row — horizontal under title */}
-          <div style={{
-            display: "flex", flexWrap: "wrap",
-            gap: isMobile ? "8px 24px" : "0 40px",
-            marginTop: 18,
-            paddingTop: 16,
-            borderTop: "1px solid #EDEAE3",
-          }}>
-            <div>
-              <p style={{ fontSize: T.small, color: "#999", margin: "0 0 2px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"Role"}</p>
-              <p style={{ fontSize: T.small, color: "#333", margin: 0, fontWeight: 500 }}>{project.roleLine.split(" // ")[0]}</p>
-            </div>
-            <div>
-              <p style={{ fontSize: T.small, color: "#999", margin: "0 0 2px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"Timeline"}</p>
-              <p style={{ fontSize: T.small, color: "#333", margin: 0, fontWeight: 500 }}>{project.roleLine.split(" // ")[1]}</p>
-            </div>
-            <div>
-              <p style={{ fontSize: T.small, color: "#999", margin: "0 0 2px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"Team"}</p>
-              <p style={{ fontSize: T.small, color: "#333", margin: 0, fontWeight: 500 }}>
-                {project.teamInfo || "\u3010\u56E2\u961F\u6784\u6210\u5F85\u5B9A\u3011"}
-              </p>
-            </div>
+          <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? 20 : 32, marginTop: 14 }}>
+            {[
+              ["Role", project.roleLine.split(" // ")[0]],
+              ["Team", project.teamInfo || "\u3010\u56E2\u961F\u6784\u6210\u5F85\u5B9A\u3011"],
+              ["Context", project.context || "\u3010\u5F85\u5B9A\u3011"],
+            ].map(([label, val], fi) => (
+              <div key={fi} style={{ textAlign: "center" }}>
+                <p style={{ fontSize: T.small, color: "#aaa", margin: "0 0 3px", textTransform: "uppercase", letterSpacing: 0.5 }}>{label}</p>
+                <p style={{ fontSize: T.small, color: "#555", margin: 0, fontWeight: 500 }}>{val}</p>
+              </div>
+            ))}
           </div>
-
-          {/* Summary — full width, breathes below metadata */}
-          <p style={{ fontSize: T.body, color: "#444", marginTop: 20, lineHeight: 1.8 }}>{project.summary}</p>
+          {/* Tags */}
+          {project.skillTags && project.skillTags.length > 0 && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10, justifyContent: "center" }}>
+              {project.skillTags.map((tag, ti) => {
+                const hasJump = project.skillTagJumps && project.skillTagJumps[tag];
+                const isActive = activeTagJump && activeTagJump.tag === tag;
+                return (
+                  <span
+                    key={ti}
+                    onClick={hasJump ? () => handleTagClick(tag) : undefined}
+                    style={{
+                      fontSize: 11,
+                      color: isActive ? "#111" : "#999",
+                      backgroundColor: isActive ? "#E5E2DC" : "#F2EFEA",
+                      borderRadius: 0,
+                      padding: "3px 9px",
+                      lineHeight: 1.5,
+                      cursor: hasJump ? "pointer" : "default",
+                      transition: "background-color 0.2s ease, color 0.2s ease",
+                    }}
+                  >{tag}</span>
+                );
+              })}
+            </div>
+          )}
+          {/* Beat 2: Story hook */}
+          <p style={{ fontSize: isMobile ? 17 : 19, color: "#2A2A2A", marginTop: 36, marginBottom: 0, lineHeight: 1.75, textAlign: "center", fontWeight: 400, maxWidth: 500, marginLeft: "auto", marginRight: "auto" }}>{project.summary}</p>
         </header>
       </div>
 
       {/* === Metrics Bar === */}
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "24px 16px 0" : "28px 0 0" }}>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "16px 16px 0" : "16px 0 0" }}>
         <div style={{
-          borderBottom: "1px solid #E5E2DC",
-          paddingBottom: 28, marginBottom: 24,
+          paddingBottom: 28, marginBottom: 48,
         }}>
           {project.metricsMode === "state-change" ? (
             <div style={{
@@ -1807,7 +1903,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                 padding: isMobile ? "0" : "0 24px",
               }}>
                 <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"Before"}</p>
-                <p style={{ fontSize: T.body, fontWeight: 500, color: "#888", margin: 0, lineHeight: 1.5 }}>{project.stateBefore}</p>
+                <p style={{ fontSize: T.body, fontWeight: 500, color: "#aaa", margin: 0, lineHeight: 1.5, textDecoration: "line-through" }}>{project.stateBefore}</p>
               </div>
               {/* Arrow indicator */}
               <div style={{ padding: "0 12px", fontSize: T.heading, color: "#ccc", flexShrink: 0 }}>{"\u2192"}</div>
@@ -1816,7 +1912,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                 padding: isMobile ? "0" : "0 24px",
               }}>
                 <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"After"}</p>
-                <p style={{ fontSize: T.body, fontWeight: 600, color: "#000", margin: 0, lineHeight: 1.5 }}>{project.stateAfter}</p>
+                <p style={{ fontSize: T.body, fontWeight: 600, color: "#2A2A2A", margin: 0, lineHeight: 1.5 }}>{project.stateAfter}</p>
               </div>
             </div>
           ) : (
@@ -1843,31 +1939,54 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
       {/* === Body — narrower for reading === */}
       <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 0 80px" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
         {bodyWithIds.map((block, i) => {
+          const isInBorderRange = activeTagJump && block.bodyIndex >= activeTagJump.borderRange[0] && block.bodyIndex <= activeTagJump.borderRange[1];
+          const borderShadow = isInBorderRange ? "inset 3px 0 0 #111" : undefined;
+          const blockId = "body-block-" + block.bodyIndex;
 
           if (block.type === "heading") {
             const isReflection = block.navLabel === "\u56DE\u5934\u770B";
             if (isReflection) {
               return (
-                <div key={i} id={"section-" + block.sectionId} style={{ scrollMarginTop: 80, marginTop: 36, paddingTop: 40, borderTop: "1px solid #E5E2DC" }}>
-                  <h2 style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY }}>{block.text}</h2>
+                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 36, paddingTop: 40, borderTop: "1px solid #E5E2DC", boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
                 </div>
               );
             }
-            return <h2 key={i} id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: "28px 0 0", scrollMarginTop: 80, fontFamily: FONT_DISPLAY }}>{block.text}</h2>;
+            return (
+              <div key={i} id={blockId} style={{ margin: "28px 0 0", scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
+              </div>
+            );
           }
 
           if (block.type === "paragraph") {
             if (block.text) {
-              return <p key={i} style={{ fontSize: T.body, color: "#333", lineHeight: 1.65, margin: 0, whiteSpace: "pre-wrap" }}>{block.text}</p>;
+              const isKeyBlock = activeTagJump && block.bodyIndex === activeTagJump.keyBlock && activeTagJump.sentencePhase !== "done";
+              let paragraphContent = block.text;
+              if (isKeyBlock && activeTagJump.keySentence && block.text.includes(activeTagJump.keySentence)) {
+                const parts = block.text.split(activeTagJump.keySentence);
+                const phase = activeTagJump.sentencePhase;
+                const hlOpacity = phase === "mounting" ? 0 : phase === "in" ? 1 : phase === "out" ? 0 : 0;
+                paragraphContent = (
+                  <>{parts[0]}<span style={{
+                    backgroundColor: "rgba(229, 226, 220, 0.7)",
+                    opacity: hlOpacity,
+                    transition: "opacity 1s ease",
+                    borderRadius: 2,
+                    padding: "1px 0",
+                  }}>{activeTagJump.keySentence}</span>{parts.slice(1).join(activeTagJump.keySentence)}</>
+                );
+              }
+              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.65, margin: 0, whiteSpace: "pre-wrap", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>{paragraphContent}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
 
           if (block.type === "quote-list") {
             return (
-              <div key={i} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", gap: 10, boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
                 {block.items.map((q, qi) => (
                   <div key={qi} style={{
                     display: "flex", gap: 16, alignItems: "flex-start",
@@ -1887,7 +2006,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "module-list") {
             return (
-              <div key={i} style={{ display: "flex", flexDirection: "column" }}>
+              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
                 {block.items.map((m, mi) => (
                   <div key={mi} style={{
                     display: "flex", gap: 20, alignItems: "flex-start",
@@ -1908,10 +2027,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "pull-quote") {
             return (
-              <blockquote key={i} style={{
+              <blockquote key={i} id={blockId} style={{
                 margin: "8px 0",
                 padding: "20px 0 20px 24px",
                 borderLeft: "4px solid #2A2A2A",
+                scrollMarginTop: 80,
                 fontSize: 20,
                 fontWeight: 600,
                 color: "#000",
@@ -1925,7 +2045,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "screenshot-group") {
             return (
-              <div key={i} style={{ margin: "32px 0" }}>
+              <div key={i} id={blockId} style={{ margin: "32px 0", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
                 <div style={{
                   display: "grid",
                   gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
@@ -1949,14 +2069,19 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             const ill = project.illustrations[block.index];
             const IllComponent = ILLUSTRATION_MAP[ill.name];
             if (IllComponent) {
-              // Break out of 720px body into ~960px for breathing room
-              const breakoutPx = isMobile ? 0 : 120;
+              // Break out of 720px body — asymmetric to keep clear of SideNav on right
+              const breakoutL = isMobile ? 0 : 80;
+              const breakoutR = isMobile ? 0 : 20;
               return (
                 <div
                   key={i}
+                  id={blockId}
                   style={{
-                    margin: `12px -${breakoutPx}px`,
+                    margin: `12px -${breakoutR}px 12px -${breakoutL}px`,
                     position: "relative",
+                    boxShadow: borderShadow,
+                    transition: "box-shadow 0.3s ease",
+                    scrollMarginTop: 80,
                   }}
                 >
                   {/* On mobile: horizontally scrollable so SVG text remains legible */}
@@ -2003,14 +2128,16 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               );
             }
             return (
-              <PlaceholderBox key={i} label={ill.name} sublabel={ill.type + " \u00B7 " + ill.note} height={240} dark />
+              <div key={i} id={blockId} style={{ scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+                <PlaceholderBox label={ill.name} sublabel={ill.type + " \u00B7 " + ill.note} height={240} dark />
+              </div>
             );
           }
 
           if (block.type === "screenshot-inline") {
             if (block.src) {
               return (
-                <div key={i} style={{ margin: "32px 0" }}>
+                <div key={i} id={blockId} style={{ margin: "32px 0", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
                   <img
                     src={block.src}
                     alt={block.label}
@@ -2027,16 +2154,18 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               );
             }
             return (
-              <PlaceholderBox key={i} label={block.label} sublabel={block.note} height={200} />
+              <div key={i} id={blockId} style={{ scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+                <PlaceholderBox label={block.label} sublabel={block.note} height={200} />
+              </div>
             );
           }
 
           if (block.type === "screenshot-pair") {
-            return <BeforeAfterPair key={i} labelBefore={block.labelBefore} labelAfter={block.labelAfter} note={block.note} isMobile={isMobile} />;
+            return <div key={i} id={blockId} style={{ scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}><BeforeAfterPair labelBefore={block.labelBefore} labelAfter={block.labelAfter} note={block.note} isMobile={isMobile} /></div>;
           }
 
           if (block.type === "iteration-step") {
-            return <div key={i} id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={block.heading} /></div>;
+            return <div key={i} id={blockId} style={{ scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={block.heading} /></div></div>;
           }
 
           return null;
@@ -2097,9 +2226,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       {/* === Prev / Next Nav === */}
       <nav style={{
         display: "flex",
-        justifyContent: "space-between",
         marginTop: 72, paddingTop: 28, borderTop: "1px solid #E5E2DC",
-        flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 0,
+        flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 16,
       }}>
         <div
           onClick={hasPrev ? () => onNavigate("project-" + prevProject.id) : () => onToast("This is the first project", "bottom")}
@@ -2107,6 +2235,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           onMouseMove={(e) => { if (hoveredNav === "prev") setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
           onMouseLeave={() => setHoveredNav(null)}
           style={{
+            flex: 1,
             border: hasPrev ? "1px solid #E5E2DC" : "1px dashed #E5E2DC",
             padding: "14px 20px",
             cursor: hasPrev ? "pointer" : "default",
@@ -2124,6 +2253,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           onMouseMove={(e) => { if (hoveredNav === "next") setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
           onMouseLeave={() => setHoveredNav(null)}
           style={{
+            flex: 1,
             border: hasNext ? "1px solid #E5E2DC" : "1px dashed #E5E2DC",
             padding: "14px 20px",
             textAlign: isMobile ? "left" : "right",
@@ -2314,6 +2444,7 @@ function Lightbox({ children, onClose }) {
 
 function BackToTop() {
   const [show, setShow] = useState(false);
+  const [hovered, setHovered] = useState(false);
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 300);
     window.addEventListener("scroll", onScroll);
@@ -2323,18 +2454,19 @@ function BackToTop() {
   return (
     <div
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        position: "fixed", bottom: 24, right: 24, zIndex: 200,
-        width: 40, height: 40,
-        border: "1px solid #E5E2DC", backgroundColor: "#FAF9F7",
+        position: "fixed", bottom: 80,
+        right: "max(16px, calc((100% - 720px) / 2 - 140px))",
+        zIndex: 200, width: 40, height: 40,
+        border: hovered ? "1px solid #111" : "1px solid #E5E2DC",
+        backgroundColor: hovered ? "#111" : "#FAF9F7",
         display: "flex", alignItems: "center", justifyContent: "center",
-        cursor: "pointer", transition: "border-color 0.15s",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+        cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
       }}
-      onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#000"; }}
-      onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E2DC"; }}
     >
-      <span style={{ fontSize: 14, color: "#666" }}>{"\u2191"}</span>
+      <span style={{ fontSize: 14, color: hovered ? "#FAF9F7" : "#666", transition: "color 0.2s ease", display: "inline-block", transform: "rotate(90deg)" }}>{"\u2190"}</span>
     </div>
   );
 }
