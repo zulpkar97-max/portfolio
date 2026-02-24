@@ -898,7 +898,7 @@ function SideNav({ headings, onNavigate, prevProjectId }) {
     <>
       {/* Back button — 40x40 box, navigates to prev project */}
       <div
-        onClick={() => onNavigate(prevProjectId ? "project-" + prevProjectId : "home")}
+        onClick={() => onNavigate("home")}
         onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#FAF9F7"; }}
         onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#FAF9F7"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
         style={{
@@ -1840,10 +1840,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
         <header style={{ marginBottom: 0, paddingBottom: 0 }}>
           {/* Beat 1: Title + metadata + tags */}
-          <h1 style={{ fontSize: T.title, fontWeight: 700, margin: 0, color: "#000", lineHeight: 1.25, fontFamily: FONT_DISPLAY, textAlign: "center" }}>
+          <h1 style={{ fontSize: isMobile ? 24 : 30, fontWeight: 700, margin: 0, color: "#000", lineHeight: 1.2, fontFamily: FONT_DISPLAY, textAlign: "center" }}>
             {project.name}
           </h1>
-          <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? 20 : 32, marginTop: 14 }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? 20 : 32, marginTop: 16 }}>
             {[
               ["Role", project.roleLine.split(" // ")[0]],
               ["Team", project.teamInfo || "\u3010\u56E2\u961F\u6784\u6210\u5F85\u5B9A\u3011"],
@@ -1851,7 +1851,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             ].map(([label, val], fi) => (
               <div key={fi} style={{ textAlign: "center" }}>
                 <p style={{ fontSize: T.small, color: "#aaa", margin: "0 0 3px", textTransform: "uppercase", letterSpacing: 0.5 }}>{label}</p>
-                <p style={{ fontSize: T.small, color: "#555", margin: 0, fontWeight: 500 }}>{val}</p>
+                <p style={{ fontSize: T.small, color: "#444", margin: 0, fontWeight: 500 }}>{val}</p>
               </div>
             ))}
           </div>
@@ -1880,15 +1880,15 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               })}
             </div>
           )}
-          {/* Beat 2: Story hook */}
-          <p style={{ fontSize: isMobile ? 17 : 19, color: "#2A2A2A", marginTop: 36, marginBottom: 0, lineHeight: 1.75, textAlign: "center", fontWeight: 400, maxWidth: 500, marginLeft: "auto", marginRight: "auto" }}>{project.summary}</p>
+          {/* Beat 2: Story hook — visually separated from orientation block */}
+          <p style={{ fontSize: isMobile ? 16 : 17, color: "#555", marginTop: 32, marginBottom: 0, lineHeight: 1.75, textAlign: "center", fontWeight: 400, maxWidth: 500, marginLeft: "auto", marginRight: "auto" }}>{project.summary}</p>
         </header>
       </div>
 
       {/* === Metrics Bar === */}
       <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "16px 16px 0" : "16px 0 0" }}>
         <div style={{
-          paddingBottom: 28, marginBottom: 48,
+          paddingBottom: 24, marginBottom: 32,
         }}>
           {project.metricsMode === "state-change" ? (
             <div style={{
@@ -1903,16 +1903,16 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                 padding: isMobile ? "0" : "0 24px",
               }}>
                 <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"Before"}</p>
-                <p style={{ fontSize: T.body, fontWeight: 500, color: "#aaa", margin: 0, lineHeight: 1.5, textDecoration: "line-through" }}>{project.stateBefore}</p>
+                <p style={{ fontSize: 15, fontWeight: 500, color: "#aaa", margin: 0, lineHeight: 1.5, textDecoration: "line-through" }}>{project.stateBefore}</p>
               </div>
               {/* Arrow indicator */}
-              <div style={{ padding: "0 12px", fontSize: T.heading, color: "#ccc", flexShrink: 0 }}>{"\u2192"}</div>
+              <div style={{ padding: "0 16px", fontSize: 20, color: "#B8B0A3", flexShrink: 0 }}>{"\u2192"}</div>
               <div style={{
                 flex: 1, textAlign: "center",
                 padding: isMobile ? "0" : "0 24px",
               }}>
                 <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"After"}</p>
-                <p style={{ fontSize: T.body, fontWeight: 600, color: "#2A2A2A", margin: 0, lineHeight: 1.5 }}>{project.stateAfter}</p>
+                <p style={{ fontSize: 15, fontWeight: 700, color: "#111", margin: 0, lineHeight: 1.5 }}>{project.stateAfter}</p>
               </div>
             </div>
           ) : (
@@ -1979,7 +1979,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   }}>{activeTagJump.keySentence}</span>{parts.slice(1).join(activeTagJump.keySentence)}</>
                 );
               }
-              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.65, margin: 0, whiteSpace: "pre-wrap", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>{paragraphContent}</p>;
+              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.8, margin: 0, whiteSpace: "pre-wrap", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>{paragraphContent}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
@@ -1989,10 +1989,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", gap: 10, boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
                 {block.items.map((q, qi) => (
                   <div key={qi} style={{
-                    display: "flex", gap: 16, alignItems: "flex-start",
+                    display: "flex", gap: isMobile ? 10 : 16, alignItems: "flex-start",
                     borderLeft: "2px solid #5B8C7E", paddingLeft: 16,
+                    flexDirection: isMobile ? "column" : "row",
                   }}>
-                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#888", minWidth: 80, flexShrink: 0 }}>
+                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#888", minWidth: isMobile ? "auto" : 80, flexShrink: 0 }}>
                       {q.role}
                     </span>
                     <span style={{ fontSize: T.body, color: "#444", lineHeight: 1.65 }}>
@@ -2009,11 +2010,12 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
                 {block.items.map((m, mi) => (
                   <div key={mi} style={{
-                    display: "flex", gap: 20, alignItems: "flex-start",
+                    display: "flex", gap: isMobile ? 8 : 20, alignItems: "flex-start",
                     padding: "14px 0",
                     borderBottom: mi < block.items.length - 1 ? "1px solid #F0EDE8" : "none",
+                    flexDirection: isMobile ? "column" : "row",
                   }}>
-                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#111", minWidth: 140, flexShrink: 0, paddingTop: 2 }}>
+                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#111", minWidth: isMobile ? "auto" : 140, flexShrink: 0, paddingTop: 2 }}>
                       {m.name}
                     </span>
                     <span style={{ fontSize: T.body, color: "#555", lineHeight: 1.7 }}>
@@ -2114,11 +2116,16 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     <span
                       onClick={() => setLightboxContent(<IllComponent />)}
                       style={{
-                        fontSize: T.small, color: "#999", cursor: "pointer",
-                        display: "flex", alignItems: "center", gap: 4,
+                        fontSize: T.small, color: "#666", cursor: "pointer",
+                        display: "flex", alignItems: "center", gap: 5,
+                        padding: "4px 10px",
+                        backgroundColor: "#F2EFEA",
+                        transition: "background-color 0.2s ease, color 0.2s ease",
                       }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.color = "#fff"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#F2EFEA"; e.currentTarget.style.color = "#666"; }}
                     >
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
                       </svg>
                       {"Expand"}
@@ -2141,10 +2148,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   <img
                     src={block.src}
                     alt={block.label}
+                    onClick={() => setLightboxContent(
+                      <img src={block.src} alt={block.label} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />
+                    )}
                     style={{
                       width: "100%",
                       borderRadius: 0,
                       display: "block",
+                      cursor: "pointer",
                     }}
                   />
                   {block.note && (
@@ -2180,11 +2191,16 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         const rest = visibleScreenshots.filter(s => !s.featured);
         const renderCard = (s, i) => (
           <div key={i} style={{
-            background: "#fff",
+            background: "#FAF9F7",
             borderRadius: 0,
             border: "1px solid #EDEAE3",
             overflow: "hidden",
-          }}>
+            cursor: s.src ? "pointer" : "default",
+          }}
+            onClick={s.src ? () => setLightboxContent(
+              <img src={s.src} alt={s.label} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />
+            ) : undefined}
+          >
             {s.src ? (
               <img src={s.src} alt={s.label} style={{ width: "100%", display: "block" }} />
             ) : (
@@ -2239,6 +2255,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             border: hasPrev ? "1px solid #E5E2DC" : "1px dashed #E5E2DC",
             padding: "14px 20px",
             cursor: hasPrev ? "pointer" : "default",
+            opacity: hasPrev ? 1 : 0.7,
             backgroundColor: hoveredNav === "prev" ? "#111" : "transparent",
             backgroundImage: hoveredNav === "prev" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
             transition: "background-color 0.2s ease",
@@ -2258,6 +2275,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             padding: "14px 20px",
             textAlign: isMobile ? "left" : "right",
             cursor: hasNext ? "pointer" : "default",
+            opacity: hasNext ? 1 : 0.7,
             backgroundColor: hoveredNav === "next" ? "#111" : "transparent",
             backgroundImage: hoveredNav === "next" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
             transition: "background-color 0.2s ease",
@@ -2376,11 +2394,31 @@ function Lightbox({ children, onClose }) {
       onPointerUp={onPointerUp}
       style={{
         position: "fixed", inset: 0, zIndex: 500,
-        backgroundColor: "rgba(0,0,0,0.82)",
+        backgroundColor: "rgba(20,18,15,0.85)",
         cursor: dragging.current ? "grabbing" : "grab",
         touchAction: "none", userSelect: "none",
       }}
     >
+      {/* Close button — top right */}
+      <div
+        onClick={(e) => { e.stopPropagation(); onClose(); }}
+        onPointerDown={(e) => e.stopPropagation()}
+        style={{
+          position: "fixed", top: 20, right: 20, zIndex: 501,
+          width: 40, height: 40,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          cursor: "pointer",
+          color: "rgba(255,255,255,0.6)",
+          fontSize: 24,
+          fontWeight: 300,
+          transition: "color 0.2s ease",
+          pointerEvents: "auto",
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.color = "#fff"}
+        onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.6)"}
+      >
+        {"\u00D7"}
+      </div>
       <div style={{
         position: "absolute", top: "50%", left: "50%",
         transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) scale(${scale})`,
