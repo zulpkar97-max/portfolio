@@ -842,7 +842,7 @@ function SideNav({ headings }) {
 
   return (
     <div style={{
-      position: "fixed", top: "50%", right: "max(16px, calc((100% - 860px) / 2 - 120px))",
+      position: "fixed", top: "50%", right: "max(16px, calc((100% - 720px) / 2 - 140px))",
       transform: "translateY(-50%)",
       zIndex: 50,
       transition: "opacity 0.3s ease",
@@ -1570,7 +1570,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       <SideNav headings={sectionHeadings} />
       <MobileProgressNav headings={sectionHeadings} />
       {/* === Header — wider, two-column on desktop === */}
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "28px 16px 0" : "40px 40px 0" }}>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "28px 16px 0" : "40px 0 0" }}>
 
         {/* Back link */}
         <span
@@ -1609,12 +1609,12 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           </div>
 
           {/* Summary — full width, breathes below metadata */}
-          <p style={{ fontSize: T.body, color: "#444", marginTop: 20, lineHeight: 1.8, maxWidth: 640 }}>{project.summary}</p>
+          <p style={{ fontSize: T.body, color: "#444", marginTop: 20, lineHeight: 1.8 }}>{project.summary}</p>
         </header>
       </div>
 
       {/* === Metrics Bar === */}
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "24px 16px 0" : "28px 40px 0" }}>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "24px 16px 0" : "28px 0 0" }}>
         <div style={{
           borderBottom: "1px solid #E5E2DC",
           paddingBottom: 28, marginBottom: 24,
@@ -1667,7 +1667,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       </div>
 
       {/* === Body — narrower for reading === */}
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 40px 80px" }}>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 0 80px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 36 }}>
         {bodyWithIds.map((block, i) => {
 
@@ -1685,14 +1685,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "paragraph") {
             if (block.text) {
-              return <p key={i} style={{ fontSize: T.body, color: "#333", lineHeight: 1.75, margin: 0, whiteSpace: "pre-wrap", maxWidth: 680 }}>{block.text}</p>;
+              return <p key={i} style={{ fontSize: T.body, color: "#333", lineHeight: 1.75, margin: 0, whiteSpace: "pre-wrap" }}>{block.text}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
 
           if (block.type === "quote-list") {
             return (
-              <div key={i} style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 680 }}>
+              <div key={i} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {block.items.map((q, qi) => (
                   <div key={qi} style={{
                     display: "flex", gap: 16, alignItems: "flex-start",
@@ -1712,7 +1712,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "module-list") {
             return (
-              <div key={i} style={{ display: "flex", flexDirection: "column", maxWidth: 680 }}>
+              <div key={i} style={{ display: "flex", flexDirection: "column" }}>
                 {block.items.map((m, mi) => (
                   <div key={mi} style={{
                     display: "flex", gap: 20, alignItems: "baseline",
