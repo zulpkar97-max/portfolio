@@ -48,9 +48,9 @@ const PROJECTS = [
     skillTags: ["系统诊断", "约束下决策", "流程设计", "AI落地"],
     skillTagJumps: {
       "系统诊断":  { scrollTo: 6,  borderRange: [5, 11],  keySentence: "不是人的问题，是系统的问题。", keyBlock: 10 },
-      "约束下决策": { scrollTo: 13, borderRange: [13, 14], keySentence: "我给自己设了三条硬约束", keyBlock: 13 },
+      "约束下决策": { scrollTo: 13, borderRange: [13, 14], keySentence: "零成本、零学习成本、立即见效", keyBlock: 13 },
       "流程设计":  { scrollTo: 16, borderRange: [16, 20], keySentence: "六个模块不是拍脑袋拆的", keyBlock: 20 },
-      "AI落地":   { scrollTo: 26, borderRange: [25, 33], keySentence: "知识库的信息架构", keyBlock: 33 },
+      "AI落地":   { scrollTo: 26, borderRange: [25, 33], keySentence: "根因不是模型能力问题，而是知识库的信息架构", keyBlock: 33 },
     },
     context: "公司首个长线项目",
     cardImage: "images/collab-system-interaction.jpg",
@@ -89,7 +89,7 @@ const PROJECTS = [
 
       // === 设计 ===
       { type: "heading", text: "设计：用现有条件从零搭一套协作系统", navLabel: "设计" },
-      { type: "paragraph", text: "确认了问题根源之后，我给自己设了三条硬约束：零成本——只用公司已有的飞书文档，不引入新工具；零学习成本——团队不需要学新东西，打开文档就能用；立即见效——没有时间搞试点推广，必须一上来就全员切换。" },
+      { type: "paragraph", text: "确认了问题根源之后，我给自己设了三条硬约束——零成本、零学习成本、立即见效。零成本——只用公司已有的飞书文档，不引入新工具；零学习成本——团队不需要学新东西，打开文档就能用；立即见效——没有时间搞试点推广，必须一上来就全员切换。" },
       { type: "paragraph", text: "这三条约束是现实倒逼出来的。公司没有预算买新工具，团队也没有时间和意愿去学一套陌生的系统。如果方案不能在现有条件下直接落地，就等于没有方案。" },
       { type: "paragraph", text: "我回到三个最基本的问题来推导。问题本质是什么？——信息不对称、流程不清晰、责任不明确。最小可行方案是什么？——用一份结构化的中枢文档，把所有信息、流程、责任固定下来。怎么保证执行？——规则公开透明，所有人只有一个信息来源。" },
       { type: "paragraph", text: "基于这个逻辑，我设计了六个模块：" },
@@ -122,7 +122,7 @@ const PROJECTS = [
       { type: "paragraph", text: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。" },
       { type: "paragraph", text: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。" },
       { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "images/nana-ai-chat.jpg" },
-      { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因是原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。" },
+      { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因不是模型能力问题，而是知识库的信息架构——原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。" },
 
       // === 回头看 ===
       { type: "heading", text: "回头看：这两件事教会我什么", navLabel: "回头看" },
@@ -141,65 +141,77 @@ const PROJECTS = [
     name: "客户说改UI，但UI不是问题",
     navName: "02",
     roleLine: "自发介入者 // 2025",
-    summary: "【一句话概述待定稿】",
+    summary: "订单写的是UI改版。我在交付UI方案的同时，自费走查了全站、访谈了30多位用户——最后交出去的不只是一套界面，是一份完整的产品重构规划。",
     cardSummary: "订单范围是UI迭代，没有人让我做全站走查，更没有人让我自掏腰包找三四十个用户做访谈。但我需要先搞清楚这个产品到底卡在哪——走查报告和三期规划是未收费主动交出去的，拿着它直接过了客户VP的审批。",
-    cardTag: "【关键数字待定】",
-    cardImage: null,
+    cardTag: "¥10万→¥150万",
+    cardImage: "images/case2-new-homepage.png",
     cardHighlights: ["¥10万→¥150万", "三期产品规划", "20人执行团队"],
     layoutMode: "before-after",
     metricsMode: "numbers",
     metrics: [
-      { number: "¥100K", label: "起始订单" },
-      { number: "¥1.5M", label: "最终审批规模" },
-      { number: "15\u00D7", label: "订单扩展倍数" },
+      { number: "30+", label: "用户访谈" },
+      { number: "全站", label: "逐页走查" },
+      { number: "未收费", label: "主动交付" },
     ],
-    teamInfo: "内部团队20人",
-    context: "【待定】",
-    skillTags: ["【待定】"],
-    skillTagJumps: {},
+    teamInfo: "跨5个部门联动",
+    context: "客户病急投医，方向不明",
+    skillTags: ["问题重定义", "信任策略", "用户研究", "分阶段落地"],
+    skillTagJumps: {
+      "问题重定义": { scrollTo: 6, borderRange: [6, 12], keySentence: "客户的问题不是UI，是产品定位", keyBlock: 12 },
+      "信任策略": { scrollTo: 13, borderRange: [13, 13], keySentence: "先解决客户说的问题，再引出客户没看到的问题", keyBlock: 13 },
+      "用户研究": { scrollTo: 18, borderRange: [17, 21], keySentence: "走查能看到产品，看不到人", keyBlock: 18 },
+      "分阶段落地": { scrollTo: 23, borderRange: [22, 29], keySentence: "不是三选一，是分阶段全做", keyBlock: 25 },
+    },
     illustrations: [
       { name: "诊断漏斗图", type: "漏斗图", note: "覆盖诊断链（从表象到根因）" },
       { name: "三期递进图", type: "路线图", note: "覆盖落地路径和商业结果" },
     ],
     bodyStructure: [
-      // === 起点 ===
+      // === 起点 === Block 0-3
       { type: "heading", text: "起点：一个卡住的客户，和一个即时冒出来的念头", navLabel: "起点" },
       { type: "paragraph", text: "2025年初，一个攻略站项目转到我手上。背景是这样的：客户之前找外包做了一版潮汐守望者游戏攻略站（移动端H5），一期上线后效果不好，想做二期但说不清楚该往哪个方向改。最后给出的需求是\u201C先把UI改一下\u201D——这不是一个明确的产品诉求，更像是找不到方向时退而求其次的兜底选项。起始订单是10万的UI迭代。" },
       { type: "paragraph", text: "听到\u201C潮汐守望者\u201D这个名字的瞬间，我就搜索并下载了游戏。这是职业本能——你要帮一个游戏攻略站做产品判断，不深入理解它服务的游戏生态，所有判断都是空的。" },
       { type: "paragraph", text: "下载游戏后几乎立刻注意到一件事：玩家之间有一个非常活跃的\u201C装备码\u201D分享习惯。在B站、YouTube这些平台上，玩家分享一串代码，其他人在游戏内输入就能直接复制整套英雄装备配置。这是游戏已有的、被玩家高频使用的打通机制。我当时脑子里冒出来一个念头：既然装备能用一串码打通，为什么攻略站的\u201C阵容\u201D不能？这个想法在那一刻就出现了，不是后来分析出来的。但直觉离落地很远，我先把它放着，开始做正事。" },
 
-      // === 走查 ===
+      // === 走查 === Block 4-16
       { type: "heading", text: "走查：不是客户要求的，但我判断必须做的事", navLabel: "走查" },
       { type: "paragraph", text: "客户说的是改UI。如果我只按这个需求做，正确的动作是拉一份界面修改清单，报价执行。但我没有这么做。原因很简单：我还不理解这个产品，没有足够的判断力来确认\u201C改UI\u201D是不是真正需要做的事。所以我给自己加了一项不在订单范围内的工作——全站体验走查，从首页到编辑器到收藏到个人中心，逐页记录问题并归类。没有人要求我做这件事。" },
       { type: "paragraph", text: "打开攻略站的第一眼，两个感受同时出现：视觉层面不匹配，这是客观的；更重要的是一种\u201C四不像\u201D感——这个产品既不像一个内容平台，也不像一个工具站，说不清它到底想做什么。直觉层面就不对劲。" },
       { type: "paragraph", text: "首页走完，判断加重了。问题不在于某个按钮丑或某处配色不对——而是整个页面没有信息优先级。哪些内容重要、哪些次要、用户该按什么顺序看，完全没有引导。功能堆在那里，但堆的逻辑不清楚。UI丑可以换皮，信息架构的混乱说明产品本身没想清楚自己要给用户呈现什么。如果只是UI问题，首页应该是\u201C好看但不好用\u201D或者\u201C丑但逻辑清晰\u201D，不应该是\u201C不知道在说什么\u201D。" },
-      { type: "screenshot-pair", labelBefore: "首页 Before", labelAfter: "首页 After", note: "正文讲首页走查时" },
       { type: "paragraph", text: "编辑器的问题更直接。攻略站的编辑器不只是给普通用户用的——在这个生态里，真正持续产出内容的人首先是能带来流量的游戏主播，其次是官方的内容运营人员。编辑器是他们的核心生产工具。但整条上传链路的操作逻辑跟游戏内搭阵容的逻辑完全不一致，玩家在游戏里习惯的交互方式到了攻略站变成另一套东西。如果连最核心的内容生产者都觉得难用，产品的问题就不在表面。" },
-      { type: "screenshot-pair", labelBefore: "编辑器 Before", labelAfter: "编辑器 After", note: "正文讲编辑器走查时" },
       { type: "paragraph", text: "走查进行到大约一半的时候，我开始注意到一个反复出现的现象：很多问题表面上各不相同，但底下都是同一种冲突——功能和功能在打架。首页里，内容推荐和筛选工具在抢同一块空间，信息展示和操作入口互相挤压，谁都没有得到合理的优先级。编辑器里，攻略的文字描述流程和阵容的结构化配置被塞在同一条线性链路里，两种完全不同性质的任务被迫共用一套交互逻辑。一个想展示内容，一个想提供工具，但产品没有决定谁先谁后、怎么衔接，所以它们在每个页面里各自为战。" },
       { type: "paragraph", text: "这个冲突反复出现之后，我才意识到它们不是各自独立的缺陷，是同一个根源。我回到\u201C攻略站\u201D这三个字本身去想：攻略站天然有双重身份，它是眼睛看的（玩家来这里看攻略内容），也是手上用的（玩家要把阵容拿到游戏里去用）。看和用，这两件事必须实现闭环。但当前的产品把这两个角色既没有整合、也没有区分，互相干扰着挤在一起。" },
       { type: "paragraph", text: "到这里，我之前下载游戏时冒出的那个念头突然有了落点。阵容码不只是一个功能想法——它恰好是连接\u201C看\u201D和\u201C用\u201D的枢纽。主播展示阵容码，玩家看完攻略后输入阵容码，在游戏内直接使用。两个角色通过一串代码实现统一。" },
       { type: "paragraph", text: "我基本确认了两件事：第一，客户的问题不是UI，是产品定位——\u201C内容聚合\u201D和\u201C阵容工具\u201D两个身份没有找到统一的方式；第二，定位之外，执行层面的交互设计基础也出了问题。" },
       { type: "paragraph", text: "但我知道不能一上来就跟客户说\u201C你的问题不是UI是定位\u201D。所以我在走查报告里做了一个刻意的安排：前半部分老老实实标注每一个UI和交互缺陷，配截图、写修复方案，回应客户\u201C先改UI\u201D的原始需求。你拿着这部分找更便宜的外包去改也行。真正的重点在报告后半部分——产品定位分析和分阶段规划。先解决客户说的问题，再引出客户没看到的问题。" },
+      { type: "screenshot-group", items: [
+        { src: "images/case2-old-homepage.png", label: "旧版首页", note: "信息架构混乱，无优先级引导" },
+        { src: "images/case2-old-detail.png", label: "旧版详情页", note: "内容展示和工具功能互相干扰" },
+      ]},
+      { type: "screenshot-inline", label: "旧版编辑器", note: "上传链路与游戏内逻辑不一致", src: "images/case2-old-editor.png" },
       { type: "illustration", index: 0 },
 
-      // === 验证 ===
+      // === 验证 === Block 17-21
       { type: "heading", text: "验证：走查能看到产品，看不到人", navLabel: "验证" },
-      { type: "paragraph", text: "走查告诉我产品本身有什么问题，但它有一个天然局限：看不到真实用户在实际使用中卡在哪里。我对这款游戏的理解也可能不够深。这个判断需要第三方验证。" },
+      { type: "paragraph", text: "走查能看到产品，看不到人。它告诉我产品本身有什么问题，但有一个天然局限：看不到真实用户在实际使用中卡在哪里。我对这款游戏的理解也可能不够深。这个判断需要第三方验证。" },
       { type: "paragraph", text: "还是那个前提——没有人要求我做这件事。10万的UI迭代订单不包含用户调研，公司不会报销访谈费用。但我判断不做不行。我自掏腰包做了一对一访谈：给国内主播发50块红包、国外主播发10美金，换半小时深度对话；普通玩家每人约聊10分钟；官方的内容填报人员不需要花钱，这是他们工作的一部分，直接聊。前后接触大约三四十人。" },
       { type: "paragraph", text: "几类关键反馈逐渐清晰，每一类都接回了我在走查中形成的诊断：\n\n官方内容填报人员说上传流程太繁琐、步骤太多——这直接印证了走查中编辑器的判断：上传链路跟游戏内逻辑不一致，连最核心的内容生产者都觉得难用，问题确实不在UI层面。\n\n头部主播的反馈补充了走查完全看不到的维度：写完攻略之后分发量不够，分享出去只是一个链接，点击量和用户反馈作者完全不知道，没有激励也没有反馈，持续创作动力很难维持。这告诉我：产品不只是\u201C内容聚合\u201D这个角色没做好，它根本没想清楚内容生产出来之后往哪走——内容的流通和生态的循环是整体缺失的。\n\n最重要的观察来自普通用户。攻略站上目前全是图文，但潮汐守望者是一款高度策略化的游戏，阵容的英雄站位、出手顺序、操作时机都是通关关键。这类信息靠图文很难讲清楚。在游戏内容的信息传递中，文字的效率低于图片，图片低于视频——尤其对操作密集的策略型游戏，玩家需要的是\u201C手把手跟着做\u201D，需要知道几分几秒该做什么。这意味着产品形态本身也需要重新考虑。" },
       { type: "paragraph", text: "走查、访谈、玩游戏是同步推进的。深度玩了大约两个月后，之前脑子里零散的判断全部串起来了。" },
 
-      // === 方案 ===
+      // === 方案 === Block 22-31
       { type: "heading", text: "方案：分阶段实施，阵容码是枢纽", navLabel: "方案" },
       { type: "paragraph", text: "基于走查和访谈的完整诊断，阵容码从最初的产品直觉变成了整个方案的枢纽。它是攻略站相较于任何外部平台的独家优势——B站和YouTube只能看视频，不能实现阵容数据的直接复用。" },
       { type: "paragraph", text: "但阵容码不能第一步就做，它依赖游戏客户端的功能支持。我产出了三期规划：第一期解决当前竖版交互的基础体验问题，优化上传链路和信息架构，让产品先能用；第二期做横版适配——游戏内核心操作界面全是横版，主播和核心玩家普遍用PC端或模拟器，竖版H5在主力使用场景下体验断裂；第三期横版内嵌游戏、联动阵容码，打通\u201C看攻略\u201D和\u201C用攻略\u201D的完整闭环。" },
-      { type: "illustration", index: 1 },
-      { type: "paragraph", text: "我没有让客户三选一，建议是全做、分阶段实施，总预算150万。" },
+      { type: "paragraph", text: "不是三选一，是分阶段全做——总预算150万。" },
       { type: "paragraph", text: "走查报告和三期规划都是未收费主动产出的。我拿走查报告直接跟客户VP团队做了汇报，方案获得审批。订单从10万UI迭代扩展为150万的完整产品重构，分三阶段执行。我离职时前两个阶段约110万已在执行中，内部团队20人。" },
-      { type: "screenshot-pair", labelBefore: "详情页 Before", labelAfter: "详情页 After", note: "方案落地后的详情页重设计" },
+      { type: "screenshot-group", items: [
+        { src: "images/case2-new-homepage.png", label: "新版首页", note: "重构后的信息架构和视觉层级" },
+        { src: "images/case2-new-detail.png", label: "新版详情页", note: "内容与工具分层呈现" },
+      ]},
+      { type: "screenshot-inline", label: "新版编辑器", note: "双层难度编辑器，对齐游戏内逻辑", src: "images/case2-new-editor.jpg" },
+      { type: "illustration", index: 1 },
 
-      // === 回头看 ===
+      // === 回头看 === Block 30-31
       { type: "heading", text: "回头看", navLabel: "回头看" },
       { type: "paragraph", text: "我之前处理过一次已经爆发的团队协作危机，那次是问题摆在所有人面前，合同快丢了，我必须找到根源并解出来。这次完全不同。客户只说\u201C改UI\u201D，没有人让我做全站走查，没有人让我找三四十个用户访谈，走查报告和三期规划不在订单范围内，访谈费用是自己出的。从头到尾，每一步都是我自己判断\u201C这件事应该做\u201D之后主动推进的。" },
     ],
@@ -523,7 +535,6 @@ function HomePage({ onNavigate, isMobile }) {
       <div style={{ marginTop: 0, marginBottom: isMobile ? 24 : 32 }}>
         {PROJECTS.map((p, idx) => {
           const isHovered = hoveredId === p.id;
-          const timeStr = p.roleLine.split(" // ")[1] || "";
 
           return (
             <div
@@ -595,15 +606,6 @@ function HomePage({ onNavigate, isMobile }) {
 
                   {/* Center: text block */}
                   <div style={{ minWidth: 0 }}>
-                    {/* Year */}
-                    <div style={{ marginBottom: 6 }}>
-                      <span style={{
-                        fontSize: T.small,
-                        color: isHovered ? "rgba(255,255,255,0.6)" : "#B8B0A3",
-                        transition: "color 0.4s ease",
-                      }}>{timeStr}</span>
-                    </div>
-
                     {/* Title */}
                     <h2 style={{
                       fontSize: 22,
@@ -675,13 +677,8 @@ function HomePage({ onNavigate, isMobile }) {
               ) : (
                 /* Mobile: stacked but compact */
                 <div onClick={() => onNavigate("project-" + p.id)} style={{ cursor: "pointer" }}>
-                  {/* Number + time */}
-                  <div style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: 8,
-                  }}>
+                  {/* Number */}
+                  <div style={{ marginBottom: 8 }}>
                     <span style={{
                       fontSize: 28,
                       fontFamily: FONT_DISPLAY,
@@ -691,7 +688,6 @@ function HomePage({ onNavigate, isMobile }) {
                       letterSpacing: "-0.02em",
                       userSelect: "none",
                     }}>{String(idx + 1).padStart(2, "0")}</span>
-                    <span style={{ fontSize: T.small, color: "#B8B0A3" }}>{timeStr}</span>
                   </div>
 
                   {/* Title + summary */}
@@ -859,44 +855,27 @@ function IterationStep({ version, heading }) {
   );
 }
 
-function SideNav({ headings, onNavigate, prevProjectId }) {
+function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
   const isCompact = useIsMobile(1100);
-  const [active, setActive] = useState(-1);
   const [visible, setVisible] = useState(false);
   const [hoveredIdx, setHoveredIdx] = useState(null);
 
   useEffect(() => {
-    let rafId = null;
-    const compute = () => {
-      const els = headings.map((_, i) => document.getElementById("section-" + i));
-      const navH = 60;
-      let found = -1;
-      const atBottom = window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
-      if (atBottom && headings.length > 0) {
-        found = headings.length - 1;
-      } else {
-        for (let i = els.length - 1; i >= 0; i--) {
-          if (els[i] && els[i].getBoundingClientRect().top <= navH + 100) {
-            found = i;
-            break;
-          }
-        }
-      }
-      setActive(found);
-      setVisible(found >= 0);
-      rafId = null;
+    const check = () => {
+      const el = document.getElementById("body-block-0");
+      setVisible(el ? el.getBoundingClientRect().top <= 160 : false);
     };
-    const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(compute); };
+    const onScroll = () => requestAnimationFrame(check);
     window.addEventListener("scroll", onScroll, { passive: true });
-    const t = setTimeout(compute, 100);
-    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); if (rafId) cancelAnimationFrame(rafId); };
-  }, [headings]);
+    const t = setTimeout(check, 100);
+    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); };
+  }, []);
 
-  if (isCompact) return null;
+  if (isCompact || !sections || sections.length === 0) return null;
 
   return (
     <>
-      {/* Back button — 40x40 box, navigates to prev project */}
+      {/* Back button — 40x40 box */}
       <div
         onClick={() => onNavigate("home")}
         onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#FAF9F7"; }}
@@ -914,7 +893,7 @@ function SideNav({ headings, onNavigate, prevProjectId }) {
         <span style={{ fontSize: 14, color: "#666", transition: "color 0.2s ease" }}>{"\u2190"}</span>
       </div>
 
-      {/* Section nav — slides in once body is scrolled into view */}
+      {/* Section nav — skill tag sections */}
       {visible && (
         <div style={{
           position: "fixed", top: "50%", right: "max(16px, calc((100% - 720px) / 2 - 140px))",
@@ -927,42 +906,39 @@ function SideNav({ headings, onNavigate, prevProjectId }) {
         }}>
           {/* Labels */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 }}>
-            {headings.map((h, i) => (
+            {sections.map((s, i) => (
               <div
                 key={i}
-                onClick={() => {
-                  const el = document.getElementById("section-" + i);
-                  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-                }}
+                onClick={() => onSectionClick && onSectionClick(s)}
                 onMouseEnter={() => setHoveredIdx(i)}
                 onMouseLeave={() => setHoveredIdx(null)}
                 style={{
-                  fontSize: active === i ? T.body : T.small,
+                  fontSize: activeSectionIdx === i ? T.body : T.small,
                   lineHeight: 1,
-                  color: (hoveredIdx === i || active === i) ? (hoveredIdx === i ? "#FAF9F7" : "#000") : "#ccc",
+                  color: (hoveredIdx === i || activeSectionIdx === i) ? (hoveredIdx === i ? "#FAF9F7" : "#000") : "#ccc",
                   backgroundColor: hoveredIdx === i ? "#111" : "transparent",
-                  fontWeight: active === i ? 700 : 500,
+                  fontWeight: activeSectionIdx === i ? 700 : 500,
                   padding: "10px 12px 10px 8px",
                   whiteSpace: "nowrap",
                   minWidth: 68,
                   textAlign: "center",
-                  transform: active === i ? "translateX(-4px)" : "translateX(0)",
+                  transform: activeSectionIdx === i ? "translateX(-4px)" : "translateX(0)",
                   pointerEvents: "auto",
                   cursor: "pointer",
                   transition: "background-color 0.2s ease, color 0.2s ease",
                 }}
               >
-                {h}
+                {s}
               </div>
             ))}
           </div>
           {/* Vertical track */}
           <div style={{ width: 2, backgroundColor: "#E5E2DC", position: "relative", flexShrink: 0 }}>
-            {active >= 0 && (
+            {activeSectionIdx >= 0 && (
               <div style={{
                 position: "absolute",
-                top: `${(active / headings.length) * 100}%`,
-                height: `${(1 / headings.length) * 100}%`,
+                top: `${(activeSectionIdx / sections.length) * 100}%`,
+                height: `${(1 / sections.length) * 100}%`,
                 width: 2,
                 backgroundColor: "#000",
                 transition: "top 0.25s ease, height 0.25s ease",
@@ -1789,7 +1765,55 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
     return { sectionHeadings: headings, bodyWithIds: body };
   }, [project.bodyStructure]);
 
-  // --- Skill tag jump state ---
+  // --- Pre-compute key sentence map for persistent highlights ---
+  const keyBlockMap = useMemo(() => {
+    const map = {};
+    if (project.skillTags && project.skillTagJumps) {
+      project.skillTags.forEach((tag) => {
+        const jump = project.skillTagJumps[tag];
+        if (jump && jump.keyBlock != null && jump.keySentence) {
+          map[jump.keyBlock] = { keySentence: jump.keySentence, tag };
+        }
+      });
+    }
+    return map;
+  }, [project]);
+
+  // --- Scroll-spy: track which skillTag section is currently in view ---
+  const [activeScrollSection, setActiveScrollSection] = useState(-1);
+
+  useEffect(() => {
+    const tags = project.skillTags;
+    const jumps = project.skillTagJumps;
+    if (!tags || !jumps) return;
+    let rafId = null;
+    const compute = () => {
+      const navH = 60;
+      let found = -1;
+      for (let i = tags.length - 1; i >= 0; i--) {
+        const jump = jumps[tags[i]];
+        if (!jump) continue;
+        const el = document.getElementById("body-block-" + jump.scrollTo);
+        if (el && el.getBoundingClientRect().top <= navH + 100) { found = i; break; }
+      }
+      // Also check if we've scrolled past the last section's range
+      if (found >= 0) {
+        const lastJump = jumps[tags[found]];
+        if (lastJump) {
+          const endEl = document.getElementById("body-block-" + lastJump.borderRange[1]);
+          if (endEl && endEl.getBoundingClientRect().bottom < 0) found = -1;
+        }
+      }
+      setActiveScrollSection(found);
+      rafId = null;
+    };
+    const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(compute); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const t = setTimeout(compute, 100);
+    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); if (rafId) cancelAnimationFrame(rafId); };
+  }, [project.skillTags, project.skillTagJumps]);
+
+  // --- Skill tag jump state (click-triggered) ---
   const [activeTagJump, setActiveTagJump] = useState(null);
   const highlightTimers = useRef([]);
 
@@ -1854,7 +1878,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         }} />
       )}
       <ReadingProgressBar />
-      <SideNav headings={sectionHeadings} onNavigate={onNavigate} prevProjectId={prevProject ? prevProject.id : null} />
+      <SideNav sections={project.skillTags} activeSectionIdx={activeScrollSection} onNavigate={onNavigate} onSectionClick={handleTagClick} />
       <MobileProgressNav headings={sectionHeadings} />
       {/* === Header — wider, two-column on desktop === */}
       <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "28px 16px 0" : "40px 0 0" }}>
@@ -1980,8 +2004,15 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 0 80px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
         {bodyWithIds.map((block, i) => {
-          const isInBorderRange = activeTagJump && block.bodyIndex >= activeTagJump.borderRange[0] && block.bodyIndex <= activeTagJump.borderRange[1];
-          const borderShadow = isInBorderRange ? "inset 3px 0 0 #111" : undefined;
+          // Click-triggered border (strong, temporary)
+          const isInClickRange = activeTagJump && block.bodyIndex >= activeTagJump.borderRange[0] && block.bodyIndex <= activeTagJump.borderRange[1];
+          // Persistent border (subtle, scroll-driven)
+          const tags = project.skillTags || [];
+          const jumps = project.skillTagJumps || {};
+          const persistentTag = activeScrollSection >= 0 && tags[activeScrollSection];
+          const persistentJump = persistentTag && jumps[persistentTag];
+          const isInPersistentRange = persistentJump && block.bodyIndex >= persistentJump.borderRange[0] && block.bodyIndex <= persistentJump.borderRange[1];
+          const borderShadow = isInClickRange ? "inset 3px 0 0 #111" : isInPersistentRange ? "inset 2px 0 0 #D5D0C8" : undefined;
           const blockId = "body-block-" + block.bodyIndex;
 
           if (block.type === "heading") {
@@ -2002,20 +2033,36 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "paragraph") {
             if (block.text) {
-              const isKeyBlock = activeTagJump && block.bodyIndex === activeTagJump.keyBlock && activeTagJump.sentencePhase !== "done";
+              // Check for click-triggered highlight (temporary animation)
+              const isClickKeyBlock = activeTagJump && block.bodyIndex === activeTagJump.keyBlock && activeTagJump.sentencePhase !== "done";
+              // Check for persistent highlight (always visible for key sentences)
+              const persistentKeyInfo = keyBlockMap[block.bodyIndex];
+              const hasPersistentKey = persistentKeyInfo && block.text.includes(persistentKeyInfo.keySentence);
               let paragraphContent = block.text;
-              if (isKeyBlock && activeTagJump.keySentence && block.text.includes(activeTagJump.keySentence)) {
+
+              if (isClickKeyBlock && activeTagJump.keySentence && block.text.includes(activeTagJump.keySentence)) {
+                // Click-triggered: stronger highlight with animation
                 const parts = block.text.split(activeTagJump.keySentence);
                 const phase = activeTagJump.sentencePhase;
                 const hlOpacity = phase === "mounting" ? 0 : phase === "in" ? 1 : phase === "out" ? 0 : 0;
                 paragraphContent = (
                   <>{parts[0]}<span style={{
-                    backgroundColor: "rgba(229, 226, 220, 0.7)",
-                    opacity: hlOpacity,
-                    transition: "opacity 1s ease",
+                    backgroundColor: `rgba(229, 226, 220, ${0.35 + 0.35 * hlOpacity})`,
+                    transition: "background-color 1s ease",
                     borderRadius: 2,
-                    padding: "1px 0",
+                    padding: "1px 3px",
                   }}>{activeTagJump.keySentence}</span>{parts.slice(1).join(activeTagJump.keySentence)}</>
+                );
+              } else if (hasPersistentKey) {
+                // Persistent: subtle always-visible highlight
+                const ks = persistentKeyInfo.keySentence;
+                const parts = block.text.split(ks);
+                paragraphContent = (
+                  <>{parts[0]}<span style={{
+                    backgroundColor: "rgba(229, 226, 220, 0.35)",
+                    borderRadius: 2,
+                    padding: "1px 3px",
+                  }}>{ks}</span>{parts.slice(1).join(ks)}</>
                 );
               }
               return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.8, margin: 0, whiteSpace: "pre-wrap", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>{paragraphContent}</p>;
@@ -2137,7 +2184,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     )}
                     <div style={{ minWidth: isMobile ? 600 : "auto" }}>
                       <div
-                        onClick={() => setLightboxContent(<IllComponent />)}
+                        onClick={() => setLightboxContent(<div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>)}
                         style={{ cursor: "pointer" }}
                       >
                         <IllComponent />
@@ -2153,7 +2200,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                       {ill.name}<span style={{ color: "#ccc", margin: "0 6px" }}>{"\u00B7"}</span>{ill.type}
                     </span>
                     <span
-                      onClick={() => setLightboxContent(<IllComponent />)}
+                      onClick={() => setLightboxContent(<div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>)}
                       style={{
                         fontSize: T.small, color: "#666", cursor: "pointer",
                         display: "flex", alignItems: "center", gap: 5,
@@ -2462,11 +2509,11 @@ function Lightbox({ children, onClose }) {
         position: "absolute", top: "50%", left: "50%",
         transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) scale(${scale})`,
         transformOrigin: "center center",
-        width: "min(94vw, 1100px)",
+        maxWidth: "min(94vw, 1100px)",
         transition: dragging.current ? "none" : "transform 0.15s ease-out",
         display: "flex", flexDirection: "column", alignItems: "center",
       }}>
-        <div style={{ backgroundColor: "#FAF9F7", padding: 24, width: "100%", boxSizing: "border-box" }}>
+        <div style={{ backgroundColor: "#FAF9F7", padding: 24, boxSizing: "border-box" }}>
           {children}
         </div>
         {/* Hint bar right below the card */}
