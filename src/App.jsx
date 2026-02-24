@@ -1359,99 +1359,138 @@ function DualTrackTimeline() {
 
 function InfoHub() {
   const ff = "'DM Sans', sans-serif";
+  const govColor = "#7A8BA8";
+  const govDark = "#5A7390";
+  const govLight = "#C8D3E0";
+  const delColor = "#5B8C7E";
+  const delDark = "#4A7568";
+  const fbColor = "#2A2A2A";
   return (
-    <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
+    <svg viewBox="0 0 840 450" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
       <defs>
         <marker id="ih-gov" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <path d="M 0 0 L 8 3 L 0 6 Z" fill="#000"/>
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill={govColor}/>
         </marker>
-        <marker id="ih-gov-rev" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
-          <path d="M 8 0 L 0 3 L 8 6 Z" fill="#aaa"/>
+        <marker id="ih-del" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+          <path d="M 8 0 L 0 3 L 8 6 Z" fill={delColor}/>
+        </marker>
+        <marker id="ih-fb" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill={fbColor}/>
         </marker>
       </defs>
 
-      {/* === Legend + Core Rule (top row) === */}
-      <line x1="20" y1="12" x2="40" y2="12" stroke="#000" strokeWidth="1.5"/>
-      <text x="44" y="15" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#666">{"\u2192 Governance (demand in)"}</text>
-      <line x1="195" y1="12" x2="215" y2="12" stroke="#aaa" strokeWidth="1.5"/>
-      <text x="219" y="15" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#666">{"\u2190 Delivery (output back)"}</text>
-      <text x="410" y="15" fontFamily={ff} fontSize="8.5" fontWeight="700" fill="#333">{"\u201CIf it\u2019s not in the formal tracker, it doesn\u2019t exist\u201D"}</text>
+      {/* === Legend row === */}
+      <line x1="20" y1="12" x2="42" y2="12" stroke={govColor} strokeWidth="2"/>
+      <text x="46" y="15" fontFamily={ff} fontSize="9" fontWeight="600" fill={govColor}>{"\u2192 Governance (demand in)"}</text>
+      <line x1="220" y1="12" x2="242" y2="12" stroke={delColor} strokeWidth="2"/>
+      <text x="246" y="15" fontFamily={ff} fontSize="9" fontWeight="600" fill={delColor}>{"\u2190 Delivery (output back)"}</text>
+      <line x1="420" y1="12" x2="442" y2="12" stroke={fbColor} strokeWidth="2" strokeDasharray="6,3"/>
+      <text x="446" y="15" fontFamily={ff} fontSize="9" fontWeight="600" fill={fbColor}>Feedback loop</text>
+
+      {/* === Entry annotation banner — full width, high contrast === */}
+      <rect x="0" y="28" width="840" height="30" fill="#2A2A2A"/>
+      <text x="420" y="48" textAnchor="middle" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#FAF9F7" letterSpacing="0.03em">
+        {"SYSTEM RULE:  Only formal submissions enter \u2014 all other channels are ignored"}
+      </text>
 
       {/* === Three zone backgrounds === */}
-      {/* Client zone */}
-      <rect x="0" y="30" width="60" height="290" fill="#EDF2F7"/>
-      <text x="30" y="175" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#4A5568" transform="rotate(-90, 30, 175)">CLIENT</text>
-      {/* Hub zone (white — default) */}
-      {/* Execution zone */}
-      <rect x="660" y="30" width="60" height="290" fill="#F5F5F5"/>
-      <text x="690" y="175" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#666" transform="rotate(90, 690, 175)">EXECUTION</text>
+      <rect x="0" y="64" width="110" height="356" fill="#E8EDF3" rx="0"/>
+      <rect x="730" y="64" width="110" height="290" fill="#EDEAE3" rx="0"/>
 
-      {/* === GOVERNANCE LAYER === */}
-      <text x="360" y="46" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.08em" fill="#bbb">{"GOVERNANCE \u2014 DEMAND FLOWS IN \u2192"}</text>
-      <line x1="80" y1="52" x2="640" y2="52" stroke="#e8e8e8" strokeWidth="1"/>
+      {/* Zone labels */}
+      <text x="55" y="230" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="700" fill="#5A6A80">CLIENT</text>
+      <text x="55" y="246" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="500" fill="#8899AA">Demand Source</text>
+      <text x="785" y="200" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="700" fill="#8A8275">EXECUTION</text>
+      <text x="785" y="216" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="500" fill="#B8B0A3">Task Teams</text>
 
-      {/* Entrance annotation */}
-      <text x="82" y="72" fontFamily={ff} fontSize="8" fontWeight="500" fontStyle="italic" fill="#999">Only formal submissions enter</text>
-      <text x="82" y="82" fontFamily={ff} fontSize="8" fontWeight="500" fontStyle="italic" fill="#999">{"— all other channels ignored"}</text>
+      {/* === GOVERNANCE LAYER band === */}
+      <rect x="110" y="64" width="620" height="150" fill="#F0F3F8" rx="0"/>
+      <text x="420" y="78" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.1em" fill={govColor}>{"GOVERNANCE \u2014 DEMAND FLOWS IN \u2192"}</text>
+      <line x1="128" y1="82" x2="710" y2="82" stroke={govLight} strokeWidth="1"/>
 
       {/* Arrow Client → Requirement Lifecycle */}
-      <line x1="60" y1="100" x2="88" y2="100" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
+      <line x1="110" y1="142" x2="124" y2="142" stroke={govColor} strokeWidth="2" markerEnd="url(#ih-gov)"/>
 
-      {/* Requirement Lifecycle — CORE, widest box */}
-      <rect x="96" y="62" width="280" height="80" fill="#FAF9F7" stroke="#000" strokeWidth="2" rx="2"/>
-      <rect x="96" y="62" width="280" height="20" fill="#111" rx="2"/>
-      <text x="108" y="76" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Requirement Lifecycle</text>
-      <rect x="296" y="65" width="44" height="14" rx="7" fill="#666"/>
-      <text x="318" y="75" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">CORE</text>
-      <text x="108" y="102" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#555">GATEWAY & ENGINE</text>
+      {/* === Requirement Lifecycle — CORE, largest module === */}
+      {/* Outer halo */}
+      <rect x="124" y="86" width="328" height="120" rx="3" fill="none" stroke={govLight} strokeWidth="1.5" strokeDasharray="4,2"/>
+      {/* Main box */}
+      <rect x="128" y="90" width="320" height="112" rx="2" fill="#FAF9F7" stroke={govColor} strokeWidth="3"/>
+      {/* Header band */}
+      <rect x="128" y="90" width="320" height="26" rx="2" fill={govDark}/>
+      <text x="142" y="108" fontFamily={ff} fontSize="12" fontWeight="700" fill="#fff">Requirement Lifecycle</text>
+      <rect x="354" y="94" width="44" height="18" rx="9" fill="#fff" fillOpacity="0.25"/>
+      <text x="376" y="106" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" fill="#fff">CORE</text>
+      {/* Role label */}
+      <text x="142" y="134" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.04em" fill={govColor}>GATEWAY & ENGINE</text>
+      {/* Description */}
+      <text x="142" y="152" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">Captures, validates, and tracks all formal</text>
+      <text x="142" y="164" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">requirements through their complete lifecycle.</text>
+      {/* Vertical accent bar on left */}
+      <rect x="128" y="116" width="3" height="86" fill={govColor} rx="1"/>
 
       {/* Arrow Req → Role Map */}
-      <line x1="376" y1="100" x2="408" y2="100" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
+      <line x1="448" y1="142" x2="466" y2="142" stroke={govColor} strokeWidth="2" markerEnd="url(#ih-gov)"/>
 
-      {/* Role Map */}
-      <rect x="416" y="62" width="200" height="80" fill="#FAF9F7" stroke="#000" strokeWidth="1.5" rx="2"/>
-      <rect x="416" y="62" width="200" height="20" fill="#111" rx="2"/>
-      <text x="428" y="76" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Role Map</text>
-      <text x="428" y="102" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#555">ROUTER</text>
+      {/* === Role Map === */}
+      <rect x="470" y="90" width="240" height="112" rx="2" fill="#FAF9F7" stroke={govColor} strokeWidth="1.5"/>
+      <rect x="470" y="90" width="240" height="24" rx="2" fill={govDark}/>
+      <text x="484" y="107" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#fff">Role Map</text>
+      <text x="484" y="132" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.04em" fill={govColor}>ROUTER</text>
+      <text x="484" y="150" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">Routes each requirement to the correct</text>
+      <text x="484" y="162" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">owner by domain and responsibility.</text>
 
       {/* Arrow Role Map → Execution */}
-      <line x1="616" y1="100" x2="658" y2="100" stroke="#000" strokeWidth="1.5" markerEnd="url(#ih-gov)"/>
+      <line x1="710" y1="142" x2="728" y2="142" stroke={govColor} strokeWidth="2" markerEnd="url(#ih-gov)"/>
 
-      {/* === DELIVERY LAYER === */}
-      <text x="360" y="168" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.08em" fill="#bbb">{"\u2190 OUTPUT FLOWS BACK \u2014 DELIVERY"}</text>
-      <line x1="80" y1="174" x2="640" y2="174" stroke="#e8e8e8" strokeWidth="1"/>
+      {/* === DELIVERY LAYER band === */}
+      <rect x="110" y="220" width="620" height="136" fill="#F5F2ED" rx="0"/>
+      <text x="420" y="234" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.1em" fill={delColor}>{"\u2190 OUTPUT FLOWS BACK \u2014 DELIVERY"}</text>
+      <line x1="128" y1="238" x2="710" y2="238" stroke="#D5D0C8" strokeWidth="1"/>
 
       {/* Arrow Execution → Release Mgmt */}
-      <line x1="658" y1="220" x2="624" y2="220" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-gov-rev)"/>
+      <line x1="728" y1="296" x2="714" y2="296" stroke={delColor} strokeWidth="2" markerEnd="url(#ih-del)"/>
 
-      {/* Release Management */}
-      <rect x="416" y="184" width="200" height="72" fill="#FAF9F7" stroke="#aaa" strokeWidth="1.5" rx="2"/>
-      <rect x="416" y="184" width="200" height="20" fill="#aaa" rx="2"/>
-      <text x="428" y="198" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Release Management</text>
-      <text x="428" y="224" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#888">PACKAGING</text>
+      {/* === Release Management === */}
+      <rect x="470" y="244" width="240" height="104" rx="2" fill="#FAF9F7" stroke={delColor} strokeWidth="1.5"/>
+      <rect x="470" y="244" width="240" height="24" rx="2" fill={delDark}/>
+      <text x="484" y="261" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#fff">Release Management</text>
+      <text x="484" y="286" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.04em" fill={delColor}>PACKAGING</text>
+      <text x="484" y="304" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">Packages verified deliverables into</text>
+      <text x="484" y="316" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">release bundles with version control.</text>
 
       {/* Arrow Release → Acceptance */}
-      <line x1="416" y1="220" x2="384" y2="220" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-gov-rev)"/>
+      <line x1="470" y1="296" x2="452" y2="296" stroke={delColor} strokeWidth="2" markerEnd="url(#ih-del)"/>
 
-      {/* Acceptance Review */}
-      <rect x="96" y="184" width="280" height="72" fill="#FAF9F7" stroke="#aaa" strokeWidth="1.5" rx="2"/>
-      <rect x="96" y="184" width="280" height="20" fill="#aaa" rx="2"/>
-      <text x="108" y="198" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">Acceptance Review</text>
-      <text x="108" y="224" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.04em" fill="#888">QUALITY GATE</text>
+      {/* === Acceptance Review === */}
+      <rect x="128" y="244" width="320" height="104" rx="2" fill="#FAF9F7" stroke={delColor} strokeWidth="1.5"/>
+      <rect x="128" y="244" width="320" height="24" rx="2" fill={delDark}/>
+      <text x="142" y="261" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#fff">Acceptance Review</text>
+      <text x="142" y="286" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.04em" fill={delColor}>QUALITY GATE</text>
+      <text x="142" y="304" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">Validates every deliverable against original</text>
+      <text x="142" y="316" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">requirements before client sign-off.</text>
 
       {/* Arrow Acceptance → Client */}
-      <line x1="96" y1="220" x2="62" y2="220" stroke="#aaa" strokeWidth="1.5" markerEnd="url(#ih-gov-rev)"/>
+      <line x1="128" y1="296" x2="112" y2="296" stroke={delColor} strokeWidth="2" markerEnd="url(#ih-del)"/>
 
       {/* === Feedback loop: Acceptance Review → Requirement Lifecycle === */}
-      <path d="M 236 256 L 236 278 L 82 278 L 82 130 L 94 130" fill="none" stroke="#000" strokeWidth="1.5" strokeDasharray="5,4" opacity="0.5" markerEnd="url(#ih-gov)"/>
-      <text x="170" y="292" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="600" fontStyle="italic" fill="#999">Issues feed back into requirement pool</text>
+      <circle cx="288" cy="348" r="4" fill={fbColor}/>
+      <path d="M 288 348 L 288 370 L 118 370 L 118 160 L 126 160" fill="none" stroke={fbColor} strokeWidth="2.5" strokeDasharray="10,5" markerEnd="url(#ih-fb)"/>
+      <circle cx="128" cy="160" r="4" fill={fbColor}/>
+      <text x="200" y="384" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="600" fill={fbColor}>Issues feed back into requirement pool</text>
 
       {/* === BASE LAYER === */}
-      <rect x="96" y="310" width="520" height="50" fill="#FAF9F7" stroke="#D5D0C8" strokeWidth="1" rx="2"/>
-      <text x="236" y="335" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="700" fill="#333">Change Log</text>
-      <line x1="356" y1="318" x2="356" y2="352" stroke="#D5D0C8" strokeWidth="1"/>
-      <text x="476" y="335" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="700" fill="#333">Asset Repository</text>
-      <text x="356" y="354" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="500" fill="#aaa">{"Always on \u00B7 spans entire system"}</text>
+      <rect x="128" y="366" width="582" height="58" fill="#FAF9F7" stroke="#D5D0C8" strokeWidth="1" rx="2"/>
+      <line x1="419" y1="374" x2="419" y2="416" stroke="#D5D0C8" strokeWidth="1"/>
+      <text x="273" y="394" textAnchor="middle" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#333">Change Log</text>
+      <text x="273" y="408" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="400" fill="#aaa">Immutable audit trail</text>
+      <text x="565" y="394" textAnchor="middle" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#333">Asset Repository</text>
+      <text x="565" y="408" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="400" fill="#aaa">Centralized deliverable storage</text>
+      <text x="419" y="438" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="500" fill="#B8B0A3">{"Always on \u00B7 spans entire system"}</text>
+
+      {/* Base layer connectors — dashed lines from modules down */}
+      <line x1="288" y1="202" x2="288" y2="244" stroke="#D5D0C8" strokeWidth="1" strokeDasharray="3,3"/>
+      <line x1="590" y1="202" x2="590" y2="244" stroke="#D5D0C8" strokeWidth="1" strokeDasharray="3,3"/>
     </svg>
   );
 }
@@ -2058,7 +2097,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                       key={ii}
                       item={item}
                       onLightbox={() => setLightboxContent(
-                        <img src={item.src} alt={item.label} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />
+                        <img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
                       )}
                     />
                   ))}
@@ -2149,7 +2188,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     src={block.src}
                     alt={block.label}
                     onClick={() => setLightboxContent(
-                      <img src={block.src} alt={block.label} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />
+                      <img src={block.src} alt={block.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
                     )}
                     style={{
                       width: "100%",
@@ -2198,7 +2237,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             cursor: s.src ? "pointer" : "default",
           }}
             onClick={s.src ? () => setLightboxContent(
-              <img src={s.src} alt={s.label} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />
+              <img src={s.src} alt={s.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
             ) : undefined}
           >
             {s.src ? (
@@ -2427,7 +2466,7 @@ function Lightbox({ children, onClose }) {
         transition: dragging.current ? "none" : "transform 0.15s ease-out",
         display: "flex", flexDirection: "column", alignItems: "center",
       }}>
-        <div style={{ backgroundColor: "#FAF9F7", padding: 24, width: "100%" }}>
+        <div style={{ backgroundColor: "#FAF9F7", padding: 24, width: "100%", boxSizing: "border-box" }}>
           {children}
         </div>
         {/* Hint bar right below the card */}
