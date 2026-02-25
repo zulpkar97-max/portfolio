@@ -15,7 +15,7 @@ React 19 + Vite 7.3 单页应用，hash 路由（#project-1/2/3）。
 
 ## 设计系统
 
-- 背景：`#f5f2ed`
+- 背景：`#f0ebe3`
 - 灰色梯度：`#eae7e1` → `#D5D0C8` → `#B8B0A3` → `#2A2A2A`
 - 强调色：`#c4422b`（红）
 - 字体：Noto Sans SC（正文）、Noto Serif SC（标题）、DM Mono（编号/标签）
@@ -69,7 +69,10 @@ index.html
   - 副标题 "Product Operations · 5 years"（DM Mono）
   - thread 路径通过 DOM 测量动态生成（useEffect + document.fonts.ready）
   - CSS 动画：drawThread, showNeedle, showStitch（定义在 index.css）
-  - 卡片：3列 grid（desktop）/ 堆叠（mobile），无时间信息
+  - 卡片：3列 grid（140px stat | 1fr content | auto arrow），短 hook 文本
+  - 每个项目有 `cardStat`（number/unit/label）和 `cardHook`（短文本）
+  - Hover：微妙底色 + 箭头变深，分隔线用绝对定位 `left:-24px right:-24px`
+  - Footer CTA：居中布局，email/LinkedIn 按钮 + footer thread 动画
 - **body block 渲染循环**：搜索 `block.type === "heading"`
   - 支持类型：heading, paragraph, quote-list, module-list, pull-quote, screenshot-inline, screenshot-group, screenshot-pair, illustration, iteration-step
 
@@ -149,6 +152,12 @@ skillTagJumps: {
 - [x] Project 2/3 Hero 统一：同样5层布局，Layer 4 用 Metrics 卡片，各自装饰性 SVG
 - [x] 动画重置修复：`key={project.id}` 强制 remount
 - [x] 首页 Hero 重构：thread/needle SVG 动画穿过标题文字
+- [x] Footer CTA 重构：新文案 + email/LinkedIn 按钮 + footer thread 动画
+- [x] 首页卡片重构：stat 数据锚点（7天/15×/2人）+ 短 hook + 带边框标签 + 微妙 hover
+- [x] 背景色更新：`#f5f2ed` → `#f0ebe3`
+- [x] 导航栏样式统一：DM Mono 字体 + 颜色一致性
+- [x] skillTag 导航按钮居中
+- [x] 间距整体调优：hero 顶部、卡片区、footer 区
 
 ## 开发命令
 
