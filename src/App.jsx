@@ -44,6 +44,7 @@ const PROJECTS = [
     roleLine: "危机接管者 // 2023–2024",
     summary: "春节7天，从零搭出一套协作系统救回百万合同——之后又在同一项目里推动了公司首个AI智能体上线。",
     cardSummary: "合同快丢了，所有人在互相指责。我没有急着出方案，先拿7天做了15次一对一访谈——拼完所有人的说法，看到了一个谁都没意识到的问题。",
+    cardHook: "合同快丢了，所有人在互相指责。我先拆问题。",
     cardTag: "公司首个长线项目",
     skillTags: ["系统诊断", "约束下决策", "流程设计", "AI落地"],
     skillTagJumps: {
@@ -55,6 +56,7 @@ const PROJECTS = [
     context: "公司首个长线项目",
     cardImage: "images/collab-system-interaction.jpg",
     cardHighlights: ["从零搭建协作系统", "百万级合同挽回", "全公司SOP"],
+    cardStat: { number: "7", unit: "天", label: "审核期限" },
     layoutMode: "linear",
     metricsMode: "state-change",
     stateBefore: "互相指责 · 信息淹没 · 职责不清",
@@ -149,9 +151,11 @@ const PROJECTS = [
     roleLine: "自发介入者 // 2025",
     summary: "订单写的是UI改版。我在交付UI方案的同时，自费走查了全站、访谈了30多位用户——最后交出去的不只是一套界面，是一份完整的产品重构规划。",
     cardSummary: "订单范围是UI迭代，没有人让我做全站走查，更没有人让我自掏腰包找三四十个用户做访谈。但我需要先搞清楚这个产品到底卡在哪——走查报告和三期规划是未收费主动交出去的，拿着它直接过了客户VP的审批。",
+    cardHook: "订单范围是UI迭代，我做了全站走查和用户访谈。",
     cardTag: "¥10万→¥150万",
     cardImage: "images/case2-new-homepage.png",
     cardHighlights: ["¥10万→¥150万", "三期产品规划", "20人执行团队"],
+    cardStat: { number: "15", unit: "×", label: "合同价值增长" },
     layoutMode: "before-after",
     metricsMode: "numbers",
     metrics: [
@@ -241,9 +245,11 @@ const PROJECTS = [
     roleLine: "AI产品负责人 // 2024–2025",
     summary: "做完公司第一个AI产品后，我做了一场内部培训，培训后的调研发现了一个没人注意到的痛点——跨国业务的18语种翻译全靠分包，成本高、对接乱，带着一个实习生，从零把它做成了落地成品。",
     cardSummary: "第一个AI产品上线后，我在公司做了一轮AI培训，但目的不是教人用工具——我想知道哪些业务场景真正值得用AI重做。挨个部门聊完之后，从十几个候选里筛出了翻译：需求高频、流程标准化、容错空间大。判断完该不该做，剩下的就是做。",
+    cardHook: "第一个AI产品上线后，我没教人用工具，而是去找值得重做的场景。",
     cardTag: "AI产品 · 0→1",
     cardImage: "images/case3-18lang-output.png",
     cardHighlights: ["18语种翻译系统", "节省十几万翻译成本", "2人团队"],
+    cardStat: { number: "2", unit: "人", label: "核心团队" },
     layoutMode: "iteration",
     metricsMode: "numbers",
     metrics: [
@@ -405,7 +411,7 @@ function Footer({ isMobile }) {
             padding: "8px 20px", borderRadius: 2, cursor: "pointer",
             textDecoration: "none", display: "inline-flex", alignItems: "center",
             border: hBtn === "email" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-            color: hBtn === "email" ? "#f5f2ed" : "#1a1815",
+            color: hBtn === "email" ? "#f0ebe3" : "#1a1815",
             backgroundColor: hBtn === "email" ? "#1a1815" : "transparent",
             transition: "all 0.3s",
           }}
@@ -419,7 +425,7 @@ function Footer({ isMobile }) {
             padding: "8px 20px", borderRadius: 2, cursor: "pointer",
             textDecoration: "none", display: "inline-flex", alignItems: "center",
             border: hBtn === "link" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-            color: hBtn === "link" ? "#f5f2ed" : "#1a1815",
+            color: hBtn === "link" ? "#f0ebe3" : "#1a1815",
             backgroundColor: hBtn === "link" ? "#1a1815" : "transparent",
             transition: "all 0.3s",
           }}
@@ -437,7 +443,7 @@ function Nav({ currentPage, onNavigate, isMobile }) {
       position: "sticky",
       top: 0,
       zIndex: 100,
-      backgroundColor: "#f5f2ed",
+      backgroundColor: "#f0ebe3",
     }}>
       <div style={{
         maxWidth: 860,
@@ -455,7 +461,7 @@ function Nav({ currentPage, onNavigate, isMobile }) {
           style={{
             fontSize: T.heading,
             fontWeight: 700,
-            color: hovered === "home" ? "#f5f2ed" : "#000",
+            color: hovered === "home" ? "#f0ebe3" : "#000",
             fontFamily: FONT_DISPLAY,
             flexShrink: 0,
             cursor: "pointer",
@@ -476,12 +482,12 @@ function Nav({ currentPage, onNavigate, isMobile }) {
               onMouseEnter={() => setHovered(p.id)}
               onMouseLeave={() => setHovered(null)}
               style={{
-                fontSize: T.small,
-                fontFamily: FONT_DISPLAY,
-                fontWeight: isActive ? 600 : 400,
-                color: isItemHovered ? "#f5f2ed" : isActive ? "#000" : "#888",
+                fontSize: 14,
+                fontFamily: FONT_MONO,
+                fontWeight: 400,
+                color: isItemHovered ? "#f0ebe3" : isActive ? "#1a1815" : "#6b6560",
                 padding: "4px 10px",
-                backgroundColor: isItemHovered ? "#111111" : isActive ? "#F2EFEA" : "transparent",
+                backgroundColor: isItemHovered ? "#1a1815" : isActive ? "#F2EFEA" : "transparent",
                 borderRadius: 0,
                 whiteSpace: "nowrap",
                 cursor: "pointer",
@@ -492,9 +498,9 @@ function Nav({ currentPage, onNavigate, isMobile }) {
             </span>
           );
         })}
-        {!isMobile && <span style={{ color: "#E5E2DC", fontSize: T.small, margin: "0 4px" }}>|</span>}
+        {!isMobile && <span style={{ color: "#d4cfc7", fontSize: 14, margin: "0 4px" }}>|</span>}
         <span style={{
-          fontSize: T.small, color: "#ccc",
+          fontFamily: FONT_MONO, fontSize: 14, color: "#6b6560",
           cursor: "not-allowed", userSelect: "none",
           whiteSpace: "nowrap",
           padding: "4px 10px",
@@ -533,8 +539,10 @@ function HomePage({ onNavigate, isMobile }) {
 
   useEffect(() => {
     if (isMobile) return;
+    let cancelled = false;
     let resizeTimer;
     const generateThread = () => {
+      if (cancelled) return;
       const hero = heroRef.current;
       const title = titleRef.current;
       const aiSpan = aiRef.current;
@@ -578,24 +586,24 @@ function HomePage({ onNavigate, isMobile }) {
           stitches += `<line class="stitch" x1="${p.x+ox-dx/2}" y1="${p.y-dy/2}" x2="${p.x+ox+dx/2}" y2="${p.y+dy/2}" style="animation-delay:${delay}s"/>`;
         }
       });
-      const dl = 8000;
-      const dashStyle = `stroke-dasharray:${dl};stroke-dashoffset:${dl}`;
       setThreadSvg({
         viewBox: `0 0 ${svgW} ${svgH}`,
-        content: `<path class="thread-line-shadow" d="${d}" style="${dashStyle}"/><path class="thread-line" d="${d}" style="${dashStyle}"/>${stitches}<g class="needle"><circle class="needle-dot" cx="${aiRight+16}" cy="${aiCenterY}" r="3.5"/><line class="needle-tail" x1="${aiRight+16}" y1="${aiCenterY}" x2="${aiRight+38}" y2="${aiCenterY-10}"/></g>`,
+        content: `<path class="thread-line-shadow" d="${d}"/><path class="thread-line" d="${d}"/>${stitches}<g class="needle"><circle class="needle-dot" cx="${aiRight+16}" cy="${aiCenterY}" r="3.5"/><line class="needle-tail" x1="${aiRight+16}" y1="${aiCenterY}" x2="${aiRight+38}" y2="${aiCenterY-10}"/></g>`,
       });
     };
     document.fonts.ready.then(generateThread);
     const handleResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(generateThread, 150); };
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => { cancelled = true; window.removeEventListener("resize", handleResize); };
   }, [isMobile]);
 
   // Footer thread generation
   useEffect(() => {
     if (isMobile) return;
+    let cancelled = false;
     let rt;
     const generateFooterThread = () => {
+      if (cancelled) return;
       const zone = footerZoneRef.current;
       const email = btnEmailRef.current;
       const linkedin = btnLinkedinRef.current;
@@ -647,7 +655,7 @@ function HomePage({ onNavigate, isMobile }) {
     document.fonts.ready.then(generateFooterThread);
     const handleResize = () => { clearTimeout(rt); rt = setTimeout(generateFooterThread, 150); };
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => { cancelled = true; window.removeEventListener("resize", handleResize); };
   }, [isMobile]);
 
   return (
@@ -682,11 +690,11 @@ function HomePage({ onNavigate, isMobile }) {
         ref={heroRef}
         style={{
           position: "relative",
-          minHeight: isMobile ? "auto" : "calc(100vh - 80px)",
+          minHeight: "auto",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          paddingTop: isMobile ? 40 : "12vh",
+          paddingTop: isMobile ? 40 : 60,
           paddingLeft: isMobile ? 24 : 48,
           paddingRight: isMobile ? 24 : 48,
           textAlign: "center",
@@ -738,198 +746,175 @@ function HomePage({ onNavigate, isMobile }) {
       </div>
 
       {/* === Project Entries === */}
-      <div style={{ marginTop: 0, marginBottom: isMobile ? 24 : 32 }}>
+      <div style={{
+        maxWidth: maxW,
+        margin: "0 auto",
+        padding: isMobile ? "20px 24px 32px" : "40px 48px 40px",
+        position: "relative",
+      }}>
         {PROJECTS.map((p, idx) => {
           const isHovered = hoveredId === p.id;
+          const stat = p.cardStat || {};
 
           return (
             <div
               key={p.id}
+              onClick={() => onNavigate("project-" + p.id)}
+              onMouseEnter={() => !isMobile && setHoveredId(p.id)}
+              onMouseLeave={() => !isMobile && setHoveredId(null)}
               onTouchStart={() => setPressedId(p.id)}
               onTouchEnd={() => setPressedId(null)}
               onTouchCancel={() => setPressedId(null)}
               style={{
-                paddingTop: 0,
-                paddingBottom: 0,
-                backgroundColor: isMobile && pressedId === p.id ? "#F2EFEA" : "transparent",
-                transition: "background-color 0.1s ease",
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr auto" : "140px 1fr auto",
+                alignItems: "center",
+                gap: isMobile ? 16 : "0 32px",
+                padding: isMobile ? "32px 0" : "48px 0",
+                cursor: "pointer",
+                position: "relative",
               }}
             >
-              <div
-                style={{
-                  maxWidth: maxW,
-                  margin: "0 auto",
-                  padding: isMobile ? "16px 16px" : "6px 40px",
-                  minHeight: 120,
-                }}
-              >
-              {/* Desktop: number anchor + text + arrow */}
-              {!isMobile ? (
-                <div
-                  onClick={() => onNavigate("project-" + p.id)}
-                  onMouseEnter={() => setHoveredId(p.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    setHoverPos({
-                      x: e.clientX - rect.left,
-                      y: e.clientY - rect.top,
-                    });
-                  }}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "90px 1fr auto",
-                    columnGap: 24,
-                    alignItems: "center",
-                    padding: "28px 24px",
-                    borderRadius: 0,
-                    border: "1px solid #E5E2DC",
-                    backgroundColor: isHovered ? "#111111" : "#f5f2ed",
-                    boxShadow: isHovered ? "0 18px 40px rgba(0,0,0,0.16)" : "none",
-                    transition: "background-color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease",
-                    backgroundImage: isHovered
-                      ? `radial-gradient(circle at ${hoverPos.x}px ${hoverPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))`
-                      : "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  {/* Left: large number as visual anchor */}
-                  <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}>
-                    <span style={{
-                      fontSize: 52,
-                      fontFamily: FONT_DISPLAY,
-                      fontWeight: 700,
-                      color: isHovered ? "rgba(255,255,255,0.2)" : "#E0DCD5",
-                      lineHeight: 1,
-                      letterSpacing: "-0.02em",
-                      userSelect: "none",
-                      transition: "color 0.4s ease",
-                    }}>{String(idx + 1).padStart(2, "0")}</span>
-                  </div>
-
-                  {/* Center: text block */}
-                  <div style={{ minWidth: 0 }}>
-                    {/* Title */}
-                    <h2 style={{
-                      fontSize: 22,
-                      fontWeight: 600,
-                      color: isHovered ? "#f5f2ed" : "#2A2A2A",
-                      margin: "0 0 6px",
-                      lineHeight: 1.3,
-                      fontFamily: FONT_DISPLAY,
-                    }}>{p.name}</h2>
-
-                    {/* Summary */}
-                    <p style={{
-                      fontSize: T.body,
-                      color: isHovered ? "rgba(255,255,255,0.75)" : "#888",
-                      margin: 0,
-                      lineHeight: 1.65,
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden",
-                    }}>{p.cardSummary}</p>
-
-                    {/* Highlights chips */}
-                    {p.cardHighlights && p.cardHighlights.length > 0 && (
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10 }}>
-                        {p.cardHighlights.map((h, hi) => (
-                          <span key={hi} style={{
-                            fontSize: 12,
-                            color: isHovered ? "rgba(255,255,255,0.65)" : "#666",
-                            backgroundColor: isHovered ? "transparent" : "#F2EFEA",
-                            border: isHovered ? "1px solid rgba(255,255,255,0.3)" : "1px solid transparent",
-                            borderRadius: 0,
-                            padding: "3px 10px",
-                            lineHeight: 1.5,
-                            transition: "color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease",
-                          }}>{h}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Right: arrow */}
-                  <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}>
-                    <div style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: "999px",
-                      border: isHovered ? "1px solid #f5f2ed" : "1px solid #D5D0C8",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      transition: "background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease",
-                      backgroundColor: isHovered ? "#f5f2ed" : "transparent",
-                      borderColor: isHovered ? "#f5f2ed" : "#D5D0C8",
-                      transform: isHovered ? "translateX(2px)" : "translateX(0)",
-                    }}>
-                      <span style={{
-                        fontSize: 18,
-                        color: isHovered ? "#111111" : "#2A2A2A",
-                        cursor: "pointer",
-                        userSelect: "none",
-                      }}>{"\u2192"}</span>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                /* Mobile: stacked but compact */
-                <div onClick={() => onNavigate("project-" + p.id)} style={{ cursor: "pointer" }}>
-                  {/* Number */}
-                  <div style={{ marginBottom: 8 }}>
-                    <span style={{
-                      fontSize: 28,
-                      fontFamily: FONT_DISPLAY,
-                      fontWeight: 700,
-                      color: "#E0DCD5",
-                      lineHeight: 1,
-                      letterSpacing: "-0.02em",
-                      userSelect: "none",
-                    }}>{String(idx + 1).padStart(2, "0")}</span>
-                  </div>
-
-                  {/* Title + summary */}
-                  <h2 style={{
-                    fontSize: T.heading,
-                    fontWeight: 600,
-                    color: "#2A2A2A",
-                    margin: "0 0 6px",
-                    lineHeight: 1.3,
-                    fontFamily: FONT_DISPLAY,
-                  }}>{p.name}</h2>
-                  <p style={{
-                    fontSize: 15,
-                    color: "#888",
-                    margin: 0,
-                    lineHeight: 1.7,
-                  }}>{p.cardSummary}</p>
-
-                  {/* Highlights chips */}
-                  {p.cardHighlights && p.cardHighlights.length > 0 && (
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10 }}>
-                      {p.cardHighlights.map((h, hi) => (
-                        <span key={hi} style={{
-                          fontSize: 11,
-                          color: "#666",
-                          backgroundColor: "#F2EFEA",
-                          borderRadius: 0,
-                          padding: "3px 9px",
-                          lineHeight: 1.5,
-                        }}>{h}</span>
-                      ))}
-                    </div>
-                  )}
-                </div>
+              {/* Top separator — extends beyond content */}
+              <div style={{
+                position: "absolute", top: 0, left: -24, right: -24,
+                height: 1, background: "#d4cfc7", zIndex: 1,
+              }} />
+              {/* Bottom separator for last card */}
+              {idx === PROJECTS.length - 1 && (
+                <div style={{
+                  position: "absolute", bottom: 0, left: -24, right: -24,
+                  height: 1, background: "#d4cfc7", zIndex: 1,
+                }} />
               )}
+              {/* Hover background overlay */}
+              {!isMobile && (
+                <div style={{
+                  position: "absolute",
+                  inset: "0 -24px",
+                  background: "rgba(26, 24, 21, 0.02)",
+                  borderRadius: 4,
+                  opacity: isHovered ? 1 : 0,
+                  transition: "opacity 0.3s",
+                  pointerEvents: "none",
+                  zIndex: 0,
+                }} />
+              )}
+
+              {/* Left: stat number as visual anchor */}
+              <div style={{
+                position: "relative", zIndex: 1,
+                ...(isMobile ? { gridColumn: "1 / -1" } : {}),
+              }}>
+                <div style={{
+                  fontFamily: FONT_DISPLAY,
+                  fontWeight: 900,
+                  fontSize: isMobile ? 40 : 56,
+                  lineHeight: 1,
+                  color: ACCENT,
+                  letterSpacing: "-0.03em",
+                  opacity: isHovered ? 1 : 0.85,
+                  transition: "opacity 0.3s",
+                  whiteSpace: "nowrap",
+                }}>
+                  {stat.number}
+                  <span style={{
+                    fontSize: 24,
+                    fontWeight: 400,
+                    color: "#6b6560",
+                    marginLeft: 2,
+                    letterSpacing: 0,
+                  }}>{stat.unit}</span>
+                </div>
+                <span style={{
+                  display: "block",
+                  fontFamily: FONT_MONO,
+                  fontSize: 11,
+                  fontWeight: 400,
+                  color: "#6b6560",
+                  opacity: isHovered ? 1 : 0.7,
+                  letterSpacing: "0.03em",
+                  marginTop: 6,
+                  transition: "opacity 0.3s",
+                }}>{stat.label}</span>
+              </div>
+
+              {/* Center: index + title + hook + tags */}
+              <div style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+                minWidth: 0,
+                position: "relative", zIndex: 1,
+              }}>
+                <span style={{
+                  fontFamily: FONT_MONO,
+                  fontSize: 11,
+                  color: "#B8B0A3",
+                  letterSpacing: "0.06em",
+                }}>{String(idx + 1).padStart(2, "0")}</span>
+                <h3 style={{
+                  fontFamily: FONT_DISPLAY,
+                  fontWeight: 900,
+                  fontSize: isMobile ? 18 : "clamp(18px, 2.2vw, 24px)",
+                  lineHeight: 1.35,
+                  letterSpacing: "-0.01em",
+                  margin: 0,
+                }}>{p.name}</h3>
+                <p style={{
+                  fontSize: 14,
+                  color: isHovered ? "#1a1815" : "#6b6560",
+                  fontWeight: 300,
+                  lineHeight: 1.5,
+                  margin: 0,
+                  transition: "color 0.3s",
+                }}>{p.cardHook || p.cardSummary}</p>
+                {p.cardHighlights && p.cardHighlights.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 }}>
+                    {p.cardHighlights.map((h, hi) => (
+                      <span key={hi} style={{
+                        fontFamily: FONT_MONO,
+                        fontSize: 11,
+                        color: "#6b6560",
+                        padding: "4px 10px",
+                        border: "1px solid #d4cfc7",
+                        borderRadius: 2,
+                        letterSpacing: "0.02em",
+                        whiteSpace: "nowrap",
+                      }}>{h}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Right: arrow */}
+              <div style={{
+                width: isMobile ? 36 : 40,
+                height: isMobile ? 36 : 40,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                border: isHovered ? "1px solid #1a1815" : "1px solid #d4cfc7",
+                borderRadius: "50%",
+                transition: "all 0.3s",
+                flexShrink: 0,
+                backgroundColor: isHovered ? "#1a1815" : "transparent",
+                position: "relative", zIndex: 1,
+              }}>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  style={{
+                    width: 16, height: 16,
+                    transition: "all 0.3s",
+                    transform: isHovered ? "translateX(2px)" : "translateX(0)",
+                  }}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  stroke={isHovered ? "#f0ebe3" : "#6b6560"}
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </div>
             </div>
           );
@@ -939,7 +924,7 @@ function HomePage({ onNavigate, isMobile }) {
       {/* === Footer CTA === */}
       <section style={{
         textAlign: "center",
-        padding: isMobile ? "56px 24px 32px" : "80px 48px 40px",
+        padding: isMobile ? "40px 24px 32px" : "48px 48px 40px",
         position: "relative",
       }}>
         <p style={{
@@ -981,7 +966,7 @@ function HomePage({ onNavigate, isMobile }) {
                 padding: "12px 28px", borderRadius: 2, cursor: "pointer",
                 textDecoration: "none", display: "inline-flex", alignItems: "center",
                 border: hoveredBtn === "email" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-                color: hoveredBtn === "email" ? "#f5f2ed" : "#1a1815",
+                color: hoveredBtn === "email" ? "#f0ebe3" : "#1a1815",
                 backgroundColor: hoveredBtn === "email" ? "#1a1815" : "transparent",
                 transition: "all 0.3s",
               }}
@@ -999,7 +984,7 @@ function HomePage({ onNavigate, isMobile }) {
                 padding: "12px 28px", borderRadius: 2, cursor: "pointer",
                 textDecoration: "none", display: "inline-flex", alignItems: "center",
                 border: hoveredBtn === "link" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-                color: hoveredBtn === "link" ? "#f5f2ed" : "#1a1815",
+                color: hoveredBtn === "link" ? "#f0ebe3" : "#1a1815",
                 backgroundColor: hoveredBtn === "link" ? "#1a1815" : "transparent",
                 transition: "all 0.3s",
               }}
@@ -1010,7 +995,7 @@ function HomePage({ onNavigate, isMobile }) {
 
           <p ref={detailBelowRef} style={{
             fontSize: 14, lineHeight: 1.6, color: "#6b6560", fontWeight: 300,
-            marginTop: 52, position: "relative", zIndex: 2,
+            marginTop: 28, position: "relative", zIndex: 2,
           }}>
             {"\u5982\u679C\u4F60\u5BF9\u6211\u7684\u7ECF\u5386\u611F\u5174\u8DA3\uFF0C\u5F88\u4E50\u610F\u804A\u804A\u3002"}
           </p>
@@ -1029,7 +1014,7 @@ function HomePage({ onNavigate, isMobile }) {
       {/* Footer bottom bar */}
       <div style={{
         display: "flex", justifyContent: "center",
-        padding: isMobile ? 24 : "32px 48px 24px", marginTop: 64,
+        padding: isMobile ? 24 : "24px 48px 24px", marginTop: 32,
       }}>
         <span style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#d4cfc7", letterSpacing: "0.04em" }}>
           {"zulpkar.com"}
@@ -1097,14 +1082,14 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
       {/* Back button — 40x40 box */}
       <div
         onClick={() => onNavigate("home")}
-        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#f5f2ed"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#f5f2ed"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
+        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#f0ebe3"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#f0ebe3"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
         style={{
           position: "fixed", top: 72,
           right: "max(16px, calc((100% - 720px) / 2 - 140px))",
           zIndex: 50, pointerEvents: "auto",
           width: 40, height: 40,
-          border: "1px solid #E5E2DC", backgroundColor: "#f5f2ed",
+          border: "1px solid #E5E2DC", backgroundColor: "#f0ebe3",
           display: "flex", alignItems: "center", justifyContent: "center",
           cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
         }}
@@ -1134,7 +1119,7 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
                 style={{
                   fontSize: activeSectionIdx === i ? T.body : T.small,
                   lineHeight: 1,
-                  color: (hoveredIdx === i || activeSectionIdx === i) ? (hoveredIdx === i ? "#f5f2ed" : "#000") : "#ccc",
+                  color: (hoveredIdx === i || activeSectionIdx === i) ? (hoveredIdx === i ? "#f0ebe3" : "#000") : "#ccc",
                   backgroundColor: hoveredIdx === i ? "#111" : "transparent",
                   fontWeight: activeSectionIdx === i ? 700 : 500,
                   padding: "10px 12px 10px 8px",
@@ -2283,11 +2268,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         ) : null}
 
         {/* Layer 5: Section navigation */}
-        <div style={{ paddingBottom: 48, animation: "fadeUp 0.7s ease-out 0.55s both" }}>
+        <div style={{ paddingBottom: 48, animation: "fadeUp 0.7s ease-out 0.55s both", textAlign: "center" }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8a857d", marginBottom: 12 }}>
             {"跳转至章节"}
           </div>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
             {(project.skillTags || []).map((tag, i) => {
               const jump = project.skillTagJumps && project.skillTagJumps[tag];
               return (
@@ -2299,7 +2284,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                       if (el) el.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "#1a1815"; e.currentTarget.style.color = "#f5f2ed"; e.currentTarget.style.borderColor = "#1a1815"; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#1a1815"; e.currentTarget.style.color = "#f0ebe3"; e.currentTarget.style.borderColor = "#1a1815"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#1a1815"; e.currentTarget.style.borderColor = "#d4cfc7"; }}
                   style={{
                     display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
@@ -2597,7 +2582,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         const rest = visibleScreenshots.filter(s => !s.featured);
         const renderCard = (s, i) => (
           <div key={i} style={{
-            background: "#f5f2ed",
+            background: "#f0ebe3",
             borderRadius: 0,
             border: "1px solid #EDEAE3",
             overflow: "hidden",
@@ -2833,7 +2818,7 @@ function Lightbox({ children, onClose }) {
         transition: dragging.current ? "none" : "transform 0.15s ease-out",
         display: "flex", flexDirection: "column", alignItems: "center",
       }}>
-        <div style={{ backgroundColor: "#f5f2ed", padding: 24, boxSizing: "border-box" }}>
+        <div style={{ backgroundColor: "#f0ebe3", padding: 24, boxSizing: "border-box" }}>
           {children}
         </div>
         {/* Hint bar right below the card */}
@@ -2902,15 +2887,15 @@ function BackToTop() {
       onMouseLeave={() => setHovered(false)}
       style={{
         position: "fixed", bottom: 80,
-        right: "max(16px, calc((100% - 720px) / 2 - 140px))",
+        right: "max(32px, calc((100% - 720px) / 2 - 120px))",
         zIndex: 200, width: 40, height: 40,
         border: hovered ? "1px solid #111" : "1px solid #E5E2DC",
-        backgroundColor: hovered ? "#111" : "#f5f2ed",
+        backgroundColor: hovered ? "#111" : "#f0ebe3",
         display: "flex", alignItems: "center", justifyContent: "center",
         cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
       }}
     >
-      <span style={{ fontSize: 14, color: hovered ? "#f5f2ed" : "#666", transition: "color 0.2s ease", display: "inline-block", transform: "rotate(90deg)" }}>{"\u2190"}</span>
+      <span style={{ fontSize: 14, color: hovered ? "#f0ebe3" : "#666", transition: "color 0.2s ease", display: "inline-block", transform: "rotate(90deg)" }}>{"\u2190"}</span>
     </div>
   );
 }
@@ -3002,7 +2987,7 @@ export default function App() {
       fontFamily: FONT_BODY,
       color: "#000",
       minHeight: "100vh",
-      backgroundColor: "#f5f2ed",
+      backgroundColor: "#f0ebe3",
       display: "flex",
       flexDirection: "column",
     }}>

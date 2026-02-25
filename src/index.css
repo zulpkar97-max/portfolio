@@ -54,8 +54,8 @@ body {
   stroke: #c4422b;
   stroke-width: 1.5;
   stroke-linecap: round;
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
+  stroke-dasharray: 4000;
+  stroke-dashoffset: 4000;
   animation: drawThread 2s ease-out 0.5s forwards;
   opacity: 0.55;
 }
@@ -64,8 +64,8 @@ body {
   stroke: #c4422b;
   stroke-width: 4;
   stroke-linecap: round;
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
+  stroke-dasharray: 4000;
+  stroke-dashoffset: 4000;
   animation: drawThread 2s ease-out 0.5s forwards;
   opacity: 0.06;
   filter: blur(2px);
@@ -96,8 +96,8 @@ body {
   stroke-width: 1.3;
   stroke-linecap: round;
   opacity: 0.5;
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
   animation: drawThread 1.8s ease-out 0.3s forwards;
 }
 .thread-weave-shadow {
@@ -107,8 +107,8 @@ body {
   stroke-linecap: round;
   opacity: 0.05;
   filter: blur(2px);
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
   animation: drawThread 1.8s ease-out 0.3s forwards;
 }
 .thread-endpoint {
@@ -132,7 +132,7 @@ body {
   animation: dotIn 0.3s ease-out 2s forwards;
 }
 .thread-pulse-ring circle {
-  animation: ringPulse 2.6s ease-out 2.2s infinite;
+  animation: ringPulse 3s ease-in-out 2.2s infinite;
 }
 .stitch-mark {
   stroke: #c4422b;
@@ -145,9 +145,9 @@ body {
   to { opacity: 0.55; }
 }
 @keyframes ringPulse {
-  0% { r: 3.5; opacity: 0.45; }
-  70% { r: 14; opacity: 0; }
-  100% { r: 14; opacity: 0; }
+  0% { r: 3.5; opacity: 0.4; }
+  50% { r: 12; opacity: 0; }
+  100% { r: 12; opacity: 0; }
 }
 @keyframes stitchIn {
   to { opacity: 0.3; }
