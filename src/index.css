@@ -38,15 +38,24 @@ body {
   to { width: 64px; }
 }
 
-/* Thread animation (homepage) */
-@keyframes drawThread {
-  to { stroke-dashoffset: 0; }
+/* Thread animation — single keyframes: draw then fade */
+@keyframes threadDrawFade {
+  0%   { stroke-dashoffset: 4000; opacity: 0.55; }
+  50%  { stroke-dashoffset: 0;    opacity: 0.55; }
+  75%  { stroke-dashoffset: 0;    opacity: 0.55; }
+  100% { stroke-dashoffset: 0;    opacity: 0; }
 }
-@keyframes showNeedle {
-  to { opacity: 1; }
+@keyframes threadShadowDrawFade {
+  0%   { stroke-dashoffset: 4000; opacity: 0.06; }
+  50%  { stroke-dashoffset: 0;    opacity: 0.06; }
+  75%  { stroke-dashoffset: 0;    opacity: 0.06; }
+  100% { stroke-dashoffset: 0;    opacity: 0; }
 }
-@keyframes showStitch {
-  to { opacity: 0.35; }
+@keyframes stitchFade {
+  0%   { opacity: 0; }
+  10%  { opacity: 0.35; }
+  75%  { opacity: 0.35; }
+  100% { opacity: 0; }
 }
 
 .thread-line {
@@ -56,8 +65,9 @@ body {
   stroke-linecap: round;
   stroke-dasharray: 4000;
   stroke-dashoffset: 4000;
-  animation: drawThread 2s ease-out 0.5s forwards;
-  opacity: 0.55;
+  opacity: 0;
+  pointer-events: none;
+  animation: threadDrawFade 4s ease-out 0.5s forwards;
 }
 .thread-line-shadow {
   fill: none;
@@ -66,91 +76,89 @@ body {
   stroke-linecap: round;
   stroke-dasharray: 4000;
   stroke-dashoffset: 4000;
-  animation: drawThread 2s ease-out 0.5s forwards;
-  opacity: 0.06;
-  filter: blur(2px);
-}
-.needle {
   opacity: 0;
-  animation: showNeedle 0.4s ease-out 2.4s forwards;
-}
-.needle-dot { fill: #c4422b; }
-.needle-tail {
-  stroke: #c4422b;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  fill: none;
+  filter: blur(2px);
+  pointer-events: none;
+  animation: threadShadowDrawFade 4s ease-out 0.5s forwards;
 }
 .stitch {
   stroke: #c4422b;
   stroke-width: 1.2;
   stroke-linecap: round;
   opacity: 0;
-  animation: showStitch 0.3s ease-out forwards;
+  pointer-events: none;
+  animation: stitchFade 4s ease-out 0.5s forwards;
 }
 
-/* Footer thread animation */
-.thread-weave {
+/* Footer thread — single keyframes: draw then fade */
+@keyframes ftDrawFade {
+  0%   { stroke-dashoffset: 400; opacity: 0.45; }
+  40%  { stroke-dashoffset: 0;   opacity: 0.45; }
+  70%  { stroke-dashoffset: 0;   opacity: 0.45; }
+  100% { stroke-dashoffset: 0;   opacity: 0; }
+}
+@keyframes ftShadowDrawFade {
+  0%   { stroke-dashoffset: 400; opacity: 0.05; }
+  40%  { stroke-dashoffset: 0;   opacity: 0.05; }
+  70%  { stroke-dashoffset: 0;   opacity: 0.05; }
+  100% { stroke-dashoffset: 0;   opacity: 0; }
+}
+@keyframes ftBranchDrawFade {
+  0%   { stroke-dashoffset: 300; opacity: 0.45; }
+  35%  { stroke-dashoffset: 0;   opacity: 0.45; }
+  65%  { stroke-dashoffset: 0;   opacity: 0.45; }
+  100% { stroke-dashoffset: 0;   opacity: 0; }
+}
+@keyframes ftBranchShadowDrawFade {
+  0%   { stroke-dashoffset: 300; opacity: 0.05; }
+  35%  { stroke-dashoffset: 0;   opacity: 0.05; }
+  65%  { stroke-dashoffset: 0;   opacity: 0.05; }
+  100% { stroke-dashoffset: 0;   opacity: 0; }
+}
+.thread-ft {
   fill: none;
   stroke: #c4422b;
   stroke-width: 1.3;
   stroke-linecap: round;
-  opacity: 0.5;
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-  animation: drawThread 1.8s ease-out 0.3s forwards;
+  opacity: 0;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  pointer-events: none;
+  animation: ftDrawFade 3.5s ease-out 0.3s forwards;
 }
-.thread-weave-shadow {
+.thread-ft-shadow {
   fill: none;
   stroke: #c4422b;
   stroke-width: 3.5;
   stroke-linecap: round;
-  opacity: 0.05;
+  opacity: 0;
   filter: blur(2px);
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-  animation: drawThread 1.8s ease-out 0.3s forwards;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  pointer-events: none;
+  animation: ftShadowDrawFade 3.5s ease-out 0.3s forwards;
 }
-.thread-endpoint {
+.thread-ft-branch {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: ftBranchDrawFade 3s ease-out 1.2s forwards;
+}
+.thread-ft-shadow.thread-ft-branch {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: ftBranchShadowDrawFade 3s ease-out 1.2s forwards;
+}
+.thread-ft-dot {
   fill: #c4422b;
   opacity: 0;
-  animation: dotIn 0.3s ease-out 2s forwards;
+  pointer-events: none;
+  animation: ftDotPulse 2s ease-in-out 1.8s forwards;
 }
-.thread-needle-ft {
-  stroke: #c4422b;
-  stroke-width: 1.3;
-  stroke-linecap: round;
-  fill: none;
-  opacity: 0;
-  animation: dotIn 0.3s ease-out 2s forwards;
-}
-.thread-pulse-ring {
-  fill: none;
-  stroke: #c4422b;
-  stroke-width: 0.8;
-  opacity: 0;
-  animation: dotIn 0.3s ease-out 2s forwards;
-}
-.thread-pulse-ring circle {
-  animation: ringPulse 3s ease-in-out 2.2s infinite;
-}
-.stitch-mark {
-  stroke: #c4422b;
-  stroke-width: 1;
-  stroke-linecap: round;
-  opacity: 0;
-  animation: stitchIn 0.3s ease-out forwards;
-}
-@keyframes dotIn {
-  to { opacity: 0.55; }
-}
-@keyframes ringPulse {
-  0% { r: 3.5; opacity: 0.4; }
-  50% { r: 12; opacity: 0; }
-  100% { r: 12; opacity: 0; }
-}
-@keyframes stitchIn {
-  to { opacity: 0.3; }
+@keyframes ftDotPulse {
+  0% { opacity: 0; }
+  30% { opacity: 0.5; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0; }
 }
 
 @keyframes confetti-fly {

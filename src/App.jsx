@@ -48,10 +48,10 @@ const PROJECTS = [
     cardTag: "公司首个长线项目",
     skillTags: ["系统诊断", "约束下决策", "流程设计", "AI落地"],
     skillTagJumps: {
-      "系统诊断":  { scrollTo: 6,  borderRange: [5, 11],  keySentence: "不是人的问题，是系统的问题。", keyBlock: 10 },
-      "约束下决策": { scrollTo: 13, borderRange: [13, 14], keySentence: "零成本、零学习成本、立即见效", keyBlock: 13 },
-      "流程设计":  { scrollTo: 16, borderRange: [16, 20], keySentence: "六个模块不是拍脑袋拆的", keyBlock: 20 },
-      "AI落地":   { scrollTo: 26, borderRange: [25, 33], keySentence: "根因不是模型能力问题，而是知识库的信息架构", keyBlock: 33 },
+      "系统诊断":  { scrollTo: 6,  borderRange: [5, 12],  keySentence: "不是人的问题，是系统的问题。", keyBlock: 11 },
+      "约束下决策": { scrollTo: 14, borderRange: [14, 15], keySentence: "零成本、零学习成本、立即见效", keyBlock: 14 },
+      "流程设计":  { scrollTo: 17, borderRange: [17, 21], keySentence: "六个模块不是拍脑袋拆的", keyBlock: 21 },
+      "AI落地":   { scrollTo: 27, borderRange: [26, 34], keySentence: "根因不是模型能力问题，而是知识库的信息架构", keyBlock: 34 },
     },
     context: "公司首个长线项目",
     cardImage: "images/collab-system-interaction.jpg",
@@ -92,7 +92,8 @@ const PROJECTS = [
         { role: "客户方",   text: "我提的需求，不知道有没有进入开发流程。" },
         { role: "技术部领导", text: "我看不到整体进度，不知道哪里卡住了。" },
       ]},
-      { type: "paragraph", text: "每个人描述的症状不一样，但根源指向同一件事：信息在人和人之间流转不了。不是谁不愿意干活，是现有的群聊式协作方式，在一两周短项目里勉强能用，但放到两年长线项目里完全崩溃了。不是人的问题，是系统的问题。" },
+      { type: "paragraph", text: "每个人描述的症状不一样，但根源指向同一件事：信息在人和人之间流转不了。不是谁不愿意干活，是现有的群聊式协作方式，在一两周短项目里勉强能用，但放到两年长线项目里完全崩溃了。" },
+      { type: "pull-quote", text: "不是人的问题，是系统的问题。" },
       { type: "illustration", index: 0 },
 
       // === 设计 ===
@@ -115,7 +116,7 @@ const PROJECTS = [
       { type: "paragraph", text: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。" },
       { type: "paragraph", text: "结果是：这套协作系统直接支撑了二期的顺利交付，差点丢掉的合同被挽回来了。客户签下了二期。之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部先用，效果验证后其他团队认可跟进，最终成为全公司标准SOP。" },
       { type: "paragraph", text: "后来我才知道，行业内早已有成熟的专业协作工具在做类似的事。我从问题本身出发一步步推导出来的东西，和那些成熟工具的底层逻辑高度一致。这件事让我意识到：解决问题的关键不是知道有什么工具，而是能不能准确诊断出问题的结构，然后用手头有的资源把它解出来。" },
-      { type: "screenshot-group", items: [
+      { type: "screenshot-carousel", items: [
         { src: "images/1771894558756_协作系统截图3.png", label: "文档结构", note: "协作系统完整文档架构" },
         { src: "images/协作系统截图1.png", label: "流程设计", note: "执行层流程设计" },
         { src: "images/协作系统运行记录.png", label: "看板运行", note: "系统实际运行状态" },
@@ -519,85 +520,83 @@ function HomePage({ onNavigate, isMobile }) {
   const maxW = 860;
   const [hoveredId, setHoveredId] = useState(null);
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
-  const [pageCursor, setPageCursor] = useState({ x: 0, y: 0, visible: false });
+  const pageCursorRef = useRef(null);
   const [hoveredBtn, setHoveredBtn] = useState(null);
   const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
   const [pressedId, setPressedId] = useState(null);
 
-  // Hero thread animation
-  const heroRef = useRef(null);
-  const titleRef = useRef(null);
-  const aiRef = useRef(null);
-  const [threadSvg, setThreadSvg] = useState({ viewBox: "0 0 100 100", content: "" });
+  // Hero typewriter animation
+  const HERO_LINES = [
+    { text: "产品、设计、项目管理、客户", type: "normal" },
+    { text: "收拢成一个 PM 底座，", type: "normal" },
+    { text: "下一步方向：", type: "normal", inline: true },
+    { text: "AI", type: "accent", inline: true },
+  ];
+  const heroChars = useMemo(() => {
+    const chars = [];
+    HERO_LINES.forEach((line, li) => {
+      for (let i = 0; i < line.text.length; i++) {
+        chars.push({ char: line.text[i], lineIndex: li, type: line.type, inline: line.inline || false });
+      }
+    });
+    return chars;
+  }, []);
+  const HERO_TOTAL = heroChars.length;
+  const HERO_CHAR_DELAY = 100;
+  const AI_START = HERO_TOTAL - 2;
+  const AI_PAUSE = 500;
+  const heroPlayed = typeof sessionStorage !== "undefined" && sessionStorage.getItem("hero-played");
+  const [revealedCount, setRevealedCount] = useState(heroPlayed ? HERO_TOTAL : 0);
+  const [subtitleVisible, setSubtitleVisible] = useState(!!heroPlayed);
+  const [aiGlow, setAiGlow] = useState(!!heroPlayed);
+  const [aiPulse, setAiPulse] = useState(false);
+  const heroFrameRef = useRef(null);
+  const heroStartRef = useRef(null);
+
+  useEffect(() => {
+    if (heroPlayed) return;
+    const initDelay = setTimeout(() => {
+      heroStartRef.current = performance.now();
+      const animate = (now) => {
+        const elapsed = now - heroStartRef.current;
+        let count;
+        if (elapsed < AI_START * HERO_CHAR_DELAY) {
+          count = Math.min(Math.floor(elapsed / HERO_CHAR_DELAY) + 1, AI_START);
+        } else {
+          const aiElapsed = elapsed - AI_START * HERO_CHAR_DELAY;
+          if (aiElapsed < AI_PAUSE) {
+            count = AI_START;
+          } else {
+            const aiCharElapsed = aiElapsed - AI_PAUSE;
+            count = AI_START + Math.min(Math.floor(aiCharElapsed / HERO_CHAR_DELAY) + 1, 2);
+          }
+        }
+        count = Math.min(count, HERO_TOTAL);
+        setRevealedCount(count);
+        if (count < HERO_TOTAL) {
+          heroFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          setTimeout(() => { setAiGlow(true); setAiPulse(true); }, 150);
+          setTimeout(() => setAiPulse(false), 700);
+          setTimeout(() => setSubtitleVisible(true), 900);
+          sessionStorage.setItem("hero-played", "true");
+        }
+      };
+      heroFrameRef.current = requestAnimationFrame(animate);
+    }, 600);
+    return () => { clearTimeout(initDelay); if (heroFrameRef.current) cancelAnimationFrame(heroFrameRef.current); };
+  }, []);
 
   // Footer thread animation
   const footerZoneRef = useRef(null);
   const btnEmailRef = useRef(null);
   const btnLinkedinRef = useRef(null);
   const detailBelowRef = useRef(null);
-  const [footerThread, setFooterThread] = useState({ viewBox: "0 0 100 100", content: "" });
+  const footerSvgRef = useRef(null);
 
-  useEffect(() => {
-    if (isMobile) return;
-    let cancelled = false;
-    let resizeTimer;
-    const generateThread = () => {
-      if (cancelled) return;
-      const hero = heroRef.current;
-      const title = titleRef.current;
-      const aiSpan = aiRef.current;
-      if (!hero || !title || !aiSpan) return;
-      const heroRect = hero.getBoundingClientRect();
-      const titleRect = title.getBoundingClientRect();
-      const aiRect = aiSpan.getBoundingClientRect();
-      const svgW = heroRect.width;
-      const svgH = heroRect.height;
-      const titleTop = titleRect.top - heroRect.top;
-      const lineHeight = titleRect.height / 3;
-      const gap1Y = titleTop + lineHeight * 0.95;
-      const gap2Y = titleTop + lineHeight * 1.95;
-      const aiCenterY = aiRect.top - heroRect.top + aiRect.height / 2;
-      const aiRight = aiRect.right - heroRect.left;
-      const titleLeft = titleRect.left - heroRect.left;
-      const titleRight = titleRect.right - heroRect.left;
-      const startX = 40;
-      const startY = titleTop - 30;
-      const pts = [
-        { x: startX, y: startY },
-        { x: titleRight + 40, y: titleTop + lineHeight * 0.3 },
-        { x: titleLeft - 50, y: gap1Y },
-        { x: titleRight + 60, y: gap1Y + lineHeight * 0.4 },
-        { x: titleLeft - 30, y: gap2Y },
-        { x: aiRight + 50, y: gap2Y + lineHeight * 0.3 },
-        { x: aiRight + 16, y: aiCenterY },
-      ];
-      let d = `M ${pts[0].x} ${pts[0].y}`;
-      for (let i = 1; i < pts.length; i++) {
-        const prev = pts[i - 1], curr = pts[i];
-        const cpx = prev.x + (curr.x - prev.x) * 0.5;
-        d += ` C ${cpx} ${prev.y}, ${cpx} ${curr.y}, ${curr.x} ${curr.y}`;
-      }
-      let stitches = "";
-      [2, 4].forEach((idx, i) => {
-        const p = pts[idx], len = 12, angle = Math.PI * 0.3;
-        const dx = Math.cos(angle) * len, dy = Math.sin(angle) * len;
-        for (let j = -1; j <= 1; j++) {
-          const ox = j * 14, delay = 0.8 + i * 0.6 + j * 0.1;
-          stitches += `<line class="stitch" x1="${p.x+ox-dx/2}" y1="${p.y-dy/2}" x2="${p.x+ox+dx/2}" y2="${p.y+dy/2}" style="animation-delay:${delay}s"/>`;
-        }
-      });
-      setThreadSvg({
-        viewBox: `0 0 ${svgW} ${svgH}`,
-        content: `<path class="thread-line-shadow" d="${d}"/><path class="thread-line" d="${d}"/>${stitches}<g class="needle"><circle class="needle-dot" cx="${aiRight+16}" cy="${aiCenterY}" r="3.5"/><line class="needle-tail" x1="${aiRight+16}" y1="${aiCenterY}" x2="${aiRight+38}" y2="${aiCenterY-10}"/></g>`,
-      });
-    };
-    document.fonts.ready.then(generateThread);
-    const handleResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(generateThread, 150); };
-    window.addEventListener("resize", handleResize);
-    return () => { cancelled = true; window.removeEventListener("resize", handleResize); };
-  }, [isMobile]);
+  // Footer thread — generate path data, inject via ref when footer scrolls into view
+  const footerThreadData = useRef(null);
 
-  // Footer thread generation
   useEffect(() => {
     if (isMobile) return;
     let cancelled = false;
@@ -615,42 +614,20 @@ function HomePage({ onNavigate, isMobile }) {
       const detailRect = detail.getBoundingClientRect();
       const w = zoneRect.width;
       const h = zoneRect.height;
-      const emailBottom = emailRect.bottom - zoneRect.top;
+      const detailCX = detailRect.left - zoneRect.left + detailRect.width / 2;
+      const startY = detailRect.top - zoneRect.top - 4;
+      const btnGapX = (emailRect.right - zoneRect.left + (linkedinRect.left - zoneRect.left)) / 2;
+      const btnBottomY = emailRect.bottom - zoneRect.top + 4;
+      const forkY = startY - (startY - btnBottomY) * 0.5;
       const emailCX = emailRect.left - zoneRect.left + emailRect.width / 2;
       const linkedinCX = linkedinRect.left - zoneRect.left + linkedinRect.width / 2;
-      const detailTop = detailRect.top - zoneRect.top;
-      const detailCX = detailRect.left - zoneRect.left + detailRect.width / 2;
-      const gap = detailTop - emailBottom;
-      const pts = [
-        { x: emailCX, y: emailBottom + 4 },
-        { x: linkedinCX + 30, y: emailBottom + gap * 0.25 },
-        { x: emailCX - 30, y: emailBottom + gap * 0.5 },
-        { x: linkedinCX + 20, y: emailBottom + gap * 0.75 },
-        { x: detailCX, y: detailTop - 4 },
-      ];
-      let d = `M ${pts[0].x} ${pts[0].y}`;
-      for (let i = 1; i < pts.length; i++) {
-        const prev = pts[i - 1], curr = pts[i];
-        const cpx1 = prev.x + (curr.x - prev.x) * 0.4;
-        const cpy1 = prev.y + (curr.y - prev.y) * 0.1;
-        const cpx2 = curr.x - (curr.x - prev.x) * 0.4;
-        const cpy2 = curr.y - (curr.y - prev.y) * 0.1;
-        d += ` C ${cpx1} ${cpy1}, ${cpx2} ${cpy2}, ${curr.x} ${curr.y}`;
-      }
-      let stitches = "";
-      [1, 3].forEach((idx, i) => {
-        const p = pts[idx], len = 9, angle = Math.PI * 0.35;
-        const dx = Math.cos(angle) * len, dy = Math.sin(angle) * len;
-        for (let j = -1; j <= 1; j++) {
-          const ox = j * 10, delay = 0.8 + i * 0.5 + j * 0.08;
-          stitches += `<line class="stitch-mark" x1="${p.x+ox-dx/2}" y1="${p.y-dy/2}" x2="${p.x+ox+dx/2}" y2="${p.y+dy/2}" style="animation-delay:${delay}s"/>`;
-        }
-      });
-      const endX = pts[pts.length - 1].x, endY = pts[pts.length - 1].y;
-      setFooterThread({
+      const stem = `M ${detailCX} ${startY} C ${detailCX} ${startY - (startY - forkY) * 0.6}, ${btnGapX} ${forkY + (startY - forkY) * 0.3}, ${btnGapX} ${forkY}`;
+      const branchL = `M ${btnGapX} ${forkY} C ${btnGapX - 10} ${forkY - (forkY - btnBottomY) * 0.4}, ${emailCX + 10} ${btnBottomY + (forkY - btnBottomY) * 0.3}, ${emailCX} ${btnBottomY}`;
+      const branchR = `M ${btnGapX} ${forkY} C ${btnGapX + 10} ${forkY - (forkY - btnBottomY) * 0.4}, ${linkedinCX - 10} ${btnBottomY + (forkY - btnBottomY) * 0.3}, ${linkedinCX} ${btnBottomY}`;
+      footerThreadData.current = {
         viewBox: `0 0 ${w} ${h}`,
-        content: `<path class="thread-weave-shadow" d="${d}"/><path class="thread-weave" d="${d}"/>${stitches}<circle class="thread-endpoint" cx="${pts[0].x}" cy="${pts[0].y}" r="2.5"/><circle class="thread-endpoint" cx="${endX}" cy="${endY}" r="2.5"/><line class="thread-needle-ft" x1="${endX}" y1="${endY}" x2="${endX+12}" y2="${endY+8}"/><g class="thread-pulse-ring"><circle cx="${endX}" cy="${endY}" r="3.5"/></g>`,
-      });
+        content: `<path class="thread-ft-shadow" d="${stem}"/><path class="thread-ft" d="${stem}"/><path class="thread-ft-shadow thread-ft-branch" d="${branchL}"/><path class="thread-ft thread-ft-branch" d="${branchL}"/><path class="thread-ft-shadow thread-ft-branch" d="${branchR}"/><path class="thread-ft thread-ft-branch" d="${branchR}"/><circle class="thread-ft-dot" cx="${emailCX}" cy="${btnBottomY}" r="3"/><circle class="thread-ft-dot" cx="${linkedinCX}" cy="${btnBottomY}" r="3"/>`,
+      };
     };
     document.fonts.ready.then(generateFooterThread);
     const handleResize = () => { clearTimeout(rt); rt = setTimeout(generateFooterThread, 150); };
@@ -658,23 +635,49 @@ function HomePage({ onNavigate, isMobile }) {
     return () => { cancelled = true; window.removeEventListener("resize", handleResize); };
   }, [isMobile]);
 
+  // IntersectionObserver: inject footer thread SVG when visible (ref-based, no re-render)
+  useEffect(() => {
+    if (isMobile) return;
+    const zone = footerZoneRef.current;
+    if (!zone) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const svg = footerSvgRef.current;
+          const data = footerThreadData.current;
+          if (svg && data) {
+            svg.setAttribute("viewBox", data.viewBox);
+            svg.innerHTML = data.content;
+          }
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(zone);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
   return (
     <div
       style={{ width: "100%", position: "relative" }}
       onMouseMove={(e) => {
-        // 只在没有 hover 某个卡片时，展示页面级跟随效果
-        if (hoveredId != null) return;
-        setPageCursor({ x: e.clientX, y: e.clientY, visible: true });
+        const el = pageCursorRef.current;
+        if (!el) return;
+        if (hoveredId != null) { el.style.opacity = "0"; return; }
+        el.style.opacity = "1";
+        el.style.left = (e.clientX - 60) + "px";
+        el.style.top = (e.clientY - 60) + "px";
       }}
-      onMouseLeave={() => setPageCursor((c) => ({ ...c, visible: false }))}
+      onMouseLeave={() => { const el = pageCursorRef.current; if (el) el.style.opacity = "0"; }}
     >
-      {/* Page-level subtle cursor indicator for whitespace */}
-      {pageCursor.visible && hoveredId == null && !isMobile && (
+      {/* Page-level subtle cursor indicator — ref-driven to avoid re-renders */}
+      {!isMobile && (
         <div
+          ref={pageCursorRef}
           style={{
             position: "fixed",
-            left: pageCursor.x - 60,
-            top: pageCursor.y - 60,
+            left: 0, top: 0,
             width: 120,
             height: 120,
             borderRadius: "999px",
@@ -682,15 +685,15 @@ function HomePage({ onNavigate, isMobile }) {
               "radial-gradient(circle, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 60%)",
             pointerEvents: "none",
             mixBlendMode: "multiply",
+            opacity: 0,
+            transition: "opacity 0.15s ease",
           }}
         />
       )}
-      {/* === Hero with Thread Animation === */}
+      {/* === Hero with Typewriter Reveal === */}
       <div
-        ref={heroRef}
         style={{
           position: "relative",
-          minHeight: "auto",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -700,46 +703,73 @@ function HomePage({ onNavigate, isMobile }) {
           textAlign: "center",
         }}
       >
-        {/* Thread SVG — desktop only */}
-        {!isMobile && threadSvg.content && (
-          <svg
-            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none" }}
-            viewBox={threadSvg.viewBox}
-            dangerouslySetInnerHTML={{ __html: threadSvg.content }}
-          />
-        )}
-
         <div style={{
-          fontFamily: FONT_MONO, fontSize: 14, color: "#6b6560",
+          fontFamily: FONT_MONO, fontSize: 14, color: "#a09688",
           letterSpacing: "0.08em", marginBottom: 32,
-          position: "relative", zIndex: 2,
-          animation: isMobile ? "fadeUp 0.8s ease-out 0.1s both" : "fadeUp 0.8s ease-out 0.4s both",
+          opacity: revealedCount > 0 ? 1 : 0,
+          transform: revealedCount > 0 ? "translateY(0)" : "translateY(6px)",
+          transition: "all 0.8s cubic-bezier(0.23,1,0.32,1)",
         }}>
           {"Product Operations \u00B7 5 years"}
         </div>
 
-        <h1
-          ref={titleRef}
-          style={{
-            fontFamily: FONT_DISPLAY,
-            fontSize: isMobile ? 32 : "clamp(32px, 5vw, 52px)",
-            fontWeight: 900, lineHeight: 1.55,
-            letterSpacing: "0.04em",
-            position: "relative", zIndex: 2, margin: 0,
-            animation: isMobile ? "fadeUp 0.9s ease-out 0.2s both" : "fadeUp 0.9s ease-out 0.6s both",
-          }}
-        >
-          {"产品、设计、项目管理、客户"}<br />
-          {"收拢成一个 PM 底座，"}<br />
-          {"下一步方向："}
-          <span ref={aiRef} style={{ color: ACCENT }}>{"AI"}</span>
+        <h1 style={{
+          fontFamily: FONT_DISPLAY,
+          fontSize: isMobile ? 32 : "clamp(32px, 5.5vw, 56px)",
+          fontWeight: 700, lineHeight: 1.45,
+          letterSpacing: "-0.02em",
+          margin: 0, maxWidth: 780,
+        }}>
+          {(() => {
+            const lineGroups = {};
+            heroChars.forEach((c, i) => {
+              if (!lineGroups[c.lineIndex]) lineGroups[c.lineIndex] = [];
+              lineGroups[c.lineIndex].push({ ...c, gi: i });
+            });
+            return Object.entries(lineGroups).map(([li, chars]) => {
+              const lineData = HERO_LINES[parseInt(li)];
+              return (
+                <span key={li} style={{ display: lineData.inline ? "inline" : "block", whiteSpace: "pre-wrap" }}>
+                  {chars.map((c) => {
+                    const isRevealed = c.gi < revealedCount;
+                    const isAI = c.type === "accent";
+                    return (
+                      <span key={c.gi} style={{
+                        display: "inline-block",
+                        color: isAI
+                          ? (isRevealed ? ACCENT : "#d4cdc2")
+                          : (isRevealed ? "#2a2520" : "#d4cdc2"),
+                        transition: isAI
+                          ? "color 0.3s ease, text-shadow 0.6s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)"
+                          : "color 0.25s ease",
+                        transform: isAI && aiGlow
+                          ? (aiPulse ? "scale(1.12)" : "scale(1.0)")
+                          : "scale(1)",
+                        textShadow: isAI && aiGlow
+                          ? (aiPulse
+                            ? "0 0 40px rgba(196,90,60,0.5), 0 0 80px rgba(196,90,60,0.2), 0 2px 4px rgba(196,90,60,0.3)"
+                            : "0 0 24px rgba(196,90,60,0.25), 0 0 48px rgba(196,90,60,0.08)")
+                          : (c.gi === revealedCount - 1 && isRevealed && !isAI
+                            ? "0 0 20px rgba(42,37,32,0.15)"
+                            : "none"),
+                        minWidth: c.char === " " ? "0.3em" : undefined,
+                      }}>
+                        {c.char}
+                      </span>
+                    );
+                  })}
+                </span>
+              );
+            });
+          })()}
         </h1>
 
         <p style={{
-          marginTop: 36, fontSize: 15, color: "#6b6560",
-          letterSpacing: "0.02em",
-          position: "relative", zIndex: 2,
-          animation: isMobile ? "fadeUp 0.7s ease-out 0.4s both" : "fadeUp 0.7s ease-out 2.5s both",
+          marginTop: 40, fontSize: 15, color: "#8a847c",
+          letterSpacing: "0.02em", lineHeight: 1.6,
+          opacity: subtitleVisible ? 1 : 0,
+          transform: subtitleVisible ? "translateY(0)" : "translateY(10px)",
+          transition: "all 0.8s cubic-bezier(0.23,1,0.32,1) 0.1s",
         }}>
           {"三个项目，做的事越来越不一样——但切入点始终一样：先把问题拆对。"}
         </p>
@@ -1000,12 +1030,11 @@ function HomePage({ onNavigate, isMobile }) {
             {"\u5982\u679C\u4F60\u5BF9\u6211\u7684\u7ECF\u5386\u611F\u5174\u8DA3\uFF0C\u5F88\u4E50\u610F\u804A\u804A\u3002"}
           </p>
 
-          {/* Footer thread SVG — desktop only */}
-          {!isMobile && footerThread.content && (
+          {/* Footer thread SVG — desktop only, ref-driven */}
+          {!isMobile && (
             <svg
+              ref={footerSvgRef}
               style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 1, overflow: "visible" }}
-              viewBox={footerThread.viewBox}
-              dangerouslySetInnerHTML={{ __html: footerThread.content }}
             />
           )}
         </div>
@@ -1086,7 +1115,7 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
         onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#f0ebe3"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
         style={{
           position: "fixed", top: 72,
-          right: "max(16px, calc((100% - 720px) / 2 - 140px))",
+          right: "max(24px, calc((100% - 720px) / 2 - 220px))",
           zIndex: 50, pointerEvents: "auto",
           width: 40, height: 40,
           border: "1px solid #E5E2DC", backgroundColor: "#f0ebe3",
@@ -1100,7 +1129,7 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
       {/* Section nav — skill tag sections */}
       {visible && (
         <div style={{
-          position: "fixed", top: "50%", right: "max(16px, calc((100% - 720px) / 2 - 140px))",
+          position: "fixed", top: "50%", right: "max(24px, calc((100% - 720px) / 2 - 220px))",
           transform: "translateY(-50%)",
           zIndex: 50,
           transition: "opacity 0.3s ease",
@@ -1338,7 +1367,7 @@ function ReadingProgressBar() {
     <div style={{
       position: "fixed",
       top: "50%",
-      left: "max(16px, calc((100% - 720px) / 2 - 140px))",
+      left: "max(24px, calc((100% - 720px) / 2 - 220px))",
       transform: "translateY(-50%)",
       zIndex: 50,
       height: 200,
@@ -1395,143 +1424,122 @@ function ReadingProgressBar() {
 
 function DualTrackTimeline() {
   const ff = "'DM Sans', sans-serif";
-  // Track colors
-  const blue = "#2B5EA7";
-  const blueLight = "#C6D8EF";
-  const orange = "#D97B0D";
-  const orangeLight = "#F5DFC0";
-  const resultGray = "#666";
+  const ffSerif = "'Noto Serif SC', Georgia, serif";
+  const brown = "#6B5B4E";
+  const amber = "#B5743A";
+  const textDark = "#3a3632";
+  const textLight = "#a09688";
+  const borderLight = "#d4cdc2";
+
+  const PHASES = [
+    { phase: "Crisis", time: "2023", track: "A", nodes: [
+      { label: "Collaboration Breakdown", sub: "Client threatens to terminate contract", type: "context" },
+      { label: "Structural Diagnosis", sub: '15 interviews \u2192 "System failure, not people"', type: "core" },
+    ]},
+    { phase: "Recovery", time: "Early 2024", track: "A", nodes: [
+      { label: "Six-Module System", sub: "Zero cost, zero learning curve, immediate rollout", type: "action" },
+      { label: "Client Re-commits \u2192 Company-wide SOP", sub: "Contract renewed \u00B7 System adopted across all teams", type: "result" },
+    ]},
+    { phase: "Innovation", time: "2025", track: "B", bridge: true, nodes: [
+      { label: "Identifies AI Opportunity", sub: "DeepSeek + community scenario fit", type: "core" },
+      { label: "Bypasses PM, Finds CTO", sub: "Right stakeholder, right sequence", type: "core" },
+      { label: "Nana AI Launches", sub: "VP approved \u00B7 2,000+ users \u00B7 25%\u2192100% retrieval accuracy", type: "result" },
+    ]},
+  ];
+
+  const color = (track) => track === "A" ? brown : amber;
+
   return (
-    <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
-      <defs>
-        <marker id="dt-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <path d="M 0 0 L 8 3 L 0 6 Z" fill={blue}/>
-        </marker>
-        <marker id="dt-orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <path d="M 0 0 L 8 3 L 0 6 Z" fill={orange}/>
-        </marker>
-        <marker id="dt-pivot" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <path d="M 0 0 L 8 3 L 0 6 Z" fill="#555"/>
-        </marker>
-      </defs>
+    <div style={{ maxWidth: 560, margin: "0 auto", padding: "36px 24px", fontFamily: ff }}>
+      {/* Legend */}
+      <div style={{ display: "flex", gap: 20, marginBottom: 28, marginLeft: 42 }}>
+        {[{ label: "Collaboration System", c: brown }, { label: "Nana AI", c: amber }].map(({ label, c }) => (
+          <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ width: 8, height: 8, borderRadius: 2, background: c, opacity: 0.7 }} />
+            <span style={{ fontSize: 11, color: textLight, fontWeight: 500 }}>{label}</span>
+          </div>
+        ))}
+      </div>
 
-      {/* === Legend === */}
-      <rect x="20" y="8" width="10" height="10" rx="2" fill={blue}/>
-      <text x="34" y="17" fontFamily={ff} fontSize="9" fontWeight="600" fill="#666">Track A: Collaboration</text>
-      <rect x="175" y="8" width="10" height="10" rx="2" fill={orange}/>
-      <text x="189" y="17" fontFamily={ff} fontSize="9" fontWeight="600" fill="#666">Track B: Nana AI</text>
-      <text x="316" y="17" fontFamily={ff} fontSize="9" fontWeight="600" fill="#666">{"\u2605 Core Decision"}</text>
-      <text x="414" y="17" fontFamily={ff} fontSize="9" fontWeight="600" fill="#666">{"\u25C6 Key Result"}</text>
+      {/* Timeline */}
+      {PHASES.map((phase, pi) => {
+        const c = color(phase.track);
+        const isLast = pi === PHASES.length - 1;
+        const nextPhase = PHASES[pi + 1];
+        const hasTrackSwitch = nextPhase && nextPhase.track !== phase.track;
 
-      {/* === Time axis === */}
-      <text x="20" y="40" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#999">2023</text>
-      <text x="200" y="40" fontFamily={ff} fontSize="8.5" fontWeight="500" fill="#bbb">Early 2024</text>
-      <text x="668" y="40" fontFamily={ff} fontSize="8.5" fontWeight="600" fill="#999">{"\u2192 2025"}</text>
-      <line x1="50" y1="37" x2="660" y2="37" stroke="#D5D0C8" strokeWidth="1"/>
+        return (
+          <div key={pi}>
+            <div style={{ position: "relative" }}>
+              {!isLast && !hasTrackSwitch && (
+                <div style={{ position: "absolute", left: 15, top: 46, bottom: -8, width: 1, background: `${c}18` }} />
+              )}
+              {hasTrackSwitch && (
+                <div style={{ position: "absolute", left: 15, top: 46, bottom: -8, width: 1, background: `linear-gradient(to bottom, ${c}18, ${c}06)` }} />
+              )}
 
-      {/* === Phase labels === */}
-      <text x="110" y="56" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.08em" fill="#bbb">PHASE 1</text>
-      <text x="370" y="56" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.08em" fill="#bbb">PHASE 2</text>
-      <text x="640" y="56" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.08em" fill="#bbb">PHASE 3</text>
+              {/* Phase header */}
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
+                <div style={{ width: 30, display: "flex", justifyContent: "center", flexShrink: 0 }}>
+                  <div style={{ width: 7, height: 7, borderRadius: "50%", background: c, opacity: 0.4 }} />
+                </div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: textLight, letterSpacing: "1.2px", textTransform: "uppercase" }}>{phase.phase}</span>
+                  <span style={{ fontSize: 11, color: borderLight, fontFamily: "'DM Mono', monospace" }}>{phase.time}</span>
+                </div>
+                <span style={{ fontSize: 10, fontWeight: 600, color: c, opacity: 0.45, marginLeft: "auto", letterSpacing: "0.5px" }}>
+                  {phase.track === "A" ? "Collaboration System" : "Nana AI"}
+                </span>
+              </div>
 
-      {/* Phase 1→2 divider (light dashed) */}
-      <line x1="215" y1="48" x2="215" y2="390" stroke="#e8e8e8" strokeWidth="1" strokeDasharray="4,4"/>
+              {/* Nodes */}
+              <div style={{ marginLeft: 42, display: "flex", flexDirection: "column", gap: 14, marginBottom: hasTrackSwitch ? 0 : isLast ? 0 : 32 }}>
+                {phase.nodes.map((node, ni) => {
+                  const isCore = node.type === "core";
+                  const isResult = node.type === "result";
+                  return (
+                    <div key={ni} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                      <div style={{
+                        marginTop: isResult ? 5 : 3,
+                        minWidth: isCore ? 10 : isResult ? 10 : 8,
+                        height: isCore ? 10 : isResult ? 10 : 8,
+                        borderRadius: isResult ? 2 : "50%",
+                        background: isCore || isResult ? c : "transparent",
+                        border: `2px solid ${isCore || isResult ? c : "#c5bfb6"}`,
+                        boxShadow: isCore ? `0 0 0 3px ${c}20` : "none",
+                        transform: isResult ? "rotate(45deg)" : "none",
+                      }} />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                          <span style={{ fontSize: 15, fontWeight: isCore || isResult ? 700 : 500, color: isCore || isResult ? c : textDark, lineHeight: 1.3, fontFamily: ffSerif }}>{node.label}</span>
+                          {isCore && <span style={{ fontSize: 9, fontWeight: 700, color: c, background: `${c}14`, padding: "2px 7px", borderRadius: 4, letterSpacing: "0.6px", textTransform: "uppercase", whiteSpace: "nowrap" }}>Core Decision</span>}
+                          {isResult && <span style={{ fontSize: 9, fontWeight: 700, color: c, background: `${c}14`, padding: "2px 7px", borderRadius: 4, letterSpacing: "0.6px", textTransform: "uppercase", whiteSpace: "nowrap" }}>Outcome</span>}
+                        </div>
+                        <p style={{ margin: "3px 0 0", fontSize: 13, color: isResult ? "#6b6560" : "#8a847c", fontWeight: isResult ? 500 : 400, lineHeight: 1.45 }}>{node.sub}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
 
-      {/* === Track divider === */}
-      <line x1="20" y1="230" x2="700" y2="230" stroke="#D5D0C8" strokeWidth="1"/>
-      <text x="12" y="150" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.06em" fill={blue} transform="rotate(-90, 12, 150)" textAnchor="middle">TRACK A</text>
-      <text x="12" y="320" fontFamily={ff} fontSize="7.5" fontWeight="700" letterSpacing="0.06em" fill={orange} transform="rotate(-90, 12, 320)" textAnchor="middle">TRACK B</text>
-
-      {/* ====== TRACK A ====== */}
-
-      {/* Node 1 — Normal */}
-      <rect x="30" y="70" width="160" height="44" rx="3" fill="#FAF9F7" stroke={blueLight} strokeWidth="1.5"/>
-      <circle cx="46" cy="92" r="10" fill={blue}/>
-      <text x="46" y="96" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">1</text>
-      <text x="62" y="96" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Collaboration Breakdown</text>
-
-      {/* Arrow 1→2 */}
-      <line x1="110" y1="114" x2="110" y2="130" stroke={blue} strokeWidth="1.5" markerEnd="url(#dt-blue)"/>
-
-      {/* Node 2 — CORE */}
-      <rect x="30" y="138" width="160" height="56" rx="3" fill="#FAF9F7" stroke={blue} strokeWidth="2.5"/>
-      <circle cx="46" cy="155" r="10" fill={blue}/>
-      <text x="46" y="159" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">2</text>
-      <rect x="60" y="148" width="40" height="14" rx="7" fill={blue}/>
-      <text x="80" y="158" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u2605 CORE"}</text>
-      <text x="106" y="158" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Structural Diagnosis</text>
-      <text x="46" y="180" fontFamily={ff} fontSize="9" fontWeight="500" fill="#666">{"System failure, not people"}</text>
-
-      {/* Arrow 2→3 (cross-phase, dashed) */}
-      <line x1="190" y1="166" x2="238" y2="92" stroke={blue} strokeWidth="1.5" strokeDasharray="6,4" markerEnd="url(#dt-blue)"/>
-
-      {/* Node 3 — Normal */}
-      <rect x="244" y="70" width="160" height="44" rx="3" fill="#FAF9F7" stroke={blueLight} strokeWidth="1.5"/>
-      <circle cx="260" cy="92" r="10" fill={blue}/>
-      <text x="260" y="96" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">3</text>
-      <text x="276" y="96" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Six-Module System</text>
-
-      {/* Arrow 3→4 */}
-      <line x1="404" y1="92" x2="430" y2="92" stroke={blue} strokeWidth="1.5" markerEnd="url(#dt-blue)"/>
-
-      {/* Node 4 — RESULT */}
-      <rect x="436" y="70" width="160" height="44" rx="3" fill="#FAF9F7" stroke={resultGray} strokeWidth="2" strokeDasharray="6,3"/>
-      <circle cx="452" cy="92" r="10" fill={resultGray}/>
-      <text x="452" y="96" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">4</text>
-      <rect x="466" y="79" width="52" height="14" rx="7" fill={resultGray}/>
-      <text x="492" y="89" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u25C6 RESULT"}</text>
-      <text x="468" y="106" fontFamily={ff} fontSize="9" fontWeight="500" fill="#666">Client Re-commits</text>
-
-      {/* Arrow 4→5 */}
-      <line x1="516" y1="114" x2="516" y2="140" stroke={blue} strokeWidth="1.5" markerEnd="url(#dt-blue)"/>
-
-      {/* Node 5 — Normal */}
-      <rect x="436" y="148" width="160" height="44" rx="3" fill="#FAF9F7" stroke={blueLight} strokeWidth="1.5"/>
-      <circle cx="452" cy="170" r="10" fill={blue}/>
-      <text x="452" y="174" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">5</text>
-      <text x="468" y="174" fontFamily={ff} fontSize="11" fontWeight="700" fill="#1a1a1a">Company-wide SOP</text>
-
-      {/* ====== PIVOT CONNECTOR 4→6 ====== */}
-      <path d="M 516 114 L 516 230 L 360 230 L 360 260" fill="none" stroke="#555" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#dt-pivot)"/>
-      <rect x="340" y="218" width="300" height="18" rx="9" fill="none" stroke="none"/>
-      <text x="530" y="222" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="600" fontStyle="italic" fill="#888">{"Stable delivery builds trust \u2192 enables AI proposal"}</text>
-
-      {/* ====== TRACK B ====== */}
-
-      {/* Node 6 — CORE */}
-      <rect x="280" y="268" width="160" height="56" rx="3" fill="#FAF9F7" stroke={orange} strokeWidth="2.5"/>
-      <circle cx="296" cy="285" r="10" fill={orange}/>
-      <text x="296" y="289" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">6</text>
-      <rect x="310" y="278" width="40" height="14" rx="7" fill={orange}/>
-      <text x="330" y="288" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u2605 CORE"}</text>
-      <text x="356" y="288" fontFamily={ff} fontSize="10.5" fontWeight="700" fill="#1a1a1a">Identifies AI Opp.</text>
-      <text x="296" y="310" fontFamily={ff} fontSize="9" fontWeight="500" fill="#666">{"DeepSeek \u2192 community scenario fit"}</text>
-
-      {/* Arrow 6→7 */}
-      <line x1="440" y1="296" x2="468" y2="296" stroke={orange} strokeWidth="1.5" markerEnd="url(#dt-orange)"/>
-
-      {/* Node 7 — CORE */}
-      <rect x="474" y="268" width="160" height="56" rx="3" fill="#FAF9F7" stroke={orange} strokeWidth="2.5"/>
-      <circle cx="490" cy="285" r="10" fill={orange}/>
-      <text x="490" y="289" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">7</text>
-      <rect x="504" y="278" width="40" height="14" rx="7" fill={orange}/>
-      <text x="524" y="288" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u2605 CORE"}</text>
-      <text x="550" y="288" fontFamily={ff} fontSize="10.5" fontWeight="700" fill="#1a1a1a">Validates Feasibility</text>
-      <text x="490" y="310" fontFamily={ff} fontSize="9" fontWeight="500" fill="#666">{"Tech Director first, then budget"}</text>
-
-      {/* Arrow 7→8 (cross-phase, dashed) */}
-      <line x1="634" y1="296" x2="540" y2="360" stroke={orange} strokeWidth="1.5" strokeDasharray="6,4"/>
-      <line x1="540" y1="348" x2="540" y2="360" stroke={orange} strokeWidth="1.5" markerEnd="url(#dt-orange)"/>
-
-      {/* Node 8 — RESULT (black fill) */}
-      <rect x="468" y="348" width="190" height="46" rx="3" fill="#111" stroke="#111" strokeWidth="1.5"/>
-      <circle cx="484" cy="365" r="10" fill={resultGray}/>
-      <text x="484" y="369" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" fill="#fff">8</text>
-      <rect x="498" y="356" width="52" height="14" rx="7" fill={resultGray}/>
-      <text x="524" y="366" textAnchor="middle" fontFamily={ff} fontSize="7.5" fontWeight="700" fill="#fff">{"\u25C6 RESULT"}</text>
-      <text x="556" y="367" fontFamily={ff} fontSize="10.5" fontWeight="700" fill="#fff">Nana AI Launches</text>
-      <text x="498" y="385" fontFamily={ff} fontSize="9" fontWeight="500" fill="#999">{"VP approved \u2192 2,000+ users"}</text>
-    </svg>
+            {/* Bridge transition */}
+            {hasTrackSwitch && (
+              <div style={{ margin: "8px 0", padding: "28px 0", position: "relative" }}>
+                <div style={{ position: "absolute", top: 0, left: 15, right: 0, height: 1, background: `linear-gradient(to right, ${brown}25, ${brown}08)` }} />
+                <div style={{ marginLeft: 42, padding: "14px 18px", background: `linear-gradient(135deg, ${brown}06, ${amber}08)`, borderLeft: "3px solid", borderImage: `linear-gradient(to bottom, ${brown}50, ${amber}70) 1`, borderRadius: "0 8px 8px 0" }}>
+                  <div style={{ fontSize: 9, fontWeight: 700, color: textLight, letterSpacing: "1.2px", textTransform: "uppercase", marginBottom: 5 }}>Turning Point</div>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "#6b5f53", fontStyle: "italic", fontFamily: ffSerif, lineHeight: 1.4 }}>
+                    {"Stable delivery builds trust \u2192 unlocks AI proposal"}
+                  </span>
+                </div>
+                <div style={{ position: "absolute", bottom: 0, left: 15, right: 0, height: 1, background: `linear-gradient(to right, ${amber}25, ${amber}08)` }} />
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -1539,139 +1547,154 @@ function DualTrackTimeline() {
 
 function InfoHub() {
   const ff = "'DM Sans', sans-serif";
-  const govColor = "#7A8BA8";
-  const govDark = "#5A7390";
-  const govLight = "#C8D3E0";
-  const delColor = "#5B8C7E";
-  const delDark = "#4A7568";
-  const fbColor = "#2A2A2A";
+  const ffSerif = "'Noto Serif SC', Georgia, serif";
+  const accent1 = "#6B5B4E";
+  const accent2 = "#B5743A";
+  const textDark = "#3a3632";
+  const textLight = "#a09688";
+  const bgZone = "#e8e2d8";
+  const bgModule = "#ffffff";
+  const border = "#d4cdc2";
+  const roleTint = "#8a7b6e";
+
+  const W = 880, H = 510;
+  const zoneW = 82, zoneGap = 18;
+  const hubX = zoneW + zoneGap, hubW = W - 2 * (zoneW + zoneGap), execX = W - zoneW;
+  const pad = 18, modL = hubX + pad, modR = hubX + hubW - pad, modSpan = modR - modL, modGap = 16;
+  const govY = 72, govH = 128, reqW = 376, roleW = modSpan - reqW - modGap;
+  const delY = 246, delH = 118, acceptW = 306, releaseW = modSpan - acceptW - modGap;
+  const foundY = 398, foundH = 58, foundGap = 12, foundItemW = (modSpan - foundGap) / 2;
+  const zoneTop = govY - 12, zoneBot = delY + delH + 12, zoneH = zoneBot - zoneTop;
+
   return (
-    <svg viewBox="0 0 840 450" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
-      <defs>
-        <marker id="ih-gov" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <path d="M 0 0 L 8 3 L 0 6 Z" fill={govColor}/>
-        </marker>
-        <marker id="ih-del" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
-          <path d="M 8 0 L 0 3 L 8 6 Z" fill={delColor}/>
-        </marker>
-        <marker id="ih-fb" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <path d="M 0 0 L 8 3 L 0 6 Z" fill={fbColor}/>
-        </marker>
-      </defs>
+    <div style={{ maxWidth: `${W}px`, margin: "0 auto", padding: "0 16px", fontFamily: ff }}>
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
+        <defs>
+          <marker id="ag2" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="8" markerHeight="6" orient="auto"><path d="M0,0 L8,3 L0,6" fill={accent1} opacity="0.5" /></marker>
+          <marker id="ad2" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="8" markerHeight="6" orient="auto"><path d="M0,0 L8,3 L0,6" fill={accent2} opacity="0.5" /></marker>
+          <marker id="af2" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="7" markerHeight="5" orient="auto"><path d="M0,0 L8,3 L0,6" fill={textLight} /></marker>
+        </defs>
 
-      {/* === Legend row === */}
-      <line x1="20" y1="12" x2="42" y2="12" stroke={govColor} strokeWidth="2"/>
-      <text x="46" y="15" fontFamily={ff} fontSize="9" fontWeight="600" fill={govColor}>{"\u2192 Governance (demand in)"}</text>
-      <line x1="220" y1="12" x2="242" y2="12" stroke={delColor} strokeWidth="2"/>
-      <text x="246" y="15" fontFamily={ff} fontSize="9" fontWeight="600" fill={delColor}>{"\u2190 Delivery (output back)"}</text>
-      <line x1="420" y1="12" x2="442" y2="12" stroke={fbColor} strokeWidth="2" strokeDasharray="6,3"/>
-      <text x="446" y="15" fontFamily={ff} fontSize="9" fontWeight="600" fill={fbColor}>Feedback loop</text>
+        {/* CLIENT ZONE */}
+        <g>
+          <rect x={0} y={zoneTop} width={zoneW} height={zoneH} rx={8} fill={bgZone} opacity="0.45" />
+          <text x={zoneW / 2} y={zoneTop + zoneH / 2 - 16} textAnchor="middle" fontSize="13" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Client</text>
+          <text x={zoneW / 2} y={zoneTop + zoneH / 2 + 2} textAnchor="middle" fontSize="9" fill={textLight}>Demand</text>
+          <text x={zoneW / 2} y={zoneTop + zoneH / 2 + 14} textAnchor="middle" fontSize="9" fill={textLight}>Source</text>
+        </g>
 
-      {/* === Entry annotation banner — full width, high contrast === */}
-      <rect x="0" y="28" width="840" height="30" fill="#2A2A2A"/>
-      <text x="420" y="48" textAnchor="middle" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#FAF9F7" letterSpacing="0.03em">
-        {"SYSTEM RULE:  Only formal submissions enter \u2014 all other channels are ignored"}
-      </text>
+        {/* EXECUTION ZONE */}
+        <g>
+          <rect x={execX} y={zoneTop} width={zoneW} height={zoneH} rx={8} fill={bgZone} opacity="0.45" />
+          <text x={execX + zoneW / 2} y={zoneTop + zoneH / 2 - 16} textAnchor="middle" fontSize="13" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Execution</text>
+          <text x={execX + zoneW / 2} y={zoneTop + zoneH / 2 + 2} textAnchor="middle" fontSize="9" fill={textLight}>{`FE \u00B7 BE`}</text>
+          <text x={execX + zoneW / 2} y={zoneTop + zoneH / 2 + 14} textAnchor="middle" fontSize="9" fill={textLight}>{`Design \u00B7 QA`}</text>
+        </g>
 
-      {/* === Three zone backgrounds === */}
-      <rect x="0" y="64" width="110" height="356" fill="#E8EDF3" rx="0"/>
-      <rect x="730" y="64" width="110" height="290" fill="#EDEAE3" rx="0"/>
+        {/* SYSTEM RULE BANNER */}
+        <g>
+          <rect x={hubX} y={10} width={hubW} height={30} rx={6} fill={accent1} opacity="0.92" />
+          <text x={hubX + hubW / 2} y={30} textAnchor="middle" fontSize="10.5" fontWeight="600" fill="#fff" letterSpacing="0.3">{`Only formal submissions enter \u2014 all other channels ignored`}</text>
+        </g>
 
-      {/* Zone labels */}
-      <text x="55" y="230" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="700" fill="#5A6A80">CLIENT</text>
-      <text x="55" y="246" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="500" fill="#8899AA">Demand Source</text>
-      <text x="785" y="200" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="700" fill="#8A8275">EXECUTION</text>
-      <text x="785" y="216" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="500" fill="#B8B0A3">Task Teams</text>
+        {/* GOVERNANCE ROW */}
+        <g>
+          <text x={hubX + hubW / 2} y={58} textAnchor="middle" fontSize="9" fontWeight="700" fill={textLight} letterSpacing="1.5">{`GOVERNANCE \u2014 DEMAND FLOWS IN \u2192`}</text>
+        </g>
 
-      {/* === GOVERNANCE LAYER band === */}
-      <rect x="110" y="64" width="620" height="150" fill="#F0F3F8" rx="0"/>
-      <text x="420" y="78" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.1em" fill={govColor}>{"GOVERNANCE \u2014 DEMAND FLOWS IN \u2192"}</text>
-      <line x1="128" y1="82" x2="710" y2="82" stroke={govLight} strokeWidth="1"/>
+        {/* Requirement Lifecycle — CORE */}
+        <g>
+          <rect x={modL} y={govY} width={reqW} height={govH} rx={8} fill={accent1} />
+          <rect x={modL + reqW - 58} y={govY + 10} width={46} height={18} rx={9} fill="rgba(255,255,255,0.16)" />
+          <text x={modL + reqW - 35} y={govY + 22.5} textAnchor="middle" fontSize="8.5" fontWeight="700" fill="rgba(255,255,255,0.75)" letterSpacing="0.6">CORE</text>
+          <text x={modL + 18} y={govY + 36} fontSize="15" fontWeight="700" fill="#fff" fontFamily={ffSerif}>Requirement Lifecycle</text>
+          <text x={modL + 18} y={govY + 55} fontSize="10.5" fontWeight="600" fill="rgba(255,255,255,0.55)" letterSpacing="0.5">GATEWAY & ENGINE</text>
+          <text x={modL + 18} y={govY + 80} fontSize="9.5" fill="rgba(255,255,255,0.4)">{`Submit \u2192 Classify \u2192 Prioritize \u2192 Assign \u2192 Track \u2192 Close`}</text>
+          {[0, 1, 2, 3, 4, 5].map((i) => <circle key={i} cx={modL + 22 + i * 42} cy={govY + 100} r={2.5} fill="rgba(255,255,255,0.18)" />)}
+          <line x1={modL + 22} y1={govY + 100} x2={modL + 22 + 5 * 42} y2={govY + 100} stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+        </g>
 
-      {/* Arrow Client → Requirement Lifecycle */}
-      <line x1="110" y1="142" x2="124" y2="142" stroke={govColor} strokeWidth="2" markerEnd="url(#ih-gov)"/>
+        {/* Role Map */}
+        <g>
+          <rect x={modL + reqW + modGap} y={govY} width={roleW} height={govH} rx={8} fill={bgModule} stroke={border} strokeWidth="1" />
+          <text x={modL + reqW + modGap + 16} y={govY + 32} fontSize="14" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Role Map</text>
+          <text x={modL + reqW + modGap + 16} y={govY + 50} fontSize="10.5" fontWeight="600" fill={roleTint} letterSpacing="0.5">ROUTER</text>
+          <text x={modL + reqW + modGap + 16} y={govY + 74} fontSize="10" fill={textLight}>Who owns what,</text>
+          <text x={modL + reqW + modGap + 16} y={govY + 88} fontSize="10" fill={textLight}>at every stage</text>
+        </g>
 
-      {/* === Requirement Lifecycle — CORE, largest module === */}
-      {/* Outer halo */}
-      <rect x="124" y="86" width="328" height="120" rx="3" fill="none" stroke={govLight} strokeWidth="1.5" strokeDasharray="4,2"/>
-      {/* Main box */}
-      <rect x="128" y="90" width="320" height="112" rx="2" fill="#FAF9F7" stroke={govColor} strokeWidth="3"/>
-      {/* Header band */}
-      <rect x="128" y="90" width="320" height="26" rx="2" fill={govDark}/>
-      <text x="142" y="108" fontFamily={ff} fontSize="12" fontWeight="700" fill="#fff">Requirement Lifecycle</text>
-      <rect x="354" y="94" width="44" height="18" rx="9" fill="#fff" fillOpacity="0.25"/>
-      <text x="376" y="106" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" fill="#fff">CORE</text>
-      {/* Role label */}
-      <text x="142" y="134" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.04em" fill={govColor}>GATEWAY & ENGINE</text>
-      {/* Description */}
-      <text x="142" y="152" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">Captures, validates, and tracks all formal</text>
-      <text x="142" y="164" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">requirements through their complete lifecycle.</text>
-      {/* Vertical accent bar on left */}
-      <rect x="128" y="116" width="3" height="86" fill={govColor} rx="1"/>
+        {/* Governance arrows */}
+        <line x1={modL + reqW + 4} y1={govY + govH / 2} x2={modL + reqW + modGap - 4} y2={govY + govH / 2} stroke={accent1} strokeWidth="1.5" opacity="0.35" markerEnd="url(#ag2)" />
+        <line x1={zoneW + 4} y1={govY + govH / 2} x2={modL - 4} y2={govY + govH / 2} stroke={accent1} strokeWidth="1.5" opacity="0.35" markerEnd="url(#ag2)" />
+        <line x1={modR + 4} y1={govY + govH / 2} x2={execX - 4} y2={govY + govH / 2} stroke={accent1} strokeWidth="1.5" opacity="0.35" markerEnd="url(#ag2)" />
 
-      {/* Arrow Req → Role Map */}
-      <line x1="448" y1="142" x2="466" y2="142" stroke={govColor} strokeWidth="2" markerEnd="url(#ih-gov)"/>
+        {/* DELIVERY ROW */}
+        <g>
+          <text x={hubX + hubW / 2} y={232} textAnchor="middle" fontSize="9" fontWeight="700" fill={textLight} letterSpacing="1.5">{`\u2190 OUTPUT FLOWS BACK \u2014 DELIVERY`}</text>
+        </g>
 
-      {/* === Role Map === */}
-      <rect x="470" y="90" width="240" height="112" rx="2" fill="#FAF9F7" stroke={govColor} strokeWidth="1.5"/>
-      <rect x="470" y="90" width="240" height="24" rx="2" fill={govDark}/>
-      <text x="484" y="107" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#fff">Role Map</text>
-      <text x="484" y="132" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.04em" fill={govColor}>ROUTER</text>
-      <text x="484" y="150" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">Routes each requirement to the correct</text>
-      <text x="484" y="162" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">owner by domain and responsibility.</text>
+        {/* Acceptance Review */}
+        <g>
+          <rect x={modL} y={delY} width={acceptW} height={delH} rx={8} fill={bgModule} stroke={accent2} strokeWidth="1.5" />
+          <text x={modL + 16} y={delY + 30} fontSize="14" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Acceptance Review</text>
+          <text x={modL + 16} y={delY + 48} fontSize="10.5" fontWeight="600" fill={roleTint} letterSpacing="0.5">QUALITY GATE</text>
+          <text x={modL + 16} y={delY + 72} fontSize="10" fill={textLight}>Design vs. implementation,</text>
+          <text x={modL + 16} y={delY + 86} fontSize="10" fill={textLight}>page by page</text>
+        </g>
 
-      {/* Arrow Role Map → Execution */}
-      <line x1="710" y1="142" x2="728" y2="142" stroke={govColor} strokeWidth="2" markerEnd="url(#ih-gov)"/>
+        {/* Release Management */}
+        <g>
+          <rect x={modL + acceptW + modGap} y={delY} width={releaseW} height={delH} rx={8} fill={bgModule} stroke={border} strokeWidth="1" />
+          <text x={modL + acceptW + modGap + 16} y={delY + 30} fontSize="14" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Release Management</text>
+          <text x={modL + acceptW + modGap + 16} y={delY + 48} fontSize="10.5" fontWeight="600" fill={roleTint} letterSpacing="0.5">PACKAGING</text>
+          <text x={modL + acceptW + modGap + 16} y={delY + 72} fontSize="10" fill={textLight}>Bundle verified deliverables</text>
+          <text x={modL + acceptW + modGap + 16} y={delY + 86} fontSize="10" fill={textLight}>into versioned releases</text>
+        </g>
 
-      {/* === DELIVERY LAYER band === */}
-      <rect x="110" y="220" width="620" height="136" fill="#F5F2ED" rx="0"/>
-      <text x="420" y="234" textAnchor="middle" fontFamily={ff} fontSize="8" fontWeight="700" letterSpacing="0.1em" fill={delColor}>{"\u2190 OUTPUT FLOWS BACK \u2014 DELIVERY"}</text>
-      <line x1="128" y1="238" x2="710" y2="238" stroke="#D5D0C8" strokeWidth="1"/>
+        {/* Delivery arrows */}
+        <line x1={modL + acceptW + modGap - 4} y1={delY + delH / 2} x2={modL + acceptW + 4} y2={delY + delH / 2} stroke={accent2} strokeWidth="1.5" opacity="0.35" markerEnd="url(#ad2)" />
+        <line x1={execX - 4} y1={delY + delH / 2} x2={modR + 4} y2={delY + delH / 2} stroke={accent2} strokeWidth="1.5" opacity="0.35" markerEnd="url(#ad2)" />
+        <line x1={modL - 4} y1={delY + delH / 2} x2={zoneW + 4} y2={delY + delH / 2} stroke={accent2} strokeWidth="1.5" opacity="0.35" markerEnd="url(#ad2)" />
 
-      {/* Arrow Execution → Release Mgmt */}
-      <line x1="728" y1="296" x2="714" y2="296" stroke={delColor} strokeWidth="2" markerEnd="url(#ih-del)"/>
+        {/* FEEDBACK LOOP */}
+        <g>
+          <line x1={modL} y1={delY + 30} x2={modL - 8} y2={delY + 30} stroke={textLight} strokeWidth="1.2" strokeDasharray="4,3" />
+          <line x1={modL - 8} y1={delY + 30} x2={modL - 8} y2={govY + govH - 30} stroke={textLight} strokeWidth="1.2" strokeDasharray="4,3" />
+          <line x1={modL - 8} y1={govY + govH - 30} x2={modL} y2={govY + govH - 30} stroke={textLight} strokeWidth="1.2" strokeDasharray="4,3" markerEnd="url(#af2)" />
+          <text x={modL + 4} y={(govY + govH + delY) / 2 + 3} fontSize="8.5" fontWeight="600" fill={textLight} fontStyle="italic">{`Issues feed back \u2192`}</text>
+        </g>
 
-      {/* === Release Management === */}
-      <rect x="470" y="244" width="240" height="104" rx="2" fill="#FAF9F7" stroke={delColor} strokeWidth="1.5"/>
-      <rect x="470" y="244" width="240" height="24" rx="2" fill={delDark}/>
-      <text x="484" y="261" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#fff">Release Management</text>
-      <text x="484" y="286" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.04em" fill={delColor}>PACKAGING</text>
-      <text x="484" y="304" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">Packages verified deliverables into</text>
-      <text x="484" y="316" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">release bundles with version control.</text>
+        {/* FOUNDATION LAYER */}
+        <g>
+          <rect x={modL} y={foundY} width={foundItemW} height={foundH} rx={6} fill={bgModule} stroke={border} strokeWidth="1" />
+          <rect x={modL} y={foundY} width={foundItemW} height={foundH} rx={6} fill={bgZone} opacity="0.25" />
+          <line x1={modL + 14} y1={foundY + 20} x2={modL + 26} y2={foundY + 20} stroke={textLight} strokeWidth="1.5" strokeLinecap="round" />
+          <line x1={modL + 14} y1={foundY + 26} x2={modL + 22} y2={foundY + 26} stroke={textLight} strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+          <line x1={modL + 14} y1={foundY + 32} x2={modL + 24} y2={foundY + 32} stroke={textLight} strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+          <text x={modL + 36} y={foundY + 25} fontSize="12" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Change Log</text>
+          <text x={modL + 36} y={foundY + 41} fontSize="9.5" fill={textLight}>Immutable audit trail</text>
 
-      {/* Arrow Release → Acceptance */}
-      <line x1="470" y1="296" x2="452" y2="296" stroke={delColor} strokeWidth="2" markerEnd="url(#ih-del)"/>
+          <rect x={modL + foundItemW + foundGap} y={foundY} width={foundItemW} height={foundH} rx={6} fill={bgModule} stroke={border} strokeWidth="1" />
+          <rect x={modL + foundItemW + foundGap} y={foundY} width={foundItemW} height={foundH} rx={6} fill={bgZone} opacity="0.25" />
+          <rect x={modL + foundItemW + foundGap + 14} y={foundY + 18} width={14} height={11} rx={2} stroke={textLight} strokeWidth="1.3" fill="none" />
+          <rect x={modL + foundItemW + foundGap + 14} y={foundY + 16} width={7} height={4} rx={1} fill={textLight} opacity="0.5" />
+          <text x={modL + foundItemW + foundGap + 36} y={foundY + 25} fontSize="12" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Asset Repository</text>
+          <text x={modL + foundItemW + foundGap + 36} y={foundY + 41} fontSize="9.5" fill={textLight}>Centralized storage</text>
 
-      {/* === Acceptance Review === */}
-      <rect x="128" y="244" width="320" height="104" rx="2" fill="#FAF9F7" stroke={delColor} strokeWidth="1.5"/>
-      <rect x="128" y="244" width="320" height="24" rx="2" fill={delDark}/>
-      <text x="142" y="261" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#fff">Acceptance Review</text>
-      <text x="142" y="286" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.04em" fill={delColor}>QUALITY GATE</text>
-      <text x="142" y="304" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">Validates every deliverable against original</text>
-      <text x="142" y="316" fontFamily={ff} fontSize="9" fontWeight="400" fill="#888">requirements before client sign-off.</text>
+          <text x={hubX + hubW / 2} y={foundY + foundH + 16} textAnchor="middle" fontSize="9" fill={textLight} fontStyle="italic">{`Always on \u00B7 spans entire system`}</text>
+        </g>
 
-      {/* Arrow Acceptance → Client */}
-      <line x1="128" y1="296" x2="112" y2="296" stroke={delColor} strokeWidth="2" markerEnd="url(#ih-del)"/>
-
-      {/* === Feedback loop: Acceptance Review → Requirement Lifecycle === */}
-      <circle cx="288" cy="348" r="4" fill={fbColor}/>
-      <path d="M 288 348 L 288 370 L 118 370 L 118 160 L 126 160" fill="none" stroke={fbColor} strokeWidth="2.5" strokeDasharray="10,5" markerEnd="url(#ih-fb)"/>
-      <circle cx="128" cy="160" r="4" fill={fbColor}/>
-      <text x="200" y="384" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="600" fill={fbColor}>Issues feed back into requirement pool</text>
-
-      {/* === BASE LAYER === */}
-      <rect x="128" y="366" width="582" height="58" fill="#FAF9F7" stroke="#D5D0C8" strokeWidth="1" rx="2"/>
-      <line x1="419" y1="374" x2="419" y2="416" stroke="#D5D0C8" strokeWidth="1"/>
-      <text x="273" y="394" textAnchor="middle" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#333">Change Log</text>
-      <text x="273" y="408" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="400" fill="#aaa">Immutable audit trail</text>
-      <text x="565" y="394" textAnchor="middle" fontFamily={ff} fontSize="11.5" fontWeight="700" fill="#333">Asset Repository</text>
-      <text x="565" y="408" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="400" fill="#aaa">Centralized deliverable storage</text>
-      <text x="419" y="438" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="500" fill="#B8B0A3">{"Always on \u00B7 spans entire system"}</text>
-
-      {/* Base layer connectors — dashed lines from modules down */}
-      <line x1="288" y1="202" x2="288" y2="244" stroke="#D5D0C8" strokeWidth="1" strokeDasharray="3,3"/>
-      <line x1="590" y1="202" x2="590" y2="244" stroke="#D5D0C8" strokeWidth="1" strokeDasharray="3,3"/>
-    </svg>
+        {/* LEGEND */}
+        <g>
+          <line x1={hubX} y1={H - 10} x2={hubX + 24} y2={H - 10} stroke={accent1} strokeWidth="1.5" opacity="0.5" markerEnd="url(#ag2)" />
+          <text x={hubX + 32} y={H - 6} fontSize="9" fill={textLight} fontWeight="500">Demand in</text>
+          <line x1={hubX + 110} y1={H - 10} x2={hubX + 134} y2={H - 10} stroke={accent2} strokeWidth="1.5" opacity="0.5" markerEnd="url(#ad2)" />
+          <text x={hubX + 142} y={H - 6} fontSize="9" fill={textLight} fontWeight="500">Output back</text>
+          <line x1={hubX + 230} y1={H - 10} x2={hubX + 254} y2={H - 10} stroke={textLight} strokeWidth="1.2" strokeDasharray="4,3" />
+          <text x={hubX + 262} y={H - 6} fontSize="9" fill={textLight} fontWeight="500">Feedback loop</text>
+        </g>
+      </svg>
+    </div>
   );
 }
 
@@ -1952,6 +1975,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
   const [pageCursor, setPageCursor] = useState({ x: 0, y: 0, visible: false });
   const [hoveredNav, setHoveredNav] = useState(null);
   const [navPos, setNavPos] = useState({ x: 0, y: 0 });
+  const [expandCursor, setExpandCursor] = useState({ visible: false, x: 0, y: 0 });
+  const [carouselActive, setCarouselActive] = useState(0);
 
   // Extract headings for side nav — memoized so SideNav/MobileProgressNav
   // don't re-attach scroll listeners on every parent render
@@ -2324,13 +2349,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             const isReflection = block.navLabel === "\u56DE\u5934\u770B";
             if (isReflection) {
               return (
-                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 36, paddingTop: 40, borderTop: "1px solid #E5E2DC", boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 56, paddingTop: 40, borderTop: "1px solid #E5E2DC", boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
                   <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
                 </div>
               );
             }
             return (
-              <div key={i} id={blockId} style={{ margin: "28px 0 0", scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+              <div key={i} id={blockId} style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #E5E2DC", scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
                 <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
               </div>
             );
@@ -2364,13 +2389,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                 const parts = block.text.split(ks);
                 paragraphContent = (
                   <>{parts[0]}<span style={{
-                    backgroundColor: "rgba(229, 226, 220, 0.35)",
+                    backgroundColor: "rgba(218, 212, 203, 0.45)",
                     borderRadius: 2,
                     padding: "1px 3px",
                   }}>{ks}</span>{parts.slice(1).join(ks)}</>
                 );
               }
-              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.8, margin: 0, whiteSpace: "pre-wrap", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>{paragraphContent}</p>;
+              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.85, margin: 0, maxWidth: 700, whiteSpace: "pre-wrap", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>{paragraphContent}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
@@ -2381,7 +2406,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                 {block.items.map((q, qi) => (
                   <div key={qi} style={{
                     display: "flex", gap: isMobile ? 10 : 16, alignItems: "flex-start",
-                    borderLeft: "2px solid #5B8C7E", paddingLeft: 16,
+                    borderLeft: "2px solid #B8B0A3", paddingLeft: 16,
                     flexDirection: isMobile ? "column" : "row",
                   }}>
                     <span style={{ fontSize: T.small, fontWeight: 600, color: "#888", minWidth: isMobile ? "auto" : 80, flexShrink: 0 }}>
@@ -2409,7 +2434,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     <span style={{ fontSize: T.small, fontWeight: 600, color: "#111", minWidth: isMobile ? "auto" : 140, flexShrink: 0, paddingTop: 2 }}>
                       {m.name}
                     </span>
-                    <span style={{ fontSize: T.body, color: "#555", lineHeight: 1.7 }}>
+                    <span style={{ fontSize: T.body, color: "#6b6560", lineHeight: 1.75 }}>
                       {m.desc}
                     </span>
                   </div>
@@ -2423,7 +2448,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               <blockquote key={i} id={blockId} style={{
                 margin: "8px 0",
                 padding: "20px 0 20px 24px",
-                borderLeft: "4px solid #2A2A2A",
+                borderLeft: "3px solid #c4422b",
                 scrollMarginTop: 80,
                 fontSize: 20,
                 fontWeight: 600,
@@ -2433,6 +2458,45 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               }}>
                 {block.text}
               </blockquote>
+            );
+          }
+
+          if (block.type === "screenshot-carousel") {
+            const items = block.items || [];
+            const total = items.length;
+            const getPos = (idx) => { const d = (idx - carouselActive + total) % total; return d === 0 ? "center" : d === 1 ? "right" : "left"; };
+            const posStyles = {
+              center: { transform: "translateX(0) scale(1)", zIndex: 3, opacity: 1 },
+              left: { transform: "translateX(-68%) scale(0.85)", zIndex: 1, opacity: 0.5 },
+              right: { transform: "translateX(68%) scale(0.85)", zIndex: 1, opacity: 0.5 },
+            };
+            return (
+              <div key={i} id={blockId} style={{ margin: "32px 0", scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+                <div style={{ position: "relative", maxWidth: 700, margin: "0 auto", height: 340, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  {items.map((item, ii) => {
+                    const pos = getPos(ii);
+                    const isCenter = pos === "center";
+                    return (
+                      <div key={ii} onClick={() => { if (isCenter && item.src) { setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />); } else { setCarouselActive(ii); } }} style={{ position: "absolute", width: "58%", maxWidth: 400, cursor: isCenter ? "zoom-in" : "pointer", transition: "all 0.45s cubic-bezier(0.23,1,0.32,1)", ...posStyles[pos] }}>
+                        <div style={{ backgroundColor: "#fff", borderRadius: 8, overflow: "hidden", boxShadow: isCenter ? "0 8px 32px rgba(0,0,0,0.1)" : "0 4px 16px rgba(0,0,0,0.06)" }}>
+                          <div style={{ width: "100%", height: 220, backgroundColor: "#EDEAE3", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                            {item.src ? <img src={item.src} alt={item.label} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} /> : <span style={{ fontSize: 13, color: "#B8B0A3" }}>[ {item.label} ]</span>}
+                          </div>
+                          <div style={{ padding: "12px 16px 14px" }}>
+                            <p style={{ fontSize: 14, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
+                            <p style={{ fontSize: 12, color: "#8a857d", margin: "3px 0 0" }}>{item.note}</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 12 }}>
+                  {items.map((_, ii) => (
+                    <button key={ii} onClick={() => setCarouselActive(ii)} style={{ width: ii === carouselActive ? 20 : 6, height: 6, borderRadius: 3, border: "none", backgroundColor: ii === carouselActive ? "#6b6560" : "#d4cfc7", cursor: "pointer", padding: 0, transition: "all 0.35s cubic-bezier(0.23,1,0.32,1)" }} />
+                  ))}
+                </div>
+              </div>
             );
           }
 
@@ -2478,48 +2542,59 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   }}
                 >
                   {/* On mobile: horizontally scrollable so SVG text remains legible */}
-                  <div style={{
-                    overflowX: isMobile ? "auto" : "visible",
-                    WebkitOverflowScrolling: "touch",
-                  }}>
+                  <div
+                    style={{
+                      overflowX: isMobile ? "auto" : "visible",
+                      WebkitOverflowScrolling: "touch",
+                      position: "relative",
+                      cursor: "pointer",
+                    }}
+                    onMouseEnter={() => !isMobile && setExpandCursor(c => ({ ...c, visible: true }))}
+                    onMouseMove={(e) => {
+                      if (isMobile) return;
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top });
+                    }}
+                    onMouseLeave={() => !isMobile && setExpandCursor(c => ({ ...c, visible: false }))}
+                    onClick={() => setLightboxContent(<div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>)}
+                  >
                     {isMobile && (
                       <p style={{ fontSize: 10, color: "#aaa", margin: "0 0 6px 0", textAlign: "center" }}>
                         {"← 左右滑动查看 / scroll to explore →"}
                       </p>
                     )}
                     <div style={{ minWidth: isMobile ? 600 : "auto" }}>
-                      <div
-                        onClick={() => setLightboxContent(<div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>)}
-                        style={{ cursor: "pointer" }}
-                      >
-                        <IllComponent />
-                      </div>
+                      <IllComponent />
                     </div>
+                    {/* Floating expand indicator — follows mouse */}
+                    {!isMobile && expandCursor.visible && (
+                      <div style={{
+                        position: "absolute",
+                        left: expandCursor.x,
+                        top: expandCursor.y,
+                        transform: "translate(12px, 12px)",
+                        pointerEvents: "none",
+                        zIndex: 10,
+                        display: "flex", alignItems: "center", gap: 5,
+                        fontSize: T.small, color: "#fff",
+                        backgroundColor: "rgba(17,17,17,0.85)",
+                        padding: "6px 12px",
+                        whiteSpace: "nowrap",
+                      }}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                        </svg>
+                        {"Expand"}
+                      </div>
+                    )}
                   </div>
-                  {/* Subtle caption line with expand hint */}
+                  {/* Caption */}
                   <div style={{
-                    display: "flex", justifyContent: "space-between", alignItems: "center",
+                    display: "flex", justifyContent: "flex-start", alignItems: "center",
                     padding: "8px 4px 0",
                   }}>
                     <span style={{ fontSize: T.small, color: "#aaa" }}>
                       {ill.name}<span style={{ color: "#ccc", margin: "0 6px" }}>{"\u00B7"}</span>{ill.type}
-                    </span>
-                    <span
-                      onClick={() => setLightboxContent(<div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>)}
-                      style={{
-                        fontSize: T.small, color: "#666", cursor: "pointer",
-                        display: "flex", alignItems: "center", gap: 5,
-                        padding: "4px 10px",
-                        backgroundColor: "#F2EFEA",
-                        transition: "background-color 0.2s ease, color 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.color = "#fff"; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#F2EFEA"; e.currentTarget.style.color = "#666"; }}
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-                      </svg>
-                      {"Expand"}
                     </span>
                   </div>
                 </div>
@@ -2536,19 +2611,40 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             if (block.src) {
               return (
                 <div key={i} id={blockId} style={{ margin: "32px 0", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
-                  <img
-                    src={block.src}
-                    alt={block.label}
+                  <div
                     onClick={() => setLightboxContent(
                       <img src={block.src} alt={block.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
                     )}
                     style={{
+                      position: "relative",
                       width: "100%",
-                      borderRadius: 0,
-                      display: "block",
-                      cursor: "pointer",
+                      height: 280,
+                      borderRadius: 8,
+                      overflow: "hidden",
+                      cursor: "zoom-in",
                     }}
-                  />
+                  >
+                    <img
+                      src={block.src}
+                      alt={block.label}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "top center",
+                        display: "block",
+                      }}
+                    />
+                    <div style={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      height: 80,
+                      background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.35))",
+                      pointerEvents: "none",
+                    }} />
+                  </div>
                   {block.note && (
                     <p style={{ fontSize: T.small, color: "#999", marginTop: 8, textAlign: "center" }}>{block.note}</p>
                   )}
@@ -2887,7 +2983,7 @@ function BackToTop() {
       onMouseLeave={() => setHovered(false)}
       style={{
         position: "fixed", bottom: 80,
-        right: "max(32px, calc((100% - 720px) / 2 - 120px))",
+        right: "max(24px, calc((100% - 720px) / 2 - 200px))",
         zIndex: 200, width: 40, height: 40,
         border: hovered ? "1px solid #111" : "1px solid #E5E2DC",
         backgroundColor: hovered ? "#111" : "#f0ebe3",

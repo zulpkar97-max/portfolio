@@ -3,7 +3,7 @@
 ## 项目概况
 
 React 19 + Vite 7.3 单页应用，hash 路由（#project-1/2/3）。
-所有组件、数据、样式都在 `src/App.jsx` 一个文件里（~2700行）。
+所有组件、数据、样式都在 `src/App.jsx` 一个文件里（~3100行）。
 
 ## 技术栈
 
@@ -26,10 +26,14 @@ React 19 + Vite 7.3 单页应用，hash 路由（#project-1/2/3）。
 
 ```
 src/App.jsx          — 唯一代码文件（组件 + 数据 + 样式）
-public/images/       — 所有截图（15张）
+src/index.css        — CSS 动画关键帧（thread, confetti 等）
+public/images/       — 截图资产
   ├── collab-system-interaction.jpg    (Case 1)
   ├── nana-tech-architecture.jpg       (Case 1)
   ├── nana-ai-chat.jpg                 (Case 1)
+  ├── 1771894558756_协作系统截图3.png   (Case 1 carousel)
+  ├── 协作系统截图1.png                 (Case 1 carousel)
+  ├── 协作系统运行记录.png              (Case 1 carousel)
   ├── case2-old-homepage.png           (Case 2 旧版)
   ├── case2-old-detail.png             (Case 2 旧版)
   ├── case2-old-editor.png             (Case 2 旧版)
@@ -42,16 +46,17 @@ public/images/       — 所有截图（15张）
   ├── case3-frontend-ui.jpg            (Case 3)
   ├── case3-18lang-output.png          (Case 3)
   └── case3-feishu-bot.png             (Case 3)
+public/               — favicon 文件（favicon.ico, favicon-16x16.png, favicon-32x32.png, apple-touch-icon.png, android-chrome-*.png）
 index.html
 ```
 
 ## App.jsx 关键区域（按行号区间）
 
-- **PROJECTS 数据数组**：~第15-292行
-  - Project 1（协作危机）：id=1，lines ~15-137
-  - Project 2（攻略站）：id=2，lines ~139-218
-  - Project 3（18语种翻译）：id=3，lines ~220-292
-- **共享组件**：PlaceholderBox, ScreenshotItem, TextPlaceholder ~295-340
+- **PROJECTS 数据数组**：~第15-340行
+  - Project 1（协作危机）：id=1，lines ~15-146
+  - Project 2（攻略站）：id=2，lines ~148-240
+  - Project 3（18语种翻译）：id=3，lines ~242-340
+- **共享组件**：PlaceholderBox, ScreenshotItem, TextPlaceholder ~345-390
 - **ILLUSTRATION_MAP**（SVG组件注册表）：搜索 `ILLUSTRATION_MAP`
 - **SideNav 组件**：搜索 `function SideNav`
 - **ProjectPage 组件**：搜索 `function ProjectPage`
@@ -59,22 +64,22 @@ index.html
   - keyBlockMap 预计算
   - 两层 border（persistent + click）
   - 两层 key sentence 高亮（persistent + click animation）
+  - carouselActive state（screenshot-carousel 轮播）
 - **Lightbox 组件**：搜索 `function Lightbox`
   - zoom/pan/pinch，pointer capture
   - 容器用 `maxWidth`（非固定 width），图片自适应
   - SVG 内容包裹在显式宽度 div 中
 - **首页（LandingPage）**：搜索 `Project Entries`
-  - 全屏 hero：thread/needle SVG 动画穿过标题文字
+  - 全屏 hero：typewriter 逐字符打字机动画（requestAnimationFrame）
   - 标题三行："产品、设计、项目管理、客户——"/"收拢成一个 PM 底座，"/"下一步方向：AI"
   - 副标题 "Product Operations · 5 years"（DM Mono）
-  - thread 路径通过 DOM 测量动态生成（useEffect + document.fonts.ready）
-  - CSS 动画：drawThread, showNeedle, showStitch（定义在 index.css）
+  - sessionStorage `hero-played` 控制"每次会话只播放一次"
   - 卡片：3列 grid（140px stat | 1fr content | auto arrow），短 hook 文本
   - 每个项目有 `cardStat`（number/unit/label）和 `cardHook`（短文本）
   - Hover：微妙底色 + 箭头变深，分隔线用绝对定位 `left:-24px right:-24px`
   - Footer CTA：居中布局，email/LinkedIn 按钮 + footer thread 动画
 - **body block 渲染循环**：搜索 `block.type === "heading"`
-  - 支持类型：heading, paragraph, quote-list, module-list, pull-quote, screenshot-inline, screenshot-group, screenshot-pair, illustration, iteration-step
+  - 支持类型：heading, paragraph, quote-list, module-list, pull-quote, screenshot-inline, screenshot-carousel, screenshot-group, screenshot-pair, illustration, iteration-step
 
 ## 核心机制：skillTag 跳转 + 两层高亮
 
@@ -92,7 +97,7 @@ skillTagJumps: {
 ```
 
 **两层反馈：**
-1. **持续层**（滚动驱动）：浅灰左边线 `inset 2px 0 0 #D5D0C8` + 关键句淡底色 `rgba(229,226,220,0.35)`
+1. **持续层**（滚动驱动）：浅灰左边线 `inset 2px 0 0 #D5D0C8` + 关键句淡底色 `rgba(218,212,203,0.45)`
 2. **点击层**（临时动画）：深色左边线 `inset 3px 0 0 #111` + 关键句加强高亮动画（淡入1s→停留2s→淡出1s）
 
 ## 三个 Case 当前状态
@@ -115,7 +120,9 @@ skillTagJumps: {
 - skillTags: 系统诊断, 约束下决策, 流程设计, AI落地
 - heroStat: "7天" / heroNarrative: hook + detail
 - Layer 4: Before→After 堆叠卡片
-- 图片：3张截图 + 2个SVG插图（InfoHub, Iteration Flow）
+- 截图：screenshot-carousel（3张层叠卡片轮播） + 2个 screenshot-inline + 2个SVG插图
+- SVG 插图简化版：DualTrackTimeline（无 IntersectionObserver）、InfoHub（无 fade-in，marker IDs ag2/ad2/af2）
+- pull-quote: "不是人的问题，是系统的问题。"（从段落提取独立展示）
 
 ### Case 2 — 客户说改UI，但UI不是问题 ✅
 
@@ -136,28 +143,20 @@ skillTagJumps: {
 ## 已完成的优化
 
 - [x] Header 层级统一（h1/h2/h3）
-- [x] Lightbox 一致性（统一触发方式）
+- [x] Lightbox 一致性（统一触发方式）+ 拖拽修复 + 白边修复
 - [x] 移动端布局修复
-- [x] InfoHub SVG 重设计
-- [x] Lightbox 拖拽修复 + 白边修复（maxWidth 方案）
-- [x] 图片裁剪（nana-tech-architecture, collab-system-interaction）
 - [x] SideNav 改为 skillTags 驱动 + scroll-spy
 - [x] 两层高亮系统（persistent + click）
-- [x] 首页卡片去除时间信息
-- [x] Case 2 完整内容填充
-- [x] Case 3 完整内容填充
-- [x] 全局禁用文本选择 + 光标样式修复
-- [x] 设计系统更新：背景 `#f5f2ed`、强调色 `#c4422b`、字体切换到 Noto 系列
-- [x] Project 1 Hero 重构：5层杂志化布局 + fadeUp 入场动画
-- [x] Project 2/3 Hero 统一：同样5层布局，Layer 4 用 Metrics 卡片，各自装饰性 SVG
-- [x] 动画重置修复：`key={project.id}` 强制 remount
-- [x] 首页 Hero 重构：thread/needle SVG 动画穿过标题文字
-- [x] Footer CTA 重构：新文案 + email/LinkedIn 按钮 + footer thread 动画
-- [x] 首页卡片重构：stat 数据锚点（7天/15×/2人）+ 短 hook + 带边框标签 + 微妙 hover
-- [x] 背景色更新：`#f5f2ed` → `#f0ebe3`
-- [x] 导航栏样式统一：DM Mono 字体 + 颜色一致性
-- [x] skillTag 导航按钮居中
-- [x] 间距整体调优：hero 顶部、卡片区、footer 区
+- [x] Case 2/3 完整内容填充
+- [x] 设计系统更新：背景 `#f0ebe3`、强调色 `#c4422b`、字体 Noto 系列
+- [x] 所有3个 Hero 统一5层杂志化布局 + fadeUp 动画 + `key={project.id}` remount
+- [x] 首页 Hero：typewriter 逐字符动画 + sessionStorage 单次播放
+- [x] 首页卡片：stat 数据锚点 + 短 hook + 带边框标签 + 微妙 hover
+- [x] Footer CTA：email/LinkedIn 按钮 + footer thread 动画
+- [x] 全局 UX：禁用文本选择 + 光标样式 + 导航栏 DM Mono + skillTag 按钮居中
+- [x] 自定义 favicon："Z" 红底（替换 Vite 默认）
+- [x] 第一批 Diff：paragraph lineHeight/maxWidth、heading borderTop、highlight 加深、quote/module-list/pull-quote/screenshot-inline 样式微调
+- [x] 第二批 Diff：DualTrackTimeline 简化（去 IntersectionObserver）、InfoHub 简化（去 fade-in, marker IDs ag2/ad2/af2）、pull-quote 独立块、screenshot-carousel 层叠卡片轮播
 
 ## 开发命令
 
@@ -173,4 +172,5 @@ npx vite build                # 构建
 - body block 的 `bodyIndex` 从0开始计数，`skillTagJumps` 里的 index 必须与实际 block 位置对应
 - `keySentence` 文本必须在对应 `keyBlock` 的正文中完全匹配（子字符串匹配）
 - screenshot-inline 需要 `src` 属性指向 `images/` 下的文件
-- screenshot-group 的 items 数组每项也需要 `src`
+- screenshot-group / screenshot-carousel 的 items 数组每项也需要 `src`
+- screenshot-carousel 的 `carouselActive` state 在 ProjectPage 组件顶层声明
