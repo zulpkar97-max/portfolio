@@ -30,7 +30,7 @@ const MOBILE_NAV_H = 50;
  * This constraint is binding for all subsequent UI work.
  */
 
-const T = { display: 30, title: 22, heading: 18, body: 16, small: 13 };
+const T = { heading: 18, body: 16, small: 13 };
 const ACCENT = "#c4422b";
 const FONT_BODY = "'Noto Sans SC', 'Helvetica Neue', sans-serif";
 const FONT_DISPLAY = "'Noto Serif SC', 'Georgia', serif";
@@ -117,9 +117,9 @@ const PROJECTS = [
       { type: "paragraph", text: "结果是：这套协作系统直接支撑了二期的顺利交付，差点丢掉的合同被挽回来了。客户签下了二期。之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部先用，效果验证后其他团队认可跟进，最终成为全公司标准SOP。" },
       { type: "paragraph", text: "后来我才知道，行业内早已有成熟的专业协作工具在做类似的事。我从问题本身出发一步步推导出来的东西，和那些成熟工具的底层逻辑高度一致。这件事让我意识到：解决问题的关键不是知道有什么工具，而是能不能准确诊断出问题的结构，然后用手头有的资源把它解出来。" },
       { type: "screenshot-carousel", items: [
-        { src: "images/1771894558756_协作系统截图3.png", label: "文档结构", note: "协作系统完整文档架构" },
-        { src: "images/协作系统截图1.png", label: "流程设计", note: "执行层流程设计" },
-        { src: "images/协作系统运行记录.png", label: "看板运行", note: "系统实际运行状态" },
+        { src: "images/collab-doc-structure.png", label: "文档结构", note: "协作系统完整文档架构" },
+        { src: "images/collab-flow-design.png", label: "流程设计", note: "执行层流程设计" },
+        { src: "images/collab-kanban-running.png", label: "看板运行", note: "系统实际运行状态" },
       ]},
 
       // === 转折 ===
@@ -130,7 +130,7 @@ const PROJECTS = [
       { type: "paragraph", text: "所有准备工作做完，我才开始跟客户沟通。我预判客户一定会抗拒——外包方提议加新功能，客户的第一反应通常是怀疑动机。所以我的预案策略是：方案足够详细，方向、内容、时间节点全部明确；同时设计退出机制，数据不好随时可以撤，分散客户的决策压力。" },
       { type: "paragraph", text: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。" },
       { type: "paragraph", text: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。" },
-      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "images/nana-ai-chat.jpg" },
+      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "images/nana-ai-chat-trimmed.jpg" },
       { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因不是模型能力问题，而是知识库的信息架构——原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。" },
 
       // === 回头看 ===
@@ -140,7 +140,7 @@ const PROJECTS = [
       { type: "paragraph", text: "但这些判断都是靠经验和直觉驱动的，缺少系统性的方法论支撑。我能从零设计一套协作系统，但说不清楚它背后的理论框架；我能识别AI落地机会并推动客户买单，但对AI产品管理的完整知识体系还有明显的缺口。这也是我想进一步深入学习的原因——把散装的实践经验，整合进一个专业的、可复用的框架里。" },
     ],
     supportingScreenshots: [
-      { label: "四层技术架构", proves: "技术选型全景", src: "images/nana-tech-architecture.jpg", featured: true },
+      { label: "四层技术架构", proves: "技术选型全景", src: "images/nana-tech-architecture-cropped.png", featured: true },
       { label: "看板运行状态", proves: "系统日常运行状态" },
       { label: "空间化PRD", proves: "信息架构实际产出" },
     ],
@@ -412,9 +412,9 @@ function Footer({ isMobile }) {
             padding: "8px 20px", borderRadius: 2, cursor: "pointer",
             textDecoration: "none", display: "inline-flex", alignItems: "center",
             border: hBtn === "email" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-            color: hBtn === "email" ? "#f0ebe3" : "#1a1815",
+            color: hBtn === "email" ? "#faf8f4" : "#1a1815",
             backgroundColor: hBtn === "email" ? "#1a1815" : "transparent",
-            transition: "all 0.3s",
+            transition: "all 0.2s ease",
           }}
         >{"zulpkar97@gmail.com"}</a>
         <a
@@ -426,9 +426,9 @@ function Footer({ isMobile }) {
             padding: "8px 20px", borderRadius: 2, cursor: "pointer",
             textDecoration: "none", display: "inline-flex", alignItems: "center",
             border: hBtn === "link" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-            color: hBtn === "link" ? "#f0ebe3" : "#1a1815",
+            color: hBtn === "link" ? "#faf8f4" : "#1a1815",
             backgroundColor: hBtn === "link" ? "#1a1815" : "transparent",
-            transition: "all 0.3s",
+            transition: "all 0.2s ease",
           }}
         >{"LinkedIn"}</a>
       </div>
@@ -444,7 +444,7 @@ function Nav({ currentPage, onNavigate, isMobile }) {
       position: "sticky",
       top: 0,
       zIndex: 100,
-      backgroundColor: "#f0ebe3",
+      backgroundColor: "#faf8f4",
     }}>
       <div style={{
         maxWidth: 860,
@@ -453,7 +453,7 @@ function Nav({ currentPage, onNavigate, isMobile }) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderBottom: "1px solid #EDEAE6",
+        borderBottom: "1px solid #E5E2DC",
       }}>
         <span
           onClick={() => { if (currentPage !== "home") onNavigate("home"); }}
@@ -462,13 +462,13 @@ function Nav({ currentPage, onNavigate, isMobile }) {
           style={{
             fontSize: T.heading,
             fontWeight: 700,
-            color: hovered === "home" ? "#f0ebe3" : "#000",
+            color: hovered === "home" ? "#faf8f4" : "#000",
             fontFamily: FONT_DISPLAY,
             flexShrink: 0,
             cursor: "pointer",
             padding: "4px 12px",
             borderRadius: 0,
-            backgroundColor: hovered === "home" ? "#111111" : "transparent",
+            backgroundColor: hovered === "home" ? "#1a1815" : "transparent",
             transition: "color 0.2s ease, background-color 0.2s ease",
           }}
         >{"Zulpkar Tuerxun"}</span>
@@ -486,7 +486,7 @@ function Nav({ currentPage, onNavigate, isMobile }) {
                 fontSize: 14,
                 fontFamily: FONT_MONO,
                 fontWeight: 400,
-                color: isItemHovered ? "#f0ebe3" : isActive ? "#1a1815" : "#6b6560",
+                color: isItemHovered ? "#faf8f4" : isActive ? "#1a1815" : "#6b6560",
                 padding: "4px 10px",
                 backgroundColor: isItemHovered ? "#1a1815" : isActive ? "#F2EFEA" : "transparent",
                 borderRadius: 0,
@@ -698,8 +698,8 @@ function HomePage({ onNavigate, isMobile }) {
           flexDirection: "column",
           alignItems: "center",
           paddingTop: isMobile ? 40 : 60,
-          paddingLeft: isMobile ? 24 : 48,
-          paddingRight: isMobile ? 24 : 48,
+          paddingLeft: isMobile ? 24 : 40,
+          paddingRight: isMobile ? 24 : 40,
           textAlign: "center",
         }}
       >
@@ -765,7 +765,7 @@ function HomePage({ onNavigate, isMobile }) {
         </h1>
 
         <p style={{
-          marginTop: 40, fontSize: 15, color: "#8a847c",
+          marginTop: 40, fontSize: 15, color: "#8a857d",
           letterSpacing: "0.02em", lineHeight: 1.6,
           opacity: subtitleVisible ? 1 : 0,
           transform: subtitleVisible ? "translateY(0)" : "translateY(10px)",
@@ -779,7 +779,7 @@ function HomePage({ onNavigate, isMobile }) {
       <div style={{
         maxWidth: maxW,
         margin: "0 auto",
-        padding: isMobile ? "20px 24px 32px" : "40px 48px 40px",
+        padding: isMobile ? "20px 24px 32px" : "40px 40px 40px",
         position: "relative",
       }}>
         {PROJECTS.map((p, idx) => {
@@ -926,7 +926,7 @@ function HomePage({ onNavigate, isMobile }) {
                 justifyContent: "center",
                 border: isHovered ? "1px solid #1a1815" : "1px solid #d4cfc7",
                 borderRadius: "50%",
-                transition: "all 0.3s",
+                transition: "all 0.2s ease",
                 flexShrink: 0,
                 backgroundColor: isHovered ? "#1a1815" : "transparent",
                 position: "relative", zIndex: 1,
@@ -936,12 +936,12 @@ function HomePage({ onNavigate, isMobile }) {
                   fill="none"
                   style={{
                     width: 16, height: 16,
-                    transition: "all 0.3s",
+                    transition: "all 0.2s ease",
                     transform: isHovered ? "translateX(2px)" : "translateX(0)",
                   }}
                   strokeWidth="2"
                   strokeLinecap="round"
-                  stroke={isHovered ? "#f0ebe3" : "#6b6560"}
+                  stroke={isHovered ? "#faf8f4" : "#6b6560"}
                 >
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
@@ -954,7 +954,7 @@ function HomePage({ onNavigate, isMobile }) {
       {/* === Footer CTA === */}
       <section style={{
         textAlign: "center",
-        padding: isMobile ? "40px 24px 32px" : "48px 48px 40px",
+        padding: isMobile ? "40px 24px 32px" : "48px 40px 40px",
         position: "relative",
       }}>
         <p style={{
@@ -996,9 +996,9 @@ function HomePage({ onNavigate, isMobile }) {
                 padding: "12px 28px", borderRadius: 2, cursor: "pointer",
                 textDecoration: "none", display: "inline-flex", alignItems: "center",
                 border: hoveredBtn === "email" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-                color: hoveredBtn === "email" ? "#f0ebe3" : "#1a1815",
+                color: hoveredBtn === "email" ? "#faf8f4" : "#1a1815",
                 backgroundColor: hoveredBtn === "email" ? "#1a1815" : "transparent",
-                transition: "all 0.3s",
+                transition: "all 0.2s ease",
               }}
             >
               {"zulpkar97@gmail.com"}
@@ -1014,9 +1014,9 @@ function HomePage({ onNavigate, isMobile }) {
                 padding: "12px 28px", borderRadius: 2, cursor: "pointer",
                 textDecoration: "none", display: "inline-flex", alignItems: "center",
                 border: hoveredBtn === "link" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-                color: hoveredBtn === "link" ? "#f0ebe3" : "#1a1815",
+                color: hoveredBtn === "link" ? "#faf8f4" : "#1a1815",
                 backgroundColor: hoveredBtn === "link" ? "#1a1815" : "transparent",
-                transition: "all 0.3s",
+                transition: "all 0.2s ease",
               }}
             >
               {"LinkedIn"}
@@ -1060,11 +1060,11 @@ function BeforeAfterPair({ labelBefore, labelAfter, note, isMobile }) {
     <div>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
         <div>
-          <div style={{ fontSize: T.small, fontWeight: 600, color: "#888", marginBottom: 6, textTransform: "uppercase", letterSpacing: 1 }}>{"Before"}</div>
+          <div style={{ fontSize: T.small, fontWeight: 600, color: "#888", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em" }}>{"Before"}</div>
           <PlaceholderBox label={labelBefore} height={220} />
         </div>
         <div>
-          <div style={{ fontSize: T.small, fontWeight: 600, color: "#333", marginBottom: 6, textTransform: "uppercase", letterSpacing: 1 }}>{"After"}</div>
+          <div style={{ fontSize: T.small, fontWeight: 600, color: "#333", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em" }}>{"After"}</div>
           <PlaceholderBox label={labelAfter} height={220} />
         </div>
       </div>
@@ -1079,7 +1079,7 @@ function IterationStep({ version, heading }) {
       <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{
           padding: "4px 12px", backgroundColor: "#333", color: "#fff",
-          fontSize: T.small, fontWeight: 600, letterSpacing: 0.5,
+          fontSize: T.small, fontWeight: 600, letterSpacing: "0.05em",
         }}>{version}</div>
         <div style={{ width: 1, height: 24, backgroundColor: "#E5E2DC", marginTop: 4 }} />
       </div>
@@ -1111,14 +1111,14 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
       {/* Back button — 40x40 box */}
       <div
         onClick={() => onNavigate("home")}
-        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#f0ebe3"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#f0ebe3"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
+        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#1a1815"; e.currentTarget.style.borderColor = "#1a1815"; e.currentTarget.querySelector("span").style.color = "#faf8f4"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#faf8f4"; e.currentTarget.style.borderColor = "#D5D0C8"; e.currentTarget.querySelector("span").style.color = "#666"; }}
         style={{
           position: "fixed", top: 72,
           right: "max(24px, calc((100% - 720px) / 2 - 220px))",
           zIndex: 50, pointerEvents: "auto",
           width: 40, height: 40,
-          border: "1px solid #E5E2DC", backgroundColor: "#f0ebe3",
+          border: "1px solid #D5D0C8", backgroundColor: "#faf8f4",
           display: "flex", alignItems: "center", justifyContent: "center",
           cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
         }}
@@ -1148,8 +1148,8 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
                 style={{
                   fontSize: activeSectionIdx === i ? T.body : T.small,
                   lineHeight: 1,
-                  color: (hoveredIdx === i || activeSectionIdx === i) ? (hoveredIdx === i ? "#f0ebe3" : "#000") : "#ccc",
-                  backgroundColor: hoveredIdx === i ? "#111" : "transparent",
+                  color: (hoveredIdx === i || activeSectionIdx === i) ? (hoveredIdx === i ? "#faf8f4" : "#000") : "#B8B0A3",
+                  backgroundColor: hoveredIdx === i ? "#1a1815" : "transparent",
                   fontWeight: activeSectionIdx === i ? 700 : 500,
                   padding: "10px 12px 10px 8px",
                   whiteSpace: "nowrap",
@@ -1166,7 +1166,7 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
             ))}
           </div>
           {/* Vertical track */}
-          <div style={{ width: 2, backgroundColor: "#E5E2DC", position: "relative", flexShrink: 0 }}>
+          <div style={{ width: 2, backgroundColor: "#D5D0C8", position: "relative", flexShrink: 0 }}>
             {activeSectionIdx >= 0 && (
               <div style={{
                 position: "absolute",
@@ -1423,8 +1423,8 @@ function ReadingProgressBar() {
 /* ===== Illustration: Dual-Track Timeline (Project 1) ===== */
 
 function DualTrackTimeline() {
-  const ff = "'DM Sans', sans-serif";
-  const ffSerif = "'Noto Serif SC', Georgia, serif";
+  const ff = FONT_BODY;
+  const ffSerif = FONT_DISPLAY;
   const brown = "#6B5B4E";
   const amber = "#B5743A";
   const textDark = "#3a3632";
@@ -1450,9 +1450,9 @@ function DualTrackTimeline() {
   const color = (track) => track === "A" ? brown : amber;
 
   return (
-    <div style={{ maxWidth: 560, margin: "0 auto", padding: "36px 24px", fontFamily: ff }}>
+    <div style={{ maxWidth: "100%", margin: "0 auto", padding: "36px 24px", fontFamily: ff }}>
       {/* Legend */}
-      <div style={{ display: "flex", gap: 20, marginBottom: 28, marginLeft: 42 }}>
+      <div style={{ display: "flex", gap: 24, marginBottom: 32, marginLeft: 42 }}>
         {[{ label: "Collaboration System", c: brown }, { label: "Nana AI", c: amber }].map(({ label, c }) => (
           <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <div style={{ width: 8, height: 8, borderRadius: 2, background: c, opacity: 0.7 }} />
@@ -1493,7 +1493,7 @@ function DualTrackTimeline() {
               </div>
 
               {/* Nodes */}
-              <div style={{ marginLeft: 42, display: "flex", flexDirection: "column", gap: 14, marginBottom: hasTrackSwitch ? 0 : isLast ? 0 : 32 }}>
+              <div style={{ marginLeft: 42, display: "flex", flexDirection: "column", gap: 18, marginBottom: hasTrackSwitch ? 0 : isLast ? 0 : 40 }}>
                 {phase.nodes.map((node, ni) => {
                   const isCore = node.type === "core";
                   const isResult = node.type === "result";
@@ -1546,8 +1546,8 @@ function DualTrackTimeline() {
 /* ===== Illustration: Six-Module Information Hub (Project 1) ===== */
 
 function InfoHub() {
-  const ff = "'DM Sans', sans-serif";
-  const ffSerif = "'Noto Serif SC', Georgia, serif";
+  const ff = FONT_BODY;
+  const ffSerif = FONT_DISPLAY;
   const accent1 = "#6B5B4E";
   const accent2 = "#B5743A";
   const textDark = "#3a3632";
@@ -1567,7 +1567,7 @@ function InfoHub() {
   const zoneTop = govY - 12, zoneBot = delY + delH + 12, zoneH = zoneBot - zoneTop;
 
   return (
-    <div style={{ maxWidth: `${W}px`, margin: "0 auto", padding: "0 16px", fontFamily: ff }}>
+    <div style={{ maxWidth: "100%", margin: "0 auto", padding: "0 16px", fontFamily: ff }}>
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
         <defs>
           <marker id="ag2" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="8" markerHeight="6" orient="auto"><path d="M0,0 L8,3 L0,6" fill={accent1} opacity="0.5" /></marker>
@@ -1701,7 +1701,7 @@ function InfoHub() {
 /* ===== Illustration: Linear Iteration Flow (Project 3) ===== */
 
 function LinearIterationFlow() {
-  const ff = "'DM Sans', sans-serif";
+  const ff = FONT_BODY;
   return (
     <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
       <defs>
@@ -1829,7 +1829,7 @@ const ILLUSTRATION_MAP = {
 /* ===== Illustration: Diagnostic Funnel (Project 2) ===== */
 
 function DiagnosticFunnel() {
-  const ff = "'Inter', sans-serif";
+  const ff = FONT_BODY;
   return (
     <svg viewBox="0 0 800 590" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
       {/* Title */}
@@ -1900,7 +1900,7 @@ function DiagnosticFunnel() {
 /* ===== Illustration: Three-Phase Roadmap (Project 2) ===== */
 
 function ThreePhaseRoadmap() {
-  const ff = "'Inter', sans-serif";
+  const ff = FONT_BODY;
   return (
     <svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
       <defs>
@@ -2228,7 +2228,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
         {/* Layer 3: Narrative */}
         {project.heroNarrative && (
-          <div style={{ maxWidth: 680, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.35s both" }}>
+          <div style={{ maxWidth: 700, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.35s both" }}>
             <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: "#1a1815" }}>
               {project.heroNarrative.hook}
             </div>
@@ -2241,7 +2241,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         {/* Layer 4: Before/After cards OR Metrics card */}
         {project.stateBefore ? (
           <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.45s both" }}>
-            <div style={{ padding: "28px 36px", background: "#eae7e1", borderRadius: 3, marginRight: isMobile ? 12 : 20 }}>
+            <div style={{ padding: "28px 36px", background: "#eae7e1", borderRadius: 6, marginRight: isMobile ? 12 : 20 }}>
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#aaa69f", marginBottom: 10 }}>Before</div>
               <div style={{ fontSize: 15, lineHeight: 1.7, color: "#aaa69f", textDecoration: "line-through", textDecorationColor: "rgba(196, 66, 43, 0.25)", textDecorationThickness: 1 }}>
                 {project.stateBefore}
@@ -2249,7 +2249,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             </div>
             <div style={{
               position: "relative", marginTop: -20, marginLeft: isMobile ? 12 : 20, marginRight: 0,
-              padding: "32px 36px", background: "#fff", borderRadius: 3,
+              padding: "32px 36px", background: "#faf9f7", borderRadius: 6,
               boxShadow: "0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02)",
             }}>
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: ACCENT, marginBottom: 10 }}>After</div>
@@ -2268,8 +2268,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
             marginBottom: 64,
             animation: "fadeUp 0.8s ease-out 0.45s both",
-            background: "#fff",
-            borderRadius: 3,
+            background: "#faf9f7",
+            borderRadius: 6,
             boxShadow: "0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02)",
             overflow: "hidden",
           }}>
@@ -2309,15 +2309,15 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                       if (el) el.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "#1a1815"; e.currentTarget.style.color = "#f0ebe3"; e.currentTarget.style.borderColor = "#1a1815"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#1a1815"; e.currentTarget.style.borderColor = "#d4cfc7"; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#1a1815"; e.currentTarget.style.color = "#faf8f4"; e.currentTarget.style.borderColor = "#1a1815"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#1a1815"; e.currentTarget.style.borderColor = "#B8B0A3"; }}
                   style={{
                     display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
                     fontFamily: FONT_BODY, fontSize: 13, fontWeight: 500,
                     minWidth: 120, padding: "8px 18px",
                     color: "#1a1815", cursor: "pointer", textDecoration: "none",
-                    border: "1px solid #d4cfc7", borderRadius: 2,
-                    transition: "all 0.3s",
+                    border: "1px solid #B8B0A3", borderRadius: 2,
+                    transition: "all 0.2s ease",
                   }}
                 >
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2"><line x1="6" y1="2" x2="6" y2="10"/><polyline points="3,7 6,10 9,7"/></svg>
@@ -2342,20 +2342,20 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           const persistentTag = activeScrollSection >= 0 && tags[activeScrollSection];
           const persistentJump = persistentTag && jumps[persistentTag];
           const isInPersistentRange = persistentJump && block.bodyIndex >= persistentJump.borderRange[0] && block.bodyIndex <= persistentJump.borderRange[1];
-          const borderShadow = isInClickRange ? "inset 3px 0 0 #111" : isInPersistentRange ? "inset 2px 0 0 #D5D0C8" : undefined;
+          const borderShadow = isInClickRange ? "inset 3px 0 0 #111" : undefined;
           const blockId = "body-block-" + block.bodyIndex;
 
           if (block.type === "heading") {
             const isReflection = block.navLabel === "\u56DE\u5934\u770B";
             if (isReflection) {
               return (
-                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 56, paddingTop: 40, borderTop: "1px solid #E5E2DC", boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
                   <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
                 </div>
               );
             }
             return (
-              <div key={i} id={blockId} style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #E5E2DC", scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+              <div key={i} id={blockId} style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
                 <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
               </div>
             );
@@ -2412,7 +2412,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     <span style={{ fontSize: T.small, fontWeight: 600, color: "#888", minWidth: isMobile ? "auto" : 80, flexShrink: 0 }}>
                       {q.role}
                     </span>
-                    <span style={{ fontSize: T.body, color: "#444", lineHeight: 1.65 }}>
+                    <span style={{ fontSize: T.body, color: "#333", lineHeight: 1.85 }}>
                       {"\u201C"}{q.text}{"\u201D"}
                     </span>
                   </div>
@@ -2428,13 +2428,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   <div key={mi} style={{
                     display: "flex", gap: isMobile ? 8 : 20, alignItems: "flex-start",
                     padding: "14px 0",
-                    borderBottom: mi < block.items.length - 1 ? "1px solid #F0EDE8" : "none",
+                    borderBottom: mi < block.items.length - 1 ? "1px solid #E5E2DC" : "none",
                     flexDirection: isMobile ? "column" : "row",
                   }}>
-                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#111", minWidth: isMobile ? "auto" : 140, flexShrink: 0, paddingTop: 2 }}>
+                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#1a1815", minWidth: isMobile ? "auto" : 140, flexShrink: 0, paddingTop: 2 }}>
                       {m.name}
                     </span>
-                    <span style={{ fontSize: T.body, color: "#6b6560", lineHeight: 1.75 }}>
+                    <span style={{ fontSize: T.body, color: "#6b6560", lineHeight: 1.85 }}>
                       {m.desc}
                     </span>
                   </div>
@@ -2446,7 +2446,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           if (block.type === "pull-quote") {
             return (
               <blockquote key={i} id={blockId} style={{
-                margin: "8px 0",
+                margin: "16px 0",
                 padding: "20px 0 20px 24px",
                 borderLeft: "3px solid #c4422b",
                 scrollMarginTop: 80,
@@ -2464,36 +2464,238 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           if (block.type === "screenshot-carousel") {
             const items = block.items || [];
             const total = items.length;
+            const [carouselPaused, setCarouselPaused] = useState(false);
+
+            // Auto-play carousel every 4 seconds
+            useEffect(() => {
+              if (carouselPaused || total <= 1) return;
+              const timer = setInterval(() => {
+                setCarouselActive((prev) => (prev + 1) % total);
+              }, 4000);
+              return () => clearInterval(timer);
+            }, [carouselPaused, total]);
+
             const getPos = (idx) => { const d = (idx - carouselActive + total) % total; return d === 0 ? "center" : d === 1 ? "right" : "left"; };
             const posStyles = {
-              center: { transform: "translateX(0) scale(1)", zIndex: 3, opacity: 1 },
-              left: { transform: "translateX(-68%) scale(0.85)", zIndex: 1, opacity: 0.5 },
-              right: { transform: "translateX(68%) scale(0.85)", zIndex: 1, opacity: 0.5 },
+              center: { transform: "translateX(0) scale(1)", zIndex: 3, opacity: 1, filter: "blur(0)" },
+              left: { transform: "translateX(-58%) scale(0.85)", zIndex: 1, opacity: 0.25, filter: "blur(1px)" },
+              right: { transform: "translateX(58%) scale(0.85)", zIndex: 1, opacity: 0.25, filter: "blur(1px)" },
             };
+
             return (
-              <div key={i} id={blockId} style={{ margin: "32px 0", scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
-                <div style={{ position: "relative", maxWidth: 700, margin: "0 auto", height: 340, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  {items.map((item, ii) => {
-                    const pos = getPos(ii);
-                    const isCenter = pos === "center";
-                    return (
-                      <div key={ii} onClick={() => { if (isCenter && item.src) { setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />); } else { setCarouselActive(ii); } }} style={{ position: "absolute", width: "58%", maxWidth: 400, cursor: isCenter ? "zoom-in" : "pointer", transition: "all 0.45s cubic-bezier(0.23,1,0.32,1)", ...posStyles[pos] }}>
-                        <div style={{ backgroundColor: "#fff", borderRadius: 8, overflow: "hidden", boxShadow: isCenter ? "0 8px 32px rgba(0,0,0,0.1)" : "0 4px 16px rgba(0,0,0,0.06)" }}>
-                          <div style={{ width: "100%", height: 220, backgroundColor: "#EDEAE3", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-                            {item.src ? <img src={item.src} alt={item.label} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} /> : <span style={{ fontSize: 13, color: "#B8B0A3" }}>[ {item.label} ]</span>}
-                          </div>
-                          <div style={{ padding: "12px 16px 14px" }}>
-                            <p style={{ fontSize: 14, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
-                            <p style={{ fontSize: 12, color: "#8a857d", margin: "3px 0 0" }}>{item.note}</p>
+              <div
+                key={i}
+                id={blockId}
+                style={{ margin: "32px 0", scrollMarginTop: 80 }}
+                onMouseEnter={() => setCarouselPaused(true)}
+                onMouseLeave={() => setCarouselPaused(false)}
+              >
+                <div style={{ position: "relative", maxWidth: "100%", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  {/* Left arrow */}
+                  <button
+                    onClick={() => setCarouselActive((prev) => (prev - 1 + total) % total)}
+                    style={{
+                      position: "absolute",
+                      left: -50,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      zIndex: 10,
+                      width: 28,
+                      height: 28,
+                      borderRadius: "50%",
+                      border: "1px solid #b8b0a3",
+                      backgroundColor: "transparent",
+                      color: "#b8b0a3",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 16,
+                      opacity: 0.5,
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => { e.target.style.opacity = 1; e.target.style.color = "#2a2a2a"; }}
+                    onMouseLeave={(e) => { e.target.style.opacity = 0.5; e.target.style.color = "#b8b0a3"; }}
+                  >
+                    ←
+                  </button>
+
+                  {/* Carousel stage */}
+                  <div style={{ position: "relative", width: "100%", height: 500, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    {items.map((item, ii) => {
+                      const pos = getPos(ii);
+                      const isCenter = pos === "center";
+                      const [imgDimensions, setImgDimensions] = useState(null);
+                      const handleImgLoad = (e) => {
+                        const { naturalWidth, naturalHeight } = e.target;
+                        setImgDimensions({ width: naturalWidth, height: naturalHeight });
+                      };
+
+                      const isShortImage = imgDimensions && imgDimensions.height < 400;
+                      const isTallImage = imgDimensions && imgDimensions.height > 500;
+
+                      return (
+                        <div
+                          key={ii}
+                          onClick={() => { if (isCenter && item.src) { setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />); } else { setCarouselActive(ii); } }}
+                          style={{
+                            position: "absolute",
+                            width: "70%",
+                            maxWidth: 550,
+                            cursor: isCenter ? "zoom-in" : "pointer",
+                            transition: "all 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
+                            ...posStyles[pos]
+                          }}
+                        >
+                          {/* Card container */}
+                          <div style={{
+                            background: "#fff",
+                            borderRadius: "10px",
+                            border: "1px solid #d4cdc2",
+                            overflow: "hidden",
+                            boxShadow: isCenter ? "0 8px 32px rgba(0,0,0,0.12)" : "none",
+                          }}>
+                            {/* Image container - 500px height with smart detection */}
+                            <div style={{
+                              position: "relative",
+                              width: "100%",
+                              height: 500,
+                              backgroundColor: "#f5f3f0",
+                              overflow: "hidden",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}>
+                              {/* Background layer - only for short images */}
+                              {isShortImage && (
+                                <img
+                                  src={item.src}
+                                  alt={item.label}
+                                  style={{
+                                    position: "absolute",
+                                    inset: 0,
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    filter: "blur(24px) brightness(0.85)",
+                                    transform: "scale(1.05)",
+                                  }}
+                                />
+                              )}
+
+                              {/* Main image */}
+                              {item.src ? (
+                                <img
+                                  src={item.src}
+                                  alt={item.label}
+                                  onLoad={handleImgLoad}
+                                  style={{
+                                    position: "relative",
+                                    zIndex: 1,
+                                    maxHeight: "100%",
+                                    maxWidth: "100%",
+                                    objectFit: "contain",
+                                    display: "block",
+                                  }}
+                                />
+                              ) : (
+                                <span style={{ fontSize: 13, color: "#B8B0A3" }}>[ {item.label} ]</span>
+                              )}
+
+                              {/* Gradient overlay + button for tall images */}
+                              {isTallImage && (
+                                <>
+                                  <div style={{
+                                    position: "absolute",
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    height: 120,
+                                    background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
+                                    pointerEvents: "none",
+                                  }} />
+                                  <div style={{
+                                    position: "absolute",
+                                    bottom: 32,
+                                    left: "50%",
+                                    transform: "translateX(-50%)",
+                                    zIndex: 2,
+                                    backgroundColor: "rgba(0,0,0,0.8)",
+                                    color: "#fff",
+                                    padding: "8px 16px",
+                                    borderRadius: "4px",
+                                    fontSize: T.small,
+                                  }}>
+                                    点击查看完整图
+                                  </div>
+                                </>
+                              )}
+                            </div>
+
+                            {/* Bottom label bar */}
+                            <div style={{
+                              padding: "12px 16px",
+                              borderTop: "1px solid #e8e3da",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}>
+                              <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
+                              {item.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{item.note}</p>}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
+
+                  {/* Right arrow */}
+                  <button
+                    onClick={() => setCarouselActive((prev) => (prev + 1) % total)}
+                    style={{
+                      position: "absolute",
+                      right: -50,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      zIndex: 10,
+                      width: 28,
+                      height: 28,
+                      borderRadius: "50%",
+                      border: "1px solid #b8b0a3",
+                      backgroundColor: "transparent",
+                      color: "#b8b0a3",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 16,
+                      opacity: 0.5,
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => { e.target.style.opacity = 1; e.target.style.color = "#2a2a2a"; }}
+                    onMouseLeave={(e) => { e.target.style.opacity = 0.5; e.target.style.color = "#b8b0a3"; }}
+                  >
+                    →
+                  </button>
                 </div>
-                <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 12 }}>
+
+                {/* Dot indicators */}
+                <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 16 }}>
                   {items.map((_, ii) => (
-                    <button key={ii} onClick={() => setCarouselActive(ii)} style={{ width: ii === carouselActive ? 20 : 6, height: 6, borderRadius: 3, border: "none", backgroundColor: ii === carouselActive ? "#6b6560" : "#d4cfc7", cursor: "pointer", padding: 0, transition: "all 0.35s cubic-bezier(0.23,1,0.32,1)" }} />
+                    <button
+                      key={ii}
+                      onClick={() => setCarouselActive(ii)}
+                      style={{
+                        width: ii === carouselActive ? 20 : 6,
+                        height: 6,
+                        borderRadius: 3,
+                        border: "none",
+                        backgroundColor: ii === carouselActive ? "#6b6560" : "#d4cfc7",
+                        cursor: "pointer",
+                        padding: 0,
+                        transition: "all 0.35s cubic-bezier(0.23,1,0.32,1)"
+                      }}
+                    />
                   ))}
                 </div>
               </div>
@@ -2536,66 +2738,75 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   style={{
                     margin: `12px -${breakoutR}px 12px -${breakoutL}px`,
                     position: "relative",
-                    boxShadow: borderShadow,
-                    transition: "box-shadow 0.3s ease",
                     scrollMarginTop: 80,
                   }}
                 >
-                  {/* On mobile: horizontally scrollable so SVG text remains legible */}
-                  <div
-                    style={{
-                      overflowX: isMobile ? "auto" : "visible",
-                      WebkitOverflowScrolling: "touch",
-                      position: "relative",
-                      cursor: "pointer",
-                    }}
-                    onMouseEnter={() => !isMobile && setExpandCursor(c => ({ ...c, visible: true }))}
-                    onMouseMove={(e) => {
-                      if (isMobile) return;
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top });
-                    }}
-                    onMouseLeave={() => !isMobile && setExpandCursor(c => ({ ...c, visible: false }))}
-                    onClick={() => setLightboxContent(<div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>)}
-                  >
-                    {isMobile && (
-                      <p style={{ fontSize: 10, color: "#aaa", margin: "0 0 6px 0", textAlign: "center" }}>
-                        {"← 左右滑动查看 / scroll to explore →"}
-                      </p>
-                    )}
-                    <div style={{ minWidth: isMobile ? 600 : "auto" }}>
-                      <IllComponent />
-                    </div>
-                    {/* Floating expand indicator — follows mouse */}
-                    {!isMobile && expandCursor.visible && (
-                      <div style={{
-                        position: "absolute",
-                        left: expandCursor.x,
-                        top: expandCursor.y,
-                        transform: "translate(12px, 12px)",
-                        pointerEvents: "none",
-                        zIndex: 10,
-                        display: "flex", alignItems: "center", gap: 5,
-                        fontSize: T.small, color: "#fff",
-                        backgroundColor: "rgba(17,17,17,0.85)",
-                        padding: "6px 12px",
-                        whiteSpace: "nowrap",
-                      }}>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-                        </svg>
-                        {"Expand"}
-                      </div>
-                    )}
-                  </div>
-                  {/* Caption */}
+                  {/* Card shell */}
                   <div style={{
-                    display: "flex", justifyContent: "flex-start", alignItems: "center",
-                    padding: "8px 4px 0",
+                    background: "#fff",
+                    borderRadius: "10px",
+                    border: "1px solid #d4cdc2",
+                    overflow: "hidden",
                   }}>
-                    <span style={{ fontSize: T.small, color: "#aaa" }}>
-                      {ill.name}<span style={{ color: "#ccc", margin: "0 6px" }}>{"\u00B7"}</span>{ill.type}
-                    </span>
+                    {/* On mobile: horizontally scrollable so SVG text remains legible */}
+                    <div
+                      style={{
+                        overflowX: isMobile ? "auto" : "visible",
+                        WebkitOverflowScrolling: "touch",
+                        position: "relative",
+                        cursor: "zoom-in",
+                      }}
+                      onMouseEnter={() => !isMobile && setExpandCursor(c => ({ ...c, visible: true }))}
+                      onMouseMove={(e) => {
+                        if (isMobile) return;
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top });
+                      }}
+                      onMouseLeave={() => !isMobile && setExpandCursor(c => ({ ...c, visible: false }))}
+                      onClick={() => setLightboxContent(<div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>)}
+                    >
+                      {isMobile && (
+                        <p style={{ fontSize: 10, color: "#aaa", margin: "0 0 6px 0", textAlign: "center" }}>
+                          {"← 左右滑动查看 / scroll to explore →"}
+                        </p>
+                      )}
+                      <div style={{ minWidth: isMobile ? 600 : "auto", width: "100%" }}>
+                        <IllComponent />
+                      </div>
+                      {/* Floating expand indicator — follows mouse */}
+                      {!isMobile && expandCursor.visible && (
+                        <div style={{
+                          position: "absolute",
+                          left: expandCursor.x,
+                          top: expandCursor.y,
+                          transform: "translate(12px, 12px)",
+                          pointerEvents: "none",
+                          zIndex: 10,
+                          display: "flex", alignItems: "center", gap: 5,
+                          fontSize: T.small, color: "#fff",
+                          backgroundColor: "rgba(17,17,17,0.85)",
+                          padding: "6px 12px",
+                          whiteSpace: "nowrap",
+                        }}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                          </svg>
+                          {"Expand"}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Bottom label bar */}
+                    <div style={{
+                      padding: "12px 16px",
+                      borderTop: "1px solid #e8e3da",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}>
+                      <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{ill.name}</p>
+                      <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{ill.type}</p>
+                    </div>
                   </div>
                 </div>
               );
@@ -2609,50 +2820,120 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "screenshot-inline") {
             if (block.src) {
+              const [imgDimensions, setImgDimensions] = useState(null);
+              const handleImgLoad = (e) => {
+                const { naturalWidth, naturalHeight } = e.target;
+                setImgDimensions({ width: naturalWidth, height: naturalHeight });
+              };
+
+              const isShortImage = imgDimensions && imgDimensions.height < 400;
+              const isTallImage = imgDimensions && imgDimensions.height > 500;
+
               return (
-                <div key={i} id={blockId} style={{ margin: "32px 0", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
-                  <div
+                <div key={i} id={blockId} style={{ margin: "32px 0", scrollMarginTop: 80 }}>
+                  {/* Card container */}
+                  <div style={{
+                    background: "#fff",
+                    borderRadius: "10px",
+                    border: "1px solid #d4cdc2",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                  }}
                     onClick={() => setLightboxContent(
                       <img src={block.src} alt={block.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
                     )}
-                    style={{
+                  >
+                    {/* Image container - 500px fixed height */}
+                    <div style={{
                       position: "relative",
                       width: "100%",
-                      height: 280,
-                      borderRadius: 8,
+                      height: 500,
+                      backgroundColor: "#f5f3f0",
                       overflow: "hidden",
-                      cursor: "zoom-in",
-                    }}
-                  >
-                    <img
-                      src={block.src}
-                      alt={block.label}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        objectPosition: "top center",
-                        display: "block",
-                      }}
-                    />
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}>
+                      {/* Background layer - only for short images */}
+                      {isShortImage && (
+                        <img
+                          src={block.src}
+                          alt={block.label}
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            filter: "blur(24px) brightness(0.85)",
+                            transform: "scale(1.05)",
+                          }}
+                        />
+                      )}
+
+                      {/* Main image */}
+                      <img
+                        src={block.src}
+                        alt={block.label}
+                        onLoad={handleImgLoad}
+                        style={{
+                          position: "relative",
+                          zIndex: 1,
+                          maxHeight: "100%",
+                          maxWidth: "100%",
+                          objectFit: "contain",
+                          display: "block",
+                        }}
+                      />
+
+                      {/* Gradient overlay + button for tall images */}
+                      {isTallImage && (
+                        <>
+                          <div style={{
+                            position: "absolute",
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            height: 120,
+                            background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
+                            pointerEvents: "none",
+                          }} />
+                          <div style={{
+                            position: "absolute",
+                            bottom: 32,
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            zIndex: 2,
+                            backgroundColor: "rgba(0,0,0,0.8)",
+                            color: "#fff",
+                            padding: "8px 16px",
+                            borderRadius: "4px",
+                            fontSize: T.small,
+                            cursor: "pointer",
+                          }}>
+                            点击查看完整图
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Bottom label bar */}
                     <div style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      height: 80,
-                      background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.35))",
-                      pointerEvents: "none",
-                    }} />
+                      padding: "12px 16px",
+                      borderTop: "1px solid #e8e3da",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}>
+                      <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{block.label}</p>
+                      {block.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{block.note}</p>}
+                    </div>
                   </div>
-                  {block.note && (
-                    <p style={{ fontSize: T.small, color: "#999", marginTop: 8, textAlign: "center" }}>{block.note}</p>
-                  )}
                 </div>
               );
             }
             return (
-              <div key={i} id={blockId} style={{ scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+              <div key={i} id={blockId} style={{ scrollMarginTop: 80 }}>
                 <PlaceholderBox label={block.label} sublabel={block.note} height={200} />
               </div>
             );
@@ -2678,9 +2959,9 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         const rest = visibleScreenshots.filter(s => !s.featured);
         const renderCard = (s, i) => (
           <div key={i} style={{
-            background: "#f0ebe3",
+            background: "#faf8f4",
             borderRadius: 0,
-            border: "1px solid #EDEAE3",
+            border: "1px solid #E5E2DC",
             overflow: "hidden",
             cursor: s.src ? "pointer" : "default",
           }}
@@ -2700,8 +2981,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           </div>
         );
         return (
-          <section style={{ marginTop: 72, paddingTop: 36, borderTop: "1px solid #E5E2DC" }}>
-            <h3 style={{ fontSize: T.small, fontWeight: 600, color: "#000", margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5 }}>
+          <section style={{ marginTop: 72, paddingTop: 36, borderTop: "1px solid #D5D0C8" }}>
+            <h3 style={{ fontSize: T.small, fontWeight: 600, color: "#000", margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
               {"System in Action"}
             </h3>
             <p style={{ fontSize: T.small, color: "#999", marginBottom: 24 }}>
@@ -2716,7 +2997,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               <div style={{
                 display: "grid",
                 gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-                gap: 20,
+                gap: 16,
               }}>
                 {rest.map((s, i) => renderCard(s, i))}
               </div>
@@ -2729,7 +3010,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       {/* === Prev / Next Nav === */}
       <nav style={{
         display: "flex",
-        marginTop: 72, paddingTop: 28, borderTop: "1px solid #E5E2DC",
+        marginTop: 72, paddingTop: 28, borderTop: "1px solid #D5D0C8",
         flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 16,
       }}>
         <div
@@ -2739,11 +3020,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           onMouseLeave={() => setHoveredNav(null)}
           style={{
             flex: 1,
-            border: hasPrev ? "1px solid #E5E2DC" : "1px dashed #E5E2DC",
+            border: hasPrev ? "1px solid #D5D0C8" : "1px dashed #D5D0C8",
             padding: "14px 20px",
             cursor: hasPrev ? "pointer" : "default",
             opacity: hasPrev ? 1 : 0.7,
-            backgroundColor: hoveredNav === "prev" ? "#111" : "transparent",
+            backgroundColor: hoveredNav === "prev" ? "#1a1815" : "transparent",
             backgroundImage: hoveredNav === "prev" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
             transition: "background-color 0.2s ease",
           }}
@@ -2758,12 +3039,12 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           onMouseLeave={() => setHoveredNav(null)}
           style={{
             flex: 1,
-            border: hasNext ? "1px solid #E5E2DC" : "1px dashed #E5E2DC",
+            border: hasNext ? "1px solid #D5D0C8" : "1px dashed #D5D0C8",
             padding: "14px 20px",
             textAlign: isMobile ? "left" : "right",
             cursor: hasNext ? "pointer" : "default",
             opacity: hasNext ? 1 : 0.7,
-            backgroundColor: hoveredNav === "next" ? "#111" : "transparent",
+            backgroundColor: hoveredNav === "next" ? "#1a1815" : "transparent",
             backgroundImage: hoveredNav === "next" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
             transition: "background-color 0.2s ease",
           }}
@@ -2914,7 +3195,7 @@ function Lightbox({ children, onClose }) {
         transition: dragging.current ? "none" : "transform 0.15s ease-out",
         display: "flex", flexDirection: "column", alignItems: "center",
       }}>
-        <div style={{ backgroundColor: "#f0ebe3", padding: 24, boxSizing: "border-box" }}>
+        <div style={{ backgroundColor: "#faf8f4", padding: 24, boxSizing: "border-box" }}>
           {children}
         </div>
         {/* Hint bar right below the card */}
@@ -2983,15 +3264,15 @@ function BackToTop() {
       onMouseLeave={() => setHovered(false)}
       style={{
         position: "fixed", bottom: 80,
-        right: "max(24px, calc((100% - 720px) / 2 - 200px))",
+        right: "max(24px, calc((100% - 720px) / 2 - 220px))",
         zIndex: 200, width: 40, height: 40,
-        border: hovered ? "1px solid #111" : "1px solid #E5E2DC",
-        backgroundColor: hovered ? "#111" : "#f0ebe3",
+        border: hovered ? "1px solid #1a1815" : "1px solid #D5D0C8",
+        backgroundColor: hovered ? "#1a1815" : "#faf8f4",
         display: "flex", alignItems: "center", justifyContent: "center",
         cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
       }}
     >
-      <span style={{ fontSize: 14, color: hovered ? "#f0ebe3" : "#666", transition: "color 0.2s ease", display: "inline-block", transform: "rotate(90deg)" }}>{"\u2190"}</span>
+      <span style={{ fontSize: 14, color: hovered ? "#faf8f4" : "#666", transition: "color 0.2s ease", display: "inline-block", transform: "rotate(90deg)" }}>{"\u2190"}</span>
     </div>
   );
 }
@@ -3013,7 +3294,7 @@ function Toast({ message, position, onDone }) {
     <div style={{
       position: "fixed", left: "50%", transform: "translateX(-50%)",
       ...posStyle,
-      zIndex: 300, backgroundColor: "#333", color: "#fff",
+      zIndex: 300, backgroundColor: "#2A2A2A", color: "#fff",
       fontSize: T.small, padding: "10px 24px",
       boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
       opacity: phase === "in" ? 0 : phase === "out" ? 0 : 1,
@@ -3083,7 +3364,7 @@ export default function App() {
       fontFamily: FONT_BODY,
       color: "#000",
       minHeight: "100vh",
-      backgroundColor: "#f0ebe3",
+      backgroundColor: "#faf8f4",
       display: "flex",
       flexDirection: "column",
     }}>
