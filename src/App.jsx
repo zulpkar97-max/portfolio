@@ -31,10 +31,10 @@ const MOBILE_NAV_H = 50;
  */
 
 const T = { display: 30, title: 22, heading: 18, body: 16, small: 13 };
-// 单一中性强调色，减少绿色感，整体更黑白
-const ACCENT = "#2A2A2A";
-const FONT_BODY = "'DM Sans', sans-serif";
-const FONT_DISPLAY = "'DM Serif Display', serif";
+const ACCENT = "#c4422b";
+const FONT_BODY = "'Noto Sans SC', 'Helvetica Neue', sans-serif";
+const FONT_DISPLAY = "'Noto Serif SC', 'Georgia', serif";
+const FONT_MONO = "'DM Mono', 'Courier New', monospace";
 
 const PROJECTS = [
   {
@@ -60,6 +60,11 @@ const PROJECTS = [
     stateBefore: "互相指责 · 信息淹没 · 职责不清",
     stateAfter: "单一信息源 · 状态全程可追溯 · 角色权责锁定",
     teamInfo: "核心15人，协调近百人",
+    heroStat: { number: "7天", unit: "从零搭建 · 春节期间" },
+    heroNarrative: {
+      hook: "春节7天，从零搭出一套协作系统，救回百万合同。",
+      detail: "之后又在同一项目里推动了公司首个AI智能体上线——将互相指责、信息淹没的混乱局面，转化为权责清晰、状态可追溯的协作流程。",
+    },
     illustrations: [
       { name: "双轨时间轴", type: "时间线", note: "覆盖从危机诊断到AI上线的完整双线叙事" },
       { name: "六模块信息枢纽", type: "架构图", note: "覆盖协作系统的信息流动设计逻辑" },
@@ -381,7 +386,7 @@ function Nav({ currentPage, onNavigate, isMobile }) {
       position: "sticky",
       top: 0,
       zIndex: 100,
-      backgroundColor: "#FAF9F7",
+      backgroundColor: "#f5f2ed",
     }}>
       <div style={{
         maxWidth: 860,
@@ -399,7 +404,7 @@ function Nav({ currentPage, onNavigate, isMobile }) {
           style={{
             fontSize: T.heading,
             fontWeight: 700,
-            color: hovered === "home" ? "#FAF9F7" : "#000",
+            color: hovered === "home" ? "#f5f2ed" : "#000",
             fontFamily: FONT_DISPLAY,
             flexShrink: 0,
             cursor: "pointer",
@@ -423,7 +428,7 @@ function Nav({ currentPage, onNavigate, isMobile }) {
                 fontSize: T.small,
                 fontFamily: FONT_DISPLAY,
                 fontWeight: isActive ? 600 : 400,
-                color: isItemHovered ? "#FAF9F7" : isActive ? "#000" : "#888",
+                color: isItemHovered ? "#f5f2ed" : isActive ? "#000" : "#888",
                 padding: "4px 10px",
                 backgroundColor: isItemHovered ? "#111111" : isActive ? "#F2EFEA" : "transparent",
                 borderRadius: 0,
@@ -522,7 +527,7 @@ function HomePage({ onNavigate, isMobile }) {
           <span style={{
             fontSize: isMobile ? 36 : 48,
             fontWeight: 700,
-            color: "#FAF9F7",
+            color: "#f5f2ed",
             backgroundColor: "#111111",
             padding: "0 14px 0 10px",
             display: "inline-block",
@@ -591,7 +596,7 @@ function HomePage({ onNavigate, isMobile }) {
                     padding: "28px 24px",
                     borderRadius: 0,
                     border: "1px solid #E5E2DC",
-                    backgroundColor: isHovered ? "#111111" : "#FAF9F7",
+                    backgroundColor: isHovered ? "#111111" : "#f5f2ed",
                     boxShadow: isHovered ? "0 18px 40px rgba(0,0,0,0.16)" : "none",
                     transition: "background-color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease",
                     backgroundImage: isHovered
@@ -624,7 +629,7 @@ function HomePage({ onNavigate, isMobile }) {
                     <h2 style={{
                       fontSize: 22,
                       fontWeight: 600,
-                      color: isHovered ? "#FAF9F7" : "#2A2A2A",
+                      color: isHovered ? "#f5f2ed" : "#2A2A2A",
                       margin: "0 0 6px",
                       lineHeight: 1.3,
                       fontFamily: FONT_DISPLAY,
@@ -670,13 +675,13 @@ function HomePage({ onNavigate, isMobile }) {
                       width: 32,
                       height: 32,
                       borderRadius: "999px",
-                      border: isHovered ? "1px solid #FAF9F7" : "1px solid #D5D0C8",
+                      border: isHovered ? "1px solid #f5f2ed" : "1px solid #D5D0C8",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease",
-                      backgroundColor: isHovered ? "#FAF9F7" : "transparent",
-                      borderColor: isHovered ? "#FAF9F7" : "#D5D0C8",
+                      backgroundColor: isHovered ? "#f5f2ed" : "transparent",
+                      borderColor: isHovered ? "#f5f2ed" : "#D5D0C8",
                       transform: isHovered ? "translateX(2px)" : "translateX(0)",
                     }}>
                       <span style={{
@@ -892,14 +897,14 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
       {/* Back button — 40x40 box */}
       <div
         onClick={() => onNavigate("home")}
-        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#FAF9F7"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#FAF9F7"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
+        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#f5f2ed"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#f5f2ed"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
         style={{
           position: "fixed", top: 72,
           right: "max(16px, calc((100% - 720px) / 2 - 140px))",
           zIndex: 50, pointerEvents: "auto",
           width: 40, height: 40,
-          border: "1px solid #E5E2DC", backgroundColor: "#FAF9F7",
+          border: "1px solid #E5E2DC", backgroundColor: "#f5f2ed",
           display: "flex", alignItems: "center", justifyContent: "center",
           cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
         }}
@@ -929,7 +934,7 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
                 style={{
                   fontSize: activeSectionIdx === i ? T.body : T.small,
                   lineHeight: 1,
-                  color: (hoveredIdx === i || activeSectionIdx === i) ? (hoveredIdx === i ? "#FAF9F7" : "#000") : "#ccc",
+                  color: (hoveredIdx === i || activeSectionIdx === i) ? (hoveredIdx === i ? "#f5f2ed" : "#000") : "#ccc",
                   backgroundColor: hoveredIdx === i ? "#111" : "transparent",
                   fontWeight: activeSectionIdx === i ? 700 : 500,
                   padding: "10px 12px 10px 8px",
@@ -1894,128 +1899,247 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       <ReadingProgressBar />
       <SideNav sections={project.skillTags} activeSectionIdx={activeScrollSection} onNavigate={onNavigate} onSectionClick={handleTagClick} />
       <MobileProgressNav headings={sectionHeadings} />
-      {/* === Header — wider, two-column on desktop === */}
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "28px 16px 0" : "40px 0 0" }}>
+      {/* === Hero Section === */}
+      {project.id === 1 ? (
+        /* ===== NEW 5-LAYER HERO for Project 1 ===== */
+        <section style={{ position: "relative", maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 24px" : "0 40px", paddingTop: isMobile ? 32 : 56 }}>
 
-        {/* Back link — shown on mobile only; desktop uses SideNav back link */}
-        {isMobile && (
-          <div
-            onClick={() => onNavigate("home")}
-            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#FAF9F7"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#FAF9F7"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
-            style={{
-              display: "inline-flex", alignItems: "center", justifyContent: "center",
-              width: 40, height: 40,
-              border: "1px solid #E5E2DC", backgroundColor: "#FAF9F7",
-              cursor: "pointer", marginBottom: 28,
-              transition: "background-color 0.2s ease, border-color 0.2s ease",
-            }}
-          >
-            <span style={{ fontSize: 14, color: "#666", transition: "color 0.2s ease" }}>{"\u2190"}</span>
-          </div>
-        )}
-
-        <header style={{ marginBottom: 0, paddingBottom: 0 }}>
-          {/* Beat 1: Title + metadata + tags */}
-          <h1 style={{ fontSize: isMobile ? 24 : 30, fontWeight: 700, margin: 0, color: "#000", lineHeight: 1.2, fontFamily: FONT_DISPLAY, textAlign: "center" }}>
-            {project.name}
-          </h1>
-          <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? 20 : 32, marginTop: 16 }}>
-            {[
-              ["Role", project.roleLine.split(" // ")[0]],
-              ["Team", project.teamInfo || "\u3010\u56E2\u961F\u6784\u6210\u5F85\u5B9A\u3011"],
-              ["Context", project.context || "\u3010\u5F85\u5B9A\u3011"],
-            ].map(([label, val], fi) => (
-              <div key={fi} style={{ textAlign: "center" }}>
-                <p style={{ fontSize: T.small, color: "#aaa", margin: "0 0 3px", textTransform: "uppercase", letterSpacing: 0.5 }}>{label}</p>
-                <p style={{ fontSize: T.small, color: "#444", margin: 0, fontWeight: 500 }}>{val}</p>
-              </div>
-            ))}
-          </div>
-          {/* Tags */}
-          {project.skillTags && project.skillTags.length > 0 && (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10, justifyContent: "center" }}>
-              {project.skillTags.map((tag, ti) => {
-                const hasJump = project.skillTagJumps && project.skillTagJumps[tag];
-                const isActive = activeTagJump && activeTagJump.tag === tag;
-                return (
-                  <span
-                    key={ti}
-                    onClick={hasJump ? () => handleTagClick(tag) : undefined}
-                    style={{
-                      fontSize: 11,
-                      color: isActive ? "#111" : "#999",
-                      backgroundColor: isActive ? "#E5E2DC" : "#F2EFEA",
-                      borderRadius: 0,
-                      padding: "3px 9px",
-                      lineHeight: 1.5,
-                      cursor: hasJump ? "pointer" : "default",
-                      transition: "background-color 0.2s ease, color 0.2s ease",
-                    }}
-                  >{tag}</span>
-                );
-              })}
+          {/* Decorative SVG — desktop only */}
+          {!isMobile && (
+            <div style={{ position: "absolute", top: 24, right: 48, width: 200, height: 200, opacity: 0.06, pointerEvents: "none", zIndex: 0, animation: "fadeUp 1s ease-out 0.6s both" }}>
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
+                <rect x="70" y="0" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
+                <rect x="140" y="0" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
+                <rect x="0" y="70" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
+                <rect x="70" y="70" width="60" height="60" fill="#1a1815"/>
+                <rect x="140" y="70" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
+                <rect x="0" y="140" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
+                <rect x="70" y="140" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
+                <rect x="140" y="140" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
+              </svg>
             </div>
           )}
-          {/* Beat 2: Story hook — visually separated from orientation block */}
-          <p style={{ fontSize: isMobile ? 16 : 17, color: "#555", marginTop: 32, marginBottom: 0, lineHeight: 1.75, textAlign: "center", fontWeight: 400, maxWidth: 500, marginLeft: "auto", marginRight: "auto" }}>{project.summary}</p>
-        </header>
-      </div>
 
-      {/* === Metrics Bar === */}
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "16px 16px 0" : "16px 0 0" }}>
-        <div style={{
-          paddingBottom: 24, marginBottom: 32,
-        }}>
-          {project.metricsMode === "state-change" ? (
-            <div style={{
-              display: "flex",
-              flexDirection: isMobile ? "column" : "row",
-              gap: isMobile ? 20 : 0,
-              alignItems: "center",
-            }}>
-              <div style={{
-                flex: 1, textAlign: "center",
-                borderRight: isMobile ? "none" : "1px solid #E5E2DC",
-                padding: isMobile ? "0" : "0 24px",
-              }}>
-                <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"Before"}</p>
-                <p style={{ fontSize: 15, fontWeight: 500, color: "#aaa", margin: 0, lineHeight: 1.5, textDecoration: "line-through" }}>{project.stateBefore}</p>
-              </div>
-              {/* Arrow indicator */}
-              <div style={{ padding: "0 16px", fontSize: 20, color: "#B8B0A3", flexShrink: 0 }}>{"\u2192"}</div>
-              <div style={{
-                flex: 1, textAlign: "center",
-                padding: isMobile ? "0" : "0 24px",
-              }}>
-                <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"After"}</p>
-                <p style={{ fontSize: 15, fontWeight: 700, color: "#111", margin: 0, lineHeight: 1.5 }}>{project.stateAfter}</p>
-              </div>
+          {/* Layer 1: Project number + metadata */}
+          <div style={{ display: "flex", alignItems: "center", gap: 24, marginBottom: 40, animation: "fadeUp 0.6s ease-out 0.1s both" }}>
+            <div style={{ fontFamily: FONT_MONO, fontSize: isMobile ? 48 : 64, fontWeight: 300, color: "#d4cfc7", lineHeight: 1, letterSpacing: "-0.03em" }}>
+              {project.navName}
             </div>
-          ) : (
-            <div style={{
-              display: "flex",
-              flexDirection: isMobile ? "column" : "row",
-              gap: isMobile ? 20 : 0,
-            }}>
-              {project.metrics.map((m, i) => (
-                <div key={i} style={{
-                  flex: 1,
-                  textAlign: "center",
-                  borderRight: (!isMobile && i < project.metrics.length - 1) ? "1px solid #E5E2DC" : "none",
-                  padding: isMobile ? "0" : "0 24px",
-                }}>
-                  <p style={{ fontSize: T.display, fontWeight: 700, color: "#000", margin: 0, lineHeight: 1.2 }}>{m.number}</p>
-                  <p style={{ fontSize: T.small, color: "#888", marginTop: 4 }}>{m.label}</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 4, paddingLeft: 24, borderLeft: "1px solid #d4cfc7" }}>
+              {[
+                ["Role", project.roleLine.split(" // ")[0]],
+                ["Team", project.teamInfo],
+                ["Context", project.context],
+              ].map(([label, val], i) => (
+                <div key={i} style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: "#8a857d" }}>
+                  {label}<span style={{ color: "#1a1815", fontFamily: FONT_BODY, fontWeight: 500, textTransform: "none", letterSpacing: 0, marginLeft: 8, fontSize: 13 }}>{val}</span>
                 </div>
               ))}
             </div>
-          )}
-        </div>
-      </div>
+          </div>
 
-      {/* === Body — narrower for reading === */}
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 0 80px" }}>
+          {/* Layer 2: Title + stat hook */}
+          <div style={{ position: "relative", marginBottom: 48, animation: "fadeUp 0.8s ease-out 0.2s both" }}>
+            <div style={{ position: "relative" }}>
+              <h1 style={{
+                fontFamily: FONT_DISPLAY, fontWeight: 900,
+                fontSize: isMobile ? 36 : "clamp(36px, 5.5vw, 72px)",
+                lineHeight: 1.15, letterSpacing: "-0.02em",
+                maxWidth: 780, margin: 0, position: "relative",
+                paddingBottom: 20,
+              }}>
+                {"不是人的问题，"}
+                <br />
+                {"是系统的问题"}
+              </h1>
+              {/* Red underline */}
+              <div style={{ width: 64, height: 4, background: ACCENT, animation: "lineGrow 0.6s ease-out 0.8s both" }} />
+            </div>
+            {/* Stat hook — right side on desktop, below title on mobile */}
+            {project.heroStat && (
+              <div style={{
+                ...(isMobile ? { marginTop: 24, textAlign: "left" } : { position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", textAlign: "right" }),
+                animation: "fadeUp 0.8s ease-out 0.5s both",
+              }}>
+                <div style={{ fontFamily: FONT_DISPLAY, fontSize: isMobile ? 48 : "clamp(48px, 7vw, 96px)", fontWeight: 900, lineHeight: 1, color: ACCENT, letterSpacing: "-0.03em" }}>
+                  {project.heroStat.number}
+                </div>
+                <div style={{ fontFamily: FONT_MONO, fontSize: 13, color: "#8a857d", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 4 }}>
+                  {project.heroStat.unit}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Layer 3: Narrative */}
+          {project.heroNarrative && (
+            <div style={{ maxWidth: 680, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.35s both" }}>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: "#1a1815" }}>
+                {project.heroNarrative.hook}
+              </div>
+              <div style={{ fontSize: 15, lineHeight: 1.8, color: "#8a857d", fontWeight: 300 }}>
+                {project.heroNarrative.detail}
+              </div>
+            </div>
+          )}
+
+          {/* Layer 4: Before → After stacked cards */}
+          <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.45s both" }}>
+            <div style={{ padding: "28px 36px", background: "#eae7e1", borderRadius: 3, marginRight: isMobile ? 12 : 20 }}>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#aaa69f", marginBottom: 10 }}>Before</div>
+              <div style={{ fontSize: 15, lineHeight: 1.7, color: "#aaa69f", textDecoration: "line-through", textDecorationColor: "rgba(196, 66, 43, 0.25)", textDecorationThickness: 1 }}>
+                {project.stateBefore}
+              </div>
+            </div>
+            <div style={{
+              position: "relative", marginTop: -20, marginLeft: isMobile ? 12 : 20, marginRight: 0,
+              padding: "32px 36px", background: "#fff", borderRadius: 3,
+              boxShadow: "0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02)",
+            }}>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: ACCENT, marginBottom: 10 }}>After</div>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: 18, fontWeight: 700, lineHeight: 1.6, color: "#1a1815" }}>
+                {project.stateAfter.split("·").map((part, i, arr) => {
+                  const trimmed = part.trim();
+                  const isLast = i === arr.length - 1;
+                  return <span key={i}>{isLast ? <span style={{ color: ACCENT }}>{trimmed}</span> : trimmed}{!isLast && " · "}</span>;
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Layer 5: Section navigation */}
+          <div style={{ paddingBottom: 48, animation: "fadeUp 0.7s ease-out 0.55s both" }}>
+            <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8a857d", marginBottom: 12 }}>
+              {"跳转至章节"}
+            </div>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              {(project.skillTags || []).map((tag, i) => {
+                const jump = project.skillTagJumps && project.skillTagJumps[tag];
+                return (
+                  <span
+                    key={i}
+                    onClick={() => {
+                      if (jump) {
+                        const el = document.getElementById("body-block-" + jump.scrollTo);
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = "#1a1815"; e.currentTarget.style.color = "#f5f2ed"; e.currentTarget.style.borderColor = "#1a1815"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#1a1815"; e.currentTarget.style.borderColor = "#d4cfc7"; }}
+                    style={{
+                      display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
+                      fontFamily: FONT_BODY, fontSize: 13, fontWeight: 500,
+                      minWidth: 120, padding: "8px 18px",
+                      color: "#1a1815", cursor: "pointer", textDecoration: "none",
+                      border: "1px solid #d4cfc7", borderRadius: 2,
+                      transition: "all 0.3s",
+                    }}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2"><line x1="6" y1="2" x2="6" y2="10"/><polyline points="3,7 6,10 9,7"/></svg>
+                    {tag}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+
+        </section>
+      ) : (
+        /* ===== ORIGINAL HERO for Project 2/3 ===== */
+        <>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "28px 16px 0" : "40px 0 0" }}>
+          {/* Back link — shown on mobile only */}
+          {isMobile && (
+            <div
+              onClick={() => onNavigate("home")}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#f5f2ed"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#f5f2ed"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
+              style={{
+                display: "inline-flex", alignItems: "center", justifyContent: "center",
+                width: 40, height: 40,
+                border: "1px solid #E5E2DC", backgroundColor: "#f5f2ed",
+                cursor: "pointer", marginBottom: 28,
+                transition: "background-color 0.2s ease, border-color 0.2s ease",
+              }}
+            >
+              <span style={{ fontSize: 14, color: "#666", transition: "color 0.2s ease" }}>{"\u2190"}</span>
+            </div>
+          )}
+          <header style={{ marginBottom: 0, paddingBottom: 0 }}>
+            <h1 style={{ fontSize: isMobile ? 24 : 30, fontWeight: 700, margin: 0, color: "#000", lineHeight: 1.2, fontFamily: FONT_DISPLAY, textAlign: "center" }}>
+              {project.name}
+            </h1>
+            <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? 20 : 32, marginTop: 16 }}>
+              {[
+                ["Role", project.roleLine.split(" // ")[0]],
+                ["Team", project.teamInfo || "\u3010\u56E2\u961F\u6784\u6210\u5F85\u5B9A\u3011"],
+                ["Context", project.context || "\u3010\u5F85\u5B9A\u3011"],
+              ].map(([label, val], fi) => (
+                <div key={fi} style={{ textAlign: "center" }}>
+                  <p style={{ fontSize: T.small, color: "#aaa", margin: "0 0 3px", textTransform: "uppercase", letterSpacing: 0.5 }}>{label}</p>
+                  <p style={{ fontSize: T.small, color: "#444", margin: 0, fontWeight: 500 }}>{val}</p>
+                </div>
+              ))}
+            </div>
+            {project.skillTags && project.skillTags.length > 0 && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10, justifyContent: "center" }}>
+                {project.skillTags.map((tag, ti) => {
+                  const hasJump = project.skillTagJumps && project.skillTagJumps[tag];
+                  const isActive = activeTagJump && activeTagJump.tag === tag;
+                  return (
+                    <span
+                      key={ti}
+                      onClick={hasJump ? () => handleTagClick(tag) : undefined}
+                      style={{
+                        fontSize: 11,
+                        color: isActive ? "#111" : "#999",
+                        backgroundColor: isActive ? "#E5E2DC" : "#F2EFEA",
+                        borderRadius: 0,
+                        padding: "3px 9px",
+                        lineHeight: 1.5,
+                        cursor: hasJump ? "pointer" : "default",
+                        transition: "background-color 0.2s ease, color 0.2s ease",
+                      }}
+                    >{tag}</span>
+                  );
+                })}
+              </div>
+            )}
+            <p style={{ fontSize: isMobile ? 16 : 17, color: "#555", marginTop: 32, marginBottom: 0, lineHeight: 1.75, textAlign: "center", fontWeight: 400, maxWidth: 500, marginLeft: "auto", marginRight: "auto" }}>{project.summary}</p>
+          </header>
+        </div>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "16px 16px 0" : "16px 0 0" }}>
+          <div style={{ paddingBottom: 24, marginBottom: 32 }}>
+            {project.metricsMode === "state-change" ? (
+              <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 20 : 0, alignItems: "center" }}>
+                <div style={{ flex: 1, textAlign: "center", borderRight: isMobile ? "none" : "1px solid #E5E2DC", padding: isMobile ? "0" : "0 24px" }}>
+                  <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"Before"}</p>
+                  <p style={{ fontSize: 15, fontWeight: 500, color: "#aaa", margin: 0, lineHeight: 1.5, textDecoration: "line-through" }}>{project.stateBefore}</p>
+                </div>
+                <div style={{ padding: "0 16px", fontSize: 20, color: "#B8B0A3", flexShrink: 0 }}>{"\u2192"}</div>
+                <div style={{ flex: 1, textAlign: "center", padding: isMobile ? "0" : "0 24px" }}>
+                  <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"After"}</p>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: "#111", margin: 0, lineHeight: 1.5 }}>{project.stateAfter}</p>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 20 : 0 }}>
+                {project.metrics.map((m, i) => (
+                  <div key={i} style={{ flex: 1, textAlign: "center", borderRight: (!isMobile && i < project.metrics.length - 1) ? "1px solid #E5E2DC" : "none", padding: isMobile ? "0" : "0 24px" }}>
+                    <p style={{ fontSize: T.display, fontWeight: 700, color: "#000", margin: 0, lineHeight: 1.2 }}>{m.number}</p>
+                    <p style={{ fontSize: T.small, color: "#888", marginTop: 4 }}>{m.label}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        </>
+      )}
+
+      {/* === Body === */}
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 40px 80px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
         {bodyWithIds.map((block, i) => {
           // Click-triggered border (strong, temporary)
@@ -2291,7 +2415,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         const rest = visibleScreenshots.filter(s => !s.featured);
         const renderCard = (s, i) => (
           <div key={i} style={{
-            background: "#FAF9F7",
+            background: "#f5f2ed",
             borderRadius: 0,
             border: "1px solid #EDEAE3",
             overflow: "hidden",
@@ -2527,7 +2651,7 @@ function Lightbox({ children, onClose }) {
         transition: dragging.current ? "none" : "transform 0.15s ease-out",
         display: "flex", flexDirection: "column", alignItems: "center",
       }}>
-        <div style={{ backgroundColor: "#FAF9F7", padding: 24, boxSizing: "border-box" }}>
+        <div style={{ backgroundColor: "#f5f2ed", padding: 24, boxSizing: "border-box" }}>
           {children}
         </div>
         {/* Hint bar right below the card */}
@@ -2599,12 +2723,12 @@ function BackToTop() {
         right: "max(16px, calc((100% - 720px) / 2 - 140px))",
         zIndex: 200, width: 40, height: 40,
         border: hovered ? "1px solid #111" : "1px solid #E5E2DC",
-        backgroundColor: hovered ? "#111" : "#FAF9F7",
+        backgroundColor: hovered ? "#111" : "#f5f2ed",
         display: "flex", alignItems: "center", justifyContent: "center",
         cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
       }}
     >
-      <span style={{ fontSize: 14, color: hovered ? "#FAF9F7" : "#666", transition: "color 0.2s ease", display: "inline-block", transform: "rotate(90deg)" }}>{"\u2190"}</span>
+      <span style={{ fontSize: 14, color: hovered ? "#f5f2ed" : "#666", transition: "color 0.2s ease", display: "inline-block", transform: "rotate(90deg)" }}>{"\u2190"}</span>
     </div>
   );
 }
@@ -2696,7 +2820,7 @@ export default function App() {
       fontFamily: FONT_BODY,
       color: "#000",
       minHeight: "100vh",
-      backgroundColor: "#FAF9F7",
+      backgroundColor: "#f5f2ed",
       display: "flex",
       flexDirection: "column",
     }}>

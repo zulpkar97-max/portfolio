@@ -15,11 +15,12 @@ React 19 + Vite 7.3 单页应用，hash 路由（#project-1/2/3）。
 
 ## 设计系统
 
-- 背景：`#FAF9F7`
-- 灰色梯度：`#EDEAE3` → `#D5D0C8` → `#B8B0A3` → `#2A2A2A`
-- 强调色：`#5B8C7E`（绿）、`#7A8BA8`（蓝灰）
-- 字体：DM Sans（正文）、DM Serif Display（标题）
+- 背景：`#f5f2ed`
+- 灰色梯度：`#eae7e1` → `#D5D0C8` → `#B8B0A3` → `#2A2A2A`
+- 强调色：`#c4422b`（红）
+- 字体：Noto Sans SC（正文）、Noto Serif SC（标题）、DM Mono（编号/标签）
 - 字号常量 `T`：small=13, body=16, heading=18（移动端适配）
+- 全局 `user-select: none; cursor: default`，可点击元素单独设置 `cursor: pointer`
 
 ## 文件结构
 
@@ -89,8 +90,16 @@ skillTagJumps: {
 ## 三个 Case 当前状态
 
 ### Case 1 — 不是人的问题，是系统的问题 ✅
+- **Hero**: 5层杂志化布局（仅 Project 1），其他 Project 保持原 2 层布局
+  - Layer 1: 项目编号 "01"（DM Mono 64px）+ 元数据竖排
+  - Layer 2: 标题（Noto Serif SC 900, clamp 36-72px）+ stat hook "7天"
+  - Layer 3: 叙事段落（hook 句 + detail 句）
+  - Layer 4: Before → After 堆叠卡片（灰底删除线 vs 白底红色高亮）
+  - Layer 5: Section nav（4个 skillTag 锚点按钮，滚动到对应章节）
+  - 入场动画：fadeUp + lineGrow，staggered delay 0.1s-0.55s
 - Header: 危机接管者 / 跨部门8人 / 项目已失控，合同悬而未决
 - skillTags: 系统诊断, 约束下决策, 流程设计, AI落地
+- 数据字段：heroStat, heroNarrative（仅 Project 1）
 - 图片：3张截图 + 2个SVG插图（InfoHub, Iteration Flow）
 - 状态：完成
 
@@ -119,6 +128,9 @@ skillTagJumps: {
 - [x] 首页卡片去除时间信息
 - [x] Case 2 完整内容填充
 - [x] Case 3 完整内容填充
+- [x] 全局禁用文本选择 + 光标样式修复
+- [x] 设计系统更新：背景 `#f5f2ed`、强调色 `#c4422b`、字体切换到 Noto 系列
+- [x] Project 1 Hero 重构：5层杂志化布局 + fadeUp 入场动画
 
 ## 开发命令
 
@@ -129,7 +141,7 @@ npx vite build                # 构建
 
 ## 注意事项
 
-- 编辑只涉及 `src/App.jsx`，没有其他代码文件
+- 编辑只涉及 `src/App.jsx` 和 `src/index.css`，没有其他代码文件
 - SVG 插图是内联 React 组件，不是外部文件
 - body block 的 `bodyIndex` 从0开始计数，`skillTagJumps` 里的 index 必须与实际 block 位置对应
 - `keySentence` 文本必须在对应 `keyBlock` 的正文中完全匹配（子字符串匹配）
