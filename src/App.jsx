@@ -360,22 +360,114 @@ function PlaceholderBox({ label, sublabel, height = 180, dark = false }) {
 
 function ScreenshotItem({ item, onLightbox }) {
   const [failed, setFailed] = useState(false);
+  const [imgDimensions, setImgDimensions] = useState(null);
+  const containerRef = useRef(null);
+  const [displayHeight, setDisplayHeight] = useState(null);
+
   const hasImage = item.src && !failed;
+
+  const handleImgLoad = (e) => {
+    const { naturalWidth, naturalHeight } = e.target;
+    setImgDimensions({ width: naturalWidth, height: naturalHeight });
+  };
+
+  useEffect(() => {
+    if (imgDimensions && containerRef.current) {
+      const containerWidth = containerRef.current.offsetWidth;
+      const ratio = imgDimensions.height / imgDimensions.width;
+      setDisplayHeight(containerWidth * ratio);
+    }
+  }, [imgDimensions]);
+
+  const isShortImage = displayHeight !== null && displayHeight < 260;
+  const isTallImage = displayHeight !== null && displayHeight > 320;
+
   return (
-    <div onClick={() => hasImage && onLightbox()} style={{ cursor: hasImage ? "pointer" : "default" }}>
-      {hasImage ? (
-        <img
-          src={item.src}
-          alt={item.label}
-          style={{ width: "100%", display: "block" }}
-          onError={() => setFailed(true)}
-        />
-      ) : (
-        <PlaceholderBox label={item.label} sublabel={item.note} height={200} />
-      )}
-      <div style={{ marginTop: 8 }}>
-        <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
-        {item.note && <p style={{ fontSize: T.small, color: "#999", margin: "2px 0 0" }}>{item.note}</p>}
+    <div ref={containerRef} onClick={() => hasImage && onLightbox()} style={{ cursor: hasImage ? "pointer" : "default" }}>
+      <div style={{
+        background: "#fff",
+        borderRadius: "10px",
+        border: "1px solid #d4cdc2",
+        overflow: "hidden",
+      }}>
+        {hasImage ? (
+          <div style={{
+            position: "relative",
+            width: "100%",
+            height: 320,
+            backgroundColor: "#f5f3f0",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+            {isShortImage && (
+              <img src={item.src} alt={item.label} style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                filter: "blur(45px) brightness(0.65)",
+                transform: "scale(1.05)",
+              }} />
+            )}
+            <img
+              src={item.src}
+              alt={item.label}
+              onLoad={handleImgLoad}
+              onError={() => setFailed(true)}
+              style={{
+                position: "relative",
+                zIndex: 1,
+                maxHeight: "100%",
+                maxWidth: "100%",
+                objectFit: "contain",
+                display: "block",
+              }}
+            />
+            {isTallImage && (
+              <>
+                <div style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: 120,
+                  background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
+                  pointerEvents: "none",
+                }} />
+                <div style={{
+                  position: "absolute",
+                  bottom: 32,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  zIndex: 2,
+                  backgroundColor: "rgba(0,0,0,0.8)",
+                  color: "#fff",
+                  padding: "8px 16px",
+                  borderRadius: "4px",
+                  fontSize: T.small,
+                  cursor: "pointer",
+                }}>
+                  点击查看完整图
+                </div>
+              </>
+            )}
+          </div>
+        ) : (
+          <PlaceholderBox label={item.label} sublabel={item.note} height={200} />
+        )}
+        <div style={{
+          padding: "12px 16px",
+          borderTop: "1px solid #e8e3da",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
+          <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
+          {item.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{item.note}</p>}
+        </div>
       </div>
     </div>
   );
@@ -2556,28 +2648,35 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 40px 80px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
         {bodyWithIds.map((block, i) => {
-          // Click-triggered border (strong, temporary)
+          // Background flash on click (warm red, fading)
           const isInClickRange = activeTagJump && block.bodyIndex >= activeTagJump.borderRange[0] && block.bodyIndex <= activeTagJump.borderRange[1];
-          // Persistent border (subtle, scroll-driven)
+          const flashPhase = activeTagJump?.sentencePhase;
+          const flashBg = isInClickRange && block.type !== "illustration"
+            ? (flashPhase === "mounting" || flashPhase === "in"
+              ? "rgba(196, 66, 43, 0.04)"
+              : flashPhase === "out"
+              ? "rgba(196, 66, 43, 0)"
+              : "transparent")
+            : "transparent";
+          // Persistent border (subtle, scroll-driven) — removed, keeping for reference
           const tags = project.skillTags || [];
           const jumps = project.skillTagJumps || {};
           const persistentTag = activeScrollSection >= 0 && tags[activeScrollSection];
           const persistentJump = persistentTag && jumps[persistentTag];
           const isInPersistentRange = persistentJump && block.bodyIndex >= persistentJump.borderRange[0] && block.bodyIndex <= persistentJump.borderRange[1];
-          const borderShadow = isInClickRange ? "inset 3px 0 0 #111" : undefined;
           const blockId = "body-block-" + block.bodyIndex;
 
           if (block.type === "heading") {
             const isReflection = block.navLabel === "\u56DE\u5934\u770B";
             if (isReflection) {
               return (
-                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, margin: "0 -8px", padding: "40px 8px 0" }}>
                   <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
                 </div>
               );
             }
             return (
-              <div key={i} id={blockId} style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+              <div key={i} id={blockId} style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, margin: "0 -8px", padding: "40px 8px 0" }}>
                 <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
               </div>
             );
@@ -2617,14 +2716,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   }}>{ks}</span>{parts.slice(1).join(ks)}</>
                 );
               }
-              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.85, margin: 0, maxWidth: 700, whiteSpace: "pre-wrap", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>{paragraphContent}</p>;
+              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.85, margin: 0, maxWidth: 700, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>{paragraphContent}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
 
           if (block.type === "quote-list") {
             return (
-              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", gap: 10, boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
+              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", gap: 10, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>
                 {block.items.map((q, qi) => (
                   <div key={qi} style={{
                     display: "flex", gap: isMobile ? 10 : 16, alignItems: "flex-start",
@@ -2645,7 +2744,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "module-list") {
             return (
-              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
+              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>
                 {block.items.map((m, mi) => (
                   <div key={mi} style={{
                     display: "flex", gap: isMobile ? 8 : 20, alignItems: "flex-start",
@@ -2815,7 +2914,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "screenshot-group") {
             return (
-              <div key={i} id={blockId} style={{ margin: "32px 0", boxShadow: borderShadow, transition: "box-shadow 0.3s ease", scrollMarginTop: 80 }}>
+              <div key={i} id={blockId} style={{ margin: "32px 0", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>
                 <div style={{
                   display: "grid",
                   gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
@@ -2923,7 +3022,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               );
             }
             return (
-              <div key={i} id={blockId} style={{ scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}>
+              <div key={i} id={blockId} style={{ scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}>
                 <PlaceholderBox label={ill.name} sublabel={ill.type + " \u00B7 " + ill.note} height={240} dark />
               </div>
             );
@@ -2950,11 +3049,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           }
 
           if (block.type === "screenshot-pair") {
-            return <div key={i} id={blockId} style={{ scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}><BeforeAfterPair labelBefore={block.labelBefore} labelAfter={block.labelAfter} note={block.note} isMobile={isMobile} /></div>;
+            return <div key={i} id={blockId} style={{ scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><BeforeAfterPair labelBefore={block.labelBefore} labelAfter={block.labelAfter} note={block.note} isMobile={isMobile} /></div>;
           }
 
           if (block.type === "iteration-step") {
-            return <div key={i} id={blockId} style={{ scrollMarginTop: 80, boxShadow: borderShadow, transition: "box-shadow 0.3s ease" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={block.heading} /></div></div>;
+            return <div key={i} id={blockId} style={{ scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={block.heading} /></div></div>;
           }
 
           return null;
