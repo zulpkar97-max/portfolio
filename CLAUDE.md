@@ -64,6 +64,11 @@ index.html
   - 容器用 `maxWidth`（非固定 width），图片自适应
   - SVG 内容包裹在显式宽度 div 中
 - **首页（LandingPage）**：搜索 `Project Entries`
+  - 全屏 hero：thread/needle SVG 动画穿过标题文字
+  - 标题三行："产品、设计、项目管理、客户——"/"收拢成一个 PM 底座，"/"下一步方向：AI"
+  - 副标题 "Product Operations · 5 years"（DM Mono）
+  - thread 路径通过 DOM 测量动态生成（useEffect + document.fonts.ready）
+  - CSS 动画：drawThread, showNeedle, showStitch（定义在 index.css）
   - 卡片：3列 grid（desktop）/ 堆叠（mobile），无时间信息
 - **body block 渲染循环**：搜索 `block.type === "heading"`
   - 支持类型：heading, paragraph, quote-list, module-list, pull-quote, screenshot-inline, screenshot-group, screenshot-pair, illustration, iteration-step
@@ -89,31 +94,41 @@ skillTagJumps: {
 
 ## 三个 Case 当前状态
 
+### Hero 架构（所有3个项目统一）
+
+5层杂志化布局，`key={project.id}` 强制 remount 以重置动画：
+- Layer 1: 项目编号 "01/02/03"（DM Mono 64px）+ 元数据竖排（Role/Team/Context）
+- Layer 2: 标题（Noto Serif SC 900, clamp 36-72px）+ stat hook（大号数字 + 说明）
+- Layer 3: 叙事段落（hook 句 700 + detail 句 300）
+- Layer 4: 条件渲染 — P1 用 Before→After 堆叠卡片，P2/P3 用 3列 Metrics 卡片
+- Layer 5: Section nav（4个 skillTag 锚点按钮）
+- 装饰性 SVG：P1 网格、P2 同心圆、P3 连接节点
+- 入场动画：fadeUp + lineGrow，staggered delay 0.1s-0.55s
+- 数据字段：heroTitleLines, heroStat, heroNarrative, heroMetrics（P2/P3）, stateBefore/stateAfter（P1）
+
 ### Case 1 — 不是人的问题，是系统的问题 ✅
-- **Hero**: 5层杂志化布局（仅 Project 1），其他 Project 保持原 2 层布局
-  - Layer 1: 项目编号 "01"（DM Mono 64px）+ 元数据竖排
-  - Layer 2: 标题（Noto Serif SC 900, clamp 36-72px）+ stat hook "7天"
-  - Layer 3: 叙事段落（hook 句 + detail 句）
-  - Layer 4: Before → After 堆叠卡片（灰底删除线 vs 白底红色高亮）
-  - Layer 5: Section nav（4个 skillTag 锚点按钮，滚动到对应章节）
-  - 入场动画：fadeUp + lineGrow，staggered delay 0.1s-0.55s
-- Header: 危机接管者 / 跨部门8人 / 项目已失控，合同悬而未决
+
+- Header: 危机接管者 / 核心15人，协调近百人 / 公司首个长线项目
 - skillTags: 系统诊断, 约束下决策, 流程设计, AI落地
-- 数据字段：heroStat, heroNarrative（仅 Project 1）
+- heroStat: "7天" / heroNarrative: hook + detail
+- Layer 4: Before→After 堆叠卡片
 - 图片：3张截图 + 2个SVG插图（InfoHub, Iteration Flow）
-- 状态：完成
 
 ### Case 2 — 客户说改UI，但UI不是问题 ✅
+
 - Header: 自发介入者 / 跨5个部门联动 / 客户病急投医，方向不明
 - skillTags: 问题重定义, 信任策略, 用户研究, 分阶段落地
+- heroStat: "15×" / heroMetrics: [30+ 用户访谈, 全站 逐页走查, 未收费 主动交付]
+- Layer 4: 3列 Metrics 卡片
 - 图片：6张截图（3旧3新）+ 2个SVG插图（诊断漏斗图, 三期递进图）
-- 状态：完成
 
 ### Case 3 — AI落地最难的部分，不是技术 ✅
+
 - Header: AI产品负责人 / 2人（我+1名实习生）/ 无人要求，自主立项
 - skillTags: 场景识别, 可行性判断, 迭代落地, 执行韧性
+- heroStat: "2人" / heroMetrics: [18 Languages, 5 Iteration steps, 4 Business scenarios]
+- Layer 4: 3列 Metrics 卡片
 - 图片：6张截图 + 1个SVG插图（迭代流程图）
-- 状态：完成
 
 ## 已完成的优化
 
@@ -131,6 +146,9 @@ skillTagJumps: {
 - [x] 全局禁用文本选择 + 光标样式修复
 - [x] 设计系统更新：背景 `#f5f2ed`、强调色 `#c4422b`、字体切换到 Noto 系列
 - [x] Project 1 Hero 重构：5层杂志化布局 + fadeUp 入场动画
+- [x] Project 2/3 Hero 统一：同样5层布局，Layer 4 用 Metrics 卡片，各自装饰性 SVG
+- [x] 动画重置修复：`key={project.id}` 强制 remount
+- [x] 首页 Hero 重构：thread/needle SVG 动画穿过标题文字
 
 ## 开发命令
 

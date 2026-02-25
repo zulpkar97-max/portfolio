@@ -65,6 +65,7 @@ const PROJECTS = [
       hook: "春节7天，从零搭出一套协作系统，救回百万合同。",
       detail: "之后又在同一项目里推动了公司首个AI智能体上线——将互相指责、信息淹没的混乱局面，转化为权责清晰、状态可追溯的协作流程。",
     },
+    heroTitleLines: ["不是人的问题，", "是系统的问题"],
     illustrations: [
       { name: "双轨时间轴", type: "时间线", note: "覆盖从危机诊断到AI上线的完整双线叙事" },
       { name: "六模块信息枢纽", type: "架构图", note: "覆盖协作系统的信息流动设计逻辑" },
@@ -167,6 +168,17 @@ const PROJECTS = [
       "用户研究": { scrollTo: 18, borderRange: [17, 21], keySentence: "走查能看到产品，看不到人", keyBlock: 18 },
       "分阶段落地": { scrollTo: 23, borderRange: [22, 29], keySentence: "不是三选一，是分阶段全做", keyBlock: 25 },
     },
+    heroStat: { number: "15×", unit: "商单价值增长" },
+    heroNarrative: {
+      hook: "订单写的是UI改版，最后交出去的是一份完整的产品重构规划。",
+      detail: "我在交付UI方案的同时，自费走查了全站、访谈了30多位用户——发现真正的问题不在界面，而在产品方向。最后交出去的不只是一套界面，是一份让客户从\u201C病急投医\u201D变成\u201C方向清晰\u201D的完整规划。",
+    },
+    heroMetrics: [
+      { value: "30+", label: "用户访谈", highlight: true },
+      { value: "全站", label: "逐页走查" },
+      { value: "未收费", label: "主动交付" },
+    ],
+    heroTitleLines: ["客户说改UI，", "但UI不是问题"],
     illustrations: [
       { name: "诊断漏斗图", type: "漏斗图", note: "覆盖诊断链（从表象到根因）" },
       { name: "三期递进图", type: "路线图", note: "覆盖落地路径和商业结果" },
@@ -248,6 +260,17 @@ const PROJECTS = [
       "迭代落地": { scrollTo: 7, borderRange: [5, 18], keySentence: "这不是一个给政企部门用的小工具，而是需要支持文件级批量处理的通用翻译系统", keyBlock: 10 },
       "执行韧性": { scrollTo: 20, borderRange: [20, 21], keySentence: "AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」", keyBlock: 20 },
     },
+    heroStat: { number: "2人", unit: "自主立项 · 从零到上线" },
+    heroNarrative: {
+      hook: "没人要求，没有预算，带一个实习生做出了公司的18语种翻译产品。",
+      detail: "做完公司第一个AI产品后，一场内部培训的调研让我发现了被忽视的痛点——跨国业务的18语种翻译全靠分包，成本高、对接乱。从零搞定再到落地成品。",
+    },
+    heroMetrics: [
+      { value: "18", label: "Languages supported", highlight: true },
+      { value: "5", label: "Iteration steps" },
+      { value: "4", label: "Business scenarios" },
+    ],
+    heroTitleLines: ["AI落地最难的部分，", "不是技术"],
     illustrations: [
       { name: "线性迭代流程图", type: "流程图", note: "从MVP到business-ready的五步迭代路径与关键决策节点" },
     ],
@@ -467,6 +490,70 @@ function HomePage({ onNavigate, isMobile }) {
   const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
   const [pressedId, setPressedId] = useState(null);
 
+  // Thread animation
+  const heroRef = useRef(null);
+  const titleRef = useRef(null);
+  const aiRef = useRef(null);
+  const [threadSvg, setThreadSvg] = useState({ viewBox: "0 0 100 100", content: "" });
+
+  useEffect(() => {
+    if (isMobile) return;
+    let resizeTimer;
+    const generateThread = () => {
+      const hero = heroRef.current;
+      const title = titleRef.current;
+      const aiSpan = aiRef.current;
+      if (!hero || !title || !aiSpan) return;
+      const heroRect = hero.getBoundingClientRect();
+      const titleRect = title.getBoundingClientRect();
+      const aiRect = aiSpan.getBoundingClientRect();
+      const svgW = heroRect.width;
+      const svgH = heroRect.height;
+      const titleTop = titleRect.top - heroRect.top;
+      const lineHeight = titleRect.height / 3;
+      const gap1Y = titleTop + lineHeight * 0.95;
+      const gap2Y = titleTop + lineHeight * 1.95;
+      const aiCenterY = aiRect.top - heroRect.top + aiRect.height / 2;
+      const aiRight = aiRect.right - heroRect.left;
+      const titleLeft = titleRect.left - heroRect.left;
+      const titleRight = titleRect.right - heroRect.left;
+      const startX = 40;
+      const startY = titleTop - 30;
+      const pts = [
+        { x: startX, y: startY },
+        { x: titleRight + 40, y: titleTop + lineHeight * 0.3 },
+        { x: titleLeft - 50, y: gap1Y },
+        { x: titleRight + 60, y: gap1Y + lineHeight * 0.4 },
+        { x: titleLeft - 30, y: gap2Y },
+        { x: aiRight + 50, y: gap2Y + lineHeight * 0.3 },
+        { x: aiRight + 16, y: aiCenterY },
+      ];
+      let d = `M ${pts[0].x} ${pts[0].y}`;
+      for (let i = 1; i < pts.length; i++) {
+        const prev = pts[i - 1], curr = pts[i];
+        const cpx = prev.x + (curr.x - prev.x) * 0.5;
+        d += ` C ${cpx} ${prev.y}, ${cpx} ${curr.y}, ${curr.x} ${curr.y}`;
+      }
+      let stitches = "";
+      [2, 4].forEach((idx, i) => {
+        const p = pts[idx], len = 12, angle = Math.PI * 0.3;
+        const dx = Math.cos(angle) * len, dy = Math.sin(angle) * len;
+        for (let j = -1; j <= 1; j++) {
+          const ox = j * 14, delay = 0.8 + i * 0.6 + j * 0.1;
+          stitches += `<line class="stitch" x1="${p.x+ox-dx/2}" y1="${p.y-dy/2}" x2="${p.x+ox+dx/2}" y2="${p.y+dy/2}" style="animation-delay:${delay}s"/>`;
+        }
+      });
+      setThreadSvg({
+        viewBox: `0 0 ${svgW} ${svgH}`,
+        content: `<path class="thread-line-shadow" d="${d}"/><path class="thread-line" d="${d}"/>${stitches}<g class="needle"><circle class="needle-dot" cx="${aiRight+16}" cy="${aiCenterY}" r="3.5"/><line class="needle-tail" x1="${aiRight+16}" y1="${aiCenterY}" x2="${aiRight+38}" y2="${aiCenterY-10}"/></g>`,
+      });
+    };
+    document.fonts.ready.then(generateThread);
+    const handleResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(generateThread, 150); };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isMobile]);
+
   return (
     <div
       style={{ width: "100%", position: "relative" }}
@@ -494,56 +581,62 @@ function HomePage({ onNavigate, isMobile }) {
           }}
         />
       )}
-      {/* === Hero/Tagline === */}
-      <div style={{ maxWidth: maxW, margin: "0 auto", padding: isMobile ? "24px 16px 0" : "40px 40px 0", textAlign: "center" }}>
-        <h1 style={{
-          margin: "0 auto",
-          maxWidth: 580,
-          fontFamily: FONT_DISPLAY,
-          lineHeight: 1.5,
-        }}>
-          <span style={{
-            fontSize: isMobile ? 16 : 20,
-            fontWeight: 400,
-            color: "#8A8276",
-            letterSpacing: "0.02em",
-          }}>{"产品、设计、项目管理、客户 \u00B7\u00B7\u00B7  收拢成一个 "}</span>
-          <span style={{
-            fontSize: isMobile ? 16 : 20,
-            fontWeight: 700,
-            color: "#000",
-          }}>{"PM"}</span>
-          <span style={{
-            fontSize: isMobile ? 16 : 20,
-            fontWeight: 400,
-            color: "#8A8276",
-          }}>{" 底座"}</span>
-          <br />
-          <span style={{
-            fontSize: isMobile ? 24 : 30,
-            fontWeight: 400,
-            color: "#2A2A2A",
-          }}>{"下一步方向："}</span>
-          <span style={{
-            fontSize: isMobile ? 36 : 48,
-            fontWeight: 700,
-            color: "#f5f2ed",
-            backgroundColor: "#111111",
-            padding: "0 14px 0 10px",
-            display: "inline-block",
-            lineHeight: 1.2,
-          }}>{"AI"}</span>
-        </h1>
-      </div>
+      {/* === Hero with Thread Animation === */}
+      <div
+        ref={heroRef}
+        style={{
+          position: "relative",
+          minHeight: isMobile ? "auto" : "calc(100vh - 80px)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          paddingTop: isMobile ? 40 : "12vh",
+          paddingLeft: isMobile ? 24 : 48,
+          paddingRight: isMobile ? 24 : 48,
+          textAlign: "center",
+        }}
+      >
+        {/* Thread SVG — desktop only */}
+        {!isMobile && threadSvg.content && (
+          <svg
+            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none" }}
+            viewBox={threadSvg.viewBox}
+            preserveAspectRatio="none"
+            dangerouslySetInnerHTML={{ __html: threadSvg.content }}
+          />
+        )}
 
-      {/* === Curatorial line — belongs to card section, not hero === */}
-      <div style={{ maxWidth: maxW, margin: "0 auto", padding: isMobile ? "0 16px" : "0 40px" }}>
+        <div style={{
+          fontFamily: FONT_MONO, fontSize: 14, color: "#6b6560",
+          letterSpacing: "0.08em", marginBottom: 32,
+          position: "relative", zIndex: 2,
+          opacity: 0, animation: isMobile ? "fadeUp 0.8s ease-out 0.1s forwards" : "fadeUp 0.8s ease-out 0.4s forwards",
+        }}>
+          {"Product Operations \u00B7 5 years"}
+        </div>
+
+        <h1
+          ref={titleRef}
+          style={{
+            fontFamily: FONT_DISPLAY,
+            fontSize: isMobile ? 32 : "clamp(32px, 5vw, 52px)",
+            fontWeight: 900, lineHeight: 1.55,
+            letterSpacing: "0.04em",
+            position: "relative", zIndex: 2, margin: 0,
+            opacity: 0, animation: isMobile ? "fadeUp 0.9s ease-out 0.2s forwards" : "fadeUp 0.9s ease-out 0.6s forwards",
+          }}
+        >
+          {"产品、设计、项目管理、客户"}<br />
+          {"收拢成一个 PM 底座，"}<br />
+          {"下一步方向："}
+          <span ref={aiRef} style={{ color: ACCENT }}>{"AI"}</span>
+        </h1>
+
         <p style={{
-          fontSize: 12, color: "#8A8276", fontWeight: 500,
-          margin: 0, lineHeight: 1.5, marginBottom: isMobile ? 16 : 24,
-          letterSpacing: "0.04em",
-          paddingTop: 0,
-          marginTop: isMobile ? 24 : 36,
+          marginTop: 36, fontSize: 15, color: "#6b6560",
+          letterSpacing: "0.02em",
+          position: "relative", zIndex: 2,
+          opacity: 0, animation: isMobile ? "fadeUp 0.7s ease-out 0.4s forwards" : "fadeUp 0.7s ease-out 2.5s forwards",
         }}>
           {"三个项目，做的事越来越不一样——但切入点始终一样：先把问题拆对。"}
         </p>
@@ -1899,14 +1992,22 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       <ReadingProgressBar />
       <SideNav sections={project.skillTags} activeSectionIdx={activeScrollSection} onNavigate={onNavigate} onSectionClick={handleTagClick} />
       <MobileProgressNav headings={sectionHeadings} />
-      {/* === Hero Section === */}
-      {project.id === 1 ? (
-        /* ===== NEW 5-LAYER HERO for Project 1 ===== */
-        <section style={{ position: "relative", maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 24px" : "0 40px", paddingTop: isMobile ? 32 : 56 }}>
+      {/* ===== 5-LAYER HERO for ALL projects ===== */}
+      <section key={project.id} style={{ position: "relative", maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 24px" : "0 40px", paddingTop: isMobile ? 32 : 56 }}>
 
-          {/* Decorative SVG — desktop only */}
-          {!isMobile && (
-            <div style={{ position: "absolute", top: 24, right: 48, width: 200, height: 200, opacity: 0.06, pointerEvents: "none", zIndex: 0, animation: "fadeUp 1s ease-out 0.6s both" }}>
+        {/* Decorative SVG — desktop only */}
+        {!isMobile && (
+          <div style={{
+            position: "absolute",
+            top: project.id === 2 ? 20 : 24,
+            right: 48,
+            width: project.id === 2 ? 220 : 200,
+            height: project.id === 2 ? 220 : 200,
+            opacity: project.id === 2 ? 0.05 : 0.06,
+            pointerEvents: "none", zIndex: 0,
+            animation: "fadeUp 1s ease-out 0.6s both",
+          }}>
+            {project.id === 1 && (
               <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0" y="0" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
                 <rect x="70" y="0" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
@@ -1918,73 +2019,110 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                 <rect x="70" y="140" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
                 <rect x="140" y="140" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
               </svg>
-            </div>
-          )}
-
-          {/* Layer 1: Project number + metadata */}
-          <div style={{ display: "flex", alignItems: "center", gap: 24, marginBottom: 40, animation: "fadeUp 0.6s ease-out 0.1s both" }}>
-            <div style={{ fontFamily: FONT_MONO, fontSize: isMobile ? 48 : 64, fontWeight: 300, color: "#d4cfc7", lineHeight: 1, letterSpacing: "-0.03em" }}>
-              {project.navName}
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 4, paddingLeft: 24, borderLeft: "1px solid #d4cfc7" }}>
-              {[
-                ["Role", project.roleLine.split(" // ")[0]],
-                ["Team", project.teamInfo],
-                ["Context", project.context],
-              ].map(([label, val], i) => (
-                <div key={i} style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: "#8a857d" }}>
-                  {label}<span style={{ color: "#1a1815", fontFamily: FONT_BODY, fontWeight: 500, textTransform: "none", letterSpacing: 0, marginLeft: 8, fontSize: 13 }}>{val}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Layer 2: Title + stat hook */}
-          <div style={{ position: "relative", marginBottom: 48, animation: "fadeUp 0.8s ease-out 0.2s both" }}>
-            <div style={{ position: "relative" }}>
-              <h1 style={{
-                fontFamily: FONT_DISPLAY, fontWeight: 900,
-                fontSize: isMobile ? 36 : "clamp(36px, 5.5vw, 72px)",
-                lineHeight: 1.15, letterSpacing: "-0.02em",
-                maxWidth: 780, margin: 0, position: "relative",
-                paddingBottom: 20,
-              }}>
-                {"不是人的问题，"}
-                <br />
-                {"是系统的问题"}
-              </h1>
-              {/* Red underline */}
-              <div style={{ width: 64, height: 4, background: ACCENT, animation: "lineGrow 0.6s ease-out 0.8s both" }} />
-            </div>
-            {/* Stat hook — right side on desktop, below title on mobile */}
-            {project.heroStat && (
-              <div style={{
-                ...(isMobile ? { marginTop: 24, textAlign: "left" } : { position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", textAlign: "right" }),
-                animation: "fadeUp 0.8s ease-out 0.5s both",
-              }}>
-                <div style={{ fontFamily: FONT_DISPLAY, fontSize: isMobile ? 48 : "clamp(48px, 7vw, 96px)", fontWeight: 900, lineHeight: 1, color: ACCENT, letterSpacing: "-0.03em" }}>
-                  {project.heroStat.number}
-                </div>
-                <div style={{ fontFamily: FONT_MONO, fontSize: 13, color: "#8a857d", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 4 }}>
-                  {project.heroStat.unit}
-                </div>
-              </div>
+            )}
+            {project.id === 2 && (
+              <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="110" cy="110" r="108" stroke="#1a1815" strokeWidth="1"/>
+                <circle cx="110" cy="110" r="85" stroke="#1a1815" strokeWidth="1"/>
+                <circle cx="110" cy="110" r="62" stroke="#1a1815" strokeWidth="1"/>
+                <circle cx="110" cy="110" r="39" stroke="#1a1815" strokeWidth="1.5"/>
+                <circle cx="110" cy="110" r="16" fill="#1a1815"/>
+                <line x1="110" y1="0" x2="110" y2="70" stroke="#1a1815" strokeWidth="0.75"/>
+                <line x1="110" y1="150" x2="110" y2="220" stroke="#1a1815" strokeWidth="0.75"/>
+                <line x1="0" y1="110" x2="70" y2="110" stroke="#1a1815" strokeWidth="0.75"/>
+                <line x1="150" y1="110" x2="220" y2="110" stroke="#1a1815" strokeWidth="0.75"/>
+              </svg>
+            )}
+            {project.id === 3 && (
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="30" r="8" fill="#1a1815"/>
+                <circle cx="40" cy="100" r="6" stroke="#1a1815" strokeWidth="1.5"/>
+                <circle cx="100" cy="100" r="12" fill="#1a1815"/>
+                <circle cx="160" cy="100" r="6" stroke="#1a1815" strokeWidth="1.5"/>
+                <circle cx="60" cy="170" r="6" stroke="#1a1815" strokeWidth="1.5"/>
+                <circle cx="140" cy="170" r="6" stroke="#1a1815" strokeWidth="1.5"/>
+                <circle cx="170" cy="40" r="4" stroke="#1a1815" strokeWidth="1"/>
+                <circle cx="30" cy="50" r="4" stroke="#1a1815" strokeWidth="1"/>
+                <line x1="100" y1="38" x2="100" y2="88" stroke="#1a1815" strokeWidth="1"/>
+                <line x1="46" y1="100" x2="88" y2="100" stroke="#1a1815" strokeWidth="1"/>
+                <line x1="112" y1="100" x2="154" y2="100" stroke="#1a1815" strokeWidth="1"/>
+                <line x1="94" y1="110" x2="66" y2="164" stroke="#1a1815" strokeWidth="0.75"/>
+                <line x1="106" y1="110" x2="134" y2="164" stroke="#1a1815" strokeWidth="0.75"/>
+                <line x1="100" y1="30" x2="170" y2="40" stroke="#1a1815" strokeWidth="0.5"/>
+                <line x1="100" y1="30" x2="30" y2="50" stroke="#1a1815" strokeWidth="0.5"/>
+                <line x1="40" y1="100" x2="30" y2="50" stroke="#1a1815" strokeWidth="0.5"/>
+                <line x1="160" y1="100" x2="170" y2="40" stroke="#1a1815" strokeWidth="0.5"/>
+                <line x1="60" y1="170" x2="140" y2="170" stroke="#1a1815" strokeWidth="0.5"/>
+              </svg>
             )}
           </div>
+        )}
 
-          {/* Layer 3: Narrative */}
-          {project.heroNarrative && (
-            <div style={{ maxWidth: 680, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.35s both" }}>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: "#1a1815" }}>
-                {project.heroNarrative.hook}
+        {/* Layer 1: Project number + metadata */}
+        <div style={{ display: "flex", alignItems: "center", gap: 24, marginBottom: 40, animation: "fadeUp 0.6s ease-out 0.1s both" }}>
+          <div style={{ fontFamily: FONT_MONO, fontSize: isMobile ? 48 : 64, fontWeight: 300, color: "#d4cfc7", lineHeight: 1, letterSpacing: "-0.03em" }}>
+            {project.navName}
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4, paddingLeft: 24, borderLeft: "1px solid #d4cfc7" }}>
+            {[
+              ["Role", project.roleLine.split(" // ")[0]],
+              ["Team", project.teamInfo],
+              ["Context", project.context],
+            ].map(([label, val], i) => (
+              <div key={i} style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: "#8a857d" }}>
+                {label}<span style={{ color: "#1a1815", fontFamily: FONT_BODY, fontWeight: 500, textTransform: "none", letterSpacing: 0, marginLeft: 8, fontSize: 13 }}>{val}</span>
               </div>
-              <div style={{ fontSize: 15, lineHeight: 1.8, color: "#8a857d", fontWeight: 300 }}>
-                {project.heroNarrative.detail}
+            ))}
+          </div>
+        </div>
+
+        {/* Layer 2: Title + stat hook */}
+        <div style={{ position: "relative", marginBottom: 48, animation: "fadeUp 0.8s ease-out 0.2s both" }}>
+          <div style={{ position: "relative" }}>
+            <h1 style={{
+              fontFamily: FONT_DISPLAY, fontWeight: 900,
+              fontSize: isMobile ? 36 : "clamp(36px, 5.5vw, 72px)",
+              lineHeight: 1.15, letterSpacing: "-0.02em",
+              maxWidth: 780, margin: 0, position: "relative",
+              paddingBottom: 20,
+            }}>
+              {(project.heroTitleLines || [project.name]).map((line, i, arr) => (
+                <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+              ))}
+            </h1>
+            {/* Red underline */}
+            <div style={{ width: 64, height: 4, background: ACCENT, animation: "lineGrow 0.6s ease-out 0.8s both" }} />
+          </div>
+          {/* Stat hook — right side on desktop, below title on mobile */}
+          {project.heroStat && (
+            <div style={{
+              ...(isMobile ? { marginTop: 24, textAlign: "left" } : { position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", textAlign: "right" }),
+              animation: "fadeUp 0.8s ease-out 0.5s both",
+            }}>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: isMobile ? 48 : "clamp(48px, 7vw, 96px)", fontWeight: 900, lineHeight: 1, color: ACCENT, letterSpacing: "-0.03em" }}>
+                {project.heroStat.number}
+              </div>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 13, color: "#8a857d", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 4 }}>
+                {project.heroStat.unit}
               </div>
             </div>
           )}
+        </div>
 
-          {/* Layer 4: Before → After stacked cards */}
+        {/* Layer 3: Narrative */}
+        {project.heroNarrative && (
+          <div style={{ maxWidth: 680, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.35s both" }}>
+            <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: "#1a1815" }}>
+              {project.heroNarrative.hook}
+            </div>
+            <div style={{ fontSize: 15, lineHeight: 1.8, color: "#8a857d", fontWeight: 300 }}>
+              {project.heroNarrative.detail}
+            </div>
+          </div>
+        )}
+
+        {/* Layer 4: Before/After cards OR Metrics card */}
+        {project.stateBefore ? (
           <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.45s both" }}>
             <div style={{ padding: "28px 36px", background: "#eae7e1", borderRadius: 3, marginRight: isMobile ? 12 : 20 }}>
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#aaa69f", marginBottom: 10 }}>Before</div>
@@ -2007,136 +2145,73 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               </div>
             </div>
           </div>
-
-          {/* Layer 5: Section navigation */}
-          <div style={{ paddingBottom: 48, animation: "fadeUp 0.7s ease-out 0.55s both" }}>
-            <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8a857d", marginBottom: 12 }}>
-              {"跳转至章节"}
-            </div>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              {(project.skillTags || []).map((tag, i) => {
-                const jump = project.skillTagJumps && project.skillTagJumps[tag];
-                return (
-                  <span
-                    key={i}
-                    onClick={() => {
-                      if (jump) {
-                        const el = document.getElementById("body-block-" + jump.scrollTo);
-                        if (el) el.scrollIntoView({ behavior: "smooth" });
-                      }
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = "#1a1815"; e.currentTarget.style.color = "#f5f2ed"; e.currentTarget.style.borderColor = "#1a1815"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#1a1815"; e.currentTarget.style.borderColor = "#d4cfc7"; }}
-                    style={{
-                      display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
-                      fontFamily: FONT_BODY, fontSize: 13, fontWeight: 500,
-                      minWidth: 120, padding: "8px 18px",
-                      color: "#1a1815", cursor: "pointer", textDecoration: "none",
-                      border: "1px solid #d4cfc7", borderRadius: 2,
-                      transition: "all 0.3s",
-                    }}
-                  >
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2"><line x1="6" y1="2" x2="6" y2="10"/><polyline points="3,7 6,10 9,7"/></svg>
-                    {tag}
-                  </span>
-                );
-              })}
-            </div>
+        ) : project.heroMetrics ? (
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+            marginBottom: 64,
+            animation: "fadeUp 0.8s ease-out 0.45s both",
+            background: "#fff",
+            borderRadius: 3,
+            boxShadow: "0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02)",
+            overflow: "hidden",
+          }}>
+            {project.heroMetrics.map((m, i) => (
+              <div key={i} style={{
+                padding: "32px 28px",
+                textAlign: "center",
+                position: "relative",
+                ...(!isMobile && i < project.heroMetrics.length - 1 ? { borderRight: "1px solid #d4cfc7" } : {}),
+                ...(isMobile && i < project.heroMetrics.length - 1 ? { borderBottom: "1px solid #d4cfc7" } : {}),
+              }}>
+                <div style={{ fontFamily: FONT_DISPLAY, fontSize: 36, fontWeight: 900, lineHeight: 1, color: m.highlight ? ACCENT : "#1a1815", marginBottom: 8 }}>
+                  {m.value}
+                </div>
+                <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: "#8a857d", letterSpacing: "0.06em" }}>
+                  {m.label}
+                </div>
+              </div>
+            ))}
           </div>
+        ) : null}
 
-        </section>
-      ) : (
-        /* ===== ORIGINAL HERO for Project 2/3 ===== */
-        <>
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "28px 16px 0" : "40px 0 0" }}>
-          {/* Back link — shown on mobile only */}
-          {isMobile && (
-            <div
-              onClick={() => onNavigate("home")}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#111"; e.currentTarget.style.borderColor = "#111"; e.currentTarget.querySelector("span").style.color = "#f5f2ed"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#f5f2ed"; e.currentTarget.style.borderColor = "#E5E2DC"; e.currentTarget.querySelector("span").style.color = "#666"; }}
-              style={{
-                display: "inline-flex", alignItems: "center", justifyContent: "center",
-                width: 40, height: 40,
-                border: "1px solid #E5E2DC", backgroundColor: "#f5f2ed",
-                cursor: "pointer", marginBottom: 28,
-                transition: "background-color 0.2s ease, border-color 0.2s ease",
-              }}
-            >
-              <span style={{ fontSize: 14, color: "#666", transition: "color 0.2s ease" }}>{"\u2190"}</span>
-            </div>
-          )}
-          <header style={{ marginBottom: 0, paddingBottom: 0 }}>
-            <h1 style={{ fontSize: isMobile ? 24 : 30, fontWeight: 700, margin: 0, color: "#000", lineHeight: 1.2, fontFamily: FONT_DISPLAY, textAlign: "center" }}>
-              {project.name}
-            </h1>
-            <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? 20 : 32, marginTop: 16 }}>
-              {[
-                ["Role", project.roleLine.split(" // ")[0]],
-                ["Team", project.teamInfo || "\u3010\u56E2\u961F\u6784\u6210\u5F85\u5B9A\u3011"],
-                ["Context", project.context || "\u3010\u5F85\u5B9A\u3011"],
-              ].map(([label, val], fi) => (
-                <div key={fi} style={{ textAlign: "center" }}>
-                  <p style={{ fontSize: T.small, color: "#aaa", margin: "0 0 3px", textTransform: "uppercase", letterSpacing: 0.5 }}>{label}</p>
-                  <p style={{ fontSize: T.small, color: "#444", margin: 0, fontWeight: 500 }}>{val}</p>
-                </div>
-              ))}
-            </div>
-            {project.skillTags && project.skillTags.length > 0 && (
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10, justifyContent: "center" }}>
-                {project.skillTags.map((tag, ti) => {
-                  const hasJump = project.skillTagJumps && project.skillTagJumps[tag];
-                  const isActive = activeTagJump && activeTagJump.tag === tag;
-                  return (
-                    <span
-                      key={ti}
-                      onClick={hasJump ? () => handleTagClick(tag) : undefined}
-                      style={{
-                        fontSize: 11,
-                        color: isActive ? "#111" : "#999",
-                        backgroundColor: isActive ? "#E5E2DC" : "#F2EFEA",
-                        borderRadius: 0,
-                        padding: "3px 9px",
-                        lineHeight: 1.5,
-                        cursor: hasJump ? "pointer" : "default",
-                        transition: "background-color 0.2s ease, color 0.2s ease",
-                      }}
-                    >{tag}</span>
-                  );
-                })}
-              </div>
-            )}
-            <p style={{ fontSize: isMobile ? 16 : 17, color: "#555", marginTop: 32, marginBottom: 0, lineHeight: 1.75, textAlign: "center", fontWeight: 400, maxWidth: 500, marginLeft: "auto", marginRight: "auto" }}>{project.summary}</p>
-          </header>
-        </div>
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "16px 16px 0" : "16px 0 0" }}>
-          <div style={{ paddingBottom: 24, marginBottom: 32 }}>
-            {project.metricsMode === "state-change" ? (
-              <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 20 : 0, alignItems: "center" }}>
-                <div style={{ flex: 1, textAlign: "center", borderRight: isMobile ? "none" : "1px solid #E5E2DC", padding: isMobile ? "0" : "0 24px" }}>
-                  <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"Before"}</p>
-                  <p style={{ fontSize: 15, fontWeight: 500, color: "#aaa", margin: 0, lineHeight: 1.5, textDecoration: "line-through" }}>{project.stateBefore}</p>
-                </div>
-                <div style={{ padding: "0 16px", fontSize: 20, color: "#B8B0A3", flexShrink: 0 }}>{"\u2192"}</div>
-                <div style={{ flex: 1, textAlign: "center", padding: isMobile ? "0" : "0 24px" }}>
-                  <p style={{ fontSize: T.small, color: "#999", margin: "0 0 6px", textTransform: "uppercase", letterSpacing: 0.5 }}>{"After"}</p>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: "#111", margin: 0, lineHeight: 1.5 }}>{project.stateAfter}</p>
-                </div>
-              </div>
-            ) : (
-              <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 20 : 0 }}>
-                {project.metrics.map((m, i) => (
-                  <div key={i} style={{ flex: 1, textAlign: "center", borderRight: (!isMobile && i < project.metrics.length - 1) ? "1px solid #E5E2DC" : "none", padding: isMobile ? "0" : "0 24px" }}>
-                    <p style={{ fontSize: T.display, fontWeight: 700, color: "#000", margin: 0, lineHeight: 1.2 }}>{m.number}</p>
-                    <p style={{ fontSize: T.small, color: "#888", marginTop: 4 }}>{m.label}</p>
-                  </div>
-                ))}
-              </div>
-            )}
+        {/* Layer 5: Section navigation */}
+        <div style={{ paddingBottom: 48, animation: "fadeUp 0.7s ease-out 0.55s both" }}>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8a857d", marginBottom: 12 }}>
+            {"跳转至章节"}
+          </div>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {(project.skillTags || []).map((tag, i) => {
+              const jump = project.skillTagJumps && project.skillTagJumps[tag];
+              return (
+                <span
+                  key={i}
+                  onClick={() => {
+                    if (jump) {
+                      const el = document.getElementById("body-block-" + jump.scrollTo);
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#1a1815"; e.currentTarget.style.color = "#f5f2ed"; e.currentTarget.style.borderColor = "#1a1815"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#1a1815"; e.currentTarget.style.borderColor = "#d4cfc7"; }}
+                  style={{
+                    display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
+                    fontFamily: FONT_BODY, fontSize: 13, fontWeight: 500,
+                    minWidth: 120, padding: "8px 18px",
+                    color: "#1a1815", cursor: "pointer", textDecoration: "none",
+                    border: "1px solid #d4cfc7", borderRadius: 2,
+                    transition: "all 0.3s",
+                  }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2"><line x1="6" y1="2" x2="6" y2="10"/><polyline points="3,7 6,10 9,7"/></svg>
+                  {tag}
+                </span>
+              );
+            })}
           </div>
         </div>
-        </>
-      )}
+
+      </section>
 
       {/* === Body === */}
       <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 40px 80px" }}>
