@@ -386,6 +386,7 @@ function TextPlaceholder({ lines = 4 }) {
 
 function Footer({ isMobile }) {
   const maxW = 860;
+  const [hBtn, setHBtn] = useState(null);
   return (
     <footer style={{
       maxWidth: maxW,
@@ -394,10 +395,37 @@ function Footer({ isMobile }) {
       textAlign: "center",
       borderTop: "1px solid #E5E2DC",
     }}>
-      <p style={{ fontSize: T.body, color: "#444", margin: 0, lineHeight: 1.8 }}>
-        {"【邮箱 / LinkedIn，待Carl确认放哪些】"}
-      </p>
-      <p style={{ fontSize: T.small, color: "#ccc", marginTop: 8 }}>{"zulpkar.com"}</p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
+        <a
+          href="mailto:zulpkar97@gmail.com"
+          onMouseEnter={() => setHBtn("email")}
+          onMouseLeave={() => setHBtn(null)}
+          style={{
+            fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
+            padding: "8px 20px", borderRadius: 2, cursor: "pointer",
+            textDecoration: "none", display: "inline-flex", alignItems: "center",
+            border: hBtn === "email" ? "1px solid #1a1815" : "1px solid #d4cfc7",
+            color: hBtn === "email" ? "#f5f2ed" : "#1a1815",
+            backgroundColor: hBtn === "email" ? "#1a1815" : "transparent",
+            transition: "all 0.3s",
+          }}
+        >{"zulpkar97@gmail.com"}</a>
+        <a
+          href="#"
+          onMouseEnter={() => setHBtn("link")}
+          onMouseLeave={() => setHBtn(null)}
+          style={{
+            fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
+            padding: "8px 20px", borderRadius: 2, cursor: "pointer",
+            textDecoration: "none", display: "inline-flex", alignItems: "center",
+            border: hBtn === "link" ? "1px solid #1a1815" : "1px solid #d4cfc7",
+            color: hBtn === "link" ? "#f5f2ed" : "#1a1815",
+            backgroundColor: hBtn === "link" ? "#1a1815" : "transparent",
+            transition: "all 0.3s",
+          }}
+        >{"LinkedIn"}</a>
+      </div>
+      <p style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#d4cfc7", letterSpacing: "0.04em", marginTop: 16 }}>{"zulpkar.com"}</p>
     </footer>
   );
 }
@@ -490,11 +518,18 @@ function HomePage({ onNavigate, isMobile }) {
   const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
   const [pressedId, setPressedId] = useState(null);
 
-  // Thread animation
+  // Hero thread animation
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const aiRef = useRef(null);
   const [threadSvg, setThreadSvg] = useState({ viewBox: "0 0 100 100", content: "" });
+
+  // Footer thread animation
+  const footerZoneRef = useRef(null);
+  const btnEmailRef = useRef(null);
+  const btnLinkedinRef = useRef(null);
+  const detailBelowRef = useRef(null);
+  const [footerThread, setFooterThread] = useState({ viewBox: "0 0 100 100", content: "" });
 
   useEffect(() => {
     if (isMobile) return;
@@ -543,13 +578,74 @@ function HomePage({ onNavigate, isMobile }) {
           stitches += `<line class="stitch" x1="${p.x+ox-dx/2}" y1="${p.y-dy/2}" x2="${p.x+ox+dx/2}" y2="${p.y+dy/2}" style="animation-delay:${delay}s"/>`;
         }
       });
+      const dl = 8000;
+      const dashStyle = `stroke-dasharray:${dl};stroke-dashoffset:${dl}`;
       setThreadSvg({
         viewBox: `0 0 ${svgW} ${svgH}`,
-        content: `<path class="thread-line-shadow" d="${d}"/><path class="thread-line" d="${d}"/>${stitches}<g class="needle"><circle class="needle-dot" cx="${aiRight+16}" cy="${aiCenterY}" r="3.5"/><line class="needle-tail" x1="${aiRight+16}" y1="${aiCenterY}" x2="${aiRight+38}" y2="${aiCenterY-10}"/></g>`,
+        content: `<path class="thread-line-shadow" d="${d}" style="${dashStyle}"/><path class="thread-line" d="${d}" style="${dashStyle}"/>${stitches}<g class="needle"><circle class="needle-dot" cx="${aiRight+16}" cy="${aiCenterY}" r="3.5"/><line class="needle-tail" x1="${aiRight+16}" y1="${aiCenterY}" x2="${aiRight+38}" y2="${aiCenterY-10}"/></g>`,
       });
     };
     document.fonts.ready.then(generateThread);
     const handleResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(generateThread, 150); };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isMobile]);
+
+  // Footer thread generation
+  useEffect(() => {
+    if (isMobile) return;
+    let rt;
+    const generateFooterThread = () => {
+      const zone = footerZoneRef.current;
+      const email = btnEmailRef.current;
+      const linkedin = btnLinkedinRef.current;
+      const detail = detailBelowRef.current;
+      if (!zone || !email || !linkedin || !detail) return;
+      const zoneRect = zone.getBoundingClientRect();
+      const emailRect = email.getBoundingClientRect();
+      const linkedinRect = linkedin.getBoundingClientRect();
+      const detailRect = detail.getBoundingClientRect();
+      const w = zoneRect.width;
+      const h = zoneRect.height;
+      const emailBottom = emailRect.bottom - zoneRect.top;
+      const emailCX = emailRect.left - zoneRect.left + emailRect.width / 2;
+      const linkedinCX = linkedinRect.left - zoneRect.left + linkedinRect.width / 2;
+      const detailTop = detailRect.top - zoneRect.top;
+      const detailCX = detailRect.left - zoneRect.left + detailRect.width / 2;
+      const gap = detailTop - emailBottom;
+      const pts = [
+        { x: emailCX, y: emailBottom + 4 },
+        { x: linkedinCX + 30, y: emailBottom + gap * 0.25 },
+        { x: emailCX - 30, y: emailBottom + gap * 0.5 },
+        { x: linkedinCX + 20, y: emailBottom + gap * 0.75 },
+        { x: detailCX, y: detailTop - 4 },
+      ];
+      let d = `M ${pts[0].x} ${pts[0].y}`;
+      for (let i = 1; i < pts.length; i++) {
+        const prev = pts[i - 1], curr = pts[i];
+        const cpx1 = prev.x + (curr.x - prev.x) * 0.4;
+        const cpy1 = prev.y + (curr.y - prev.y) * 0.1;
+        const cpx2 = curr.x - (curr.x - prev.x) * 0.4;
+        const cpy2 = curr.y - (curr.y - prev.y) * 0.1;
+        d += ` C ${cpx1} ${cpy1}, ${cpx2} ${cpy2}, ${curr.x} ${curr.y}`;
+      }
+      let stitches = "";
+      [1, 3].forEach((idx, i) => {
+        const p = pts[idx], len = 9, angle = Math.PI * 0.35;
+        const dx = Math.cos(angle) * len, dy = Math.sin(angle) * len;
+        for (let j = -1; j <= 1; j++) {
+          const ox = j * 10, delay = 0.8 + i * 0.5 + j * 0.08;
+          stitches += `<line class="stitch-mark" x1="${p.x+ox-dx/2}" y1="${p.y-dy/2}" x2="${p.x+ox+dx/2}" y2="${p.y+dy/2}" style="animation-delay:${delay}s"/>`;
+        }
+      });
+      const endX = pts[pts.length - 1].x, endY = pts[pts.length - 1].y;
+      setFooterThread({
+        viewBox: `0 0 ${w} ${h}`,
+        content: `<path class="thread-weave-shadow" d="${d}"/><path class="thread-weave" d="${d}"/>${stitches}<circle class="thread-endpoint" cx="${pts[0].x}" cy="${pts[0].y}" r="2.5"/><circle class="thread-endpoint" cx="${endX}" cy="${endY}" r="2.5"/><line class="thread-needle-ft" x1="${endX}" y1="${endY}" x2="${endX+12}" y2="${endY+8}"/><g class="thread-pulse-ring"><circle cx="${endX}" cy="${endY}" r="3.5"/></g>`,
+      });
+    };
+    document.fonts.ready.then(generateFooterThread);
+    const handleResize = () => { clearTimeout(rt); rt = setTimeout(generateFooterThread, 150); };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isMobile]);
@@ -601,7 +697,6 @@ function HomePage({ onNavigate, isMobile }) {
           <svg
             style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none" }}
             viewBox={threadSvg.viewBox}
-            preserveAspectRatio="none"
             dangerouslySetInnerHTML={{ __html: threadSvg.content }}
           />
         )}
@@ -610,7 +705,7 @@ function HomePage({ onNavigate, isMobile }) {
           fontFamily: FONT_MONO, fontSize: 14, color: "#6b6560",
           letterSpacing: "0.08em", marginBottom: 32,
           position: "relative", zIndex: 2,
-          opacity: 0, animation: isMobile ? "fadeUp 0.8s ease-out 0.1s forwards" : "fadeUp 0.8s ease-out 0.4s forwards",
+          animation: isMobile ? "fadeUp 0.8s ease-out 0.1s both" : "fadeUp 0.8s ease-out 0.4s both",
         }}>
           {"Product Operations \u00B7 5 years"}
         </div>
@@ -623,7 +718,7 @@ function HomePage({ onNavigate, isMobile }) {
             fontWeight: 900, lineHeight: 1.55,
             letterSpacing: "0.04em",
             position: "relative", zIndex: 2, margin: 0,
-            opacity: 0, animation: isMobile ? "fadeUp 0.9s ease-out 0.2s forwards" : "fadeUp 0.9s ease-out 0.6s forwards",
+            animation: isMobile ? "fadeUp 0.9s ease-out 0.2s both" : "fadeUp 0.9s ease-out 0.6s both",
           }}
         >
           {"产品、设计、项目管理、客户"}<br />
@@ -636,7 +731,7 @@ function HomePage({ onNavigate, isMobile }) {
           marginTop: 36, fontSize: 15, color: "#6b6560",
           letterSpacing: "0.02em",
           position: "relative", zIndex: 2,
-          opacity: 0, animation: isMobile ? "fadeUp 0.7s ease-out 0.4s forwards" : "fadeUp 0.7s ease-out 2.5s forwards",
+          animation: isMobile ? "fadeUp 0.7s ease-out 0.4s both" : "fadeUp 0.7s ease-out 2.5s both",
         }}>
           {"三个项目，做的事越来越不一样——但切入点始终一样：先把问题拆对。"}
         </p>
@@ -841,93 +936,105 @@ function HomePage({ onNavigate, isMobile }) {
         })}
       </div>
 
-      {/* === Footer / Contact section === */}
-      <footer style={{
-        maxWidth: maxW,
-        margin: "0 auto",
-        padding: isMobile ? "24px 16px 28px" : "28px 40px 32px",
+      {/* === Footer CTA === */}
+      <section style={{
         textAlign: "center",
+        padding: isMobile ? "56px 24px 32px" : "80px 48px 40px",
+        position: "relative",
       }}>
-        <h2 style={{
-          fontFamily: FONT_DISPLAY,
-          fontSize: isMobile ? 22 : 26,
-          fontWeight: 400,
-          color: "#2A2A2A",
-          margin: 0,
+        <p style={{
+          fontFamily: FONT_DISPLAY, fontWeight: 400,
+          fontSize: isMobile ? 18 : "clamp(18px, 2.2vw, 24px)",
+          lineHeight: 1.4, color: "#6b6560", marginBottom: 8,
         }}>
-          {"Let's Talk"}
+          {"\u95EE\u9898\u62C6\u5BF9\u4E86\uFF0C\u624D\u503C\u5F97\u52A8\u624B\u3002"}
+        </p>
+        <h2 style={{
+          fontFamily: FONT_DISPLAY, fontWeight: 900,
+          fontSize: isMobile ? 26 : "clamp(26px, 3.8vw, 44px)",
+          lineHeight: 1.3, letterSpacing: "-0.02em", marginBottom: 24,
+        }}>
+          {"\u6211\u5728\u627E\u4E0B\u4E00\u4E2A\u503C\u5F97\u62C6\u7684\u95EE\u9898\u3002"}
         </h2>
         <p style={{
-          fontSize: T.body,
-          color: "#777",
-          marginTop: 12,
-          marginBottom: 24,
-          maxWidth: 520,
-          lineHeight: 1.7,
-          marginLeft: "auto",
-          marginRight: "auto",
+          fontSize: 14, lineHeight: 1.8, color: "#6b6560", fontWeight: 300, marginBottom: 36,
         }}>
-          {"野路子走了近5年，下一步是把经验系统化。"}<br />{"2027年秋季，我准备回到学校。"}
+          <span style={{ color: "#1a1815", fontWeight: 500 }}>{"\u0032\u0030\u0032\u0037\u5E74\u79CB\u5B63"}</span>
+          {"\uFF0C\u6211\u51C6\u5907\u56DE\u5230\u5B66\u6821\uFF0C\u628A\u0035\u5E74\u4EA7\u54C1\u5B9E\u6218\u7CFB\u7EDF\u5316\uFF0C\u4E4B\u540E\u8FDB\u5165\u0041\u0049\u884C\u4E1A\u3002"}
         </p>
-        <div style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 12,
-          justifyContent: "center",
-        }}>
-          <a
-            href="mailto:zulpkar97@gmail.com"
-            onMouseEnter={(e) => { setHoveredBtn("email"); setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
-            onMouseMove={(e) => setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })}
-            onMouseLeave={() => setHoveredBtn(null)}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "8px 18px",
-              borderRadius: 0,
-              border: hoveredBtn === "email" ? "1px solid #111" : "1px solid #2A2A2A",
-              fontSize: T.small,
-              color: hoveredBtn === "email" ? "#fff" : "#2A2A2A",
-              cursor: "pointer",
-              textDecoration: "none",
-              backgroundColor: hoveredBtn === "email" ? "#111" : "transparent",
-              backgroundImage: hoveredBtn === "email"
-                ? `radial-gradient(circle at ${btnPos.x}px ${btnPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))`
-                : "none",
-              transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
-            }}
-          >
-            {"zulpkar97@gmail.com"}
-          </a>
-          <span
-            onMouseEnter={(e) => { setHoveredBtn("link"); setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
-            onMouseMove={(e) => setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })}
-            onMouseLeave={() => setHoveredBtn(null)}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "8px 18px",
-              borderRadius: 0,
-              border: hoveredBtn === "link" ? "1px solid #111" : "1px solid #2A2A2A",
-              fontSize: T.small,
-              color: hoveredBtn === "link" ? "#fff" : "#2A2A2A",
-              cursor: "pointer",
-              backgroundColor: hoveredBtn === "link" ? "#111" : "transparent",
-              backgroundImage: hoveredBtn === "link"
-                ? `radial-gradient(circle at ${btnPos.x}px ${btnPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))`
-                : "none",
-              transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
-            }}
-          >
-            {"【LinkedIn / 个人网站等】"}
-          </span>
+
+        <div ref={footerZoneRef} style={{ position: "relative", display: "inline-block" }}>
+          <div style={{
+            display: "flex", justifyContent: "center", alignItems: "center",
+            gap: isMobile ? 12 : 32,
+            flexDirection: isMobile ? "column" : "row",
+            position: "relative", zIndex: 2,
+          }}>
+            <a
+              ref={btnEmailRef}
+              href="mailto:zulpkar97@gmail.com"
+              onMouseEnter={(e) => { setHoveredBtn("email"); setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
+              onMouseMove={(e) => setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })}
+              onMouseLeave={() => setHoveredBtn(null)}
+              style={{
+                fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
+                padding: "12px 28px", borderRadius: 2, cursor: "pointer",
+                textDecoration: "none", display: "inline-flex", alignItems: "center",
+                border: hoveredBtn === "email" ? "1px solid #1a1815" : "1px solid #d4cfc7",
+                color: hoveredBtn === "email" ? "#f5f2ed" : "#1a1815",
+                backgroundColor: hoveredBtn === "email" ? "#1a1815" : "transparent",
+                transition: "all 0.3s",
+              }}
+            >
+              {"zulpkar97@gmail.com"}
+            </a>
+            <a
+              ref={btnLinkedinRef}
+              href="#"
+              onMouseEnter={(e) => { setHoveredBtn("link"); setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
+              onMouseMove={(e) => setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })}
+              onMouseLeave={() => setHoveredBtn(null)}
+              style={{
+                fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
+                padding: "12px 28px", borderRadius: 2, cursor: "pointer",
+                textDecoration: "none", display: "inline-flex", alignItems: "center",
+                border: hoveredBtn === "link" ? "1px solid #1a1815" : "1px solid #d4cfc7",
+                color: hoveredBtn === "link" ? "#f5f2ed" : "#1a1815",
+                backgroundColor: hoveredBtn === "link" ? "#1a1815" : "transparent",
+                transition: "all 0.3s",
+              }}
+            >
+              {"LinkedIn"}
+            </a>
+          </div>
+
+          <p ref={detailBelowRef} style={{
+            fontSize: 14, lineHeight: 1.6, color: "#6b6560", fontWeight: 300,
+            marginTop: 52, position: "relative", zIndex: 2,
+          }}>
+            {"\u5982\u679C\u4F60\u5BF9\u6211\u7684\u7ECF\u5386\u611F\u5174\u8DA3\uFF0C\u5F88\u4E50\u610F\u804A\u804A\u3002"}
+          </p>
+
+          {/* Footer thread SVG — desktop only */}
+          {!isMobile && footerThread.content && (
+            <svg
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 1, overflow: "visible" }}
+              viewBox={footerThread.viewBox}
+              dangerouslySetInnerHTML={{ __html: footerThread.content }}
+            />
+          )}
         </div>
-        <p style={{ fontSize: T.small, color: "#CCC", marginTop: 28 }}>
+      </section>
+
+      {/* Footer bottom bar */}
+      <div style={{
+        display: "flex", justifyContent: "center",
+        padding: isMobile ? 24 : "32px 48px 24px", marginTop: 64,
+      }}>
+        <span style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#d4cfc7", letterSpacing: "0.04em" }}>
           {"zulpkar.com"}
-        </p>
-      </footer>
+        </span>
+      </div>
     </div>
   );
 }
