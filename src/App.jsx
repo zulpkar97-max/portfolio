@@ -391,6 +391,228 @@ function TextPlaceholder({ lines = 4 }) {
   );
 }
 
+/* ===== Screenshot Inline Card Component (with proper Hooks) ===== */
+function ScreenshotInlineCard({ block, onLightbox }) {
+  const [imgDimensions, setImgDimensions] = useState(null);
+  const containerRef = useRef(null);
+  const [displayHeight, setDisplayHeight] = useState(null);
+
+  const handleImgLoad = (e) => {
+    const { naturalWidth, naturalHeight } = e.target;
+    setImgDimensions({ width: naturalWidth, height: naturalHeight });
+  };
+
+  useEffect(() => {
+    if (imgDimensions && containerRef.current) {
+      const containerWidth = containerRef.current.offsetWidth;
+      const ratio = imgDimensions.height / imgDimensions.width;
+      setDisplayHeight(containerWidth * ratio);
+    }
+  }, [imgDimensions]);
+
+  const isShortImage = displayHeight !== null && displayHeight < 400;
+  const isTallImage = displayHeight !== null && displayHeight > 500;
+
+  return (
+    <div ref={containerRef} style={{ margin: "32px 0", scrollMarginTop: 80 }}>
+      <div style={{
+        background: "#fff",
+        borderRadius: "10px",
+        border: "1px solid #d4cdc2",
+        overflow: "hidden",
+        cursor: "pointer",
+      }} onClick={() => onLightbox()}>
+        <div style={{
+          position: "relative",
+          width: "100%",
+          height: 500,
+          backgroundColor: "#f5f3f0",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
+          {isShortImage && (
+            <img src={block.src} alt={block.label} style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              filter: "blur(45px) brightness(0.65)",
+              transform: "scale(1.05)",
+            }} />
+          )}
+          <img src={block.src} alt={block.label} onLoad={handleImgLoad} style={{
+            position: "relative",
+            zIndex: 1,
+            maxHeight: "100%",
+            maxWidth: "100%",
+            objectFit: "contain",
+            display: "block",
+          }} />
+          {isTallImage && (
+            <>
+              <div style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 120,
+                background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
+                pointerEvents: "none",
+              }} />
+              <div style={{
+                position: "absolute",
+                bottom: 32,
+                left: "50%",
+                transform: "translateX(-50%)",
+                zIndex: 2,
+                backgroundColor: "rgba(0,0,0,0.8)",
+                color: "#fff",
+                padding: "8px 16px",
+                borderRadius: "4px",
+                fontSize: T.small,
+                cursor: "pointer",
+              }}>
+                点击查看完整图
+              </div>
+            </>
+          )}
+        </div>
+        <div style={{
+          padding: "12px 16px",
+          borderTop: "1px solid #e8e3da",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
+          <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{block.label}</p>
+          {block.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{block.note}</p>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ===== Carousel Slide Component (with proper Hooks) ===== */
+function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
+  const [imgDimensions, setImgDimensions] = useState(null);
+  const containerRef = useRef(null);
+  const [displayHeight, setDisplayHeight] = useState(null);
+
+  const handleImgLoad = (e) => {
+    const { naturalWidth, naturalHeight } = e.target;
+    setImgDimensions({ width: naturalWidth, height: naturalHeight });
+  };
+
+  useEffect(() => {
+    if (imgDimensions && containerRef.current) {
+      const containerWidth = containerRef.current.offsetWidth;
+      const ratio = imgDimensions.height / imgDimensions.width;
+      setDisplayHeight(containerWidth * ratio);
+    }
+  }, [imgDimensions]);
+
+  const isShortImage = displayHeight !== null && displayHeight < 400;
+  const isTallImage = displayHeight !== null && displayHeight > 500;
+
+  return (
+    <div
+      ref={containerRef}
+      onClick={() => { if (isCenter && item.src) { onLightbox(); } else { onClick(); } }}
+      style={{
+        position: "absolute",
+        width: "70%",
+        maxWidth: 550,
+        cursor: isCenter ? "zoom-in" : "pointer",
+        transition: "all 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
+        ...posStyle
+      }}
+    >
+      <div style={{
+        background: "#fff",
+        borderRadius: "10px",
+        border: "1px solid #d4cdc2",
+        overflow: "hidden",
+        boxShadow: isCenter ? "0 8px 32px rgba(0,0,0,0.12)" : "none",
+      }}>
+        <div style={{
+          position: "relative",
+          width: "100%",
+          height: 500,
+          backgroundColor: "#f5f3f0",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
+          {isShortImage && (
+            <img src={item.src} alt={item.label} style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              filter: "blur(45px) brightness(0.65)",
+              transform: "scale(1.05)",
+            }} />
+          )}
+          {item.src ? (
+            <img src={item.src} alt={item.label} onLoad={handleImgLoad} style={{
+              position: "relative",
+              zIndex: 1,
+              maxHeight: "100%",
+              maxWidth: "100%",
+              objectFit: "contain",
+              display: "block",
+            }} />
+          ) : (
+            <span style={{ fontSize: 13, color: "#B8B0A3" }}>[ {item.label} ]</span>
+          )}
+          {isTallImage && (
+            <>
+              <div style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 120,
+                background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
+                pointerEvents: "none",
+              }} />
+              <div style={{
+                position: "absolute",
+                bottom: 32,
+                left: "50%",
+                transform: "translateX(-50%)",
+                zIndex: 2,
+                backgroundColor: "rgba(0,0,0,0.8)",
+                color: "#fff",
+                padding: "8px 16px",
+                borderRadius: "4px",
+                fontSize: T.small,
+              }}>
+                点击查看完整图
+              </div>
+            </>
+          )}
+        </div>
+        <div style={{
+          padding: "12px 16px",
+          borderTop: "1px solid #e8e3da",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
+          <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
+          {item.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{item.note}</p>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Footer({ isMobile }) {
   const maxW = 860;
   const [hBtn, setHBtn] = useState(null);
@@ -2496,7 +2718,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     onClick={() => setCarouselActive((prev) => (prev - 1 + total) % total)}
                     style={{
                       position: "absolute",
-                      left: -50,
+                      left: 12,
                       top: "50%",
                       transform: "translateY(-50%)",
                       zIndex: 10,
@@ -2525,126 +2747,15 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     {items.map((item, ii) => {
                       const pos = getPos(ii);
                       const isCenter = pos === "center";
-                      const [imgDimensions, setImgDimensions] = useState(null);
-                      const handleImgLoad = (e) => {
-                        const { naturalWidth, naturalHeight } = e.target;
-                        setImgDimensions({ width: naturalWidth, height: naturalHeight });
-                      };
-
-                      const isShortImage = imgDimensions && imgDimensions.height < 400;
-                      const isTallImage = imgDimensions && imgDimensions.height > 500;
-
                       return (
-                        <div
+                        <CarouselSlide
                           key={ii}
-                          onClick={() => { if (isCenter && item.src) { setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />); } else { setCarouselActive(ii); } }}
-                          style={{
-                            position: "absolute",
-                            width: "70%",
-                            maxWidth: 550,
-                            cursor: isCenter ? "zoom-in" : "pointer",
-                            transition: "all 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
-                            ...posStyles[pos]
-                          }}
-                        >
-                          {/* Card container */}
-                          <div style={{
-                            background: "#fff",
-                            borderRadius: "10px",
-                            border: "1px solid #d4cdc2",
-                            overflow: "hidden",
-                            boxShadow: isCenter ? "0 8px 32px rgba(0,0,0,0.12)" : "none",
-                          }}>
-                            {/* Image container - 500px height with smart detection */}
-                            <div style={{
-                              position: "relative",
-                              width: "100%",
-                              height: 500,
-                              backgroundColor: "#f5f3f0",
-                              overflow: "hidden",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}>
-                              {/* Background layer - only for short images */}
-                              {isShortImage && (
-                                <img
-                                  src={item.src}
-                                  alt={item.label}
-                                  style={{
-                                    position: "absolute",
-                                    inset: 0,
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                    filter: "blur(24px) brightness(0.85)",
-                                    transform: "scale(1.05)",
-                                  }}
-                                />
-                              )}
-
-                              {/* Main image */}
-                              {item.src ? (
-                                <img
-                                  src={item.src}
-                                  alt={item.label}
-                                  onLoad={handleImgLoad}
-                                  style={{
-                                    position: "relative",
-                                    zIndex: 1,
-                                    maxHeight: "100%",
-                                    maxWidth: "100%",
-                                    objectFit: "contain",
-                                    display: "block",
-                                  }}
-                                />
-                              ) : (
-                                <span style={{ fontSize: 13, color: "#B8B0A3" }}>[ {item.label} ]</span>
-                              )}
-
-                              {/* Gradient overlay + button for tall images */}
-                              {isTallImage && (
-                                <>
-                                  <div style={{
-                                    position: "absolute",
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                    height: 120,
-                                    background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
-                                    pointerEvents: "none",
-                                  }} />
-                                  <div style={{
-                                    position: "absolute",
-                                    bottom: 32,
-                                    left: "50%",
-                                    transform: "translateX(-50%)",
-                                    zIndex: 2,
-                                    backgroundColor: "rgba(0,0,0,0.8)",
-                                    color: "#fff",
-                                    padding: "8px 16px",
-                                    borderRadius: "4px",
-                                    fontSize: T.small,
-                                  }}>
-                                    点击查看完整图
-                                  </div>
-                                </>
-                              )}
-                            </div>
-
-                            {/* Bottom label bar */}
-                            <div style={{
-                              padding: "12px 16px",
-                              borderTop: "1px solid #e8e3da",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                            }}>
-                              <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
-                              {item.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{item.note}</p>}
-                            </div>
-                          </div>
-                        </div>
+                          item={item}
+                          isCenter={isCenter}
+                          posStyle={posStyles[pos]}
+                          onLightbox={() => setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />)}
+                          onClick={() => setCarouselActive(ii)}
+                        />
                       );
                     })}
                   </div>
@@ -2654,7 +2765,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     onClick={() => setCarouselActive((prev) => (prev + 1) % total)}
                     style={{
                       position: "absolute",
-                      right: -50,
+                      right: 12,
                       top: "50%",
                       transform: "translateY(-50%)",
                       zIndex: 10,
@@ -2820,115 +2931,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "screenshot-inline") {
             if (block.src) {
-              const [imgDimensions, setImgDimensions] = useState(null);
-              const handleImgLoad = (e) => {
-                const { naturalWidth, naturalHeight } = e.target;
-                setImgDimensions({ width: naturalWidth, height: naturalHeight });
-              };
-
-              const isShortImage = imgDimensions && imgDimensions.height < 400;
-              const isTallImage = imgDimensions && imgDimensions.height > 500;
-
               return (
-                <div key={i} id={blockId} style={{ margin: "32px 0", scrollMarginTop: 80 }}>
-                  {/* Card container */}
-                  <div style={{
-                    background: "#fff",
-                    borderRadius: "10px",
-                    border: "1px solid #d4cdc2",
-                    overflow: "hidden",
-                    cursor: "pointer",
-                  }}
-                    onClick={() => setLightboxContent(
+                <div key={i} id={blockId}>
+                  <ScreenshotInlineCard
+                    block={block}
+                    onLightbox={() => setLightboxContent(
                       <img src={block.src} alt={block.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
                     )}
-                  >
-                    {/* Image container - 500px fixed height */}
-                    <div style={{
-                      position: "relative",
-                      width: "100%",
-                      height: 500,
-                      backgroundColor: "#f5f3f0",
-                      overflow: "hidden",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}>
-                      {/* Background layer - only for short images */}
-                      {isShortImage && (
-                        <img
-                          src={block.src}
-                          alt={block.label}
-                          style={{
-                            position: "absolute",
-                            inset: 0,
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            filter: "blur(24px) brightness(0.85)",
-                            transform: "scale(1.05)",
-                          }}
-                        />
-                      )}
-
-                      {/* Main image */}
-                      <img
-                        src={block.src}
-                        alt={block.label}
-                        onLoad={handleImgLoad}
-                        style={{
-                          position: "relative",
-                          zIndex: 1,
-                          maxHeight: "100%",
-                          maxWidth: "100%",
-                          objectFit: "contain",
-                          display: "block",
-                        }}
-                      />
-
-                      {/* Gradient overlay + button for tall images */}
-                      {isTallImage && (
-                        <>
-                          <div style={{
-                            position: "absolute",
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            height: 120,
-                            background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
-                            pointerEvents: "none",
-                          }} />
-                          <div style={{
-                            position: "absolute",
-                            bottom: 32,
-                            left: "50%",
-                            transform: "translateX(-50%)",
-                            zIndex: 2,
-                            backgroundColor: "rgba(0,0,0,0.8)",
-                            color: "#fff",
-                            padding: "8px 16px",
-                            borderRadius: "4px",
-                            fontSize: T.small,
-                            cursor: "pointer",
-                          }}>
-                            点击查看完整图
-                          </div>
-                        </>
-                      )}
-                    </div>
-
-                    {/* Bottom label bar */}
-                    <div style={{
-                      padding: "12px 16px",
-                      borderTop: "1px solid #e8e3da",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}>
-                      <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{block.label}</p>
-                      {block.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{block.note}</p>}
-                    </div>
-                  </div>
+                  />
                 </div>
               );
             }
