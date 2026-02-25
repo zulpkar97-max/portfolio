@@ -7,6 +7,9 @@ body {
 
 body {
   overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
 }
 
 #root {

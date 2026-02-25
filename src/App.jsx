@@ -597,6 +597,7 @@ function HomePage({ onNavigate, isMobile }) {
                     backgroundImage: isHovered
                       ? `radial-gradient(circle at ${hoverPos.x}px ${hoverPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))`
                       : "none",
+                    cursor: "pointer",
                   }}
                 >
                   {/* Left: large number as visual anchor */}
