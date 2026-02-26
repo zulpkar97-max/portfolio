@@ -50,8 +50,8 @@ const PROJECTS = [
     skillTagJumps: {
       "系统诊断":  { scrollTo: 6,  borderRange: [5, 12],  keySentence: "不是人的问题，是系统的问题。", keyBlock: 11 },
       "约束下决策": { scrollTo: 14, borderRange: [14, 15], keySentence: "零成本、零学习成本、立即见效", keyBlock: 14 },
-      "流程设计":  { scrollTo: 17, borderRange: [17, 22], keySentence: "六个模块不是拍脑袋拆的", keyBlock: 22 },
-      "AI落地":   { scrollTo: 27, borderRange: [26, 35], keySentence: "根因不是模型能力问题，而是知识库的信息架构", keyBlock: 35 },
+      "流程设计":  { scrollTo: 17, borderRange: [17, 24], keySentence: "六个模块不是拍脑袋拆的", keyBlock: 19 },
+      "AI落地":   { scrollTo: 27, borderRange: [26, 35], keySentence: "根因不是模型能力问题，而是知识库的信息架构", keyBlock: 34 },
     },
     context: "公司首个长线项目",
     cardImage: "images/collab-system-interaction.jpg",
@@ -75,7 +75,7 @@ const PROJECTS = [
     bodyStructure: [
       // === 背景 ===
       { type: "heading", text: "背景：一个差点丢掉的百万级合同", navLabel: "背景" },
-      { type: "paragraph", text: "2023年，我所在的公司承接了一个游戏社区平台的全案开发项目。客户是一家头部游戏公司，项目总包约百万，分两期交付，预计周期两年。我的内部核心团队约15人，跨团队协调涉及客户方多个部门，总协调人数近百人。" },
+      { type: "paragraph", text: "2023年，我所在的公司承接了一个游戏社区平台的全案开发项目。客户是一家头部游戏公司，项目总包约百万，分两期交付，预计周期两年。我的内部核心团队约15人，跨团队协调涉及客户方多个部门，总协调人数近百人。我的正式角色是产品运营，但在这个项目中实际承担了从需求诊断、系统设计到客户沟通的全链条产品职能。" },
       { type: "paragraph", text: "这个项目的复杂度远超我们过往经验。公司之前做的都是一两周就能结束的H5活动和小型游戏页面，从未接过这种体量的长线项目。我当时也没有接触过行业内已有的成熟专业协作工具——不知道它们的存在，更没有任何标准化流程的经验可以参照。" },
       { type: "paragraph", text: "一期开发过程中，团队协作迅速恶化。所有沟通靠群聊，关键信息被海量消息淹没；成员之间私聊解决问题，信息无法同步；需求描述模糊导致频繁返工；设计稿和技术文档散落各处，版本混乱；没人说得清谁负责什么，进度也完全不透明。团队情绪很差，频繁争吵，没有人想继续做这个项目。" },
       { type: "paragraph", text: "春节前，客户方的产品负责人对团队专业度提出严重质疑，明确表示考虑终止合作。我只剩7到8天的春节假期来挽回这件事。" },
@@ -110,35 +110,38 @@ const PROJECTS = [
         { name: "迭代发布",           desc: "每次发版前生成发布清单，明确本次上线什么、修复了什么。" },
         { name: "验收走查",           desc: "为每个页面建独立走查表，并列放设计稿和前端还原截图，把主观验收变成可比对、可追溯的结构化流程。" },
       ]},
-      { type: "illustration", index: 1 },
-      { type: "screenshot-inline", label: "飞书多维表格目录结构 + 协作流程图", note: "正文讲六模块系统时", src: "images/collab-system-interaction.jpg" },
+      { type: "illustration", index: 1, initialScale: 1 },
+      { type: "paragraph", text: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。" },
+      { type: "paragraph", text: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。" },
+      { type: "paragraph", text: "结果是：二期交付期间，需求返工率相比一期下降约70%（剩余返工主要来自客户方的主动需求变更，非流程问题）；需求从提出到进入开发流程的响应速度提升约50%；客户方提出的需求实现了100%覆盖——没有任何一条需求在流转中丢失，客户方评价我们的需求管理甚至超过了他们内部团队的标准。差点丢掉的合同被挽回来了，客户签下了二期。" },
+      { type: "paragraph", text: "之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部两周内全面切换，三个月内扩展到全公司五个项目组，最终成为全公司标准SOP。" },
+      { type: "paragraph", text: "后来我才知道，行业内早已有成熟的专业协作工具在做类似的事。我从问题本身出发一步步推导出来的东西，和那些成熟工具的底层逻辑高度一致。这件事让我意识到：解决问题的关键不是知道有什么工具，而是能不能准确诊断出问题的结构，然后用手头有的资源把它解出来。" },
+      { type: "pull-quote", text: "协作系统相关材料图：" },
       { type: "screenshot-carousel", items: [
+        { src: "images/collab-system-interaction.jpg", label: "飞书多维表格目录结构 + 协作流程图", note: "正文讲六模块系统时" },
         { src: "images/collab-doc-structure.png", label: "文档结构", note: "协作系统完整文档架构" },
         { src: "images/collab-flow-design.png", label: "流程设计", note: "执行层流程设计" },
         { src: "images/collab-kanban-running.png", label: "看板运行", note: "系统实际运行状态" },
       ]},
-      { type: "paragraph", text: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。" },
-      { type: "paragraph", text: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。" },
-      { type: "paragraph", text: "结果是：这套协作系统直接支撑了二期的顺利交付，差点丢掉的合同被挽回来了。客户签下了二期。之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部先用，效果验证后其他团队认可跟进，最终成为全公司标准SOP。" },
-      { type: "paragraph", text: "后来我才知道，行业内早已有成熟的专业协作工具在做类似的事。我从问题本身出发一步步推导出来的东西，和那些成熟工具的底层逻辑高度一致。这件事让我意识到：解决问题的关键不是知道有什么工具，而是能不能准确诊断出问题的结构，然后用手头有的资源把它解出来。" },
 
       // === 转折 ===
       { type: "heading", text: "转折：在同一个项目里识别AI落地机会", navLabel: "转折" },
       { type: "paragraph", text: "二期进入查漏补缺阶段时，DeepSeek刚刚发布，成本极低、性能很强。我判断这个技术可以用在社区场景里——如果给微社区接入一个AI攻略助手，能直接提升用户停留时长和使用频率，这正是客户最核心的诉求。" },
       { type: "paragraph", text: "但我没有直接去找客户。我做的第一件事是确认这件事在技术上能不能落地。我绕过了项目经理，直接找技术总监。原因很现实：按这个方案前期肯定亏损，项目经理受限于预算考核，这个想法大概率在萌芽阶段就会被否掉。我需要技术总监帮我确认可行性，也需要他帮忙推动资源支持。" },
       { type: "paragraph", text: "我直接坐到技术总监旁边，一起研究Coze平台的技术文档。我看不懂代码，但我能识别哪些环节可能有技术风险，然后逐一向他确认。确认技术可行后，我做了人力资源预估：前端约1.5人，后端2人。同时梳理了管理端需求——活动管理、英雄信息输入、知识库维护，这些是客户运营必须的能力。" },
+      { type: "screenshot-inline", label: "四层技术架构", note: "技术选型全景", src: "images/nana-tech-architecture-cropped.png", height: "auto", filter: "saturate(0.65) brightness(1.05)", sourceLink: { url: "https://my.feishu.cn/wiki/DXXpwObRhiWZwSkFJrTcBppGncg", text: "查看完整需求文档 ↗" } },
       { type: "paragraph", text: "所有准备工作做完，我才开始跟客户沟通。我预判客户一定会抗拒——外包方提议加新功能，客户的第一反应通常是怀疑动机。所以我的预案策略是：方案足够详细，方向、内容、时间节点全部明确；同时设计退出机制，数据不好随时可以撤，分散客户的决策压力。" },
       { type: "paragraph", text: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。" },
       { type: "paragraph", text: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。" },
-      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "images/nana-ai-chat-trimmed.jpg" },
-      { type: "screenshot-inline", label: "四层技术架构", note: "技术选型全景", src: "images/nana-tech-architecture-cropped.png" },
       { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因不是模型能力问题，而是知识库的信息架构——原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。" },
+      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "images/nana-ai-chat-trimmed.jpg", height: "auto", objectFit: "contain", featured: true },
 
       // === 回头看 ===
       { type: "heading", text: "回头看：这两件事教会我什么", navLabel: "回头看" },
       { type: "paragraph", text: "这个项目里我做了两件性质不同但逻辑相通的事。协作系统是在危机中被动响应——团队要崩了，我必须找到问题并解出来。娜娜是在稳定期主动进攻——我识别到一个技术机会，判断它能创造价值，然后推动它落地。" },
       { type: "paragraph", text: "两件事的共同点是：在每个关键节点，我的判断比我的执行更重要。判断\u201C不是人的问题是系统的问题\u201D决定了协作系统的方向；判断\u201CDeepSeek能用在社区场景\u201D决定了AI线的启动；判断\u201C先找技术总监不找项目经理\u201D决定了娜娜项目能活过萌芽期。" },
-      { type: "paragraph", text: "但这些判断都是靠经验和直觉驱动的，缺少系统性的方法论支撑。我能从零设计一套协作系统，但说不清楚它背后的理论框架；我能识别AI落地机会并推动客户买单，但对AI产品管理的完整知识体系还有明显的缺口。这也是我想进一步深入学习的原因——把散装的实践经验，整合进一个专业的、可复用的框架里。" },
+      { type: "paragraph", text: "但这些判断都是靠经验和直觉驱动的，缺少系统性的方法论支撑。我能从零设计一套协作系统，但说不清楚它背后的理论框架；我能识别AI落地机会并推动客户买单，但对AI产品管理的完整知识体系还有明显的缺口。" },
+      { type: "pull-quote", text: "这也是我想进一步深入学习的原因——把散装的实践经验，整合进一个专业的、可复用的框架里。" },
     ],
     supportingScreenshots: [],
   },
@@ -165,10 +168,10 @@ const PROJECTS = [
     context: "客户病急投医，方向不明",
     skillTags: ["问题重定义", "信任策略", "用户研究", "分阶段落地"],
     skillTagJumps: {
-      "问题重定义": { scrollTo: 6, borderRange: [6, 12], keySentence: "客户的问题不是UI，是产品定位", keyBlock: 12 },
-      "信任策略": { scrollTo: 13, borderRange: [13, 13], keySentence: "先解决客户说的问题，再引出客户没看到的问题", keyBlock: 13 },
-      "用户研究": { scrollTo: 18, borderRange: [17, 21], keySentence: "走查能看到产品，看不到人", keyBlock: 18 },
-      "分阶段落地": { scrollTo: 23, borderRange: [22, 29], keySentence: "不是三选一，是分阶段全做", keyBlock: 25 },
+      "问题重定义": { scrollTo: 6, borderRange: [6, 15], keySentence: "客户的问题不是UI，是产品定位", keyBlock: 15 },
+      "信任策略": { scrollTo: 16, borderRange: [16, 16], keySentence: "先解决客户说的问题，再引出客户没看到的问题", keyBlock: 16 },
+      "用户研究": { scrollTo: 21, borderRange: [20, 24], keySentence: "这个判断需要第三方验证", keyBlock: 21 },
+      "分阶段落地": { scrollTo: 26, borderRange: [25, 32], keySentence: "不是三选一，是分阶段全做", keyBlock: 28 },
     },
     heroStat: { number: "15×", unit: "商单价值增长" },
     heroNarrative: {
@@ -188,7 +191,7 @@ const PROJECTS = [
     bodyStructure: [
       // === 起点 === Block 0-3
       { type: "heading", text: "起点：一个卡住的客户，和一个即时冒出来的念头", navLabel: "起点" },
-      { type: "paragraph", text: "2025年初，一个攻略站项目转到我手上。背景是这样的：客户之前找外包做了一版潮汐守望者游戏攻略站（移动端H5），一期上线后效果不好，想做二期但说不清楚该往哪个方向改。最后给出的需求是\u201C先把UI改一下\u201D——这不是一个明确的产品诉求，更像是找不到方向时退而求其次的兜底选项。起始订单是10万的UI迭代。" },
+      { type: "paragraph", text: "2025年初，一个攻略站项目转到我手上。我的正式角色是产品运营，这个项目最初只是一笔10万的常规UI外包订单。背景是这样的：客户之前找外包做了一版潮汐守望者游戏攻略站（移动端H5），一期上线后效果不好，想做二期但说不清楚该往哪个方向改。最后给出的需求是\u201C先把UI改一下\u201D——这不是一个明确的产品诉求，更像是找不到方向时退而求其次的兜底选项。" },
       { type: "paragraph", text: "听到\u201C潮汐守望者\u201D这个名字的瞬间，我就搜索并下载了游戏。这是职业本能——你要帮一个游戏攻略站做产品判断，不深入理解它服务的游戏生态，所有判断都是空的。" },
       { type: "paragraph", text: "下载游戏后几乎立刻注意到一件事：玩家之间有一个非常活跃的\u201C装备码\u201D分享习惯。在B站、YouTube这些平台上，玩家分享一串代码，其他人在游戏内输入就能直接复制整套英雄装备配置。这是游戏已有的、被玩家高频使用的打通机制。我当时脑子里冒出来一个念头：既然装备能用一串码打通，为什么攻略站的\u201C阵容\u201D不能？这个想法在那一刻就出现了，不是后来分析出来的。但直觉离落地很远，我先把它放着，开始做正事。" },
 
@@ -196,10 +199,13 @@ const PROJECTS = [
       { type: "heading", text: "走查：不是客户要求的，但我判断必须做的事", navLabel: "走查" },
       { type: "paragraph", text: "客户说的是改UI。如果我只按这个需求做，正确的动作是拉一份界面修改清单，报价执行。但我没有这么做。原因很简单：我还不理解这个产品，没有足够的判断力来确认\u201C改UI\u201D是不是真正需要做的事。所以我给自己加了一项不在订单范围内的工作——全站体验走查，从首页到编辑器到收藏到个人中心，逐页记录问题并归类。没有人要求我做这件事。" },
       { type: "paragraph", text: "打开攻略站的第一眼，两个感受同时出现：视觉层面不匹配，这是客观的；更重要的是一种\u201C四不像\u201D感——这个产品既不像一个内容平台，也不像一个工具站，说不清它到底想做什么。直觉层面就不对劲。" },
-      { type: "paragraph", text: "首页走完，判断加重了。问题不在于某个按钮丑或某处配色不对——而是整个页面没有信息优先级。哪些内容重要、哪些次要、用户该按什么顺序看，完全没有引导。功能堆在那里，但堆的逻辑不清楚。UI丑可以换皮，信息架构的混乱说明产品本身没想清楚自己要给用户呈现什么。如果只是UI问题，首页应该是\u201C好看但不好用\u201D或者\u201C丑但逻辑清晰\u201D，不应该是\u201C不知道在说什么\u201D。" },
-      { type: "paragraph", text: "编辑器的问题更直接。攻略站的编辑器不只是给普通用户用的——在这个生态里，真正持续产出内容的人首先是能带来流量的游戏主播，其次是官方的内容运营人员。编辑器是他们的核心生产工具。但整条上传链路的操作逻辑跟游戏内搭阵容的逻辑完全不一致，玩家在游戏里习惯的交互方式到了攻略站变成另一套东西。如果连最核心的内容生产者都觉得难用，产品的问题就不在表面。" },
+      { type: "paragraph", text: "首页走完，判断加重了。问题不在于某个按钮丑或某处配色不对——而是整个页面没有信息优先级。哪些内容重要、哪些次要、用户该按什么顺序看，完全没有引导。功能堆在那里，但堆的逻辑不清楚。" },
+      { type: "pull-quote", text: "UI丑可以换皮，信息架构的混乱说明产品本身没想清楚自己要给用户呈现什么。" },
+      { type: "paragraph", text: "编辑器的问题更直接。攻略站的编辑器不只是给普通用户用的——在这个生态里，真正持续产出内容的人首先是能带来流量的游戏主播，其次是官方的内容运营人员。编辑器是他们的核心生产工具。但整条上传链路的操作逻辑跟游戏内搭阵容的逻辑完全不一致，玩家在游戏里习惯的交互方式到了攻略站变成另一套东西。" },
+      { type: "pull-quote", text: "如果连最核心的内容生产者都觉得难用，产品的问题就不在表面。" },
       { type: "paragraph", text: "走查进行到大约一半的时候，我开始注意到一个反复出现的现象：很多问题表面上各不相同，但底下都是同一种冲突——功能和功能在打架。首页里，内容推荐和筛选工具在抢同一块空间，信息展示和操作入口互相挤压，谁都没有得到合理的优先级。编辑器里，攻略的文字描述流程和阵容的结构化配置被塞在同一条线性链路里，两种完全不同性质的任务被迫共用一套交互逻辑。一个想展示内容，一个想提供工具，但产品没有决定谁先谁后、怎么衔接，所以它们在每个页面里各自为战。" },
-      { type: "paragraph", text: "这个冲突反复出现之后，我才意识到它们不是各自独立的缺陷，是同一个根源。我回到\u201C攻略站\u201D这三个字本身去想：攻略站天然有双重身份，它是眼睛看的（玩家来这里看攻略内容），也是手上用的（玩家要把阵容拿到游戏里去用）。看和用，这两件事必须实现闭环。但当前的产品把这两个角色既没有整合、也没有区分，互相干扰着挤在一起。" },
+      { type: "paragraph", text: "这个冲突反复出现之后，我才意识到它们不是各自独立的缺陷，是同一个根源。我回到\u201C攻略站\u201D这三个字本身去想：攻略站天然有双重身份，它是眼睛看的（玩家来这里看攻略内容），也是手上用的（玩家要把阵容拿到游戏里去用）。看和用，这两件事必须实现闭环。" },
+      { type: "pull-quote", text: "当前的产品把这两个角色既没有整合、也没有区分，互相干扰着挤在一起。" },
       { type: "paragraph", text: "到这里，我之前下载游戏时冒出的那个念头突然有了落点。阵容码不只是一个功能想法——它恰好是连接\u201C看\u201D和\u201C用\u201D的枢纽。主播展示阵容码，玩家看完攻略后输入阵容码，在游戏内直接使用。两个角色通过一串代码实现统一。" },
       { type: "paragraph", text: "我基本确认了两件事：第一，客户的问题不是UI，是产品定位——\u201C内容聚合\u201D和\u201C阵容工具\u201D两个身份没有找到统一的方式；第二，定位之外，执行层面的交互设计基础也出了问题。" },
       { type: "paragraph", text: "但我知道不能一上来就跟客户说\u201C你的问题不是UI是定位\u201D。所以我在走查报告里做了一个刻意的安排：前半部分老老实实标注每一个UI和交互缺陷，配截图、写修复方案，回应客户\u201C先改UI\u201D的原始需求。你拿着这部分找更便宜的外包去改也行。真正的重点在报告后半部分——产品定位分析和分阶段规划。先解决客户说的问题，再引出客户没看到的问题。" },
@@ -207,12 +213,12 @@ const PROJECTS = [
         { src: "images/case2-old-homepage.png", label: "旧版首页", note: "信息架构混乱，无优先级引导" },
         { src: "images/case2-old-detail.png", label: "旧版详情页", note: "内容展示和工具功能互相干扰" },
       ]},
-      { type: "screenshot-inline", label: "旧版编辑器", note: "上传链路与游戏内逻辑不一致", src: "images/case2-old-editor.png" },
-      { type: "illustration", index: 0 },
+      { type: "screenshot-inline", label: "旧版编辑器", note: "上传链路与游戏内逻辑不一致", src: "images/case2-old-editor.png", filter: "saturate(0.65) brightness(1.05)", height: 500, objectFit: "contain", objectPosition: "top center" },
+      { type: "illustration", index: 0, initialScale: 0.95 },
 
       // === 验证 === Block 17-21
       { type: "heading", text: "验证：走查能看到产品，看不到人", navLabel: "验证" },
-      { type: "paragraph", text: "走查能看到产品，看不到人。它告诉我产品本身有什么问题，但有一个天然局限：看不到真实用户在实际使用中卡在哪里。我对这款游戏的理解也可能不够深。这个判断需要第三方验证。" },
+      { type: "paragraph", text: "走查告诉我产品本身有什么问题，但有一个天然局限：看不到真实用户在实际使用中卡在哪里。我对这款游戏的理解也可能不够深。这个判断需要第三方验证。" },
       { type: "paragraph", text: "还是那个前提——没有人要求我做这件事。10万的UI迭代订单不包含用户调研，公司不会报销访谈费用。但我判断不做不行。我自掏腰包做了一对一访谈：给国内主播发50块红包、国外主播发10美金，换半小时深度对话；普通玩家每人约聊10分钟；官方的内容填报人员不需要花钱，这是他们工作的一部分，直接聊。前后接触大约三四十人。" },
       { type: "paragraph", text: "几类关键反馈逐渐清晰，每一类都接回了我在走查中形成的诊断：\n\n官方内容填报人员说上传流程太繁琐、步骤太多——这直接印证了走查中编辑器的判断：上传链路跟游戏内逻辑不一致，连最核心的内容生产者都觉得难用，问题确实不在UI层面。\n\n头部主播的反馈补充了走查完全看不到的维度：写完攻略之后分发量不够，分享出去只是一个链接，点击量和用户反馈作者完全不知道，没有激励也没有反馈，持续创作动力很难维持。这告诉我：产品不只是\u201C内容聚合\u201D这个角色没做好，它根本没想清楚内容生产出来之后往哪走——内容的流通和生态的循环是整体缺失的。\n\n最重要的观察来自普通用户。攻略站上目前全是图文，但潮汐守望者是一款高度策略化的游戏，阵容的英雄站位、出手顺序、操作时机都是通关关键。这类信息靠图文很难讲清楚。在游戏内容的信息传递中，文字的效率低于图片，图片低于视频——尤其对操作密集的策略型游戏，玩家需要的是\u201C手把手跟着做\u201D，需要知道几分几秒该做什么。这意味着产品形态本身也需要重新考虑。" },
       { type: "paragraph", text: "走查、访谈、玩游戏是同步推进的。深度玩了大约两个月后，之前脑子里零散的判断全部串起来了。" },
@@ -227,12 +233,14 @@ const PROJECTS = [
         { src: "images/case2-new-homepage.png", label: "新版首页", note: "重构后的信息架构和视觉层级" },
         { src: "images/case2-new-detail.png", label: "新版详情页", note: "内容与工具分层呈现" },
       ]},
-      { type: "screenshot-inline", label: "新版编辑器", note: "双层难度编辑器，对齐游戏内逻辑", src: "images/case2-new-editor.jpg" },
+      { type: "screenshot-inline", label: "新版编辑器", note: "双层难度编辑器，对齐游戏内（操作逻辑+用户心智）", src: "images/case2-new-editor.jpg", filter: "saturate(0.65) brightness(1.05)", height: "auto", objectFit: "contain", featured: true },
       { type: "illustration", index: 1 },
 
       // === 回头看 === Block 30-31
-      { type: "heading", text: "回头看", navLabel: "回头看" },
-      { type: "paragraph", text: "我之前处理过一次已经爆发的团队协作危机，那次是问题摆在所有人面前，合同快丢了，我必须找到根源并解出来。这次完全不同。客户只说\u201C改UI\u201D，没有人让我做全站走查，没有人让我找三四十个用户访谈，走查报告和三期规划不在订单范围内，访谈费用是自己出的。从头到尾，每一步都是我自己判断\u201C这件事应该做\u201D之后主动推进的。" },
+      { type: "heading", text: "回头看：没有人要求我做这些", navLabel: "回头看" },
+      { type: "paragraph", text: "我之前处理过一次已经爆发的团队协作危机，那次是问题摆在所有人面前，合同快丢了，我必须找到根源并解出来。这次完全不同。客户只说\u201C改UI\u201D，没有人让我做全站走查，没有人让我找三四十个用户访谈，走查报告和三期规划不在订单范围内，访谈费用是自己出的。" },
+      { type: "paragraph", text: "但这个项目也暴露了我的方法边界。我能诊断出\u201C问题不是UI是定位\u201D，但这个判断靠的是什么？是花两个月深度玩游戏、自费找三四十个人聊、逐页走查全站——本质上是用大量时间和个人投入换来的直觉判断。这次管用了，因为我有时间、有热情、对这个领域恰好有足够的沉浸。但如果下一个项目是我不熟悉的领域？如果没有两个月让我沉浸？我的判断方法是不可复制的——它依赖于\u201C恰好足够了解这个领域\u201D这个前提。" },
+      { type: "pull-quote", text: "我需要的是一套不依赖深度沉浸也能做产品定位分析的系统方法——用户研究框架、信息架构方法论、数据驱动的产品决策工具。这样判断力就不再被\u201C碰巧熟不熟这个领域\u201D限制住。" },
     ],
     supportingScreenshots: [],
   },
@@ -260,9 +268,9 @@ const PROJECTS = [
     skillTags: ["场景识别", "可行性判断", "迭代落地", "执行韧性"],
     skillTagJumps: {
       "场景识别": { scrollTo: 1, borderRange: [1, 3], keySentence: "十八种语言意味着要同时管理多条外包线", keyBlock: 2 },
-      "可行性判断": { scrollTo: 3, borderRange: [3, 4], keySentence: "翻译是高度标准化的输入输出任务", keyBlock: 3 },
-      "迭代落地": { scrollTo: 7, borderRange: [5, 18], keySentence: "这不是一个给政企部门用的小工具，而是需要支持文件级批量处理的通用翻译系统", keyBlock: 10 },
-      "执行韧性": { scrollTo: 20, borderRange: [20, 21], keySentence: "AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」", keyBlock: 20 },
+      "可行性判断": { scrollTo: 3, borderRange: [3, 5], keySentence: "翻译是高度标准化的输入输出任务", keyBlock: 3 },
+      "迭代落地": { scrollTo: 9, borderRange: [6, 23], keySentence: "用户实际工作中处理的不是一句一句的文本，而是整份文档", keyBlock: 14 },
+      "执行韧性": { scrollTo: 25, borderRange: [24, 26], keySentence: "核心的架构决策和排错方向都是我在定", keyBlock: 25 },
     },
     heroStat: { number: "2人", unit: "自主立项 · 从零到上线" },
     heroNarrative: {
@@ -283,8 +291,9 @@ const PROJECTS = [
       { type: "heading", text: "从一次内部培训开始的AI落地", navLabel: "背景" },
       { type: "paragraph", text: "娜娜项目上线后，我在公司内部做了一场AI培训宣讲，主题是鼓励大家用Coze平台搭建自己的工作流。我当时的想法很简单——娜娜证明了AI在实际业务中能用，但如果只有我一个人在推，AI在公司内部的落地就始终是孤例。我希望更多人看到这个可能性。" },
       { type: "paragraph", text: "培训结束后我做了用户调研，收到了一条让我停下来的反馈：政企部门说跨国业务的翻译特别痛苦。他们的业务覆盖十八种语言，但市面上很难找到一家供应商能同时处理这么多语种且价格合理，实际操作是每两三种语言找一家不同的外包公司。成本高是一方面，更大的问题是对接复杂——十八种语言意味着要同时管理多条外包线，沟通成本和出错概率都在翻倍增长。" },
-      { type: "paragraph", text: "我当时的判断是：这件事很适合用AI解决。原因有三点。第一，翻译是高度标准化的输入输出任务，AI大模型在这个场景下的能力已经足够成熟。第二，痛点不在翻译质量本身，而在多语种并行处理的效率和成本——这恰好是AI工作流最擅长解决的问题。第三，如果做成了，受益的不只是政企部门，公司所有全球业务线都有同样的需求。" },
-      { type: "paragraph", text: "我带着初步方案去找了技术总监。确认技术上可行之后，我开始动手。" },
+      { type: "paragraph", text: "我当时的判断是：这件事很适合用AI解决。原因有三点。第一，翻译是高度标准化的输入输出任务，AI大模型在这个场景下的能力已经足够成熟。第二，痛点不在翻译质量本身，而在多语种并行处理的效率和成本。第三，如果做成了，受益的不只是政企部门，公司所有全球业务线都有同样的需求。" },
+      { type: "pull-quote", text: "翻译是高度标准化的输入输出任务——这恰好是AI工作流最擅长解决的问题。" },
+      { type: "paragraph", text: "这个项目没有正式立项，没有预算，也没有指派的负责人——我的正式角色仍然是产品运营，但从场景判断、技术选型到上线推广，整条链路是我在主导。我带着初步方案去找了技术总监。确认技术上可行之后，我开始动手。" },
 
       // === 五步迭代段 === Block 5-18
       { type: "iteration-step", version: "Step 1", heading: "MVP: 跑通中英文纯文本互换", navLabel: "MVP" },
@@ -294,9 +303,12 @@ const PROJECTS = [
 
       { type: "iteration-step", version: "Step 2", heading: "API 选型", navLabel: "API选型" },
       { type: "paragraph", text: "这一步我花了比较多时间权衡。评估维度有三个：业务量适配度（我们的翻译量级适合哪种计费模式）、价格（在合适的前提下找最便宜的）、翻译准确度。三者不可能都是最优解，我需要找到平衡点。最终选定了在我们的业务量级下性价比最高的方案。" },
+      { type: "paragraph", text: "翻译质量是选型中最难量化的维度。我的做法是：用同一批中文原文分别接入不同模型的API，产出各语种的翻译结果，再找同一组评审人员对翻译质量进行盲评打分。通过控制输入文本和评分人两个变量，把\u201C哪个模型翻得好\u201D从主观感受变成了可比较的量化数据。最终基于质量评分、价格和业务量适配度三个维度的综合结果，确定了接入方案。" },
 
       { type: "iteration-step", version: "Step 3", heading: "从文本到文件，从政企到全公司", navLabel: "产品升级" },
-      { type: "paragraph", text: "MVP跑通之后我发现两件事。第一，翻译需求不只存在于政企部门——公司全球业务线都有「随手放进去就能翻」的需求，用户范围比我最初预想的大得多。第二，用户实际工作中处理的不是一句一句的文本，而是整份文档。这两个发现改变了我对产品边界的判断：这不是一个给政企部门用的小工具，而是需要支持文件级批量处理的通用翻译系统。产品定位的升级直接决定了后续所有功能的设计方向。" },
+      { type: "paragraph", text: "MVP跑通之后我发现两件事。第一，翻译需求不只存在于政企部门——公司全球业务线都有「随手放进去就能翻」的需求，用户范围比我最初预想的大得多。第二，用户实际工作中处理的不是一句一句的文本，而是整份文档。这两个发现改变了我对产品边界的判断。" },
+      { type: "pull-quote", text: "这不是一个给政企部门用的小工具，而是需要支持文件级批量处理的通用翻译系统。" },
+      { type: "paragraph", text: "产品定位的升级直接决定了后续所有功能的设计方向。事实上翻译只是我在这一阶段推动的四个AI场景之一——另外三个是社区运营（娜娜）、财务报销和营销问答——但翻译的链路最长、判断最复杂，所以我选择用它来展开。" },
 
       { type: "iteration-step", version: "Step 4", heading: "格式转换——整个项目最难的环节", navLabel: "格式突破" },
       { type: "paragraph", text: "问题在于：Excel输入只能Excel输出，Markdown同理，现有的Coze插件都做不到跨格式转换。但用户的真实需求是灵活的——他们希望文本输入之后，可以选择输出为Excel、云文档或其他格式。这里我面对一个选择：是接受技术限制、告诉用户「输入什么格式就输出什么格式」，还是想办法突破？我选择后者，因为如果用户还得自己做格式转换，这个系统的实际使用门槛并没有真正降下来。我把需求定义清楚后交给技术团队，他们用Coze的代码插件功能开发了自定义插件来解决这个问题。" },
@@ -304,31 +316,31 @@ const PROJECTS = [
       { type: "iteration-step", version: "Step 5", heading: "飞书集成与前端搭建", navLabel: "整合上线" },
       { type: "paragraph", text: "格式问题解决之后，下一个判断是：怎样才算「真正好用」？我的标准是用户拿来就能用，不需要任何额外操作。所以我推动了飞书集成——翻译完成后自动生成文档、直接写入对应人的文档库，省去转换和上传步骤。前端方面，因为这是一个公益性项目，没有独立的前端开发人力，我自己用低代码平台搭建了用户界面，包括单语种和多语种两个入口。这一步的判断不复杂，但它决定了最终产出是「能跑的demo」还是「同事们愿意打开来用的工具」。" },
       { type: "screenshot-group", items: [
-        { src: "images/case3-workflow-nodes.jpg", label: "工作流节点近景", note: "Coze工作流节点结构与运行状态" },
+        { src: "images/case3-workflow-nodes.jpg", label: "工作流节点近景", note: "Coze工作流节点结构与运行状态", filter: "saturate(0.65) brightness(1.05)" },
         { src: "images/case3-workflow-full.jpg", label: "工作流全景 + 语种列表", note: "完整工作流架构与18语种并行处理" },
       ]},
-      { type: "screenshot-inline", label: "自搭前端界面", note: "低代码平台搭建的用户界面（单语种 / 多语种两个入口）", src: "images/case3-frontend-ui.jpg" },
+      { type: "screenshot-inline", label: "自搭前端界面", note: "低代码平台搭建的用户界面（单语种 / 多语种两个入口）", src: "images/case3-frontend-ui.jpg", filter: "saturate(0.65) brightness(1.05)" },
 
       { type: "illustration", index: 0 },
 
       // === 调试段 === Block 19-21
       { type: "heading", text: "调试：最痛苦的部分", navLabel: "调试" },
-      { type: "paragraph", text: "坦白说，整个迭代过程中最让我崩溃的不是产品设计，而是调试。\n\n我不懂代码。但Coze工作流的调试不是「点一下就跑通」的事情——系统频繁报错，报错信息对我来说就是一堆看不懂的技术术语。我的做法是逼自己查资料、逐条读报错信息、试不同的节点组合、调整工作流搭配、切换节点，反复排查。没有人帮我做这件事，因为这个项目的团队只有我和一个实习生——实习生负责记录报错信息、汇报进展、编写提示词初稿（由我审核定稿）、知识库维护更新等基础工作，但核心的架构决策和排错方向都是我在定。\n\n这个过程极其痛苦，但它让我理解了一件事：AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」——至少能读懂报错信息意味着什么，能判断问题出在哪个环节，能跟工程师说清楚「我需要你在这个节点上做什么」。" },
+      { type: "paragraph", text: "坦白说，整个迭代过程中最让我崩溃的不是产品设计，而是调试。\n\n我不懂代码。但Coze工作流的调试不是「点一下就跑通」的事情——系统频繁报错，报错信息对我来说就是一堆看不懂的技术术语。我的做法是逼自己查资料、逐条读报错信息、试不同的节点组合、调整工作流搭配、切换节点，反复排查。没有人帮我做这件事，因为这个项目的团队只有我和一个实习生——实习生负责记录报错信息、汇报进展、编写提示词初稿（由我审核定稿）、知识库维护更新等基础工作，但核心的架构决策和排错方向都是我在定。\n\n这个过程极其痛苦，但它让我理解了一件事。" },
+      { type: "pull-quote", text: "AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」——至少能读懂报错信息意味着什么，能判断问题出在哪个环节，能跟工程师说清楚「我需要你在这个节点上做什么」。" },
 
       // === 结果段 === Block 22-24
       { type: "heading", text: "结果", navLabel: "结果" },
-      { type: "paragraph", text: "系统正式投入公司使用，覆盖十八个语种的翻译需求。实际产出是标准化的多语种Excel表格——中文内容可以一次性转换为英语、泰语、土耳其语、马来语、缅甸语、越南语、印尼语、葡萄牙语、俄语、高棉语、菲律宾语、西班牙语等十八种目标语言。相比之前分找多家外包公司的模式，显著降低了人工翻译成本，同时把多语种并行处理的效率从「逐条对接」提升到了「一次完成」。" },
-      { type: "screenshot-group", items: [
-        { src: "images/case3-18lang-output.png", label: "飞书云表格18语种产出", note: "实际翻译产出，展示系统覆盖的语言范围" },
-        { src: "images/case3-feishu-bot.png", label: "飞书机器人实际使用", note: "接入飞书方便同事快捷使用" },
-      ]},
+      { type: "paragraph", text: "系统正式投入公司使用，覆盖十八个语种的翻译需求。实际产出是标准化的多语种Excel表格——中文内容可以一次性转换为英语、泰语、土耳其语、马来语、缅甸语、越南语、印尼语、葡萄牙语、俄语、高棉语、菲律宾语、西班牙语等十八种目标语言。原来的翻译流程是三段式的：中文内容先发给翻译公司做粗翻，粗翻完成后再交给各语种的本地化团队做精细化翻译。翻译公司的粗翻是按单独计费的外包服务，十八个语种、每次翻译都要付费。这个系统直接替代了粗翻环节——AI产出的翻译质量足以跳过外包粗翻，直接进入本地化精翻阶段。相当于把一整层外包成本归零，同时把多语种并行处理从「逐条对接不同供应商」变成「一次提交、一次产出」。" },
+      { type: "screenshot-inline", label: "飞书云表格18语种产出", note: "实际翻译产出，展示系统覆盖的语言范围", src: "images/case3-18lang-output.png", featured: true },
+      { type: "screenshot-inline", label: "飞书机器人实际使用", note: "接入飞书方便同事快捷使用", src: "images/case3-feishu-bot.png" },
 
-      // === 回头看 === Block 25-29
+      // === 回头看 === Block 31-36
       { type: "heading", text: "回头看", navLabel: "回头看" },
       { type: "paragraph", text: "如果说娜娜项目让我证明了「我能从零做出一个AI产品」，翻译系统让我看到的是另一件事——一个人做出一个AI产品不够，关键是能不能让AI能力在组织内部扩散开来。" },
       { type: "paragraph", text: "回头看整个链条：我先做了娜娜，然后做内部培训把经验推出去，通过培训后的调研发现了翻译场景，判断值得做之后从MVP迭代到完整系统。而这还没结束——在同一时期，我还在Coze平台上搭建了财务报销助手和多Agent架构的营销问答系统，覆盖了社区、翻译、财务、营销四个完全不同的业务场景。" },
       { type: "paragraph", text: "这个过程让我意识到，AI在组织内部的落地不是一个项目一个项目单独发生的。它需要有人先做出第一个成功案例打开局面，再主动把能力和方法推广出去，再持续识别新的场景、判断优先级、推动落地。这个「推动者」的角色，技术能力不是门槛——公司有比我强得多的工程师——门槛是对业务场景的判断力，以及愿意主动去推的意愿。" },
-      { type: "paragraph", text: "但我也清楚，目前我做这些判断基本靠经验积累和直觉驱动。翻译系统之所以成功，一部分是判断准确，一部分是场景本身足够标准化、容错空间大。如果场景更复杂、风险更高，纯靠直觉是不够的。我需要系统性的方法论支撑——不是学怎么用Coze搭工作流，而是学怎么评估一个AI场景的可行性、优先级和投入产出比。这是我想通过硕士阶段补上的东西。" },
+      { type: "paragraph", text: "但我也清楚，目前我做这些判断基本靠经验积累和直觉驱动。翻译系统之所以成功，一部分是判断准确，一部分是场景本身足够标准化、容错空间大。如果场景更复杂、风险更高，纯靠直觉是不够的。" },
+      { type: "pull-quote", text: "我需要系统性的方法论支撑——不是学怎么用Coze搭工作流，而是学怎么评估一个AI场景的可行性、优先级和投入产出比。这是我想通过硕士阶段补上的东西。" },
     ],
     supportingScreenshots: [
       { label: "Coze平台工作流节点视图", proves: "工作流架构与迭代过程" },
@@ -421,6 +433,7 @@ function ScreenshotItem({ item, onLightbox }) {
                 maxWidth: "100%",
                 objectFit: "contain",
                 display: "block",
+                ...(item.filter ? { filter: item.filter } : {}),
               }}
             />
           </div>
@@ -460,63 +473,30 @@ function TextPlaceholder({ lines = 4 }) {
 
 /* ===== Screenshot Inline Card Component (with proper Hooks) ===== */
 function ScreenshotInlineCard({ block, onLightbox }) {
-  const [imgDimensions, setImgDimensions] = useState(null);
   const containerRef = useRef(null);
-  const [displayHeight, setDisplayHeight] = useState(null);
   const [expandCursor, setExpandCursor] = useState({ visible: false, x: 0, y: 0 });
 
-  const handleImgLoad = (e) => {
-    const { naturalWidth, naturalHeight } = e.target;
-    setImgDimensions({ width: naturalWidth, height: naturalHeight });
-  };
-
-  useEffect(() => {
-    if (imgDimensions && containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
-      const ratio = imgDimensions.height / imgDimensions.width;
-      setDisplayHeight(containerWidth * ratio);
-    }
-  }, [imgDimensions]);
-
-  const isShortImage = displayHeight !== null && displayHeight < 400;
-
   return (
-    <div ref={containerRef} style={{ margin: "32px 0", scrollMarginTop: 80, position: "relative" }} onClick={() => onLightbox()} onMouseEnter={() => setExpandCursor(c => ({ ...c, visible: true }))} onMouseMove={(e) => { const rect = e.currentTarget.getBoundingClientRect(); setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top }); }} onMouseLeave={() => setExpandCursor(c => ({ ...c, visible: false }))}>
+    <div ref={containerRef} style={{ margin: block.featured ? "48px 0" : "32px 0", scrollMarginTop: 80, position: "relative" }} onClick={() => onLightbox()} onMouseEnter={() => setExpandCursor(c => ({ ...c, visible: true }))} onMouseMove={(e) => { const rect = e.currentTarget.getBoundingClientRect(); setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top }); }} onMouseLeave={() => setExpandCursor(c => ({ ...c, visible: false }))}>
       <div style={{
         background: "#fff",
         borderRadius: "10px",
-        border: "1px solid #d4cdc2",
+        border: block.featured ? "1.5px solid #c4b5a4" : "1px solid #d4cdc2",
         overflow: "hidden",
         cursor: "zoom-in",
+        boxShadow: block.featured ? "0 6px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" : "none",
       }}>
         <div style={{
           position: "relative",
           width: "100%",
-          height: 500,
+          ...(block.height === "auto" ? {} : { height: block.height || 550, overflow: "hidden" }),
           backgroundColor: "#f5f3f0",
-          overflow: "hidden",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
         }}>
-          {isShortImage && (
-            <img src={block.src} alt={block.label} style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              filter: "blur(45px) brightness(0.65)",
-              transform: "scale(1.05)",
-            }} />
-          )}
-          <img src={block.src} alt={block.label} onLoad={handleImgLoad} style={{
-            position: "relative",
-            zIndex: 1,
-            maxHeight: "100%",
-            maxWidth: "100%",
-            objectFit: "contain",
+          <img src={block.src} alt={block.label} style={{
+            width: "100%",
             display: "block",
+            ...(block.height === "auto" ? {} : { height: "100%", objectFit: block.objectFit || "cover", objectPosition: block.objectPosition || "top center" }),
+            ...(block.filter ? { filter: block.filter } : {}),
           }} />
         </div>
         <div style={{
@@ -526,7 +506,10 @@ function ScreenshotInlineCard({ block, onLightbox }) {
           justifyContent: "space-between",
           alignItems: "center",
         }}>
-          <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{block.label}</p>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{block.label}</p>
+            {block.sourceLink && <a href={block.sourceLink.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} style={{ fontSize: 11, fontFamily: FONT_MONO, color: "#8a857d", textDecoration: "none", letterSpacing: "0.02em", cursor: "pointer" }} onMouseEnter={(e) => e.currentTarget.style.color = "#c4422b"} onMouseLeave={(e) => e.currentTarget.style.color = "#8a857d"}>{block.sourceLink.text}</a>}
+          </div>
           {block.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{block.note}</p>}
         </div>
       </div>
@@ -542,25 +525,8 @@ function ScreenshotInlineCard({ block, onLightbox }) {
 
 /* ===== Carousel Slide Component (with proper Hooks) ===== */
 function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
-  const [imgDimensions, setImgDimensions] = useState(null);
   const containerRef = useRef(null);
-  const [displayHeight, setDisplayHeight] = useState(null);
   const [expandCursor, setExpandCursor] = useState({ visible: false, x: 0, y: 0 });
-
-  const handleImgLoad = (e) => {
-    const { naturalWidth, naturalHeight } = e.target;
-    setImgDimensions({ width: naturalWidth, height: naturalHeight });
-  };
-
-  useEffect(() => {
-    if (imgDimensions && containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
-      const ratio = imgDimensions.height / imgDimensions.width;
-      setDisplayHeight(containerWidth * ratio);
-    }
-  }, [imgDimensions]);
-
-  const isShortImage = displayHeight !== null && displayHeight < 400;
 
   return (
     <div
@@ -579,7 +545,8 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
         width: "84%",
         left: "8%",
         cursor: isCenter ? "zoom-in" : "pointer",
-        transition: "all 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
+        transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1)",
+        willChange: "transform, opacity",
         ...posStyle
       }}
     >
@@ -593,46 +560,31 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
         <div style={{
           position: "relative",
           width: "100%",
-          height: 460,
+          height: item.height || 460,
           backgroundColor: "#f5f3f0",
           overflow: "hidden",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
         }}>
-          {isShortImage && (
+          {item.src ? (
             <img src={item.src} alt={item.label} style={{
-              position: "absolute",
-              inset: 0,
               width: "100%",
               height: "100%",
-              objectFit: "cover",
-              filter: "blur(45px) brightness(0.65)",
-              transform: "scale(1.05)",
-            }} />
-          )}
-          {item.src ? (
-            <img src={item.src} alt={item.label} onLoad={handleImgLoad} style={{
-              position: "relative",
-              zIndex: 1,
-              maxHeight: "100%",
-              maxWidth: "100%",
-              objectFit: "contain",
+              objectFit: item.objectFit || "cover",
+              objectPosition: item.objectPosition || "top center",
               display: "block",
             }} />
           ) : (
-            <span style={{ fontSize: 13, color: "#B8B0A3" }}>[ {item.label} ]</span>
+            <span style={{ fontSize: 13, color: "#B8B0A3", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>[ {item.label} ]</span>
           )}
         </div>
         <div style={{
-          padding: "12px 20px",
+          padding: "12px 16px",
           borderTop: "1px solid #e8e3da",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}>
-          <p style={{ fontSize: T.small, fontWeight: 600, color: "#3a3632", margin: 0 }}>{item.label}</p>
-          {item.note && <p style={{ fontSize: 12, color: "#a09688", margin: 0 }}>{item.note}</p>}
+          <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
+          {item.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{item.note}</p>}
         </div>
       </div>
       {isCenter && item.src && expandCursor.visible && (
@@ -666,9 +618,9 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
   };
 
   const posStyles = {
-    center: { transform: "translateX(0)", zIndex: 3, opacity: 1 },
-    left: { transform: "translateX(-9.52%)", zIndex: 1, opacity: 0.7 },
-    right: { transform: "translateX(9.52%)", zIndex: 1, opacity: 0.7 },
+    center: { transform: "translateX(0) scale(1)", zIndex: 3, opacity: 1 },
+    left: { transform: "translateX(-18%) scale(0.82)", zIndex: 1, opacity: 0.55 },
+    right: { transform: "translateX(18%) scale(0.82)", zIndex: 1, opacity: 0.55 },
   };
 
   const arrowBase = {
@@ -676,14 +628,14 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
     height: 32,
     borderRadius: "50%",
     border: "1px solid #D5D0C8",
-    backgroundColor: "transparent",
-    color: "#999",
+    backgroundColor: "rgba(255,255,255,0.85)",
+    color: "#B8B0A3",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 13,
-    opacity: 0.7,
+    fontSize: T.small,
+    opacity: 0.75,
     transition: "all 0.25s",
   };
 
@@ -694,7 +646,7 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
       onMouseLeave={() => setCarouselPaused(false)}
     >
       {/* Carousel stage with arrows inside */}
-      <div style={{ position: "relative", height: 520, overflow: "hidden", marginBottom: 16 }}>
+      <div style={{ position: "relative", height: Math.max(...items.map(it => it.height || 460)) + 60, overflow: "hidden", marginBottom: 16 }}>
         {items.map((item, ii) => {
           const pos = getPos(ii);
           const isCenter = pos === "center";
@@ -704,7 +656,7 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
               item={item}
               isCenter={isCenter}
               posStyle={posStyles[pos]}
-              onLightbox={() => setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />)}
+              onLightbox={() => setLightboxContent({ content: <img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />, initialScale: item.initialScale || 0.85 })}
               onClick={() => setCarouselActive(ii)}
             />
           );
@@ -712,18 +664,18 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
         {/* Left arrow — centered on left side strip */}
         <button
           onClick={() => setCarouselActive((prev) => (prev - 1 + total) % total)}
-          style={{ ...arrowBase, position: "absolute", left: "4%", top: "50%", transform: "translate(-50%, -50%)", zIndex: 5, backgroundColor: "rgba(255,255,255,0.85)" }}
-          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#6b6560"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.85)"; e.currentTarget.style.color = "#8a847d"; e.currentTarget.style.borderColor = "#D5D0C8"; }}
+          style={{ ...arrowBase, position: "absolute", left: "4%", top: "50%", transform: "translate(-50%, -50%)", zIndex: 5 }}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#2A2A2A"; e.currentTarget.style.borderColor = "#B8B0A3"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.85)"; e.currentTarget.style.color = "#B8B0A3"; e.currentTarget.style.borderColor = "#D5D0C8"; }}
         >
           ‹
         </button>
         {/* Right arrow — centered on right side strip */}
         <button
           onClick={() => setCarouselActive((prev) => (prev + 1) % total)}
-          style={{ ...arrowBase, position: "absolute", left: "96%", top: "50%", transform: "translate(-50%, -50%)", zIndex: 5, backgroundColor: "rgba(255,255,255,0.85)" }}
-          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#6b6560"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.85)"; e.currentTarget.style.color = "#8a847d"; e.currentTarget.style.borderColor = "#D5D0C8"; }}
+          style={{ ...arrowBase, position: "absolute", left: "96%", top: "50%", transform: "translate(-50%, -50%)", zIndex: 5 }}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#2A2A2A"; e.currentTarget.style.borderColor = "#B8B0A3"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.85)"; e.currentTarget.style.color = "#B8B0A3"; e.currentTarget.style.borderColor = "#D5D0C8"; }}
         >
           ›
         </button>
@@ -1577,12 +1529,103 @@ function IterationStep({ version, heading }) {
   );
 }
 
-function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
+/* ── Turntable Nav Card (used inside SideNav) ── */
+function NavCard({ items, activeIdx, onSelect, title, count, accent, side }) {
+  const [hovIdx, setHovIdx] = useState(-1);
+  return (
+    <div style={{
+      position: "absolute",
+      width: 148,
+      top: 0,
+      left: 0,
+      pointerEvents: "auto",
+      backfaceVisibility: "hidden",
+      WebkitBackfaceVisibility: "hidden",
+      transform: side === "a" ? "rotateY(0deg) translateZ(1px)" : "rotateY(180deg) translateZ(1px)",
+      background: "rgba(255,255,255,0.45)",
+      backdropFilter: "blur(16px)",
+      WebkitBackdropFilter: "blur(16px)",
+      borderRadius: 8,
+      boxShadow: "none",
+      border: "1px solid rgba(255,255,255,0.5)",
+      overflow: "hidden",
+      WebkitFontSmoothing: "antialiased",
+      MozOsxFontSmoothing: "grayscale",
+    }}>
+      {/* Card header */}
+      <div style={{
+        padding: "10px 12px 7px",
+        borderBottom: "1px solid rgba(255,255,255,0.4)",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+      }}>
+        <span style={{ fontSize: 10, fontFamily: FONT_BODY, fontWeight: 500, color: accent === "dark" ? "#2A2A2A" : "#c4422b", letterSpacing: 3 }}>{title}</span>
+        <span style={{ fontSize: 9, fontFamily: FONT_MONO, color: accent === "dark" ? "#2A2A2A" : "#c4422b", letterSpacing: 1 }}>{count}</span>
+      </div>
+      {/* Card items */}
+      <div style={{ padding: "4px 4px 8px" }}>
+        {items.map((label, i) => {
+          const isActive = activeIdx === i;
+          const isHov = hovIdx === i;
+          const accentColor = accent === "dark" ? "#2A2A2A" : "#c4422b";
+          const bg = isActive
+            ? (accent === "dark" ? "rgba(42,42,42,0.12)" : "rgba(196,66,43,0.10)")
+            : isHov ? (accent === "dark" ? "rgba(42,42,42,0.05)" : "rgba(196,66,43,0.05)") : "transparent";
+          return (
+            <button
+              key={i}
+              onClick={(e) => { e.stopPropagation(); onSelect(label, i); }}
+              onMouseEnter={() => setHovIdx(i)}
+              onMouseLeave={() => setHovIdx(-1)}
+              style={{
+                display: "block", width: "100%", textAlign: "left",
+                padding: "8px 10px",
+                background: bg,
+                border: "none", borderRadius: 4,
+                cursor: "pointer", position: "relative",
+                transition: "background 0.2s",
+              }}
+            >
+              {/* Active indicator bar */}
+              <div style={{
+                position: "absolute", left: 2, top: "50%",
+                transform: "translateY(-50%)",
+                width: 3, height: isActive ? 18 : 0, borderRadius: 2,
+                background: accentColor,
+                transition: "height 0.3s cubic-bezier(0.4,0,0.2,1)",
+              }} />
+              <span style={{
+                fontSize: isActive ? 15 : 12.5,
+                fontFamily: FONT_DISPLAY,
+                fontWeight: isActive ? 700 : 400,
+                color: isActive ? accentColor : (isHov ? accentColor : "#B8B0A3"),
+                letterSpacing: isActive ? 3 : 1,
+                transition: "all 0.25s cubic-bezier(0.4,0,0.2,1)",
+              }}>
+                {label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function SideNav({
+  chapters, activeChapterIdx, onChapterClick,
+  skillTags, activeSkillIdx, onSkillClick,
+  navMode, onModeSwitch, onNavigate,
+}) {
   const isCompact = useIsMobile(1100);
   const [visible, setVisible] = useState(false);
-  const [hoveredIdx, setHoveredIdx] = useState(null);
   const [backHovered, setBackHovered] = useState(false);
+  const [rotation, setRotation] = useState(0);
+  const [pivotHovered, setPivotHovered] = useState(false);
+  const [introPhase, setIntroPhase] = useState("idle");  // "idle"|"enter"|"hover"|"press"|"release"|"exit"
+  const [ripple, setRipple] = useState(false);
+  const prevVisible = useRef(false);
 
+  // Visibility check
   useEffect(() => {
     const check = () => {
       const el = document.getElementById("body-block-0");
@@ -1594,7 +1637,61 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
     return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); };
   }, []);
 
-  if (isCompact || !sections || sections.length === 0) return null;
+  // Intro sequence: cursor enter → hover → press → release (ripple) → exit → flip → flip back
+  useEffect(() => {
+    if (visible && !prevVisible.current) {
+      const timers = [];
+      const t = (fn, ms) => timers.push(setTimeout(fn, ms));
+      setIntroPhase("idle");
+      t(() => setIntroPhase("enter"), 80);       // cursor slides in (0.6s anim)
+      t(() => setIntroPhase("hover"), 700);       // cursor floats, dot awakens
+      t(() => setIntroPhase("press"), 1300);      // cursor presses, dot squishes
+      t(() => { setIntroPhase("release"); setRipple(true); }, 1550);  // burst + ripple
+      t(() => { setIntroPhase("exit"); setRotation(r => r + 180); }, 1850);  // cursor exits + flip simultaneously
+      t(() => { setIntroPhase("idle"); setRipple(false); }, 2750);    // cleanup
+      t(() => setRotation(r => r + 180), 3600);   // flip back
+      prevVisible.current = true;
+      return () => timers.forEach(clearTimeout);
+    }
+    if (!visible) prevVisible.current = false;
+  }, [visible]);
+
+  // Sync rotation with navMode changes from outside (e.g. hero skillTag click)
+  const isFrontA = Math.round(rotation / 180) % 2 === 0;
+  const prevMode = useRef(navMode);
+  useEffect(() => {
+    if (navMode !== prevMode.current) {
+      const shouldBeA = navMode === "chapter";
+      if (shouldBeA !== isFrontA) {
+        setRotation(r => r + 180);
+      }
+      prevMode.current = navMode;
+    }
+  }, [navMode, isFrontA]);
+
+  const chapterLabels = chapters || [];
+  const skillLabels = skillTags || [];
+
+  if (isCompact || (chapterLabels.length === 0 && skillLabels.length === 0)) return null;
+
+  const rippleTimer = useRef(null);
+  const handleRotate = () => {
+    setRotation(r => r + 180);
+    const nextIsA = !isFrontA;
+    onModeSwitch(nextIsA ? "chapter" : "skill");
+    // Trigger ripple on every manual click
+    setRipple(true);
+    if (rippleTimer.current) clearTimeout(rippleTimer.current);
+    rippleTimer.current = setTimeout(() => setRipple(false), 1100);
+  };
+
+  const handleChapterSelect = (_label, i) => onChapterClick(i);
+  const handleSkillSelect = (label) => onSkillClick(label);
+
+  const cardH = Math.max(chapterLabels.length, skillLabels.length) * 34 + 40;
+  const accentColor = isFrontA ? "#2A2A2A" : "#c4422b";
+
+  const sideNavRight = "max(24px, calc((100vw - 720px) / 2 - 220px))";
 
   return (
     <>
@@ -1604,8 +1701,7 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
         onMouseEnter={() => setBackHovered(true)}
         onMouseLeave={() => setBackHovered(false)}
         style={{
-          position: "fixed", top: 72,
-          right: "max(24px, calc((100vw - 720px) / 2 - 220px))",
+          position: "fixed", top: 72, right: sideNavRight,
           zIndex: 50, pointerEvents: "auto",
           width: 40, height: 40,
           border: `1px solid ${backHovered ? "#1a1815" : "#D5D0C8"}`,
@@ -1617,57 +1713,164 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
         <span style={{ fontSize: 14, color: backHovered ? "#faf8f4" : "#555", transition: "color 0.2s ease" }}>{"\u2190"}</span>
       </div>
 
-      {/* Section nav — skill tag sections */}
+      {/* Turntable nav */}
       {visible && (
         <div style={{
-          position: "fixed", top: "50%", right: "max(24px, calc((100vw - 720px) / 2 - 220px))",
+          position: "fixed",
+          top: "calc(32px + (100vh - 112px) / 2)",
+          right: `max(8px, calc((100vw - 720px) / 2 - 280px))`,
           transform: "translateY(-50%)",
           zIndex: 50,
-          transition: "opacity 0.3s ease",
-          opacity: 1,
-          display: "flex", alignItems: "stretch",
+          display: "flex", flexDirection: "column", alignItems: "center",
           pointerEvents: "none",
         }}>
-          {/* Labels */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 }}>
-            {sections.map((s, i) => (
-              <div
-                key={i}
-                onClick={() => onSectionClick && onSectionClick(s)}
-                onMouseEnter={() => setHoveredIdx(i)}
-                onMouseLeave={() => setHoveredIdx(null)}
-                style={{
-                  fontSize: activeSectionIdx === i ? T.body : T.small,
-                  lineHeight: 1,
-                  color: (hoveredIdx === i || activeSectionIdx === i) ? (hoveredIdx === i ? "#faf8f4" : "#000") : "#B8B0A3",
-                  backgroundColor: hoveredIdx === i ? "#1a1815" : "transparent",
-                  fontWeight: activeSectionIdx === i ? 700 : 500,
-                  padding: "10px 12px 10px 8px",
-                  whiteSpace: "nowrap",
-                  minWidth: 68,
-                  textAlign: "center",
-                  transform: activeSectionIdx === i ? "translateX(-4px)" : "translateX(0)",
-                  pointerEvents: "auto",
-                  cursor: "pointer",
-                  transition: "background-color 0.2s ease, color 0.2s ease",
-                }}
-              >
-                {s}
-              </div>
-            ))}
+          {/* ① Toggle zone — labels + spinner as one clickable area */}
+          <div
+            onClick={handleRotate}
+            onMouseEnter={() => setPivotHovered(true)}
+            onMouseLeave={() => setPivotHovered(false)}
+            style={{
+              cursor: "pointer", pointerEvents: "auto",
+              display: "flex", flexDirection: "column", alignItems: "center",
+              padding: "6px 12px 2px",
+              marginBottom: 4,
+              userSelect: "none",
+            }}
+          >
+            {/* Mode labels */}
+            <div style={{
+              display: "flex", alignItems: "center", gap: 10,
+              marginBottom: 6,
+            }}>
+              <span style={{
+                fontSize: 10, fontFamily: FONT_BODY, letterSpacing: 3,
+                color: isFrontA ? "#2A2A2A" : (pivotHovered ? "#2A2A2A" : "#B8B0A3"),
+                fontWeight: 500,
+                transition: "color 0.4s",
+                animation: (!isFrontA && pivotHovered) ? "sidenavBreathe 1.2s ease-in-out infinite" : "none",
+              }}>{"\u53D9\u4E8B\u7EBF"}</span>
+              <div style={{ width: 2.5, height: 2.5, borderRadius: "50%", background: "#D5D0C8" }} />
+              <span style={{
+                fontSize: 10, fontFamily: FONT_BODY, letterSpacing: 3,
+                color: !isFrontA ? "#c4422b" : (pivotHovered ? "#c4422b" : "#B8B0A3"),
+                fontWeight: 500,
+                transition: "color 0.4s",
+                animation: (isFrontA && pivotHovered) ? "sidenavBreathe 1.2s ease-in-out infinite" : "none",
+              }}>{"\u65B9\u6CD5\u7EBF"}</span>
+            </div>
+            {/* Spinner — 3D orbit + glow + dot + ripples + cursor */}
+            {(() => {
+              const introShow = ["enter","hover","press","release","exit"].includes(introPhase);
+              const introHover = introPhase === "hover";
+              const introPress = introPhase === "press";
+              const introRelease = introPhase === "release" || introPhase === "exit";
+              const spinDuration = introRelease ? "0.6s" : introPress ? "0.7s" : (introHover || pivotHovered) ? "1.5s" : introPhase === "enter" ? "2.5s" : "3.5s";
+              const spinOpacity = introRelease ? 0.7 : introPress ? 0.55 : (introHover || pivotHovered) ? 0.5 : introPhase === "enter" ? 0.3 : 0.3;
+              const spinStroke = introRelease ? 2 : introPress ? 1.5 : (introHover || pivotHovered) ? 1.3 : 1.2;
+              return (
+                <div style={{
+                  position: "relative", width: 36, height: 36,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  perspective: "200px",
+                }}>
+                  {/* 3D tilted orbit ring */}
+                  <svg width="28" height="28" viewBox="0 0 28 28" style={{
+                    opacity: spinOpacity,
+                    animation: `orbitSpin ${spinDuration} linear infinite`,
+                    transition: "opacity 0.4s ease",
+                    transformStyle: "preserve-3d",
+                  }}>
+                    <circle cx="14" cy="14" r="10" fill="none"
+                      stroke={accentColor} strokeWidth={spinStroke}
+                      strokeDasharray="4 8" strokeLinecap="round"
+                      style={{ transition: "stroke-width 0.3s ease" }} />
+                  </svg>
+                  {/* Glow layer */}
+                  {(pivotHovered || introHover || introPress) && (
+                    <div style={{
+                      position: "absolute", left: "50%", top: "50%",
+                      width: 22, height: 22, borderRadius: "50%",
+                      background: "radial-gradient(circle, rgba(196,66,43,0.2) 0%, rgba(196,66,43,0.04) 60%, transparent 100%)",
+                      animation: introPress ? "glowPress 0.25s ease-in forwards" : "glowIn 0.4s ease-out forwards",
+                      pointerEvents: "none",
+                    }} />
+                  )}
+                  {/* Center dot — multi-phase */}
+                  <div style={{
+                    position: "absolute", left: "50%", top: "50%",
+                    transform: "translate(-50%,-50%)",
+                    borderRadius: "50%", background: accentColor, zIndex: 1,
+                    ...(introHover ? { width: 7, height: 7, animation: "dotAwaken 0.4s ease-out forwards" } : {}),
+                    ...(introPress ? { width: 7, height: 7, animation: "dotPress 0.22s ease-in forwards" } : {}),
+                    ...(introRelease ? { width: 7, height: 7, animation: "dotBurst 0.85s ease-out forwards" } : {}),
+                    ...(introPhase === "enter" ? { width: 4, height: 4, opacity: 0.35 } : {}),
+                    ...(!introShow ? {
+                      width: pivotHovered ? 5.5 : 4,
+                      height: pivotHovered ? 5.5 : 4,
+                      opacity: pivotHovered ? 0.55 : 0.35,
+                      transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
+                    } : {}),
+                  }} />
+                  {/* Tilted ripples */}
+                  {ripple && (
+                    <>
+                      <div style={{
+                        position: "absolute", left: "50%", top: "50%",
+                        width: 52, height: 52, borderRadius: "50%",
+                        border: `2px solid ${accentColor}`,
+                        animation: "rippleTilt1 0.65s cubic-bezier(0.2, 0.8, 0.3, 1) forwards",
+                        pointerEvents: "none",
+                      }} />
+                      <div style={{
+                        position: "absolute", left: "50%", top: "50%",
+                        width: 72, height: 72, borderRadius: "50%",
+                        border: `1.5px solid ${accentColor}`, opacity: 0,
+                        animation: "rippleTilt2 0.85s cubic-bezier(0.2, 0.8, 0.3, 1) 0.1s forwards",
+                        pointerEvents: "none",
+                      }} />
+                      <div style={{
+                        position: "absolute", left: "50%", top: "50%",
+                        width: 92, height: 92, borderRadius: "50%",
+                        border: `1px solid ${accentColor}`, opacity: 0,
+                        animation: "rippleTilt3 1.05s cubic-bezier(0.2, 0.8, 0.3, 1) 0.2s forwards",
+                        pointerEvents: "none",
+                      }} />
+                    </>
+                  )}
+                  {/* Phased cursor */}
+                  {introShow && (
+                    <svg width="18" height="22" viewBox="0 0 24 28" style={{
+                      position: "absolute", left: "calc(50% - 2px)", top: "calc(50% + 1px)",
+                      pointerEvents: "none", zIndex: 3, transformOrigin: "5px 0px",
+                      ...(introPhase === "enter" ? { animation: "cursorEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards" } : {}),
+                      ...(introPhase === "hover" ? { opacity: 0.8, animation: "cursorFloat 1.5s ease-in-out infinite" } : {}),
+                      ...(introPhase === "press" ? { animation: "cursorPress 0.22s ease-in forwards" } : {}),
+                      ...(introPhase === "release" ? { animation: "cursorRelease 0.3s ease-out forwards" } : {}),
+                      ...(introPhase === "exit" ? { animation: "cursorExit 0.9s cubic-bezier(0.4, 0, 0.7, 0.2) forwards" } : {}),
+                    }}>
+                      <path d="M5 0 L5 17 L9 13 L14 21 L17 19.5 L12 11.5 L17.5 10.5 Z"
+                        fill="#2A2A2A" fillOpacity="0.65" stroke="#fff" strokeWidth="1" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </div>
+              );
+            })()}
           </div>
-          {/* Vertical track */}
-          <div style={{ width: 2, backgroundColor: "#D5D0C8", position: "relative", flexShrink: 0 }}>
-            {activeSectionIdx >= 0 && (
-              <div style={{
-                position: "absolute",
-                top: `${(activeSectionIdx / sections.length) * 100}%`,
-                height: `${(1 / sections.length) * 100}%`,
-                width: 2,
-                backgroundColor: "#000",
-                transition: "top 0.25s ease, height 0.25s ease",
-              }} />
-            )}
+
+          {/* ③ 3D card scene */}
+          <div style={{ perspective: 900, perspectiveOrigin: "50% 0%", width: 148 }}>
+            <div style={{
+              position: "relative", width: 148, height: cardH,
+              transformStyle: "preserve-3d",
+              transform: `rotateY(${rotation}deg)`,
+              transition: "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+              willChange: "transform",
+            }}>
+              <NavCard items={chapterLabels} activeIdx={activeChapterIdx} onSelect={handleChapterSelect}
+                title={"\u53D9\u4E8B\u7EBF"} count={chapterLabels.length + " \u7AE0"} accent="dark" side="a" />
+              <NavCard items={skillLabels} activeIdx={activeSkillIdx} onSelect={handleSkillSelect}
+                title={"\u65B9\u6CD5\u7EBF"} count={skillLabels.length + " \u9879"} accent="warm" side="b" />
+            </div>
           </div>
         </div>
       )}
@@ -1858,7 +2061,7 @@ function ReadingProgressBar() {
     <div style={{
       position: "fixed",
       top: "50%",
-      left: "max(24px, calc((100% - 720px) / 2 - 220px))",
+      left: "max(24px, calc((100vw - 720px) / 2 - 220px))",
       transform: "translateY(-50%)",
       zIndex: 50,
       height: 200,
@@ -2083,7 +2286,7 @@ function InfoHub() {
   const border = "#d4cdc2";
   const roleTint = "#8a7b6e";
 
-  const W = 880, H = 510;
+  const W = 880, H = 550;
   const zoneW = 82, zoneGap = 18;
   const hubX = zoneW + zoneGap, hubW = W - 2 * (zoneW + zoneGap), execX = W - zoneW;
   const pad = 18, modL = hubX + pad, modR = hubX + hubW - pad, modSpan = modR - modL, modGap = 16;
@@ -2120,7 +2323,7 @@ function InfoHub() {
         {/* SYSTEM RULE BANNER */}
         <g>
           <rect x={hubX} y={10} width={hubW} height={30} rx={6} fill={accent1} opacity="0.92" />
-          <text x={hubX + hubW / 2} y={30} textAnchor="middle" fontSize="10.5" fontWeight="600" fill="#fff" letterSpacing="0.3">{`Only formal submissions enter \u2014 all other channels ignored`}</text>
+          <text x={hubX + hubW / 2} y={30} textAnchor="middle" fontSize="10.5" fontWeight="600" fill="#fff" letterSpacing="0.3">{`Formal submissions only`}</text>
         </g>
 
         {/* GOVERNANCE ROW */}
@@ -2504,6 +2707,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
   const [expandCursor, setExpandCursor] = useState({ visible: false, x: 0, y: 0 });
   const [carouselActive, setCarouselActive] = useState(0);
 
+  // --- Dual-mode SideNav state ---
+  const [navMode, setNavMode] = useState("chapter");
+  const [activeChapterIdx, setActiveChapterIdx] = useState(-1);
+
   // Extract headings for side nav — memoized so SideNav/MobileProgressNav
   // don't re-attach scroll listeners on every parent render
   const { sectionHeadings, bodyWithIds } = useMemo(() => {
@@ -2567,6 +2774,31 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
     const t = setTimeout(compute, 100);
     return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); if (rafId) cancelAnimationFrame(rafId); };
   }, [project.skillTags, project.skillTagJumps]);
+
+  // --- Scroll-spy: track which chapter heading is currently in view ---
+  useEffect(() => {
+    if (!sectionHeadings || sectionHeadings.length === 0) return;
+    let rafId = null;
+    const compute = () => {
+      let found = -1;
+      const atBottom = window.scrollY > 0 &&
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
+      if (atBottom) {
+        found = sectionHeadings.length - 1;
+      } else {
+        for (let i = sectionHeadings.length - 1; i >= 0; i--) {
+          const el = document.getElementById("section-" + i);
+          if (el && el.getBoundingClientRect().top <= 160) { found = i; break; }
+        }
+      }
+      setActiveChapterIdx(found);
+      rafId = null;
+    };
+    const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(compute); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const t = setTimeout(compute, 100);
+    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); if (rafId) cancelAnimationFrame(rafId); };
+  }, [sectionHeadings]);
 
   // --- Skill tag jump state (click-triggered) ---
   const [activeTagJump, setActiveTagJump] = useState(null);
@@ -2633,7 +2865,20 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         }} />
       )}
       <ReadingProgressBar />
-      <SideNav sections={project.skillTags} activeSectionIdx={activeScrollSection} onNavigate={onNavigate} onSectionClick={handleTagClick} />
+      <SideNav
+        chapters={sectionHeadings}
+        activeChapterIdx={activeChapterIdx}
+        onChapterClick={(idx) => {
+          const el = document.getElementById("section-" + idx);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+        skillTags={project.skillTags}
+        activeSkillIdx={activeScrollSection}
+        onSkillClick={handleTagClick}
+        navMode={navMode}
+        onModeSwitch={setNavMode}
+        onNavigate={onNavigate}
+      />
       <MobileProgressNav headings={sectionHeadings} />
       {/* ===== 5-LAYER HERO for ALL projects ===== */}
       <section key={project.id} style={{ position: "relative", maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 24px" : "0 40px", paddingTop: isMobile ? 32 : 56 }}>
@@ -2821,7 +3066,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         {/* Layer 5: Section navigation */}
         <div style={{ paddingBottom: 48, animation: "fadeUp 0.7s ease-out 0.55s both", textAlign: "center" }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8a857d", marginBottom: 12 }}>
-            {"跳转至章节"}
+            {"跳转至正文"}
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
             {(project.skillTags || []).map((tag, i) => {
@@ -2831,8 +3076,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   key={i}
                   onClick={() => {
                     if (jump) {
-                      const el = document.getElementById("body-block-" + jump.scrollTo);
-                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                      handleTagClick(tag);
+                      setNavMode("skill");
                     }
                   }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = "#1a1815"; e.currentTarget.style.color = "#faf8f4"; e.currentTarget.style.borderColor = "#1a1815"; }}
@@ -2930,7 +3175,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   }}>{ks}</span>{parts.slice(1).join(ks)}</>
                 );
               }
-              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.85, margin: "0 auto", maxWidth: 720, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>{paragraphContent}</p>;
+              return <p key={i} id={blockId} style={{ width: "100%", fontSize: T.body, color: "#333", lineHeight: 1.85, margin: "0 auto", maxWidth: 640, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>{paragraphContent}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
@@ -3027,7 +3272,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "pull-quote") {
             return (
-              <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "16px auto", padding: "0 8px", scrollMarginTop: 80 }}>
+              <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "16px auto", padding: "0 8px", scrollMarginTop: 80 }}>
                 <blockquote style={{
                   margin: 0,
                   borderLeft: "3px solid #c4422b",
@@ -3068,12 +3313,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   gap: 16,
                 }}>
                   {block.items.map((item, ii) => (
-                    <div key={ii} style={{ aspectRatio: "16 / 10", overflow: "hidden", position: "relative" }}>
+                    <div key={ii} style={{ position: "relative" }}>
                       <ScreenshotItem
                         item={item}
-                        onLightbox={() => setLightboxContent(
-                          <img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
-                        )}
+                        onLightbox={() => setLightboxContent({
+                          content: <img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
+                          initialScale: item.initialScale || 0.85
+                        })}
                       />
                     </div>
                   ))}
@@ -3118,7 +3364,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                         setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top });
                       }}
                       onMouseLeave={() => !isMobile && setExpandCursor(c => ({ ...c, visible: false }))}
-                      onClick={() => setLightboxContent(<div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>)}
+                      onClick={() => setLightboxContent({ content: <div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>, initialScale: block.initialScale || ill.initialScale || 0.85 })}
                     >
                       {isMobile && (
                         <p style={{ fontSize: 10, color: "#aaa", margin: "0 0 6px 0", textAlign: "center" }}>
@@ -3179,9 +3425,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                 <div key={i} id={blockId} style={{ margin: "12px 0" }}>
                   <ScreenshotInlineCard
                     block={block}
-                    onLightbox={() => setLightboxContent(
-                      <img src={block.src} alt={block.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
-                    )}
+                    onLightbox={() => setLightboxContent({
+                      content: <img src={block.src} alt={block.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
+                      initialScale: 0.85
+                    })}
                   />
                 </div>
               );
@@ -3198,7 +3445,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           }
 
           if (block.type === "iteration-step") {
-            return <div key={i} id={blockId} style={{ maxWidth: 720, margin: "0 auto", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={block.heading} /></div></div>;
+            return <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "0 auto", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={block.heading} /></div></div>;
           }
 
           return null;
@@ -3215,9 +3462,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           <ScreenshotItem
             key={i}
             item={{ src: s.src, label: s.label, note: s.proves }}
-            onLightbox={() => setLightboxContent(
-              <img src={s.src} alt={s.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
-            )}
+            onLightbox={() => setLightboxContent({
+              content: <img src={s.src} alt={s.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
+              initialScale: 0.85
+            })}
           />
         );
         return (
@@ -3254,49 +3502,47 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 16,
       }}>
         <div
-          onClick={hasPrev ? () => onNavigate("project-" + prevProject.id) : () => onToast("This is the first project", "bottom")}
-          onMouseEnter={(e) => { if (hasPrev) { setHoveredNav("prev"); setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); } }}
+          onClick={() => onNavigate(hasPrev ? "project-" + prevProject.id : "home", { scrollToBottom: !hasPrev })}
+          onMouseEnter={(e) => { setHoveredNav("prev"); setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
           onMouseMove={(e) => { if (hoveredNav === "prev") setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
           onMouseLeave={() => setHoveredNav(null)}
           style={{
             flex: 1,
-            border: hasPrev ? "1px solid #D5D0C8" : "1px dashed #D5D0C8",
+            border: "1px solid #D5D0C8",
             padding: "14px 20px",
-            cursor: hasPrev ? "pointer" : "default",
-            opacity: hasPrev ? 1 : 0.7,
+            cursor: "pointer",
             backgroundColor: hoveredNav === "prev" ? "#1a1815" : "transparent",
             backgroundImage: hoveredNav === "prev" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
             transition: "background-color 0.2s ease",
           }}
         >
-          <span style={{ fontSize: T.small, color: hoveredNav === "prev" ? "rgba(255,255,255,0.5)" : (hasPrev ? "#999" : "#ccc"), display: "block", transition: "color 0.2s ease" }}>{"\u2190 Previous"}</span>
-          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "prev" ? "#fff" : (hasPrev ? "#000" : "#ccc"), transition: "color 0.2s ease" }}>{hasPrev ? prevProject.name : "First project"}</span>
+          <span style={{ fontSize: T.small, color: hoveredNav === "prev" ? "rgba(255,255,255,0.5)" : "#999", display: "block", transition: "color 0.2s ease" }}>{"\u2190 Previous"}</span>
+          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "prev" ? "#fff" : "#000", transition: "color 0.2s ease" }}>{hasPrev ? prevProject.name : "回到首页"}</span>
         </div>
         <div
-          onClick={hasNext ? () => onNavigate("project-" + nextProject.id) : () => onToast("This is the last project", "bottom")}
-          onMouseEnter={(e) => { if (hasNext) { setHoveredNav("next"); setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); } }}
+          onClick={() => onNavigate(hasNext ? "project-" + nextProject.id : "home", { scrollToBottom: !hasNext })}
+          onMouseEnter={(e) => { setHoveredNav("next"); setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
           onMouseMove={(e) => { if (hoveredNav === "next") setNavPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
           onMouseLeave={() => setHoveredNav(null)}
           style={{
             flex: 1,
-            border: hasNext ? "1px solid #D5D0C8" : "1px dashed #D5D0C8",
+            border: "1px solid #D5D0C8",
             padding: "14px 20px",
             textAlign: isMobile ? "left" : "right",
-            cursor: hasNext ? "pointer" : "default",
-            opacity: hasNext ? 1 : 0.7,
+            cursor: "pointer",
             backgroundColor: hoveredNav === "next" ? "#1a1815" : "transparent",
             backgroundImage: hoveredNav === "next" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
             transition: "background-color 0.2s ease",
           }}
         >
-          <span style={{ fontSize: T.small, color: hoveredNav === "next" ? "rgba(255,255,255,0.5)" : (hasNext ? "#999" : "#ccc"), display: "block", transition: "color 0.2s ease" }}>{"Next \u2192"}</span>
-          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "next" ? "#fff" : (hasNext ? "#000" : "#ccc"), transition: "color 0.2s ease" }}>{hasNext ? nextProject.name : "Last project"}</span>
+          <span style={{ fontSize: T.small, color: hoveredNav === "next" ? "rgba(255,255,255,0.5)" : "#999", display: "block", transition: "color 0.2s ease" }}>{"Next \u2192"}</span>
+          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "next" ? "#fff" : "#000", transition: "color 0.2s ease" }}>{hasNext ? nextProject.name : "回到首页"}</span>
         </div>
       </nav>
       </div>
       {lightboxContent && (
-        <Lightbox onClose={() => setLightboxContent(null)}>
-          {lightboxContent}
+        <Lightbox onClose={() => setLightboxContent(null)} initialScale={lightboxContent.initialScale || 0.85}>
+          {lightboxContent.content}
         </Lightbox>
       )}
     </div>
@@ -3305,8 +3551,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
 /* ===== App ===== */
 
-function Lightbox({ children, onClose }) {
-  const [scale, setScale] = useState(1);
+function Lightbox({ children, onClose, initialScale = 0.85 }) {
+  const [scale, setScale] = useState(initialScale);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const dragging = useRef(false);
   const dragStart = useRef({ x: 0, y: 0 });
@@ -3431,11 +3677,12 @@ function Lightbox({ children, onClose }) {
         position: "absolute", top: "50%", left: "50%",
         transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) scale(${scale})`,
         transformOrigin: "center center",
-        maxWidth: "min(94vw, 1100px)",
         transition: dragging.current ? "none" : "transform 0.15s ease-out",
         display: "flex", flexDirection: "column", alignItems: "center",
+        justifyContent: "center",
+        maxWidth: "min(85vw, 900px)",
       }}>
-        <div style={{ backgroundColor: "#faf8f4", padding: 24, boxSizing: "border-box" }}>
+        <div style={{ backgroundColor: "#fff", padding: 24, boxSizing: "border-box", borderRadius: "8px" }}>
           {children}
         </div>
         {/* Hint bar right below the card */}
@@ -3558,16 +3805,20 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const [fade, setFade] = useState(1);
   const pendingNav = useRef(null);
+  const pendingScroll = useRef(null);
   const pageRef = useRef(page);
   const isMobile = useIsMobile();
 
   useEffect(() => { pageRef.current = page; }, [page]);
 
   // Sync URL hash on navigation
-  const navigate = (t) => {
-    if (t === page) return;
-    history.pushState(null, "", "#" + t);
-    pendingNav.current = t;
+  const navigate = (t, opts) => {
+    const target = t.includes("#") ? t.split("#")[0] : t;
+    const scrollId = t.includes("#") ? t.split("#")[1] : null;
+    if (target === page && !scrollId) return;
+    history.pushState(null, "", "#" + target);
+    pendingNav.current = target;
+    pendingScroll.current = scrollId || (opts?.scrollToBottom ? "bottom" : null);
     setFade(0);
   };
 
@@ -3589,8 +3840,18 @@ export default function App() {
       const timer = setTimeout(() => {
         setPage(pendingNav.current);
         pendingNav.current = null;
-        window.scrollTo({ top: 0, behavior: "instant" });
-        setTimeout(() => setFade(1), 30);
+        const scrollTarget = pendingScroll.current;
+        pendingScroll.current = null;
+        if (scrollTarget === "bottom") {
+          // Delay scroll to let new page DOM render first
+          setTimeout(() => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "instant" });
+            setFade(1);
+          }, 50);
+        } else {
+          window.scrollTo({ top: 0, behavior: "instant" });
+          setTimeout(() => setFade(1), 30);
+        }
       }, 250);
       return () => clearTimeout(timer);
     }

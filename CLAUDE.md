@@ -197,3 +197,7 @@ npx vite build                # 构建
 - screenshot-inline 需要 `src` 属性指向 `images/` 下的文件
 - screenshot-group / screenshot-carousel 的 items 数组每项也需要 `src`
 - screenshot-carousel 的 `carouselActive` state 在 ProjectPage 组件顶层声明
+
+## UX 审查
+
+**不要自动调用 ux-reviewer agent。** 只在用户明确要求时才运行。
