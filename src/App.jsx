@@ -705,6 +705,139 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
   );
 }
 
+/* ===== Screenshot Carousel Component (with proper Hooks for auto-play) ===== */
+function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive, setLightboxContent, flashBg }) {
+  const items = block.items || [];
+  const total = items.length;
+  const [carouselPaused, setCarouselPaused] = useState(false);
+
+  // Auto-play carousel every 4 seconds
+  useEffect(() => {
+    if (carouselPaused || total <= 1) return;
+    const timer = setInterval(() => {
+      setCarouselActive((prev) => (prev + 1) % total);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [carouselPaused, total, setCarouselActive]);
+
+  const getPos = (idx) => {
+    const d = (idx - carouselActive + total) % total;
+    return d === 0 ? "center" : d === 1 ? "right" : "left";
+  };
+
+  const posStyles = {
+    center: { transform: "translateX(0) scale(1)", zIndex: 3, opacity: 1, filter: "blur(0)" },
+    left: { transform: "translateX(-58%) scale(0.85)", zIndex: 1, opacity: 0.25, filter: "blur(1px)" },
+    right: { transform: "translateX(58%) scale(0.85)", zIndex: 1, opacity: 0.25, filter: "blur(1px)" },
+  };
+
+  return (
+    <div
+      style={{ margin: "32px 0", scrollMarginTop: 80 }}
+      onMouseEnter={() => setCarouselPaused(true)}
+      onMouseLeave={() => setCarouselPaused(false)}
+    >
+      <div style={{ position: "relative", maxWidth: "100%", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {/* Left arrow */}
+        <button
+          onClick={() => setCarouselActive((prev) => (prev - 1 + total) % total)}
+          style={{
+            position: "absolute",
+            left: 12,
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 10,
+            width: 28,
+            height: 28,
+            borderRadius: "50%",
+            border: "1px solid #b8b0a3",
+            backgroundColor: "transparent",
+            color: "#b8b0a3",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 16,
+            opacity: 0.5,
+            transition: "all 0.3s ease",
+          }}
+          onMouseEnter={(e) => { e.target.style.opacity = 1; e.target.style.color = "#2a2a2a"; }}
+          onMouseLeave={(e) => { e.target.style.opacity = 0.5; e.target.style.color = "#b8b0a3"; }}
+        >
+          ←
+        </button>
+
+        {/* Carousel stage */}
+        <div style={{ position: "relative", width: "100%", height: 500, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          {items.map((item, ii) => {
+            const pos = getPos(ii);
+            const isCenter = pos === "center";
+            return (
+              <CarouselSlide
+                key={ii}
+                item={item}
+                isCenter={isCenter}
+                posStyle={posStyles[pos]}
+                onLightbox={() => setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />)}
+                onClick={() => setCarouselActive(ii)}
+              />
+            );
+          })}
+        </div>
+
+        {/* Right arrow */}
+        <button
+          onClick={() => setCarouselActive((prev) => (prev + 1) % total)}
+          style={{
+            position: "absolute",
+            right: 12,
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 10,
+            width: 28,
+            height: 28,
+            borderRadius: "50%",
+            border: "1px solid #b8b0a3",
+            backgroundColor: "transparent",
+            color: "#b8b0a3",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 16,
+            opacity: 0.5,
+            transition: "all 0.3s ease",
+          }}
+          onMouseEnter={(e) => { e.target.style.opacity = 1; e.target.style.color = "#2a2a2a"; }}
+          onMouseLeave={(e) => { e.target.style.opacity = 0.5; e.target.style.color = "#b8b0a3"; }}
+        >
+          →
+        </button>
+      </div>
+
+      {/* Dot indicators */}
+      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 16 }}>
+        {items.map((_, ii) => (
+          <button
+            key={ii}
+            onClick={() => setCarouselActive(ii)}
+            style={{
+              width: ii === carouselActive ? 20 : 6,
+              height: 6,
+              borderRadius: 3,
+              border: "none",
+              backgroundColor: ii === carouselActive ? "#6b6560" : "#d4cfc7",
+              cursor: "pointer",
+              padding: 0,
+              transition: "all 0.35s cubic-bezier(0.23,1,0.32,1)"
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Footer({ isMobile }) {
   const maxW = 860;
   const [hBtn, setHBtn] = useState(null);
@@ -2670,13 +2803,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             const isReflection = block.navLabel === "\u56DE\u5934\u770B";
             if (isReflection) {
               return (
-                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, margin: "0 -8px", padding: "40px 8px 0" }}>
+                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, marginLeft: -8, marginRight: -8, padding: "40px 8px 0" }}>
                   <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
                 </div>
               );
             }
             return (
-              <div key={i} id={blockId} style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, margin: "0 -8px", padding: "40px 8px 0" }}>
+              <div key={i} id={blockId} style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, marginLeft: -8, marginRight: -8, padding: "40px 8px 0" }}>
                 <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
               </div>
             );
@@ -2783,131 +2916,16 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           }
 
           if (block.type === "screenshot-carousel") {
-            const items = block.items || [];
-            const total = items.length;
-            const [carouselPaused, setCarouselPaused] = useState(false);
-
-            // Auto-play carousel every 4 seconds
-            useEffect(() => {
-              if (carouselPaused || total <= 1) return;
-              const timer = setInterval(() => {
-                setCarouselActive((prev) => (prev + 1) % total);
-              }, 4000);
-              return () => clearInterval(timer);
-            }, [carouselPaused, total]);
-
-            const getPos = (idx) => { const d = (idx - carouselActive + total) % total; return d === 0 ? "center" : d === 1 ? "right" : "left"; };
-            const posStyles = {
-              center: { transform: "translateX(0) scale(1)", zIndex: 3, opacity: 1, filter: "blur(0)" },
-              left: { transform: "translateX(-58%) scale(0.85)", zIndex: 1, opacity: 0.25, filter: "blur(1px)" },
-              right: { transform: "translateX(58%) scale(0.85)", zIndex: 1, opacity: 0.25, filter: "blur(1px)" },
-            };
-
             return (
-              <div
-                key={i}
-                id={blockId}
-                style={{ margin: "32px 0", scrollMarginTop: 80 }}
-                onMouseEnter={() => setCarouselPaused(true)}
-                onMouseLeave={() => setCarouselPaused(false)}
-              >
-                <div style={{ position: "relative", maxWidth: "100%", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  {/* Left arrow */}
-                  <button
-                    onClick={() => setCarouselActive((prev) => (prev - 1 + total) % total)}
-                    style={{
-                      position: "absolute",
-                      left: 12,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      zIndex: 10,
-                      width: 28,
-                      height: 28,
-                      borderRadius: "50%",
-                      border: "1px solid #b8b0a3",
-                      backgroundColor: "transparent",
-                      color: "#b8b0a3",
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 16,
-                      opacity: 0.5,
-                      transition: "all 0.3s ease",
-                    }}
-                    onMouseEnter={(e) => { e.target.style.opacity = 1; e.target.style.color = "#2a2a2a"; }}
-                    onMouseLeave={(e) => { e.target.style.opacity = 0.5; e.target.style.color = "#b8b0a3"; }}
-                  >
-                    ←
-                  </button>
-
-                  {/* Carousel stage */}
-                  <div style={{ position: "relative", width: "100%", height: 500, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    {items.map((item, ii) => {
-                      const pos = getPos(ii);
-                      const isCenter = pos === "center";
-                      return (
-                        <CarouselSlide
-                          key={ii}
-                          item={item}
-                          isCenter={isCenter}
-                          posStyle={posStyles[pos]}
-                          onLightbox={() => setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />)}
-                          onClick={() => setCarouselActive(ii)}
-                        />
-                      );
-                    })}
-                  </div>
-
-                  {/* Right arrow */}
-                  <button
-                    onClick={() => setCarouselActive((prev) => (prev + 1) % total)}
-                    style={{
-                      position: "absolute",
-                      right: 12,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      zIndex: 10,
-                      width: 28,
-                      height: 28,
-                      borderRadius: "50%",
-                      border: "1px solid #b8b0a3",
-                      backgroundColor: "transparent",
-                      color: "#b8b0a3",
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 16,
-                      opacity: 0.5,
-                      transition: "all 0.3s ease",
-                    }}
-                    onMouseEnter={(e) => { e.target.style.opacity = 1; e.target.style.color = "#2a2a2a"; }}
-                    onMouseLeave={(e) => { e.target.style.opacity = 0.5; e.target.style.color = "#b8b0a3"; }}
-                  >
-                    →
-                  </button>
-                </div>
-
-                {/* Dot indicators */}
-                <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 16 }}>
-                  {items.map((_, ii) => (
-                    <button
-                      key={ii}
-                      onClick={() => setCarouselActive(ii)}
-                      style={{
-                        width: ii === carouselActive ? 20 : 6,
-                        height: 6,
-                        borderRadius: 3,
-                        border: "none",
-                        backgroundColor: ii === carouselActive ? "#6b6560" : "#d4cfc7",
-                        cursor: "pointer",
-                        padding: 0,
-                        transition: "all 0.35s cubic-bezier(0.23,1,0.32,1)"
-                      }}
-                    />
-                  ))}
-                </div>
+              <div key={i} id={blockId}>
+                <ScreenshotCarousel
+                  blockId={blockId}
+                  block={block}
+                  carouselActive={carouselActive}
+                  setCarouselActive={setCarouselActive}
+                  setLightboxContent={setLightboxContent}
+                  flashBg={flashBg}
+                />
               </div>
             );
           }
