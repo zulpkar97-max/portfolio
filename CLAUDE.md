@@ -3,7 +3,7 @@
 ## 项目概况
 
 React 19 + Vite 7.3 单页应用，hash 路由（#project-1/2/3）。
-所有组件、数据、样式都在 `src/App.jsx` 一个文件里（~3100行）。
+所有组件、数据、样式都在 `src/App.jsx` 一个文件里（~3300行）。
 
 ## 技术栈
 
@@ -97,8 +97,8 @@ skillTagJumps: {
 ```
 
 **两层反馈：**
-1. **持续层**（滚动驱动）：浅灰左边线 `inset 2px 0 0 #D5D0C8` + 关键句淡底色 `rgba(218,212,203,0.45)`
-2. **点击层**（临时动画）：深色左边线 `inset 3px 0 0 #111` + 关键句加强高亮动画（淡入1s→停留2s→淡出1s）
+1. **持续层**（滚动驱动）：关键句淡底色 `rgba(218,212,203,0.45)`
+2. **点击层**（临时动画）：flashBg 背景闪光 `rgba(196,66,43,0.04)` + 关键句加强高亮动画（淡入1s→停留2s→淡出1s）
 
 ## 三个 Case 当前状态
 
@@ -157,6 +157,29 @@ skillTagJumps: {
 - [x] 自定义 favicon："Z" 红底（替换 Vite 默认）
 - [x] 第一批 Diff：paragraph lineHeight/maxWidth、heading borderTop、highlight 加深、quote/module-list/pull-quote/screenshot-inline 样式微调
 - [x] 第二批 Diff：DualTrackTimeline 简化（去 IntersectionObserver）、InfoHub 简化（去 fade-in, marker IDs ag2/ad2/af2）、pull-quote 独立块、screenshot-carousel 层叠卡片轮播
+- [x] 第三批 Diff：screenshot-inline/carousel/illustration 卡片外壳统一 + 轮播 auto-play + 图片英文命名
+- [x] 第四批 Diff：项目二三 ScreenshotItem 卡片对齐 + 交互反馈改为 flashBg 背景闪光
+- [x] 第五批修复：heading margin 覆盖 + Hooks 违规 + 图片文件未提交
+- [x] 第六批：图片交互统一 (expandCursor/zoom-in) + 大标题红色前缀 + breakout 居中
+- [x] 第七批：heading 左对齐 (flex shrink-wrap fix) + pull-quote 统一样式 + 截图宽度 + SideNav 对称 + 轮播侧边条重做
+- [x] Batch 4 诊断区重构：DiagnosisCascadeSVG + quote-list 左标签/右引言布局
+- [x] Batch 5 宽度居中：body 880px / text 720px / illustration 无 breakout / SideNav fixed / screenshot-group aspectRatio
+- [x] 首页 replay 按钮：?→AI 动画重播 SVG 按钮
+
+## 宽度网格系统
+
+- **Body 容器**: maxWidth 880, padding 0 40px 80px
+- **文本块** (paragraph, heading, pull-quote): maxWidth 720, margin "0 auto", padding "0 8px"
+- **视觉块** (illustration, carousel, screenshot-group, screenshot-inline): 填满 880px 容器
+- **Heading 必须** `width: "100%"` 防止 flex shrink-wrap 居中
+- **SideNav + ProgressBar**: 对称定位 `max(24px, calc((100vw - 720px) / 2 - 220px))`
+
+## 轮播架构
+
+- **CarouselSlide**: width 84%, left 8%, 侧边条各 8%
+- **侧边卡**: translateX(±9.52%), 无 scale, opacity 0.7, border #b8b0a3
+- **箭头**: 绝对定位在 stage 内 left:4% / left:96%, zIndex 5
+- **自动播放**: 4s 间隔, hover 暂停, ScreenshotCarousel 独立组件
 
 ## 开发命令
 

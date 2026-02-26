@@ -50,8 +50,8 @@ const PROJECTS = [
     skillTagJumps: {
       "系统诊断":  { scrollTo: 6,  borderRange: [5, 12],  keySentence: "不是人的问题，是系统的问题。", keyBlock: 11 },
       "约束下决策": { scrollTo: 14, borderRange: [14, 15], keySentence: "零成本、零学习成本、立即见效", keyBlock: 14 },
-      "流程设计":  { scrollTo: 17, borderRange: [17, 21], keySentence: "六个模块不是拍脑袋拆的", keyBlock: 21 },
-      "AI落地":   { scrollTo: 27, borderRange: [26, 34], keySentence: "根因不是模型能力问题，而是知识库的信息架构", keyBlock: 34 },
+      "流程设计":  { scrollTo: 17, borderRange: [17, 22], keySentence: "六个模块不是拍脑袋拆的", keyBlock: 22 },
+      "AI落地":   { scrollTo: 27, borderRange: [26, 35], keySentence: "根因不是模型能力问题，而是知识库的信息架构", keyBlock: 35 },
     },
     context: "公司首个长线项目",
     cardImage: "images/collab-system-interaction.jpg",
@@ -84,7 +84,7 @@ const PROJECTS = [
       { type: "heading", text: "诊断：先搞清楚问题出在哪", navLabel: "诊断" },
       { type: "paragraph", text: "面对这个局面，我没有急着想方案。我做的第一件事是回溯过去几个月积累的所有历史会议纪要和语音记录，把反复出现的争论点、矛盾点逐条标注出来，形成了一组初步假设：问题可能不是某个人或某个环节的问题，而是整个协作方式承载不了这个项目的复杂度。" },
       { type: "paragraph", text: "带着这些假设，我跟团队里不同角色做了15次一对一访谈。不是问卷，不是群体会议，是把人一个一个叫到办公室，正式坐下来，录音，开放式提问：\u201C你觉得现在最大的问题是什么？你需要什么样的支持？\u201D" },
-      { type: "paragraph", text: "我拿到了几乎一致的诊断线索：" },
+      { type: "pull-quote", text: "我拿到了几乎一致的诊断线索：" },
       { type: "quote-list", items: [
         { role: "前端开发", text: "需求总是不明确，我不知道做到什么程度算完成。" },
         { role: "后端开发", text: "我不知道前端在做什么，经常重复开发。" },
@@ -101,7 +101,7 @@ const PROJECTS = [
       { type: "paragraph", text: "确认了问题根源之后，我给自己设了三条硬约束——零成本、零学习成本、立即见效。零成本——只用公司已有的飞书文档，不引入新工具；零学习成本——团队不需要学新东西，打开文档就能用；立即见效——没有时间搞试点推广，必须一上来就全员切换。" },
       { type: "paragraph", text: "这三条约束是现实倒逼出来的。公司没有预算买新工具，团队也没有时间和意愿去学一套陌生的系统。如果方案不能在现有条件下直接落地，就等于没有方案。" },
       { type: "paragraph", text: "我回到三个最基本的问题来推导。问题本质是什么？——信息不对称、流程不清晰、责任不明确。最小可行方案是什么？——用一份结构化的中枢文档，把所有信息、流程、责任固定下来。怎么保证执行？——规则公开透明，所有人只有一个信息来源。" },
-      { type: "paragraph", text: "基于这个逻辑，我设计了六个模块：" },
+      { type: "pull-quote", text: "基于这个逻辑，我设计了六个模块：" },
       { type: "module-list", items: [
         { name: "变更日志",           desc: "强制记录所有改动，任何人都能追溯历史，解决「我改了但你不知道」的问题。" },
         { name: "资产归集",           desc: "把环境链接、文档、第三方平台凭证集中管理，终结「那个链接在哪」的重复提问。" },
@@ -112,15 +112,15 @@ const PROJECTS = [
       ]},
       { type: "illustration", index: 1 },
       { type: "screenshot-inline", label: "飞书多维表格目录结构 + 协作流程图", note: "正文讲六模块系统时", src: "images/collab-system-interaction.jpg" },
-      { type: "paragraph", text: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。" },
-      { type: "paragraph", text: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。" },
-      { type: "paragraph", text: "结果是：这套协作系统直接支撑了二期的顺利交付，差点丢掉的合同被挽回来了。客户签下了二期。之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部先用，效果验证后其他团队认可跟进，最终成为全公司标准SOP。" },
-      { type: "paragraph", text: "后来我才知道，行业内早已有成熟的专业协作工具在做类似的事。我从问题本身出发一步步推导出来的东西，和那些成熟工具的底层逻辑高度一致。这件事让我意识到：解决问题的关键不是知道有什么工具，而是能不能准确诊断出问题的结构，然后用手头有的资源把它解出来。" },
       { type: "screenshot-carousel", items: [
         { src: "images/collab-doc-structure.png", label: "文档结构", note: "协作系统完整文档架构" },
         { src: "images/collab-flow-design.png", label: "流程设计", note: "执行层流程设计" },
         { src: "images/collab-kanban-running.png", label: "看板运行", note: "系统实际运行状态" },
       ]},
+      { type: "paragraph", text: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。" },
+      { type: "paragraph", text: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。" },
+      { type: "paragraph", text: "结果是：这套协作系统直接支撑了二期的顺利交付，差点丢掉的合同被挽回来了。客户签下了二期。之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部先用，效果验证后其他团队认可跟进，最终成为全公司标准SOP。" },
+      { type: "paragraph", text: "后来我才知道，行业内早已有成熟的专业协作工具在做类似的事。我从问题本身出发一步步推导出来的东西，和那些成熟工具的底层逻辑高度一致。这件事让我意识到：解决问题的关键不是知道有什么工具，而是能不能准确诊断出问题的结构，然后用手头有的资源把它解出来。" },
 
       // === 转折 ===
       { type: "heading", text: "转折：在同一个项目里识别AI落地机会", navLabel: "转折" },
@@ -131,6 +131,7 @@ const PROJECTS = [
       { type: "paragraph", text: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。" },
       { type: "paragraph", text: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。" },
       { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "images/nana-ai-chat-trimmed.jpg" },
+      { type: "screenshot-inline", label: "四层技术架构", note: "技术选型全景", src: "images/nana-tech-architecture-cropped.png" },
       { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因不是模型能力问题，而是知识库的信息架构——原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。" },
 
       // === 回头看 ===
@@ -139,11 +140,7 @@ const PROJECTS = [
       { type: "paragraph", text: "两件事的共同点是：在每个关键节点，我的判断比我的执行更重要。判断\u201C不是人的问题是系统的问题\u201D决定了协作系统的方向；判断\u201CDeepSeek能用在社区场景\u201D决定了AI线的启动；判断\u201C先找技术总监不找项目经理\u201D决定了娜娜项目能活过萌芽期。" },
       { type: "paragraph", text: "但这些判断都是靠经验和直觉驱动的，缺少系统性的方法论支撑。我能从零设计一套协作系统，但说不清楚它背后的理论框架；我能识别AI落地机会并推动客户买单，但对AI产品管理的完整知识体系还有明显的缺口。这也是我想进一步深入学习的原因——把散装的实践经验，整合进一个专业的、可复用的框架里。" },
     ],
-    supportingScreenshots: [
-      { label: "四层技术架构", proves: "技术选型全景", src: "images/nana-tech-architecture-cropped.png", featured: true },
-      { label: "看板运行状态", proves: "系统日常运行状态" },
-      { label: "空间化PRD", proves: "信息架构实际产出" },
-    ],
+    supportingScreenshots: [],
   },
   {
     id: 2,
@@ -579,8 +576,8 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
       style={{
         position: "absolute",
         top: 0,
-        width: "92%",
-        left: "4%",
+        width: "84%",
+        left: "8%",
         cursor: isCenter ? "zoom-in" : "pointer",
         transition: "all 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
         ...posStyle
@@ -589,7 +586,7 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
       <div style={{
         background: "#fff",
         borderRadius: "10px",
-        border: "1px solid #d4cdc2",
+        border: isCenter ? "1px solid #d4cdc2" : "1px solid #b8b0a3",
         overflow: "hidden",
         boxShadow: isCenter ? "0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)" : "none",
       }}>
@@ -669,25 +666,24 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
   };
 
   const posStyles = {
-    center: { transform: "translateX(0) scale(1)", zIndex: 3, opacity: 1, filter: "blur(0)" },
-    left: { transform: "translateX(-58%) scale(0.85)", zIndex: 1, opacity: 0.38, filter: "blur(0.5px)" },
-    right: { transform: "translateX(58%) scale(0.85)", zIndex: 1, opacity: 0.38, filter: "blur(0.5px)" },
+    center: { transform: "translateX(0)", zIndex: 3, opacity: 1 },
+    left: { transform: "translateX(-9.52%)", zIndex: 1, opacity: 0.7 },
+    right: { transform: "translateX(9.52%)", zIndex: 1, opacity: 0.7 },
   };
 
   const arrowBase = {
-    flexShrink: 0,
-    width: 28,
-    height: 28,
+    width: 32,
+    height: 32,
     borderRadius: "50%",
-    border: "1px solid #b8b0a3",
+    border: "1px solid #D5D0C8",
     backgroundColor: "transparent",
-    color: "#8a847d",
+    color: "#999",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: 13,
-    opacity: 0.75,
+    opacity: 0.7,
     transition: "all 0.25s",
   };
 
@@ -697,42 +693,37 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
       onMouseEnter={() => setCarouselPaused(true)}
       onMouseLeave={() => setCarouselPaused(false)}
     >
-      {/* carousel-outer: flex row — arrow | stage | arrow */}
-      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-        {/* Left arrow */}
+      {/* Carousel stage with arrows inside */}
+      <div style={{ position: "relative", height: 520, overflow: "hidden", marginBottom: 16 }}>
+        {items.map((item, ii) => {
+          const pos = getPos(ii);
+          const isCenter = pos === "center";
+          return (
+            <CarouselSlide
+              key={ii}
+              item={item}
+              isCenter={isCenter}
+              posStyle={posStyles[pos]}
+              onLightbox={() => setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />)}
+              onClick={() => setCarouselActive(ii)}
+            />
+          );
+        })}
+        {/* Left arrow — centered on left side strip */}
         <button
           onClick={() => setCarouselActive((prev) => (prev - 1 + total) % total)}
-          style={arrowBase}
+          style={{ ...arrowBase, position: "absolute", left: "4%", top: "50%", transform: "translate(-50%, -50%)", zIndex: 5, backgroundColor: "rgba(255,255,255,0.85)" }}
           onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#6b6560"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "#8a847d"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.85)"; e.currentTarget.style.color = "#8a847d"; e.currentTarget.style.borderColor = "#D5D0C8"; }}
         >
           ‹
         </button>
-
-        {/* Carousel stage */}
-        <div style={{ flex: 1, position: "relative", height: 520, overflow: "hidden" }}>
-          {items.map((item, ii) => {
-            const pos = getPos(ii);
-            const isCenter = pos === "center";
-            return (
-              <CarouselSlide
-                key={ii}
-                item={item}
-                isCenter={isCenter}
-                posStyle={posStyles[pos]}
-                onLightbox={() => setLightboxContent(<img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />)}
-                onClick={() => setCarouselActive(ii)}
-              />
-            );
-          })}
-        </div>
-
-        {/* Right arrow */}
+        {/* Right arrow — centered on right side strip */}
         <button
           onClick={() => setCarouselActive((prev) => (prev + 1) % total)}
-          style={arrowBase}
+          style={{ ...arrowBase, position: "absolute", left: "96%", top: "50%", transform: "translate(-50%, -50%)", zIndex: 5, backgroundColor: "rgba(255,255,255,0.85)" }}
           onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#6b6560"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "#8a847d"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.85)"; e.currentTarget.style.color = "#8a847d"; e.currentTarget.style.borderColor = "#D5D0C8"; }}
         >
           ›
         </button>
@@ -900,7 +891,6 @@ function HomePage({ onNavigate, isMobile }) {
     { text: "产品、设计、项目管理、客户", type: "normal" },
     { text: "收拢成一个 PM 底座，", type: "normal" },
     { text: "下一步方向：", type: "normal", inline: true },
-    { text: "AI", type: "accent", inline: true },
   ];
   const heroChars = useMemo(() => {
     const chars = [];
@@ -913,49 +903,151 @@ function HomePage({ onNavigate, isMobile }) {
   }, []);
   const HERO_TOTAL = heroChars.length;
   const HERO_CHAR_DELAY = 100;
-  const AI_START = HERO_TOTAL - 2;
-  const AI_PAUSE = 500;
   const heroPlayed = typeof sessionStorage !== "undefined" && sessionStorage.getItem("hero-played");
   const [revealedCount, setRevealedCount] = useState(heroPlayed ? HERO_TOTAL : 0);
   const [subtitleVisible, setSubtitleVisible] = useState(!!heroPlayed);
-  const [aiGlow, setAiGlow] = useState(!!heroPlayed);
-  const [aiPulse, setAiPulse] = useState(false);
+  const [replayKey, setReplayKey] = useState(0);
+  const [animationComplete, setAnimationComplete] = useState(!!heroPlayed);
+  const [replayHovered, setReplayHovered] = useState(false);
   const heroFrameRef = useRef(null);
   const heroStartRef = useRef(null);
+  const fogCanvasRef = useRef(null);
+  const fogParticlesRef = useRef([]);
+  const fogShockwavesRef = useRef([]);
+  const fogAnimatingRef = useRef(false);
 
+  // --- Fog particle system (canvas-based, no React re-renders) ---
+  const createFogParticle = (cx, cy) => {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 1.5 + Math.random() * 4.5;
+    const cr = Math.random();
+    let r, g, b;
+    if (cr < 0.45) { r=196; g=66+Math.floor(Math.random()*40); b=43+Math.floor(Math.random()*30); }
+    else if (cr < 0.75) { r=210; g=195; b=170; }
+    else { r=180; g=168; b=152; }
+    const radius = 12 + Math.random() * 45;
+    const alpha = 0.15 + Math.random() * 0.2;
+    return {
+      x: cx + (Math.random() - 0.5) * 10, y: cy + (Math.random() - 0.5) * 8,
+      vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed - Math.random() * 1.2,
+      friction: 0.965 + Math.random() * 0.02,
+      radius, maxRadius: radius * (1.4 + Math.random() * 0.8), growSpeed: 0.3 + Math.random() * 0.5,
+      r, g, b, alpha, maxAlpha: alpha, life: 1.0,
+      decayDelay: 0.15 + Math.random() * 0.25, decayRate: 0.006 + Math.random() * 0.008, age: 0,
+    };
+  };
+  const renderFog = () => {
+    const cv = fogCanvasRef.current;
+    if (!cv) return;
+    const c2 = cv.getContext("2d");
+    c2.clearRect(0, 0, cv.width, cv.height);
+    fogParticlesRef.current = fogParticlesRef.current.filter(p => {
+      p.age += 1/60; p.x += p.vx; p.y += p.vy; p.vx *= p.friction; p.vy *= p.friction;
+      if (p.radius < p.maxRadius) p.radius += p.growSpeed;
+      if (p.age > p.decayDelay) { p.life -= p.decayRate; p.alpha = p.maxAlpha * Math.max(0, p.life); }
+      return p.life > 0;
+    });
+    fogShockwavesRef.current = fogShockwavesRef.current.filter(s => {
+      s.radius += s.speed; s.speed *= 0.97; s.alpha *= 0.955; return s.alpha > 0.005;
+    });
+    fogParticlesRef.current.forEach(p => {
+      if (p.alpha <= 0.001) return;
+      const g = c2.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+      g.addColorStop(0, `rgba(${p.r},${p.g},${p.b},${p.alpha})`);
+      g.addColorStop(0.5, `rgba(${p.r},${p.g},${p.b},${p.alpha*0.4})`);
+      g.addColorStop(1, `rgba(${p.r},${p.g},${p.b},0)`);
+      c2.fillStyle = g; c2.beginPath(); c2.arc(p.x, p.y, p.radius, 0, Math.PI*2); c2.fill();
+    });
+    fogShockwavesRef.current.forEach(s => {
+      c2.strokeStyle = `rgba(196,66,43,${s.alpha})`; c2.lineWidth = 2;
+      c2.beginPath(); c2.arc(s.x, s.y, s.radius, 0, Math.PI*2); c2.stroke();
+    });
+    if (fogParticlesRef.current.length > 0 || fogShockwavesRef.current.length > 0) requestAnimationFrame(renderFog);
+    else { fogAnimatingRef.current = false; c2.clearRect(0, 0, cv.width, cv.height); }
+  };
+  const spawnFogBurst = (cx, cy) => {
+    for (let i = 0; i < 55; i++) fogParticlesRef.current.push(createFogParticle(cx, cy));
+    fogShockwavesRef.current.push({ x: cx, y: cy, radius: 5, alpha: 0.25, speed: 5 });
+    setTimeout(() => { for (let i = 0; i < 20; i++) fogParticlesRef.current.push(createFogParticle(cx, cy)); }, 80);
+    if (!fogAnimatingRef.current) { fogAnimatingRef.current = true; renderFog(); }
+  };
+
+  const replayHero = useCallback(() => {
+    setRevealedCount(0);
+    setSubtitleVisible(false);
+    setAnimationComplete(false);
+    setReplayHovered(false);
+    setReplayKey(k => k + 1);
+  }, []);
+
+  // Canvas resize
   useEffect(() => {
-    if (heroPlayed) return;
+    const resize = () => { const c = fogCanvasRef.current; if (c) { c.width = window.innerWidth; c.height = window.innerHeight; } };
+    resize(); window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  }, []);
+
+  // Typewriter + ? → AI reveal animation
+  useEffect(() => {
+    if (heroPlayed && replayKey === 0) return;
+    if (replayKey > 0) {
+      const qEl = document.getElementById("hero-question");
+      const aEl = document.getElementById("hero-ai");
+      if (qEl) { qEl.style.opacity = "0"; qEl.style.transform = "scale(0.8)"; qEl.style.transition = "none"; qEl.style.filter = "none"; qEl.style.color = "#d4cdc2"; }
+      if (aEl) { aEl.style.opacity = "0"; aEl.style.transform = "translate(-50%, -50%) scale(0.7)"; aEl.style.filter = "blur(16px)"; aEl.style.transition = "none"; }
+    }
     const initDelay = setTimeout(() => {
       heroStartRef.current = performance.now();
       const animate = (now) => {
         const elapsed = now - heroStartRef.current;
-        let count;
-        if (elapsed < AI_START * HERO_CHAR_DELAY) {
-          count = Math.min(Math.floor(elapsed / HERO_CHAR_DELAY) + 1, AI_START);
-        } else {
-          const aiElapsed = elapsed - AI_START * HERO_CHAR_DELAY;
-          if (aiElapsed < AI_PAUSE) {
-            count = AI_START;
-          } else {
-            const aiCharElapsed = aiElapsed - AI_PAUSE;
-            count = AI_START + Math.min(Math.floor(aiCharElapsed / HERO_CHAR_DELAY) + 1, 2);
-          }
-        }
-        count = Math.min(count, HERO_TOTAL);
+        const count = Math.min(Math.floor(elapsed / HERO_CHAR_DELAY) + 1, HERO_TOTAL);
         setRevealedCount(count);
         if (count < HERO_TOTAL) {
           heroFrameRef.current = requestAnimationFrame(animate);
         } else {
-          setTimeout(() => { setAiGlow(true); setAiPulse(true); }, 150);
-          setTimeout(() => setAiPulse(false), 700);
-          setTimeout(() => setSubtitleVisible(true), 900);
-          sessionStorage.setItem("hero-played", "true");
+          // Typewriter done — begin ? → AI sequence
+          const questionEl = document.getElementById("hero-question");
+          const aiEl = document.getElementById("hero-ai");
+          if (!questionEl || !aiEl) return;
+          // ? appears
+          setTimeout(() => {
+            questionEl.style.opacity = "1";
+            questionEl.style.color = "#b0a89a";
+            questionEl.style.transform = "scale(1.0)";
+            questionEl.style.transition = "opacity 0.25s ease, transform 0.3s ease, color 0.25s ease";
+          }, 150);
+          // ? dissolves + AI ghost emerges (simultaneous)
+          setTimeout(() => {
+            questionEl.style.opacity = "0";
+            questionEl.style.transform = "scale(1.15)";
+            questionEl.style.filter = "blur(8px)";
+            questionEl.style.transition = "opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease";
+            aiEl.style.opacity = "0.35";
+            aiEl.style.transform = "translate(-50%, -50%) scale(0.88)";
+            aiEl.style.filter = "blur(8px)";
+            aiEl.style.transition = "opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease";
+            // AI snap into focus
+            setTimeout(() => {
+              aiEl.style.opacity = "1";
+              aiEl.style.transform = "translate(-50%, -50%) scale(1.06)";
+              aiEl.style.filter = "blur(0px)";
+              aiEl.style.transition = "opacity 0.15s ease-out, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease-out";
+              // Fog burst
+              setTimeout(() => {
+                const rect = aiEl.getBoundingClientRect();
+                spawnFogBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                setTimeout(() => { aiEl.style.transform = "translate(-50%, -50%) scale(1.0)"; aiEl.style.transition = "transform 0.3s ease"; }, 150);
+                setTimeout(() => { setSubtitleVisible(true); setAnimationComplete(true); }, 550);
+                sessionStorage.setItem("hero-played", "true");
+              }, 50);
+            }, 450);
+          }, 950);
         }
       };
       heroFrameRef.current = requestAnimationFrame(animate);
     }, 600);
     return () => { clearTimeout(initDelay); if (heroFrameRef.current) cancelAnimationFrame(heroFrameRef.current); };
-  }, []);
+  }, [replayKey]);
 
   // Footer thread animation
   const footerZoneRef = useRef(null);
@@ -1060,6 +1152,9 @@ function HomePage({ onNavigate, isMobile }) {
           }}
         />
       )}
+      {/* Fog canvas for AI reveal */}
+      <canvas ref={fogCanvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", pointerEvents: "none", zIndex: 10 }} />
+
       {/* === Hero with Typewriter Reveal === */}
       <div
         style={{
@@ -1102,26 +1197,13 @@ function HomePage({ onNavigate, isMobile }) {
                 <span key={li} style={{ display: lineData.inline ? "inline" : "block", whiteSpace: "pre-wrap" }}>
                   {chars.map((c) => {
                     const isRevealed = c.gi < revealedCount;
-                    const isAI = c.type === "accent";
                     return (
                       <span key={c.gi} style={{
                         display: "inline-block",
-                        color: isAI
-                          ? (isRevealed ? ACCENT : "#d4cdc2")
-                          : (isRevealed ? "#2a2520" : "#d4cdc2"),
-                        transition: isAI
-                          ? "color 0.3s ease, text-shadow 0.6s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)"
-                          : "color 0.25s ease",
-                        transform: isAI && aiGlow
-                          ? (aiPulse ? "scale(1.12)" : "scale(1.0)")
-                          : "scale(1)",
-                        textShadow: isAI && aiGlow
-                          ? (aiPulse
-                            ? "0 0 40px rgba(196,90,60,0.5), 0 0 80px rgba(196,90,60,0.2), 0 2px 4px rgba(196,90,60,0.3)"
-                            : "0 0 24px rgba(196,90,60,0.25), 0 0 48px rgba(196,90,60,0.08)")
-                          : (c.gi === revealedCount - 1 && isRevealed && !isAI
-                            ? "0 0 20px rgba(42,37,32,0.15)"
-                            : "none"),
+                        color: isRevealed ? "#2a2520" : "#d4cdc2",
+                        transition: "color 0.25s ease",
+                        textShadow: c.gi === revealedCount - 1 && isRevealed
+                          ? "0 0 20px rgba(42,37,32,0.15)" : "none",
                         minWidth: c.char === " " ? "0.3em" : undefined,
                       }}>
                         {c.char}
@@ -1132,6 +1214,43 @@ function HomePage({ onNavigate, isMobile }) {
               );
             });
           })()}
+          <span style={{ display: "inline-block", position: "relative", verticalAlign: "baseline" }}>
+            <span id="hero-question" style={{
+              display: "inline-block", color: "#d4cdc2", fontWeight: 700,
+              opacity: 0, transform: "scale(0.8)", transition: "none",
+            }}>{"\uff1f"}</span>
+            <span id="hero-ai" style={{
+              position: "absolute", left: "50%", top: "50%",
+              transform: animationComplete ? "translate(-50%, -50%) scale(1.0)" : "translate(-50%, -50%) scale(0.7)",
+              display: "inline-block", color: "#C4422B", fontWeight: 700,
+              opacity: animationComplete ? 1 : 0,
+              filter: animationComplete ? "blur(0px)" : "blur(16px)",
+              transition: "none", whiteSpace: "nowrap", fontSize: "inherit",
+            }}>AI</span>
+            {animationComplete && (
+              <span
+                onClick={replayHero}
+                onMouseEnter={() => setReplayHovered(true)}
+                onMouseLeave={() => setReplayHovered(false)}
+                style={{
+                  position: "absolute",
+                  left: "100%",
+                  top: "50%",
+                  transform: replayHovered ? "translateY(-50%) scale(1.1) rotate(-30deg)" : "translateY(-50%)",
+                  marginLeft: 14,
+                  cursor: "pointer",
+                  opacity: replayHovered ? 0.85 : 0.7,
+                  transition: "all 0.4s cubic-bezier(0.23,1,0.32,1)",
+                  lineHeight: 0,
+                }}
+              >
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" style={{ display: "block" }}>
+                  <path d="M23 4v6h-6" stroke={replayHovered ? "#c4422b" : "#999"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" stroke={replayHovered ? "#c4422b" : "#999"} strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </span>
+            )}
+          </span>
         </h1>
 
         <p style={{
@@ -1486,7 +1605,7 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
         onMouseLeave={() => setBackHovered(false)}
         style={{
           position: "fixed", top: 72,
-          right: "max(24px, calc((100% - 720px) / 2 - 220px))",
+          right: "max(24px, calc((100vw - 720px) / 2 - 220px))",
           zIndex: 50, pointerEvents: "auto",
           width: 40, height: 40,
           border: `1px solid ${backHovered ? "#1a1815" : "#D5D0C8"}`,
@@ -1501,7 +1620,7 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
       {/* Section nav — skill tag sections */}
       {visible && (
         <div style={{
-          position: "fixed", top: "50%", right: "max(24px, calc((100% - 720px) / 2 - 220px))",
+          position: "fixed", top: "50%", right: "max(24px, calc((100vw - 720px) / 2 - 220px))",
           transform: "translateY(-50%)",
           zIndex: 50,
           transition: "opacity 0.3s ease",
@@ -1789,6 +1908,41 @@ function ReadingProgressBar() {
         }} />
       ))}
     </div>
+  );
+}
+
+/* ===== Decoration: Diagnosis Cascade (Project 1 quote-list) ===== */
+
+function DiagnosisCascadeSVG({ height = 290 }) {
+  const w = 110;
+  const nodes = [
+    { x: 35, y: 22 },
+    { x: 68, y: 72 },
+    { x: 30, y: 135 },
+    { x: 75, y: 195 },
+    { x: 50, y: 250 },
+  ];
+  const focal = { x: 52, y: height - 12 };
+  return (
+    <svg width={w} height={height} viewBox={`0 0 ${w} ${height}`} style={{ display: "block" }}>
+      {nodes.map((n, i) => (
+        <line key={`f${i}`} x1={n.x} y1={n.y} x2={focal.x} y2={focal.y} stroke="#C8C2B8" strokeWidth={0.8} opacity={0.5} />
+      ))}
+      {nodes.map((n, i) => {
+        if (i === nodes.length - 1) return null;
+        const next = nodes[i + 1];
+        return (
+          <line key={`c${i}`} x1={n.x} y1={n.y} x2={next.x} y2={next.y} stroke="#B8B0A3" strokeWidth={1} opacity={0.5} />
+        );
+      })}
+      {nodes.map((n, i) => (
+        <g key={`n${i}`}>
+          <circle cx={n.x} cy={n.y} r={5} fill="#E8E4DE" />
+          <circle cx={n.x} cy={n.y} r={5} fill="none" stroke="#C8C2B8" strokeWidth={0.8} />
+        </g>
+      ))}
+      <circle cx={focal.x} cy={focal.y} r={7} fill="#c4422b" opacity={0.85} />
+    </svg>
   );
 }
 
@@ -2600,7 +2754,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
         {/* Layer 3: Narrative */}
         {project.heroNarrative && (
-          <div style={{ maxWidth: 700, margin: "0 auto 64px", animation: "fadeUp 0.8s ease-out 0.35s both" }}>
+          <div style={{ maxWidth: 720, margin: "0 auto 64px", animation: "fadeUp 0.8s ease-out 0.35s both" }}>
             <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: "#1a1815" }}>
               {project.heroNarrative.hook}
             </div>
@@ -2612,7 +2766,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
         {/* Layer 4: Before/After cards OR Metrics card */}
         {project.stateBefore ? (
-          <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.45s both", maxWidth: 700, marginLeft: "auto", marginRight: "auto" }}>
+          <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.45s both", maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
             <div style={{ padding: "28px 36px", background: "#eae7e1", borderRadius: 6, marginRight: isMobile ? 12 : 20 }}>
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#aaa69f", marginBottom: 10 }}>Before</div>
               <div style={{ fontSize: 15, lineHeight: 1.7, color: "#aaa69f", textDecoration: "line-through", textDecorationColor: "rgba(196, 66, 43, 0.25)", textDecorationThickness: 1 }}>
@@ -2703,7 +2857,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
       </section>
 
       {/* === Body === */}
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 40px 80px" }}>
+      <div style={{ maxWidth: 880, margin: "0 auto", padding: isMobile ? "0 16px 56px" : "0 40px 80px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
         {bodyWithIds.map((block, i) => {
           // Background flash on click (warm red, fading)
@@ -2728,14 +2882,16 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             const isReflection = block.navLabel === "\u56DE\u5934\u770B";
             if (isReflection) {
               return (
-                <div key={i} id={blockId} style={{ maxWidth: 700, margin: "56px auto 0", paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
-                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}><span style={{ color: "#c4422b" }}>{block.text.slice(0, 2)}</span>{block.text.slice(2)}</h2>
+                <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "56px auto 0", padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
+                  <div style={{ height: 1, background: "#D5D0C8" }} />
+                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const ci = block.text.indexOf("\uff1a"); if (ci === -1) return block.text; return (<><span style={{ color: "#c4422b" }}>{block.text.slice(0, ci + 1)}</span>{block.text.slice(ci + 1)}</>); })()}</h2>
                 </div>
               );
             }
             return (
-              <div key={i} id={blockId} style={{ maxWidth: 700, margin: "56px auto 0", paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
-                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}><span style={{ color: "#c4422b" }}>{block.text.slice(0, 2)}</span>{block.text.slice(2)}</h2>
+              <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "56px auto 0", padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
+                <div style={{ height: 1, background: "#D5D0C8" }} />
+                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const ci = block.text.indexOf("\uff1a"); if (ci === -1) return block.text; return (<><span style={{ color: "#c4422b" }}>{block.text.slice(0, ci + 1)}</span>{block.text.slice(ci + 1)}</>); })()}</h2>
               </div>
             );
           }
@@ -2774,35 +2930,82 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   }}>{ks}</span>{parts.slice(1).join(ks)}</>
                 );
               }
-              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.85, margin: "0 auto", maxWidth: 700, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>{paragraphContent}</p>;
+              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.85, margin: "0 auto", maxWidth: 720, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>{paragraphContent}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
 
           if (block.type === "quote-list") {
             return (
-              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", gap: 10, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>
-                {block.items.map((q, qi) => (
-                  <div key={qi} style={{
-                    display: "flex", gap: isMobile ? 10 : 16, alignItems: "flex-start",
-                    borderLeft: "2px solid #B8B0A3", paddingLeft: 16,
-                    flexDirection: isMobile ? "column" : "row",
-                  }}>
-                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#888", minWidth: isMobile ? "auto" : 80, flexShrink: 0 }}>
-                      {q.role}
-                    </span>
-                    <span style={{ fontSize: T.body, color: "#333", lineHeight: 1.85 }}>
-                      {"\u201C"}{q.text}{"\u201D"}
-                    </span>
+              <div key={i} id={blockId} style={{
+                margin: "0 0 0 0",
+                scrollMarginTop: 80,
+                backgroundColor: flashBg,
+                transition: "background-color 1s ease",
+                borderRadius: 4,
+              }}>
+                <div style={{ display: "flex", gap: 0, alignItems: "stretch", maxWidth: 720, margin: "0 auto" }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    {block.items.map((q, qi) => (
+                      <div key={qi} style={{
+                        display: "flex",
+                        alignItems: "baseline",
+                        padding: "14px 0",
+                        position: "relative",
+                      }}>
+                        <span style={{
+                          fontFamily: "'DM Mono', monospace",
+                          fontSize: 13,
+                          color: "#999",
+                          width: 90,
+                          minWidth: 90,
+                          flexShrink: 0,
+                        }}>
+                          {q.role}
+                        </span>
+                        <span style={{
+                          fontSize: 15,
+                          lineHeight: 1.75,
+                          color: "#2A2A2A",
+                          flex: 1,
+                        }}>
+                          <span style={{ color: "#B8B0A3" }}>{"\u201C"}</span>
+                          {q.text}
+                          <span style={{ color: "#B8B0A3" }}>{"\u201D"}</span>
+                        </span>
+                        {qi < block.items.length - 1 && (
+                          <div style={{
+                            position: "absolute",
+                            bottom: 0,
+                            left: 0,
+                            width: "calc(100% + 120px)",
+                            height: 1,
+                            background: "rgba(213,208,200,0.45)",
+                          }} />
+                        )}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                  <div style={{
+                    width: 110,
+                    minWidth: 90,
+                    flexShrink: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0.85,
+                    transform: "translateX(40px)",
+                  }}>
+                    <DiagnosisCascadeSVG height={290} />
+                  </div>
+                </div>
               </div>
             );
           }
 
           if (block.type === "module-list") {
             return (
-              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>
+              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", maxWidth: 720, margin: "0 auto", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>
                 {block.items.map((m, mi) => (
                   <div key={mi} style={{
                     display: "flex", gap: isMobile ? 8 : 20, alignItems: "flex-start",
@@ -2824,25 +3027,26 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "pull-quote") {
             return (
-              <blockquote key={i} id={blockId} style={{
-                margin: "16px 0",
-                padding: "20px 0 20px 24px",
-                borderLeft: "3px solid #c4422b",
-                scrollMarginTop: 80,
-                fontSize: 20,
-                fontWeight: 600,
-                color: "#000",
-                lineHeight: 1.4,
-                fontFamily: FONT_DISPLAY,
-              }}>
-                {block.text}
-              </blockquote>
+              <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "16px auto", padding: "0 8px", scrollMarginTop: 80 }}>
+                <blockquote style={{
+                  margin: 0,
+                  borderLeft: "3px solid #c4422b",
+                  paddingLeft: 20,
+                  fontSize: T.body,
+                  fontWeight: 600,
+                  color: "#000",
+                  lineHeight: 1.4,
+                  fontFamily: FONT_DISPLAY,
+                }}>
+                  {block.text}
+                </blockquote>
+              </div>
             );
           }
 
           if (block.type === "screenshot-carousel") {
             return (
-              <div key={i} id={blockId} style={{ margin: `12px -${isMobile ? 0 : 20}px 12px -${isMobile ? 0 : 80}px` }}>
+              <div key={i} id={blockId} style={{ margin: "12px 0" }}>
                 <ScreenshotCarousel
                   blockId={blockId}
                   block={block}
@@ -2864,13 +3068,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   gap: 16,
                 }}>
                   {block.items.map((item, ii) => (
-                    <ScreenshotItem
-                      key={ii}
-                      item={item}
-                      onLightbox={() => setLightboxContent(
-                        <img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
-                      )}
-                    />
+                    <div key={ii} style={{ aspectRatio: "16 / 10", overflow: "hidden", position: "relative" }}>
+                      <ScreenshotItem
+                        item={item}
+                        onLightbox={() => setLightboxContent(
+                          <img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
+                        )}
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -2881,15 +3086,12 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             const ill = project.illustrations[block.index];
             const IllComponent = ILLUSTRATION_MAP[ill.name];
             if (IllComponent) {
-              // Break out of 720px body — asymmetric to keep clear of SideNav on right
-              const breakoutL = isMobile ? 0 : 80;
-              const breakoutR = isMobile ? 0 : 20;
               return (
                 <div
                   key={i}
                   id={blockId}
                   style={{
-                    margin: `12px -${breakoutR}px 12px -${breakoutL}px`,
+                    margin: "12px 0",
                     position: "relative",
                     scrollMarginTop: 80,
                   }}
@@ -2974,7 +3176,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           if (block.type === "screenshot-inline") {
             if (block.src) {
               return (
-                <div key={i} id={blockId} style={{ margin: `12px -${isMobile ? 0 : 20}px 12px -${isMobile ? 0 : 80}px` }}>
+                <div key={i} id={blockId} style={{ margin: "12px 0" }}>
                   <ScreenshotInlineCard
                     block={block}
                     onLightbox={() => setLightboxContent(
@@ -2996,7 +3198,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           }
 
           if (block.type === "iteration-step") {
-            return <div key={i} id={blockId} style={{ scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={block.heading} /></div></div>;
+            return <div key={i} id={blockId} style={{ maxWidth: 720, margin: "0 auto", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={block.heading} /></div></div>;
           }
 
           return null;
