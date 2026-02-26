@@ -363,6 +363,7 @@ function ScreenshotItem({ item, onLightbox }) {
   const [imgDimensions, setImgDimensions] = useState(null);
   const containerRef = useRef(null);
   const [displayHeight, setDisplayHeight] = useState(null);
+  const [expandCursor, setExpandCursor] = useState({ visible: false, x: 0, y: 0 });
 
   const hasImage = item.src && !failed;
 
@@ -380,10 +381,9 @@ function ScreenshotItem({ item, onLightbox }) {
   }, [imgDimensions]);
 
   const isShortImage = displayHeight !== null && displayHeight < 260;
-  const isTallImage = displayHeight !== null && displayHeight > 320;
 
   return (
-    <div ref={containerRef} onClick={() => hasImage && onLightbox()} style={{ cursor: hasImage ? "pointer" : "default" }}>
+    <div ref={containerRef} onClick={() => hasImage && onLightbox()} onMouseEnter={() => hasImage && setExpandCursor(c => ({ ...c, visible: true }))} onMouseMove={(e) => { if (!hasImage) return; const rect = e.currentTarget.getBoundingClientRect(); setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top }); }} onMouseLeave={() => setExpandCursor(c => ({ ...c, visible: false }))} style={{ cursor: hasImage ? "zoom-in" : "default", position: "relative" }}>
       <div style={{
         background: "#fff",
         borderRadius: "10px",
@@ -426,34 +426,6 @@ function ScreenshotItem({ item, onLightbox }) {
                 display: "block",
               }}
             />
-            {isTallImage && (
-              <>
-                <div style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: 120,
-                  background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
-                  pointerEvents: "none",
-                }} />
-                <div style={{
-                  position: "absolute",
-                  bottom: 32,
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  zIndex: 2,
-                  backgroundColor: "rgba(0,0,0,0.8)",
-                  color: "#fff",
-                  padding: "8px 16px",
-                  borderRadius: "4px",
-                  fontSize: T.small,
-                  cursor: "pointer",
-                }}>
-                  点击查看完整图
-                </div>
-              </>
-            )}
           </div>
         ) : (
           <PlaceholderBox label={item.label} sublabel={item.note} height={200} />
@@ -469,6 +441,12 @@ function ScreenshotItem({ item, onLightbox }) {
           {item.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{item.note}</p>}
         </div>
       </div>
+      {hasImage && expandCursor.visible && (
+        <div style={{ position: "absolute", left: expandCursor.x, top: expandCursor.y, transform: "translate(12px, 12px)", pointerEvents: "none", zIndex: 10, display: "flex", alignItems: "center", gap: 5, fontSize: T.small, color: "#fff", backgroundColor: "rgba(17,17,17,0.85)", padding: "6px 12px", whiteSpace: "nowrap" }}>
+          <svg width="12" height="12" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          Expand
+        </div>
+      )}
     </div>
   );
 }
@@ -488,6 +466,7 @@ function ScreenshotInlineCard({ block, onLightbox }) {
   const [imgDimensions, setImgDimensions] = useState(null);
   const containerRef = useRef(null);
   const [displayHeight, setDisplayHeight] = useState(null);
+  const [expandCursor, setExpandCursor] = useState({ visible: false, x: 0, y: 0 });
 
   const handleImgLoad = (e) => {
     const { naturalWidth, naturalHeight } = e.target;
@@ -503,17 +482,16 @@ function ScreenshotInlineCard({ block, onLightbox }) {
   }, [imgDimensions]);
 
   const isShortImage = displayHeight !== null && displayHeight < 400;
-  const isTallImage = displayHeight !== null && displayHeight > 500;
 
   return (
-    <div ref={containerRef} style={{ margin: "32px 0", scrollMarginTop: 80 }}>
+    <div ref={containerRef} style={{ margin: "32px 0", scrollMarginTop: 80, position: "relative" }} onClick={() => onLightbox()} onMouseEnter={() => setExpandCursor(c => ({ ...c, visible: true }))} onMouseMove={(e) => { const rect = e.currentTarget.getBoundingClientRect(); setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top }); }} onMouseLeave={() => setExpandCursor(c => ({ ...c, visible: false }))}>
       <div style={{
         background: "#fff",
         borderRadius: "10px",
         border: "1px solid #d4cdc2",
         overflow: "hidden",
-        cursor: "pointer",
-      }} onClick={() => onLightbox()}>
+        cursor: "zoom-in",
+      }}>
         <div style={{
           position: "relative",
           width: "100%",
@@ -543,34 +521,6 @@ function ScreenshotInlineCard({ block, onLightbox }) {
             objectFit: "contain",
             display: "block",
           }} />
-          {isTallImage && (
-            <>
-              <div style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: 120,
-                background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
-                pointerEvents: "none",
-              }} />
-              <div style={{
-                position: "absolute",
-                bottom: 32,
-                left: "50%",
-                transform: "translateX(-50%)",
-                zIndex: 2,
-                backgroundColor: "rgba(0,0,0,0.8)",
-                color: "#fff",
-                padding: "8px 16px",
-                borderRadius: "4px",
-                fontSize: T.small,
-                cursor: "pointer",
-              }}>
-                点击查看完整图
-              </div>
-            </>
-          )}
         </div>
         <div style={{
           padding: "12px 16px",
@@ -583,6 +533,12 @@ function ScreenshotInlineCard({ block, onLightbox }) {
           {block.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{block.note}</p>}
         </div>
       </div>
+      {expandCursor.visible && (
+        <div style={{ position: "absolute", left: expandCursor.x, top: expandCursor.y, transform: "translate(12px, 12px)", pointerEvents: "none", zIndex: 10, display: "flex", alignItems: "center", gap: 5, fontSize: T.small, color: "#fff", backgroundColor: "rgba(17,17,17,0.85)", padding: "6px 12px", whiteSpace: "nowrap" }}>
+          <svg width="12" height="12" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          Expand
+        </div>
+      )}
     </div>
   );
 }
@@ -592,6 +548,7 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
   const [imgDimensions, setImgDimensions] = useState(null);
   const containerRef = useRef(null);
   const [displayHeight, setDisplayHeight] = useState(null);
+  const [expandCursor, setExpandCursor] = useState({ visible: false, x: 0, y: 0 });
 
   const handleImgLoad = (e) => {
     const { naturalWidth, naturalHeight } = e.target;
@@ -607,16 +564,23 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
   }, [imgDimensions]);
 
   const isShortImage = displayHeight !== null && displayHeight < 400;
-  const isTallImage = displayHeight !== null && displayHeight > 500;
 
   return (
     <div
       ref={containerRef}
       onClick={() => { if (isCenter && item.src) { onLightbox(); } else { onClick(); } }}
+      onMouseEnter={() => isCenter && item.src && setExpandCursor(c => ({ ...c, visible: true }))}
+      onMouseMove={(e) => {
+        if (!isCenter || !item.src) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top });
+      }}
+      onMouseLeave={() => setExpandCursor(c => ({ ...c, visible: false }))}
       style={{
         position: "absolute",
-        width: "70%",
-        maxWidth: 550,
+        top: 0,
+        width: "92%",
+        left: "4%",
         cursor: isCenter ? "zoom-in" : "pointer",
         transition: "all 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
         ...posStyle
@@ -627,12 +591,12 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
         borderRadius: "10px",
         border: "1px solid #d4cdc2",
         overflow: "hidden",
-        boxShadow: isCenter ? "0 8px 32px rgba(0,0,0,0.12)" : "none",
+        boxShadow: isCenter ? "0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)" : "none",
       }}>
         <div style={{
           position: "relative",
           width: "100%",
-          height: 500,
+          height: 460,
           backgroundColor: "#f5f3f0",
           overflow: "hidden",
           display: "flex",
@@ -662,45 +626,24 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
           ) : (
             <span style={{ fontSize: 13, color: "#B8B0A3" }}>[ {item.label} ]</span>
           )}
-          {isTallImage && (
-            <>
-              <div style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: 120,
-                background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95))",
-                pointerEvents: "none",
-              }} />
-              <div style={{
-                position: "absolute",
-                bottom: 32,
-                left: "50%",
-                transform: "translateX(-50%)",
-                zIndex: 2,
-                backgroundColor: "rgba(0,0,0,0.8)",
-                color: "#fff",
-                padding: "8px 16px",
-                borderRadius: "4px",
-                fontSize: T.small,
-              }}>
-                点击查看完整图
-              </div>
-            </>
-          )}
         </div>
         <div style={{
-          padding: "12px 16px",
+          padding: "12px 20px",
           borderTop: "1px solid #e8e3da",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}>
-          <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
-          {item.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{item.note}</p>}
+          <p style={{ fontSize: T.small, fontWeight: 600, color: "#3a3632", margin: 0 }}>{item.label}</p>
+          {item.note && <p style={{ fontSize: 12, color: "#a09688", margin: 0 }}>{item.note}</p>}
         </div>
       </div>
+      {isCenter && item.src && expandCursor.visible && (
+        <div style={{ position: "absolute", left: expandCursor.x, top: expandCursor.y, transform: "translate(12px, 12px)", pointerEvents: "none", zIndex: 10, display: "flex", alignItems: "center", gap: 5, fontSize: T.small, color: "#fff", backgroundColor: "rgba(17,17,17,0.85)", padding: "6px 12px", whiteSpace: "nowrap" }}>
+          <svg width="12" height="12" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          Expand
+        </div>
+      )}
     </div>
   );
 }
@@ -727,8 +670,25 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
 
   const posStyles = {
     center: { transform: "translateX(0) scale(1)", zIndex: 3, opacity: 1, filter: "blur(0)" },
-    left: { transform: "translateX(-58%) scale(0.85)", zIndex: 1, opacity: 0.25, filter: "blur(1px)" },
-    right: { transform: "translateX(58%) scale(0.85)", zIndex: 1, opacity: 0.25, filter: "blur(1px)" },
+    left: { transform: "translateX(-58%) scale(0.85)", zIndex: 1, opacity: 0.38, filter: "blur(0.5px)" },
+    right: { transform: "translateX(58%) scale(0.85)", zIndex: 1, opacity: 0.38, filter: "blur(0.5px)" },
+  };
+
+  const arrowBase = {
+    flexShrink: 0,
+    width: 28,
+    height: 28,
+    borderRadius: "50%",
+    border: "1px solid #b8b0a3",
+    backgroundColor: "transparent",
+    color: "#8a847d",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 13,
+    opacity: 0.75,
+    transition: "all 0.25s",
   };
 
   return (
@@ -737,38 +697,20 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
       onMouseEnter={() => setCarouselPaused(true)}
       onMouseLeave={() => setCarouselPaused(false)}
     >
-      <div style={{ position: "relative", maxWidth: "100%", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      {/* carousel-outer: flex row — arrow | stage | arrow */}
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
         {/* Left arrow */}
         <button
           onClick={() => setCarouselActive((prev) => (prev - 1 + total) % total)}
-          style={{
-            position: "absolute",
-            left: 12,
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 10,
-            width: 28,
-            height: 28,
-            borderRadius: "50%",
-            border: "1px solid #b8b0a3",
-            backgroundColor: "transparent",
-            color: "#b8b0a3",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 16,
-            opacity: 0.5,
-            transition: "all 0.3s ease",
-          }}
-          onMouseEnter={(e) => { e.target.style.opacity = 1; e.target.style.color = "#2a2a2a"; }}
-          onMouseLeave={(e) => { e.target.style.opacity = 0.5; e.target.style.color = "#b8b0a3"; }}
+          style={arrowBase}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#6b6560"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "#8a847d"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
         >
-          ←
+          ‹
         </button>
 
         {/* Carousel stage */}
-        <div style={{ position: "relative", width: "100%", height: 500, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ flex: 1, position: "relative", height: 520, overflow: "hidden" }}>
           {items.map((item, ii) => {
             const pos = getPos(ii);
             const isCenter = pos === "center";
@@ -788,35 +730,16 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
         {/* Right arrow */}
         <button
           onClick={() => setCarouselActive((prev) => (prev + 1) % total)}
-          style={{
-            position: "absolute",
-            right: 12,
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 10,
-            width: 28,
-            height: 28,
-            borderRadius: "50%",
-            border: "1px solid #b8b0a3",
-            backgroundColor: "transparent",
-            color: "#b8b0a3",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 16,
-            opacity: 0.5,
-            transition: "all 0.3s ease",
-          }}
-          onMouseEnter={(e) => { e.target.style.opacity = 1; e.target.style.color = "#2a2a2a"; }}
-          onMouseLeave={(e) => { e.target.style.opacity = 0.5; e.target.style.color = "#b8b0a3"; }}
+          style={arrowBase}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#6b6560"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "#8a847d"; e.currentTarget.style.borderColor = "#b8b0a3"; }}
         >
-          →
+          ›
         </button>
       </div>
 
       {/* Dot indicators */}
-      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 16 }}>
+      <div style={{ display: "flex", justifyContent: "center", gap: 6 }}>
         {items.map((_, ii) => (
           <button
             key={ii}
@@ -829,7 +752,7 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
               backgroundColor: ii === carouselActive ? "#6b6560" : "#d4cfc7",
               cursor: "pointer",
               padding: 0,
-              transition: "all 0.35s cubic-bezier(0.23,1,0.32,1)"
+              transition: "all 0.4s",
             }}
           />
         ))}
@@ -1539,6 +1462,7 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
   const isCompact = useIsMobile(1100);
   const [visible, setVisible] = useState(false);
   const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [backHovered, setBackHovered] = useState(false);
 
   useEffect(() => {
     const check = () => {
@@ -1558,19 +1482,20 @@ function SideNav({ sections, activeSectionIdx, onNavigate, onSectionClick }) {
       {/* Back button — 40x40 box */}
       <div
         onClick={() => onNavigate("home")}
-        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#1a1815"; e.currentTarget.style.borderColor = "#1a1815"; e.currentTarget.querySelector("span").style.color = "#faf8f4"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#faf8f4"; e.currentTarget.style.borderColor = "#D5D0C8"; e.currentTarget.querySelector("span").style.color = "#666"; }}
+        onMouseEnter={() => setBackHovered(true)}
+        onMouseLeave={() => setBackHovered(false)}
         style={{
           position: "fixed", top: 72,
           right: "max(24px, calc((100% - 720px) / 2 - 220px))",
           zIndex: 50, pointerEvents: "auto",
           width: 40, height: 40,
-          border: "1px solid #D5D0C8", backgroundColor: "#faf8f4",
+          border: `1px solid ${backHovered ? "#1a1815" : "#D5D0C8"}`,
+          backgroundColor: backHovered ? "#1a1815" : "transparent",
           display: "flex", alignItems: "center", justifyContent: "center",
           cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
         }}
       >
-        <span style={{ fontSize: 14, color: "#666", transition: "color 0.2s ease" }}>{"\u2190"}</span>
+        <span style={{ fontSize: 14, color: backHovered ? "#faf8f4" : "#555", transition: "color 0.2s ease" }}>{"\u2190"}</span>
       </div>
 
       {/* Section nav — skill tag sections */}
@@ -2675,7 +2600,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
         {/* Layer 3: Narrative */}
         {project.heroNarrative && (
-          <div style={{ maxWidth: 700, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.35s both" }}>
+          <div style={{ maxWidth: 700, margin: "0 auto 64px", animation: "fadeUp 0.8s ease-out 0.35s both" }}>
             <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: "#1a1815" }}>
               {project.heroNarrative.hook}
             </div>
@@ -2687,7 +2612,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
         {/* Layer 4: Before/After cards OR Metrics card */}
         {project.stateBefore ? (
-          <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.45s both" }}>
+          <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.45s both", maxWidth: 700, marginLeft: "auto", marginRight: "auto" }}>
             <div style={{ padding: "28px 36px", background: "#eae7e1", borderRadius: 6, marginRight: isMobile ? 12 : 20 }}>
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#aaa69f", marginBottom: 10 }}>Before</div>
               <div style={{ fontSize: 15, lineHeight: 1.7, color: "#aaa69f", textDecoration: "line-through", textDecorationColor: "rgba(196, 66, 43, 0.25)", textDecorationThickness: 1 }}>
@@ -2803,14 +2728,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             const isReflection = block.navLabel === "\u56DE\u5934\u770B";
             if (isReflection) {
               return (
-                <div key={i} id={blockId} style={{ scrollMarginTop: 80, marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, marginLeft: -8, marginRight: -8, padding: "40px 8px 0" }}>
-                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
+                <div key={i} id={blockId} style={{ maxWidth: 700, margin: "56px auto 0", paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
+                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}><span style={{ color: "#c4422b" }}>{block.text.slice(0, 2)}</span>{block.text.slice(2)}</h2>
                 </div>
               );
             }
             return (
-              <div key={i} id={blockId} style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, marginLeft: -8, marginRight: -8, padding: "40px 8px 0" }}>
-                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}>{block.text}</h2>
+              <div key={i} id={blockId} style={{ maxWidth: 700, margin: "56px auto 0", paddingTop: 40, borderTop: "1px solid #D5D0C8", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
+                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, fontFamily: FONT_DISPLAY, scrollMarginTop: 80 }}><span style={{ color: "#c4422b" }}>{block.text.slice(0, 2)}</span>{block.text.slice(2)}</h2>
               </div>
             );
           }
@@ -2849,7 +2774,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   }}>{ks}</span>{parts.slice(1).join(ks)}</>
                 );
               }
-              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.85, margin: 0, maxWidth: 700, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>{paragraphContent}</p>;
+              return <p key={i} id={blockId} style={{ fontSize: T.body, color: "#333", lineHeight: 1.85, margin: "0 auto", maxWidth: 700, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>{paragraphContent}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
@@ -2917,7 +2842,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "screenshot-carousel") {
             return (
-              <div key={i} id={blockId}>
+              <div key={i} id={blockId} style={{ margin: `12px -${isMobile ? 0 : 20}px 12px -${isMobile ? 0 : 80}px` }}>
                 <ScreenshotCarousel
                   blockId={blockId}
                   block={block}
@@ -3049,7 +2974,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           if (block.type === "screenshot-inline") {
             if (block.src) {
               return (
-                <div key={i} id={blockId}>
+                <div key={i} id={blockId} style={{ margin: `12px -${isMobile ? 0 : 20}px 12px -${isMobile ? 0 : 80}px` }}>
                   <ScreenshotInlineCard
                     block={block}
                     onLightbox={() => setLightboxContent(
@@ -3085,27 +3010,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         const featured = visibleScreenshots.filter(s => s.featured);
         const rest = visibleScreenshots.filter(s => !s.featured);
         const renderCard = (s, i) => (
-          <div key={i} style={{
-            background: "#faf8f4",
-            borderRadius: 0,
-            border: "1px solid #E5E2DC",
-            overflow: "hidden",
-            cursor: s.src ? "pointer" : "default",
-          }}
-            onClick={s.src ? () => setLightboxContent(
+          <ScreenshotItem
+            key={i}
+            item={{ src: s.src, label: s.label, note: s.proves }}
+            onLightbox={() => setLightboxContent(
               <img src={s.src} alt={s.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />
-            ) : undefined}
-          >
-            {s.src ? (
-              <img src={s.src} alt={s.label} style={{ width: "100%", display: "block" }} />
-            ) : (
-              <PlaceholderBox label={s.label} height={220} />
             )}
-            <div style={{ padding: "14px 16px 16px" }}>
-              <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{s.label}</p>
-              <p style={{ fontSize: T.small, color: "#999", margin: "4px 0 0" }}>{s.proves}</p>
-            </div>
-          </div>
+          />
         );
         return (
           <section style={{ marginTop: 72, paddingTop: 36, borderTop: "1px solid #D5D0C8" }}>
