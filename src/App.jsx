@@ -128,7 +128,7 @@ const PROJECTS = [
       ]},
       { type: "illustration", index: 1, initialScale: 1 },
       { type: "paragraph", text: { zh: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。", en: "These six modules weren't pulled out of thin air. Each one traced directly back to a pain point from the interviews. The lifecycle module addressed the frontend developer's \"I never know what 'done' looks like\" and the client's \"I have no idea if anyone's actually working on my requests.\" Change Log addressed the designer's \"I've updated my files but I don't know if developers ever see the new version.\" Role Map addressed everyone's \"I don't know who to go to.\"" } },
-      { type: "paragraph", text: { zh: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。", en: "The rollout strategy was: get buy-in first, then lock in the process. At the Phase 2 kickoff meeting, I laid out every problem that had surfaced during Phase 1, one by one, and asked the team to confirm \u2014 are these real? Then for each problem, I presented the corresponding module. The team bought in without resistance, because the solution came directly from the problems they themselves had described. I didn\u2019t offer a \u201Cdisagree\u201D option. The process was open \u2014 the conclusion wasn\u2019t." } },
+      { type: "paragraph", text: { zh: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。", en: "The rollout strategy was: get buy-in first, then lock in the process. At the Phase 2 kickoff meeting, I laid out every problem that had surfaced during Phase 1, one by one, and asked the team to confirm \u2014 are these real? Then for each problem, I presented the corresponding module. The team bought in without resistance, because the solution came directly from the problems they themselves had described. I didn't offer a \"disagree\" option. The process was open \u2014 the conclusion wasn't." } },
       { type: "paragraph", text: { zh: "结果是：二期交付期间，需求返工率相比一期下降约70%（剩余返工主要来自客户方的主动需求变更，非流程问题）；需求从提出到进入开发流程的响应速度提升约50%；客户方提出的需求实现了100%覆盖——没有任何一条需求在流转中丢失，客户方评价我们的需求管理甚至超过了他们内部团队的标准。差点丢掉的合同被挽回来了，客户签下了二期。", en: "The results: during Phase 2 delivery, the rework rate on requirements dropped ~70% compared to Phase 1 (the remaining rework came mostly from the client's own scope changes, not process failures). Turnaround from submission to development starting dropped ~50%. We tracked every single requirement the client submitted — nothing fell through the cracks. The client said our requirements process was more rigorous than their own internal team's. The contract we'd nearly lost was saved. The client signed Phase 2." } },
       { type: "paragraph", text: { zh: "之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部两周内全面切换，三个月内扩展到全公司五个项目组，最终成为全公司标准SOP。", en: "After that, I packaged the system into three versions — light, standard, and full — to fit projects of different complexity, and proposed a company-wide rollout. The engineering department switched over within two weeks. Within three months, it had spread to all five project teams across the company. It became the company-wide SOP." } },
       { type: "paragraph", text: { zh: "后来我才知道，行业内早已有成熟的专业协作工具在做类似的事。我从问题本身出发一步步推导出来的东西，和那些成熟工具的底层逻辑高度一致。这件事让我意识到：解决问题的关键不是知道有什么工具，而是能不能准确诊断出问题的结构，然后用手头有的资源把它解出来。", en: "I found out later that the industry already had established collaboration tools doing similar things. What I'd built from scratch, just by working through the problem, followed the same underlying logic those tools were built on. The lesson was simple: solving problems isn't about knowing what tools exist. It's about breaking the problem down correctly and solving it with whatever you have." } },
@@ -149,7 +149,7 @@ const PROJECTS = [
       { type: "paragraph", text: { zh: "所有准备工作做完，我才开始跟客户沟通。我预判客户一定会抗拒——外包方提议加新功能，客户的第一反应通常是怀疑动机。所以我的预案策略是：方案足够详细，方向、内容、时间节点全部明确；同时设计退出机制，数据不好随时可以撤，分散客户的决策压力。", en: "Only after all the prep work was done did I start talking to the client. I predicted they'd push back — when the external vendor proposes adding new features, the client's first instinct is usually to question the motive. So the proposal had to be detailed enough that the direction, scope, and timeline were all explicit. And I built in an exit mechanism — if the data doesn't look good, pull the plug anytime. Make it easy for the client to say yes." } },
       { type: "paragraph", text: { zh: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。", en: "The first pitch was a brief proposal, just to test the waters. The client's reaction wasn't rejection — it was uncertainty. They went back to discuss with their product lead. The product lead came over and asked me to walk through it again, gave revision notes, and asked for interaction design. Here's the key move: I did the interaction design myself, off the clock, without telling my company. The PM's budget couldn't cover it, but I wanted this to happen. For an external vendor, interaction design is normally billable. I absorbed the cost myself." } },
       { type: "paragraph", text: { zh: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。", en: "The second pitch came with the full interaction design. More negotiation. Finally, in a formal meeting, I brought in our engineers and PM for a full team presentation. The client and their product lead took the proposal to their VP for budget approval — beyond that point, it was out of my hands. The VP approved it. From first pitch to approval, about six weeks." } },
-      { type: "paragraph", text: { zh: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因不是模型能力问题，而是知识库的信息架构——原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。", en: "The agent that shipped was called \u201CNana,\u201D built on Coze, running on DeepSeek R1/V3 and Doubao (ByteDance\u2019s LLM). It served over 2,000 users after launch. The biggest problem during troubleshooting was inaccurate knowledge base retrieval: when I ran the same question 20 times, the initial version only returned the right content 5 times \u2014 it pulled up the wrong hero 12 times and found nothing at all 3 times. The root cause wasn\u2019t the model \u2014 it was the knowledge base\u2019s information architecture. The original setup stored all of a hero\u2019s information as one large chunk, so the search engine couldn\u2019t match precisely when users asked specific questions. I redesigned the information architecture \u2014 splitting each hero into three segments (hero overview, skills + battlefield abilities + combos, gear + emblems). Once I\u2019d mapped out the new field structure, the technical team migrated everything to VikingDB on Volcano Engine (ByteDance\u2019s cloud) and handled the embedding model selection and search parameter tuning. After optimization, the same 20-question test hit correctly every single time. The fix was redesigning the information architecture, not just switching platforms." } },
+      { type: "paragraph", text: { zh: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因不是模型能力问题，而是知识库的信息架构——原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。", en: "The agent that shipped was called \"Nana,\" built on Coze, running on DeepSeek R1/V3 and Doubao (ByteDance's LLM). It served over 2,000 users after launch. The biggest problem during troubleshooting was inaccurate knowledge base retrieval: when I ran the same question 20 times, the initial version only returned the right content 5 times \u2014 it pulled up the wrong hero 12 times and found nothing at all 3 times. The root cause wasn't the model \u2014 it was the knowledge base's information architecture. The original setup stored all of a hero's information as one large chunk, so the search engine couldn't match precisely when users asked specific questions. I redesigned the information architecture \u2014 splitting each hero into three segments (hero overview, skills + battlefield abilities + combos, gear + emblems). Once I'd mapped out the new field structure, the technical team migrated everything to VikingDB on Volcano Engine (ByteDance's cloud) and handled the embedding model selection and search parameter tuning. After optimization, the same 20-question test hit correctly every single time. The fix was redesigning the information architecture, not just switching platforms." } },
       { type: "screenshot-inline", label: { zh: "娜娜AI对话界面", en: "Nana AI chat interface" }, note: { zh: "正文讲AI产品时", en: "The AI agent in action" }, src: "images/nana-ai-chat-trimmed.jpg", height: "auto", objectFit: "contain", featured: true },
 
       // === 回头看 ===
@@ -225,7 +225,7 @@ const PROJECTS = [
       { type: "pull-quote", text: { zh: "当前的产品把这两个角色既没有整合、也没有区分，互相干扰着挤在一起。", en: "The current product had neither integrated these two roles nor separated them. They were just jammed together, interfering with each other." } },
       { type: "paragraph", text: { zh: "到这里，我之前下载游戏时冒出的那个念头突然有了落点。阵容码不只是一个功能想法——它恰好是连接\u201C看\u201D和\u201C用\u201D的枢纽。主播展示阵容码，玩家看完攻略后输入阵容码，在游戏内直接使用。两个角色通过一串代码实现统一。", en: "That's when the idea I'd had while downloading the game suddenly clicked into place. Lineup Code wasn't just a feature idea — it was the hinge between \"read\" and \"use.\" A streamer shares a Lineup Code, a player reads the guide and enters the code, and the lineup is live in-game. Two roles, connected by a single string of characters." } },
       { type: "paragraph", text: { zh: "我基本确认了两件事：第一，客户的问题不是UI，是产品定位——\u201C内容聚合\u201D和\u201C阵容工具\u201D两个身份没有找到统一的方式；第二，定位之外，执行层面的交互设计基础也出了问题。", en: "I was now fairly confident about two things. First, the client's problem wasn't UI — it was product positioning. The \"content hub\" identity and the \"lineup tool\" identity had never found a way to coexist. Second, beyond positioning, the actual interaction patterns were also broken." } },
-      { type: "paragraph", text: { zh: "但我知道不能一上来就跟客户说\u201C你的问题不是UI是定位\u201D。所以我在走查报告里做了一个刻意的安排：前半部分老老实实标注每一个UI和交互缺陷，配截图、写修复方案，回应客户\u201C先改UI\u201D的原始需求。你拿着这部分找更便宜的外包去改也行。真正的重点在报告后半部分——产品定位分析和分阶段规划。先解决客户说的问题，再引出客户没看到的问题。", en: "But I knew I couldn\u2019t walk into the room and tell the client \u201Cyour problem isn\u2019t UI, it\u2019s positioning.\u201D So I was strategic about how I structured the walkthrough report: the first half documented every UI and interaction flaw honestly \u2014 screenshots, fix recommendations, directly addressing the client\u2019s original \u201Cfix the UI\u201D scope. They could take that section to a cheaper vendor and get it done. The real weight was in the second half \u2014 product positioning analysis and a phased roadmap. Answer the question the client asked first, then surface the question they hadn\u2019t seen." } },
+      { type: "paragraph", text: { zh: "但我知道不能一上来就跟客户说\u201C你的问题不是UI是定位\u201D。所以我在走查报告里做了一个刻意的安排：前半部分老老实实标注每一个UI和交互缺陷，配截图、写修复方案，回应客户\u201C先改UI\u201D的原始需求。你拿着这部分找更便宜的外包去改也行。真正的重点在报告后半部分——产品定位分析和分阶段规划。先解决客户说的问题，再引出客户没看到的问题。", en: "But I knew I couldn't walk into the room and tell the client \"your problem isn't UI, it's positioning.\" So I was strategic about how I structured the walkthrough report: the first half documented every UI and interaction flaw honestly \u2014 screenshots, fix recommendations, directly addressing the client's original \"fix the UI\" scope. They could take that section to a cheaper vendor and get it done. The real weight was in the second half \u2014 product positioning analysis and a phased roadmap. Answer the question the client asked first, then surface the question they hadn't seen." } },
       { type: "screenshot-group", items: [
         { src: "images/case2-old-homepage.png", label: { zh: "旧版首页", en: "Old homepage" }, note: { zh: "信息架构混乱，无优先级引导", en: "Disorganized information architecture, no clear hierarchy" } },
         { src: "images/case2-old-detail.png", label: { zh: "旧版详情页", en: "Old detail page" }, note: { zh: "内容展示和工具功能互相干扰", en: "Content and tools competing for space" } },
@@ -1162,7 +1162,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
 
         <h1 style={{
           fontFamily: FONT_DISPLAY,
-          fontSize: isMobile ? (lang === "en" ? 22 : 32) : (lang === "en" ? "clamp(22px, 3.2vw, 34px)" : "clamp(32px, 5.5vw, 56px)"),
+          fontSize: isMobile ? (lang === "en" ? 18 : 32) : (lang === "en" ? "clamp(22px, 3.2vw, 34px)" : "clamp(32px, 5.5vw, 56px)"),
           fontWeight: 700, lineHeight: 1.45,
           letterSpacing: "-0.02em",
           margin: 0, maxWidth: 780,
@@ -1175,23 +1175,45 @@ function HomePage({ onNavigate, isMobile, lang }) {
             });
             return Object.entries(lineGroups).map(([li, chars]) => {
               const lineData = HERO_LINES[parseInt(li)];
+              const renderChar = (c) => {
+                const isRevealed = c.gi < revealedCount;
+                return (
+                  <span key={c.gi} style={{
+                    display: "inline-block",
+                    color: isRevealed ? "#2a2520" : "#d4cdc2",
+                    transition: "color 0.25s ease",
+                    textShadow: c.gi === revealedCount - 1 && isRevealed
+                      ? "0 0 20px rgba(42,37,32,0.15)" : "none",
+                    minWidth: c.char === " " ? "0.3em" : undefined,
+                  }}>
+                    {c.char}
+                  </span>
+                );
+              };
+              if (lang === "en") {
+                // Group chars into words to prevent mid-word line breaks
+                const words = [];
+                let currentWord = [];
+                chars.forEach((c) => {
+                  if (c.char === " " || c.char === ",") {
+                    if (currentWord.length > 0) { words.push({ type: "word", chars: currentWord }); currentWord = []; }
+                    words.push({ type: "sep", chars: [c] });
+                  } else { currentWord.push(c); }
+                });
+                if (currentWord.length > 0) words.push({ type: "word", chars: currentWord });
+                return (
+                  <span key={li} style={{ display: lineData.inline ? "inline" : "block", whiteSpace: "pre-wrap" }}>
+                    {words.map((w, wi) => (
+                      <span key={wi} style={{ display: "inline-block", whiteSpace: w.type === "word" ? "nowrap" : undefined }}>
+                        {w.chars.map(renderChar)}
+                      </span>
+                    ))}
+                  </span>
+                );
+              }
               return (
                 <span key={li} style={{ display: lineData.inline ? "inline" : "block", whiteSpace: "pre-wrap" }}>
-                  {chars.map((c) => {
-                    const isRevealed = c.gi < revealedCount;
-                    return (
-                      <span key={c.gi} style={{
-                        display: "inline-block",
-                        color: isRevealed ? "#2a2520" : "#d4cdc2",
-                        transition: "color 0.25s ease",
-                        textShadow: c.gi === revealedCount - 1 && isRevealed
-                          ? "0 0 20px rgba(42,37,32,0.15)" : "none",
-                        minWidth: c.char === " " ? "0.3em" : undefined,
-                      }}>
-                        {c.char}
-                      </span>
-                    );
-                  })}
+                  {chars.map(renderChar)}
                 </span>
               );
             });
@@ -1373,7 +1395,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
                 {p.cardHighlights && p.cardHighlights.length > 0 && (
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 }}>
                     {p.cardHighlights.map((h, hi) => (
-                      <span key={hi} style={{
+                      <span key={hi} title={lang === "en" ? t(h, lang) : undefined} style={{
                         fontFamily: FONT_MONO,
                         fontSize: 11,
                         color: "#6b6560",
@@ -1382,6 +1404,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
                         borderRadius: 2,
                         letterSpacing: "0.02em",
                         whiteSpace: "nowrap",
+                        ...(lang === "en" ? { maxWidth: isMobile ? "100%" : 280, overflow: "hidden", textOverflow: "ellipsis", display: "inline-block", verticalAlign: "top" } : {}),
                       }}>{t(h, lang)}</span>
                     ))}
                   </div>
@@ -1433,7 +1456,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
           fontSize: isMobile ? 18 : "clamp(18px, 2.2vw, 24px)",
           lineHeight: 1.4, color: "#6b6560", marginBottom: 8,
         }}>
-          {lang === "en" ? "Get the problem right, then it\u2019s worth building." : "\u95EE\u9898\u62C6\u5BF9\u4E86\uFF0C\u624D\u503C\u5F97\u52A8\u624B\u3002"}
+          {lang === "en" ? "Get the problem right, then it's worth building." : "\u95EE\u9898\u62C6\u5BF9\u4E86\uFF0C\u624D\u503C\u5F97\u52A8\u624B\u3002"}
         </p>
         <h2 style={{
           fontFamily: FONT_DISPLAY, fontWeight: 900,
@@ -1445,7 +1468,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
         <p style={{
           fontSize: 14, lineHeight: 1.8, color: "#6b6560", fontWeight: 300, marginBottom: 36,
         }}>
-          {lang === "en" ? <><span style={{ color: "#1a1815", fontWeight: 500 }}>{"In Fall 2027"}</span>{", I\u2019m going back to school to build a formal framework around five years of product instinct \u2014 and bring it into AI."}</> : <><span style={{ color: "#1a1815", fontWeight: 500 }}>{"\u0032\u0030\u0032\u0037\u5E74\u79CB\u5B63"}</span>{"\uFF0C\u6211\u51C6\u5907\u56DE\u5230\u5B66\u6821\uFF0C\u628A\u0035\u5E74\u4EA7\u54C1\u5B9E\u6218\u7CFB\u7EDF\u5316\uFF0C\u4E4B\u540E\u8FDB\u5165\u0041\u0049\u884C\u4E1A\u3002"}</>}
+          {lang === "en" ? <><span style={{ color: "#1a1815", fontWeight: 500 }}>{"In Fall 2027"}</span>{", I'm going back to school to build a formal framework around five years of product instinct \u2014 and bring it into AI."}</> : <><span style={{ color: "#1a1815", fontWeight: 500 }}>{"\u0032\u0030\u0032\u0037\u5E74\u79CB\u5B63"}</span>{"\uFF0C\u6211\u51C6\u5907\u56DE\u5230\u5B66\u6821\uFF0C\u628A\u0035\u5E74\u4EA7\u54C1\u5B9E\u6218\u7CFB\u7EDF\u5316\uFF0C\u4E4B\u540E\u8FDB\u5165\u0041\u0049\u884C\u4E1A\u3002"}</>}
         </p>
 
         <div ref={footerZoneRef} style={{ position: "relative", display: "inline-block" }}>
@@ -1497,7 +1520,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
             fontSize: 14, lineHeight: 1.6, color: "#6b6560", fontWeight: 300,
             marginTop: 28, position: "relative", zIndex: 2,
           }}>
-            {lang === "en" ? "If any of this resonates, I\u2019d love to talk." : "\u5982\u679C\u4F60\u5BF9\u6211\u7684\u7ECF\u5386\u611F\u5174\u8DA3\uFF0C\u5F88\u4E50\u610F\u804A\u804A\u3002"}
+            {lang === "en" ? "If any of this resonates, I'd love to talk." : "\u5982\u679C\u4F60\u5BF9\u6211\u7684\u7ECF\u5386\u611F\u5174\u8DA3\uFF0C\u5F88\u4E50\u610F\u804A\u804A\u3002"}
           </p>
 
           {/* Footer thread SVG — desktop only, ref-driven */}
@@ -1629,6 +1652,7 @@ function NavCard({ items, activeIdx, onSelect, title, count, accent, side }) {
                 color: isActive ? accentColor : (isHov ? accentColor : "#B8B0A3"),
                 letterSpacing: isActive ? 2 : 0.5,
                 transition: "all 0.25s cubic-bezier(0.4,0,0.2,1)",
+                display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
               }}>
                 {label}
               </span>
@@ -3315,7 +3339,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                   fontSize: T.body,
                   fontWeight: 600,
                   color: "#000",
-                  lineHeight: 1.4,
+                  lineHeight: lang === "en" ? 1.55 : 1.4,
                   fontFamily: FONT_DISPLAY,
                   ...tStyle(block.text, lang),
                 }}>
