@@ -32,6 +32,21 @@ const MOBILE_NAV_H = 50;
 
 const T = { heading: 18, body: 16, small: 13 };
 const ACCENT = "#c4422b";
+
+// --- i18n helpers ---
+// t(value, lang): if value is {zh, en} object, return the right language string; otherwise pass through.
+function t(v, lang) {
+  if (v && typeof v === "object" && "zh" in v && "en" in v) return v[lang] || v.en;
+  return v;
+}
+// tStyle(value, lang): returns red highlight style when EN translation is missing, empty object otherwise.
+function tStyle(v, lang) {
+  if (lang !== "en") return {};
+  if (typeof v === "string") return { backgroundColor: "rgba(196,66,43,0.15)", color: "#c4422b" };
+  if (v && typeof v === "object" && "zh" in v && (!v.en || v.en === "[MISSING]"))
+    return { backgroundColor: "rgba(196,66,43,0.15)", color: "#c4422b" };
+  return {};
+}
 const FONT_BODY = "'Noto Sans SC', 'Helvetica Neue', sans-serif";
 const FONT_DISPLAY = "'Noto Serif SC', 'Georgia', serif";
 const FONT_MONO = "'DM Mono', 'Courier New', monospace";
@@ -39,223 +54,225 @@ const FONT_MONO = "'DM Mono', 'Courier New', monospace";
 const PROJECTS = [
   {
     id: 1,
-    name: "不是人的问题，是系统的问题",
+    name: { zh: "不是人的问题，是系统的问题", en: "Not a people problem — it's a systems problem" },
     navName: "01",
-    roleLine: "危机接管者 // 2023–2024",
-    summary: "春节7天，从零搭出一套协作系统救回百万合同——之后又在同一项目里推动了公司首个AI智能体上线。",
-    cardSummary: "合同快丢了，所有人在互相指责。我没有急着出方案，先拿7天做了15次一对一访谈——拼完所有人的说法，看到了一个谁都没意识到的问题。",
-    cardHook: "合同快丢了，所有人在互相指责。我先拆问题。",
-    cardTag: "公司首个长线项目",
+    roleLine: { zh: "危机接管者 // 2023–2024", en: "Project Lead // 2023–2024" },
+    summary: { zh: "春节7天，从零搭出一套协作系统救回百万合同——之后又在同一项目里推动了公司首个AI智能体上线。", en: "In 7 days over Lunar New Year — China's biggest holiday — I built a collaboration system from scratch to save a ~¥1M contract. Then, within the same project, I drove the company's first AI agent to launch." },
+    cardSummary: { zh: "合同快丢了，所有人在互相指责。我没有急着出方案，先拿7天做了15次一对一访谈——拼完所有人的说法，看到了一个谁都没意识到的问题。", en: "The contract was slipping away. Everyone was pointing fingers. I didn't rush to a solution. I spent 7 days doing 15 one-on-one interviews — and after piecing together everyone's accounts, I found a problem no one had seen." },
+    cardHook: { zh: "合同快丢了，所有人在互相指责。我先拆问题。", en: "The contract was slipping away. Everyone was pointing fingers. I broke down the problem first." },
+    cardTag: { zh: "公司首个长线项目", en: "Company's first long-term project" },
     skillTags: ["系统诊断", "约束下决策", "流程设计", "AI落地"],
+    skillTagsEn: ["Systems Diagnosis", "Constrained Decision-Making", "Process Design", "AI Implementation"],
     skillTagJumps: {
-      "系统诊断":  { scrollTo: 6,  borderRange: [5, 12],  keySentence: "不是人的问题，是系统的问题。", keyBlock: 11 },
-      "约束下决策": { scrollTo: 14, borderRange: [14, 15], keySentence: "零成本、零学习成本、立即见效", keyBlock: 14 },
-      "流程设计":  { scrollTo: 17, borderRange: [17, 24], keySentence: "六个模块不是拍脑袋拆的", keyBlock: 19 },
-      "AI落地":   { scrollTo: 27, borderRange: [26, 35], keySentence: "根因不是模型能力问题，而是知识库的信息架构", keyBlock: 34 },
+      "系统诊断":  { scrollTo: 6,  borderRange: [5, 12],  keySentence: { zh: "不是人的问题，是系统的问题。", en: "Not a people problem" }, keyBlock: 11 },
+      "约束下决策": { scrollTo: 14, borderRange: [14, 15], keySentence: { zh: "零成本、零学习成本、立即见效", en: "three hard constraints" }, keyBlock: 14 },
+      "流程设计":  { scrollTo: 17, borderRange: [17, 24], keySentence: { zh: "六个模块不是拍脑袋拆的", en: "six modules weren" }, keyBlock: 19 },
+      "AI落地":   { scrollTo: 27, borderRange: [26, 35], keySentence: { zh: "根因不是模型能力问题，而是知识库的信息架构", en: "information architecture" }, keyBlock: 34 },
     },
-    context: "公司首个长线项目",
+    context: { zh: "公司首个长线项目", en: "Company's first long-term project" },
     cardImage: "images/collab-system-interaction.jpg",
-    cardHighlights: ["从零搭建协作系统", "百万级合同挽回", "全公司SOP"],
-    cardStat: { number: "7", unit: "天", label: "审核期限" },
+    cardHighlights: [{ zh: "从零搭建协作系统", en: "Collaboration system built from scratch" }, { zh: "百万级合同挽回", en: "~¥1M (≈$140K USD) contract saved" }, { zh: "全公司SOP", en: "Company-wide SOP" }],
+    cardStat: { number: "7", unit: { zh: "天", en: "days" }, label: { zh: "审核期限", en: "Review deadline" } },
     layoutMode: "linear",
     metricsMode: "state-change",
-    stateBefore: "互相指责 · 信息淹没 · 职责不清",
-    stateAfter: "单一信息源 · 状态全程可追溯 · 角色权责锁定",
-    teamInfo: "核心15人，协调近百人",
-    heroStat: { number: "7天", unit: "从零搭建 · 春节期间" },
+    stateBefore: { zh: "互相指责 · 信息淹没 · 职责不清", en: "Finger-pointing · Information overload · Unclear ownership" },
+    stateAfter: { zh: "单一信息源 · 状态全程可追溯 · 角色权责锁定", en: "Single source of truth · Full traceability · Clear role accountability" },
+    teamInfo: { zh: "核心15人，协调近百人", en: "Core team of 15, coordinating nearly 100" },
+    heroStat: { number: { zh: "7天", en: "7 days" }, unit: { zh: "从零搭建 · 春节期间", en: "Built from scratch · During Lunar New Year" } },
     heroNarrative: {
-      hook: "春节7天，从零搭出一套协作系统，救回百万合同。",
-      detail: "之后又在同一项目里推动了公司首个AI智能体上线——将互相指责、信息淹没的混乱局面，转化为权责清晰、状态可追溯的协作流程。",
+      hook: { zh: "春节7天，从零搭出一套协作系统，救回百万合同。", en: "In 7 days over Lunar New Year — China's biggest holiday — I built a collaboration system from scratch and saved a ~¥1M contract." },
+      detail: { zh: "之后又在同一项目里推动了公司首个AI智能体上线——将互相指责、信息淹没的混乱局面，转化为权责清晰、状态可追溯的协作流程。", en: "Then, within the same project, I drove the company's first AI agent to launch — turning finger-pointing, information overload, and unclear ownership into a system with one source of truth and clear ownership." },
     },
-    heroTitleLines: ["不是人的问题，", "是系统的问题"],
+    heroTitleLines: { zh: ["不是人的问题，", "是系统的问题"], en: ["Not a people problem —", "it's a systems problem"] },
     illustrations: [
-      { name: "双轨时间轴", type: "时间线", note: "覆盖从危机诊断到AI上线的完整双线叙事" },
-      { name: "六模块信息枢纽", type: "架构图", note: "覆盖协作系统的信息流动设计逻辑" },
+      { name: { zh: "双轨时间轴", en: "Dual-track timeline" }, type: "时间线", note: { zh: "覆盖从危机诊断到AI上线的完整双线叙事", en: "Covers the full dual narrative from crisis diagnosis to AI launch" } },
+      { name: { zh: "六模块信息枢纽", en: "Six-module information hub" }, type: "架构图", note: { zh: "覆盖协作系统的信息流动设计逻辑", en: "Covers the information flow logic of the collaboration system" } },
     ],
     bodyStructure: [
       // === 背景 ===
-      { type: "heading", text: "背景：一个差点丢掉的百万级合同", navLabel: "背景" },
-      { type: "paragraph", text: "2023年，我所在的公司承接了一个游戏社区平台的全案开发项目。客户是一家头部游戏公司，项目总包约百万，分两期交付，预计周期两年。我的内部核心团队约15人，跨团队协调涉及客户方多个部门，总协调人数近百人。我的正式角色是产品运营，但在这个项目中实际承担了从需求诊断、系统设计到客户沟通的全链条产品职能。" },
-      { type: "paragraph", text: "这个项目的复杂度远超我们过往经验。公司之前做的都是一两周就能结束的H5活动和小型游戏页面，从未接过这种体量的长线项目。我当时也没有接触过行业内已有的成熟专业协作工具——不知道它们的存在，更没有任何标准化流程的经验可以参照。" },
-      { type: "paragraph", text: "一期开发过程中，团队协作迅速恶化。所有沟通靠群聊，关键信息被海量消息淹没；成员之间私聊解决问题，信息无法同步；需求描述模糊导致频繁返工；设计稿和技术文档散落各处，版本混乱；没人说得清谁负责什么，进度也完全不透明。团队情绪很差，频繁争吵，没有人想继续做这个项目。" },
-      { type: "paragraph", text: "春节前，客户方的产品负责人对团队专业度提出严重质疑，明确表示考虑终止合作。我只剩7到8天的春节假期来挽回这件事。" },
+      { type: "heading", text: { zh: "背景：一个差点丢掉的百万级合同", en: "Context: A ~¥1M contract on the verge of collapse" }, navLabel: { zh: "背景", en: "Context" } },
+      { type: "paragraph", text: { zh: "2023年，我所在的公司承接了一个游戏社区平台的全案开发项目。客户是一家头部游戏公司，项目总包约百万，分两期交付，预计周期两年。我的内部核心团队约15人，跨团队协调涉及客户方多个部门，总协调人数近百人。我的正式角色是产品运营，但在这个项目中实际承担了从需求诊断、系统设计到客户沟通的全链条产品职能。", en: "In 2023, my company took on an end-to-end development engagement for a gaming community platform. The client was a major gaming company. The total contract was ~¥1M (≈$140K USD), split into two phases over a projected two-year timeline. My core team was about 15 people, with cross-team coordination spanning multiple departments on the client side — nearly 100 people in total. My official title was Product Operations, but on this project I was effectively owning product end to end — from requirements analysis to system design to client communication." } },
+      { type: "paragraph", text: { zh: "这个项目的复杂度远超我们过往经验。公司之前做的都是一两周就能结束的H5活动和小型游戏页面，从未接过这种体量的长线项目。我当时也没有接触过行业内已有的成熟专业协作工具——不知道它们的存在，更没有任何标准化流程的经验可以参照。", en: "The complexity was far beyond anything we’d done before. The company’s previous work was all short-turnaround stuff — mobile web campaigns (H5) and small game pages that wrapped up in a week or two. We’d never taken on a long-term project at this scale. I also had no exposure to the industry-standard collaboration tools that already existed — I didn’t know they were out there, and I had zero experience with standardized workflows to draw on." } },
+      { type: "paragraph", text: { zh: "一期开发过程中，团队协作迅速恶化。所有沟通靠群聊，关键信息被海量消息淹没；成员之间私聊解决问题，信息无法同步；需求描述模糊导致频繁返工；设计稿和技术文档散落各处，版本混乱；没人说得清谁负责什么，进度也完全不透明。团队情绪很差，频繁争吵，没有人想继续做这个项目。", en: "During Phase 1, team collaboration deteriorated fast. All communication ran through group chats, and critical information got buried in the noise. People solved problems in private messages that never got synced. Vague requirements led to constant rework. Design files and technical docs were scattered everywhere, with no version control. Nobody could tell you who was responsible for what, and progress was completely opaque. Morale was terrible. People argued constantly. No one wanted to stay on the project." } },
+      { type: "paragraph", text: { zh: "春节前，客户方的产品负责人对团队专业度提出严重质疑，明确表示考虑终止合作。我只剩7到8天的春节假期来挽回这件事。", en: "Right before Lunar New Year — China’s biggest holiday — the client’s product lead directly questioned our team’s competence and said they were considering ending the engagement. I had seven, maybe eight days of the holiday break to turn this around." } },
 
       // === 诊断 ===
-      { type: "heading", text: "诊断：先搞清楚问题出在哪", navLabel: "诊断" },
-      { type: "paragraph", text: "面对这个局面，我没有急着想方案。我做的第一件事是回溯过去几个月积累的所有历史会议纪要和语音记录，把反复出现的争论点、矛盾点逐条标注出来，形成了一组初步假设：问题可能不是某个人或某个环节的问题，而是整个协作方式承载不了这个项目的复杂度。" },
-      { type: "paragraph", text: "带着这些假设，我跟团队里不同角色做了15次一对一访谈。不是问卷，不是群体会议，是把人一个一个叫到办公室，正式坐下来，录音，开放式提问：\u201C你觉得现在最大的问题是什么？你需要什么样的支持？\u201D" },
-      { type: "pull-quote", text: "我拿到了几乎一致的诊断线索：" },
+      { type: "heading", text: { zh: "诊断：先搞清楚问题出在哪", en: "Diagnosis: Finding where the problem actually was" }, navLabel: { zh: "诊断", en: "Diagnosis" } },
+      { type: "paragraph", text: { zh: "面对这个局面，我没有急着想方案。我做的第一件事是回溯过去几个月积累的所有历史会议纪要和语音记录，把反复出现的争论点、矛盾点逐条标注出来，形成了一组初步假设：问题可能不是某个人或某个环节的问题，而是整个协作方式承载不了这个项目的复杂度。", en: "I didn’t rush to find a solution. The first thing I did was go back through every meeting note and voice recording from the past few months, flagging each recurring argument and point of friction. That gave me a set of initial hypotheses: the problem might not be any single person or any single step — it might be that how we collaborated simply couldn’t hold up under a project this complex." } },
+      { type: "paragraph", text: { zh: "带着这些假设，我跟团队里不同角色做了15次一对一访谈。不是问卷，不是群体会议，是把人一个一个叫到办公室，正式坐下来，录音，开放式提问：\u201C你觉得现在最大的问题是什么？你需要什么样的支持？\u201D", en: "Armed with those hypotheses, I did 15 one-on-one interviews with people in different roles across the team. Not surveys. Not group meetings. I brought people into the office one by one, sat down, hit record, and asked open-ended questions: “What do you think the biggest problem is right now? What kind of support do you need?”" } },
+      { type: "pull-quote", text: { zh: "我拿到了几乎一致的诊断线索：", en: "What I got back was strikingly consistent:" } },
       { type: "quote-list", items: [
-        { role: "前端开发", text: "需求总是不明确，我不知道做到什么程度算完成。" },
-        { role: "后端开发", text: "我不知道前端在做什么，经常重复开发。" },
-        { role: "设计师",   text: "我的稿子改了，但不知道开发有没有看到新版本。" },
-        { role: "客户方",   text: "我提的需求，不知道有没有进入开发流程。" },
-        { role: "技术部领导", text: "我看不到整体进度，不知道哪里卡住了。" },
+        { role: { zh: "前端开发", en: "[MISSING]" }, text: { zh: "需求总是不明确，我不知道做到什么程度算完成。", en: "[MISSING]" } },
+        { role: { zh: "后端开发", en: "[MISSING]" }, text: { zh: "我不知道前端在做什么，经常重复开发。", en: "[MISSING]" } },
+        { role: { zh: "设计师", en: "[MISSING]" },   text: { zh: "我的稿子改了，但不知道开发有没有看到新版本。", en: "[MISSING]" } },
+        { role: { zh: "客户方", en: "[MISSING]" },   text: { zh: "我提的需求，不知道有没有进入开发流程。", en: "[MISSING]" } },
+        { role: { zh: "技术部领导", en: "[MISSING]" }, text: { zh: "我看不到整体进度，不知道哪里卡住了。", en: "[MISSING]" } },
       ]},
-      { type: "paragraph", text: "每个人描述的症状不一样，但根源指向同一件事：信息在人和人之间流转不了。不是谁不愿意干活，是现有的群聊式协作方式，在一两周短项目里勉强能用，但放到两年长线项目里完全崩溃了。" },
-      { type: "pull-quote", text: "不是人的问题，是系统的问题。" },
+      { type: "paragraph", text: { zh: "每个人描述的症状不一样，但根源指向同一件事：信息在人和人之间流转不了。不是谁不愿意干活，是现有的群聊式协作方式，在一两周短项目里勉强能用，但放到两年长线项目里完全崩溃了。", en: "Everyone described different symptoms, but they all pointed to the same root cause: information couldn’t flow between people. It wasn’t that anyone refused to work — it was that collaborating through group chats barely held up for one-to-two-week projects. Stretched across a two-year engagement, it completely collapsed." } },
+      { type: "pull-quote", text: { zh: "不是人的问题，是系统的问题。", en: "Not a people problem — a systems problem." } },
       { type: "illustration", index: 0 },
 
       // === 设计 ===
-      { type: "heading", text: "设计：用现有条件从零搭一套协作系统", navLabel: "设计" },
-      { type: "paragraph", text: "确认了问题根源之后，我给自己设了三条硬约束——零成本、零学习成本、立即见效。零成本——只用公司已有的飞书文档，不引入新工具；零学习成本——团队不需要学新东西，打开文档就能用；立即见效——没有时间搞试点推广，必须一上来就全员切换。" },
-      { type: "paragraph", text: "这三条约束是现实倒逼出来的。公司没有预算买新工具，团队也没有时间和意愿去学一套陌生的系统。如果方案不能在现有条件下直接落地，就等于没有方案。" },
-      { type: "paragraph", text: "我回到三个最基本的问题来推导。问题本质是什么？——信息不对称、流程不清晰、责任不明确。最小可行方案是什么？——用一份结构化的中枢文档，把所有信息、流程、责任固定下来。怎么保证执行？——规则公开透明，所有人只有一个信息来源。" },
-      { type: "pull-quote", text: "基于这个逻辑，我设计了六个模块：" },
+      { type: "heading", text: { zh: "设计：用现有条件从零搭一套协作系统", en: "Design: Building a collaboration system from scratch with existing resources" }, navLabel: { zh: "设计", en: "Design" } },
+      { type: "paragraph", text: { zh: "确认了问题根源之后，我给自己设了三条硬约束——零成本、零学习成本、立即见效。零成本——只用公司已有的飞书文档，不引入新工具；零学习成本——团队不需要学新东西，打开文档就能用；立即见效——没有时间搞试点推广，必须一上来就全员切换。", en: "Once I’d confirmed the root cause, I gave myself three hard constraints. No budget — so the only option was Feishu (Lark), the workplace platform the company already had. No time to train anyone — so whatever I built had to work the moment people opened it. And no runway for a pilot — everyone switches on day one, or it doesn’t count." } },
+      { type: "paragraph", text: { zh: "这三条约束是现实倒逼出来的。公司没有预算买新工具，团队也没有时间和意愿去学一套陌生的系统。如果方案不能在现有条件下直接落地，就等于没有方案。", en: "These constraints weren’t aspirational. They were forced by reality. The company had no budget for new tools, and the team had neither the time nor the willingness to learn an unfamiliar system. If the solution couldn’t work with what we already had, it wasn’t a solution." } },
+      { type: "paragraph", text: { zh: "我回到三个最基本的问题来推导。问题本质是什么？——信息不对称、流程不清晰、责任不明确。最小可行方案是什么？——用一份结构化的中枢文档，把所有信息、流程、责任固定下来。怎么保证执行？——规则公开透明，所有人只有一个信息来源。", en: "I worked backward from there. The core problem was information asymmetry, unclear processes, and undefined responsibilities. The minimum viable fix was a single structured document that pins down every process, responsibility, and piece of information in one place. And the only way to enforce it was to make the rules visible to everyone — one source of truth, no exceptions." } },
+      { type: "pull-quote", text: { zh: "基于这个逻辑，我设计了六个模块：", en: "From there, I designed six modules:" } },
       { type: "module-list", items: [
-        { name: "变更日志",           desc: "强制记录所有改动，任何人都能追溯历史，解决「我改了但你不知道」的问题。" },
-        { name: "资产归集",           desc: "把环境链接、文档、第三方平台凭证集中管理，终结「那个链接在哪」的重复提问。" },
-        { name: "组织职责",           desc: "列清每个人的角色和职责边界，终结「这个问题该找谁」的困惑。" },
-        { name: "需求全生命周期管理", desc: "核心模块。所有需求必须进入统一需求池，经过「待评估 / 已排期 / 开发中 / 已完成 / 已拒绝」完整状态流转，拒绝必须写明原因，决策过程透明可追溯。" },
-        { name: "迭代发布",           desc: "每次发版前生成发布清单，明确本次上线什么、修复了什么。" },
-        { name: "验收走查",           desc: "为每个页面建独立走查表，并列放设计稿和前端还原截图，把主观验收变成可比对、可追溯的结构化流程。" },
+        { name: { zh: "变更日志", en: "[MISSING]" },           desc: { zh: "强制记录所有改动，任何人都能追溯历史，解决「我改了但你不知道」的问题。", en: "[MISSING]" } },
+        { name: { zh: "资产归集", en: "[MISSING]" },           desc: { zh: "把环境链接、文档、第三方平台凭证集中管理，终结「那个链接在哪」的重复提问。", en: "[MISSING]" } },
+        { name: { zh: "组织职责", en: "[MISSING]" },           desc: { zh: "列清每个人的角色和职责边界，终结「这个问题该找谁」的困惑。", en: "[MISSING]" } },
+        { name: { zh: "需求全生命周期管理", en: "[MISSING]" }, desc: { zh: "核心模块。所有需求必须进入统一需求池，经过「待评估 / 已排期 / 开发中 / 已完成 / 已拒绝」完整状态流转，拒绝必须写明原因，决策过程透明可追溯。", en: "[MISSING]" } },
+        { name: { zh: "迭代发布", en: "[MISSING]" },           desc: { zh: "每次发版前生成发布清单，明确本次上线什么、修复了什么。", en: "[MISSING]" } },
+        { name: { zh: "验收走查", en: "[MISSING]" },           desc: { zh: "为每个页面建独立走查表，并列放设计稿和前端还原截图，把主观验收变成可比对、可追溯的结构化流程。", en: "[MISSING]" } },
       ]},
       { type: "illustration", index: 1, initialScale: 1 },
-      { type: "paragraph", text: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。" },
-      { type: "paragraph", text: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。" },
-      { type: "paragraph", text: "结果是：二期交付期间，需求返工率相比一期下降约70%（剩余返工主要来自客户方的主动需求变更，非流程问题）；需求从提出到进入开发流程的响应速度提升约50%；客户方提出的需求实现了100%覆盖——没有任何一条需求在流转中丢失，客户方评价我们的需求管理甚至超过了他们内部团队的标准。差点丢掉的合同被挽回来了，客户签下了二期。" },
-      { type: "paragraph", text: "之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部两周内全面切换，三个月内扩展到全公司五个项目组，最终成为全公司标准SOP。" },
-      { type: "paragraph", text: "后来我才知道，行业内早已有成熟的专业协作工具在做类似的事。我从问题本身出发一步步推导出来的东西，和那些成熟工具的底层逻辑高度一致。这件事让我意识到：解决问题的关键不是知道有什么工具，而是能不能准确诊断出问题的结构，然后用手头有的资源把它解出来。" },
-      { type: "pull-quote", text: "协作系统相关材料图：" },
+      { type: "paragraph", text: { zh: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。", en: "These six modules weren’t pulled out of thin air. Each one traced directly back to a pain point from the interviews. The lifecycle module addressed the frontend developer’s “I never know what ‘done’ looks like” and the client’s “I have no idea if anyone’s actually working on my requests.” Change Log addressed the designer’s “I’ve updated my files but I don’t know if developers ever see the new version.” Role Map addressed everyone’s “I don’t know who to go to.”" } },
+      { type: "paragraph", text: { zh: "推行策略是\u201C先建共识再定规则\u201D。项目启动会上，我把一期暴露的问题一条一条摊开，让团队自己确认——这些是不是真的？然后针对每个问题提出对应的模块方案。团队自然接受了，因为方案就是从他们说出来的问题中推导出来的。我没有给\u201C不同意\u201D的选项——这是引导，不是强制，但也没有留退路。", en: "The rollout strategy was: get buy-in first, then lock in the process. At the Phase 2 kickoff meeting, I laid out every problem that had surfaced during Phase 1, one by one, and asked the team to confirm \u2014 are these real? Then for each problem, I presented the corresponding module. The team bought in without resistance, because the solution came directly from the problems they themselves had described. I didn\u2019t offer a \u201Cdisagree\u201D option. The process was open \u2014 the conclusion wasn\u2019t." } },
+      { type: "paragraph", text: { zh: "结果是：二期交付期间，需求返工率相比一期下降约70%（剩余返工主要来自客户方的主动需求变更，非流程问题）；需求从提出到进入开发流程的响应速度提升约50%；客户方提出的需求实现了100%覆盖——没有任何一条需求在流转中丢失，客户方评价我们的需求管理甚至超过了他们内部团队的标准。差点丢掉的合同被挽回来了，客户签下了二期。", en: "The results: during Phase 2 delivery, the rework rate on requirements dropped ~70% compared to Phase 1 (the remaining rework came mostly from the client’s own scope changes, not process failures). Turnaround from submission to development starting dropped ~50%. We tracked every single requirement the client submitted — nothing fell through the cracks. The client said our requirements process was more rigorous than their own internal team’s. The contract we’d nearly lost was saved. The client signed Phase 2." } },
+      { type: "paragraph", text: { zh: "之后我把系统打包成三个版本（简化/标准/完整），适配不同复杂度的项目，向公司提议推广。技术部两周内全面切换，三个月内扩展到全公司五个项目组，最终成为全公司标准SOP。", en: "After that, I packaged the system into three versions — light, standard, and full — to fit projects of different complexity, and proposed a company-wide rollout. The engineering department switched over within two weeks. Within three months, it had spread to all five project teams across the company. It became the company-wide SOP." } },
+      { type: "paragraph", text: { zh: "后来我才知道，行业内早已有成熟的专业协作工具在做类似的事。我从问题本身出发一步步推导出来的东西，和那些成熟工具的底层逻辑高度一致。这件事让我意识到：解决问题的关键不是知道有什么工具，而是能不能准确诊断出问题的结构，然后用手头有的资源把它解出来。", en: "I found out later that the industry already had established collaboration tools doing similar things. What I’d built from scratch, just by working through the problem, followed the same underlying logic those tools were built on. The lesson was simple: solving problems isn’t about knowing what tools exist. It’s about breaking the problem down correctly and solving it with whatever you have." } },
+      { type: "pull-quote", text: { zh: "协作系统相关材料图：", en: "Supporting materials: Collaboration system" } },
       { type: "screenshot-carousel", items: [
-        { src: "images/collab-system-interaction.jpg", label: "飞书多维表格目录结构 + 协作流程图", note: "正文讲六模块系统时" },
-        { src: "images/collab-doc-structure.png", label: "文档结构", note: "协作系统完整文档架构" },
-        { src: "images/collab-flow-design.png", label: "流程设计", note: "执行层流程设计" },
-        { src: "images/collab-kanban-running.png", label: "看板运行", note: "系统实际运行状态" },
+        { src: "images/collab-system-interaction.jpg", label: { zh: "飞书多维表格目录结构 + 协作流程图", en: "Feishu (Lark) database layout + collaboration flowchart" }, note: { zh: "正文讲六模块系统时", en: "Supporting the six-module system" } },
+        { src: "images/collab-doc-structure.png", label: { zh: "文档结构", en: "Document structure" }, note: { zh: "协作系统完整文档架构", en: "How the collaboration system is organized" } },
+        { src: "images/collab-flow-design.png", label: { zh: "流程设计", en: "Process design" }, note: { zh: "执行层流程设计", en: "Day-to-day workflow design" } },
+        { src: "images/collab-kanban-running.png", label: { zh: "看板运行", en: "Live kanban" }, note: { zh: "系统实际运行状态", en: "System in use" } },
       ]},
 
       // === 转折 ===
-      { type: "heading", text: "转折：在同一个项目里识别AI落地机会", navLabel: "转折" },
-      { type: "paragraph", text: "二期进入查漏补缺阶段时，DeepSeek刚刚发布，成本极低、性能很强。我判断这个技术可以用在社区场景里——如果给微社区接入一个AI攻略助手，能直接提升用户停留时长和使用频率，这正是客户最核心的诉求。" },
-      { type: "paragraph", text: "但我没有直接去找客户。我做的第一件事是确认这件事在技术上能不能落地。我绕过了项目经理，直接找技术总监。原因很现实：按这个方案前期肯定亏损，项目经理受限于预算考核，这个想法大概率在萌芽阶段就会被否掉。我需要技术总监帮我确认可行性，也需要他帮忙推动资源支持。" },
-      { type: "paragraph", text: "我直接坐到技术总监旁边，一起研究Coze平台的技术文档。我看不懂代码，但我能识别哪些环节可能有技术风险，然后逐一向他确认。确认技术可行后，我做了人力资源预估：前端约1.5人，后端2人。同时梳理了管理端需求——活动管理、英雄信息输入、知识库维护，这些是客户运营必须的能力。" },
-      { type: "screenshot-inline", label: "四层技术架构", note: "技术选型全景", src: "images/nana-tech-architecture-cropped.png", height: "auto", filter: "saturate(0.65) brightness(1.05)", sourceLink: { url: "https://my.feishu.cn/wiki/DXXpwObRhiWZwSkFJrTcBppGncg", text: "查看完整需求文档 ↗" } },
-      { type: "paragraph", text: "所有准备工作做完，我才开始跟客户沟通。我预判客户一定会抗拒——外包方提议加新功能，客户的第一反应通常是怀疑动机。所以我的预案策略是：方案足够详细，方向、内容、时间节点全部明确；同时设计退出机制，数据不好随时可以撤，分散客户的决策压力。" },
-      { type: "paragraph", text: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。" },
-      { type: "paragraph", text: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。" },
-      { type: "paragraph", text: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因不是模型能力问题，而是知识库的信息架构——原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。" },
-      { type: "screenshot-inline", label: "娜娜AI对话界面", note: "正文讲AI产品时", src: "images/nana-ai-chat-trimmed.jpg", height: "auto", objectFit: "contain", featured: true },
+      { type: "heading", text: { zh: "转折：在同一个项目里识别AI落地机会", en: "Turning point: Spotting an AI opportunity within the same project" }, navLabel: { zh: "转折", en: "Turning Point" } },
+      { type: "paragraph", text: { zh: "二期进入查漏补缺阶段时，DeepSeek刚刚发布，成本极低、性能很强。我判断这个技术可以用在社区场景里——如果给微社区接入一个AI攻略助手，能直接提升用户停留时长和使用频率，这正是客户最核心的诉求。", en: "When Phase 2 entered its polishing stage, DeepSeek had just launched — extremely cheap, surprisingly powerful. I saw an opportunity: if we built an AI game guide assistant into the platform’s community feature, it could directly boost user retention and engagement — exactly what the client cared about most." } },
+      { type: "paragraph", text: { zh: "但我没有直接去找客户。我做的第一件事是确认这件事在技术上能不能落地。我绕过了项目经理，直接找技术总监。原因很现实：按这个方案前期肯定亏损，项目经理受限于预算考核，这个想法大概率在萌芽阶段就会被否掉。我需要技术总监帮我确认可行性，也需要他帮忙推动资源支持。", en: "But I didn’t go to the client first. The first thing I did was confirm whether this was technically feasible. I bypassed the project manager and went straight to the CTO — this plan would definitely lose money upfront, and the PM was constrained by budget KPIs. An idea like this would almost certainly get killed before it got off the ground. I needed the CTO to validate feasibility and help push for resources." } },
+      { type: "paragraph", text: { zh: "我直接坐到技术总监旁边，一起研究Coze平台的技术文档。我看不懂代码，但我能识别哪些环节可能有技术风险，然后逐一向他确认。确认技术可行后，我做了人力资源预估：前端约1.5人，后端2人。同时梳理了管理端需求——活动管理、英雄信息输入、知识库维护，这些是客户运营必须的能力。", en: "I sat down next to the CTO and we went through the technical documentation for Coze (ByteDance’s AI agent builder) together. I can’t read code, but I could identify which parts carried technical risk, and I confirmed them with him one by one. Once we’d confirmed it was feasible, I estimated the headcount: roughly 1.5 frontend developers, 2 backend. At the same time, I scoped out the admin-side requirements — event management, hero data input, knowledge base maintenance." } },
+      { type: "screenshot-inline", label: { zh: "四层技术架构", en: "Four-layer technical architecture" }, note: { zh: "技术选型全景", en: "Full tech stack overview" }, src: "images/nana-tech-architecture-cropped.png", height: "auto", filter: "saturate(0.65) brightness(1.05)", sourceLink: { url: "https://my.feishu.cn/wiki/DXXpwObRhiWZwSkFJrTcBppGncg", text: { zh: "查看完整需求文档 ↗", en: "View full requirements doc ↗" } } },
+      { type: "paragraph", text: { zh: "所有准备工作做完，我才开始跟客户沟通。我预判客户一定会抗拒——外包方提议加新功能，客户的第一反应通常是怀疑动机。所以我的预案策略是：方案足够详细，方向、内容、时间节点全部明确；同时设计退出机制，数据不好随时可以撤，分散客户的决策压力。", en: "Only after all the prep work was done did I start talking to the client. I predicted they’d push back — when the external vendor proposes adding new features, the client’s first instinct is usually to question the motive. So the proposal had to be detailed enough that the direction, scope, and timeline were all explicit. And I built in an exit mechanism — if the data doesn’t look good, pull the plug anytime. Make it easy for the client to say yes." } },
+      { type: "paragraph", text: { zh: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。", en: "The first pitch was a brief proposal, just to test the waters. The client’s reaction wasn’t rejection — it was uncertainty. They went back to discuss with their product lead. The product lead came over and asked me to walk through it again, gave revision notes, and asked for interaction design. Here’s the key move: I did the interaction design myself, off the clock, without telling my company. The PM’s budget couldn’t cover it, but I wanted this to happen. For an external vendor, interaction design is normally billable. I absorbed the cost myself." } },
+      { type: "paragraph", text: { zh: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。", en: "The second pitch came with the full interaction design. More negotiation. Finally, in a formal meeting, I brought in our engineers and PM for a full team presentation. The client and their product lead took the proposal to their VP for budget approval — beyond that point, it was out of my hands. The VP approved it. From first pitch to approval, about six weeks." } },
+      { type: "paragraph", text: { zh: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因不是模型能力问题，而是知识库的信息架构——原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。", en: "The agent that shipped was called \u201CNana,\u201D built on Coze, running on DeepSeek R1/V3 and Doubao (ByteDance\u2019s LLM). It served over 2,000 users after launch. The biggest problem during troubleshooting was inaccurate knowledge base retrieval: when I ran the same question 20 times, the initial version only returned the right content 5 times \u2014 it pulled up the wrong hero 12 times and found nothing at all 3 times. The root cause wasn\u2019t the model \u2014 it was the knowledge base\u2019s information architecture. The original setup stored all of a hero\u2019s information as one large chunk, so the search engine couldn\u2019t match precisely when users asked specific questions. I redesigned the information architecture \u2014 splitting each hero into three segments (hero overview, skills + battlefield abilities + combos, gear + emblems). Once I\u2019d mapped out the new field structure, the technical team migrated everything to VikingDB on Volcano Engine (ByteDance\u2019s cloud) and handled the embedding model selection and search parameter tuning. After optimization, the same 20-question test hit correctly every single time. The fix was redesigning the information architecture, not just switching platforms." } },
+      { type: "screenshot-inline", label: { zh: "娜娜AI对话界面", en: "Nana AI chat interface" }, note: { zh: "正文讲AI产品时", en: "The AI agent in action" }, src: "images/nana-ai-chat-trimmed.jpg", height: "auto", objectFit: "contain", featured: true },
 
       // === 回头看 ===
-      { type: "heading", text: "回头看：这两件事教会我什么", navLabel: "回头看" },
-      { type: "paragraph", text: "这个项目里我做了两件性质不同但逻辑相通的事。协作系统是在危机中被动响应——团队要崩了，我必须找到问题并解出来。娜娜是在稳定期主动进攻——我识别到一个技术机会，判断它能创造价值，然后推动它落地。" },
-      { type: "paragraph", text: "两件事的共同点是：在每个关键节点，我的判断比我的执行更重要。判断\u201C不是人的问题是系统的问题\u201D决定了协作系统的方向；判断\u201CDeepSeek能用在社区场景\u201D决定了AI线的启动；判断\u201C先找技术总监不找项目经理\u201D决定了娜娜项目能活过萌芽期。" },
-      { type: "paragraph", text: "但这些判断都是靠经验和直觉驱动的，缺少系统性的方法论支撑。我能从零设计一套协作系统，但说不清楚它背后的理论框架；我能识别AI落地机会并推动客户买单，但对AI产品管理的完整知识体系还有明显的缺口。" },
-      { type: "pull-quote", text: "这也是我想进一步深入学习的原因——把散装的实践经验，整合进一个专业的、可复用的框架里。" },
+      { type: "heading", text: { zh: "回头看：这两件事教会我什么", en: "Looking Back: What these two things taught me" }, navLabel: { zh: "回头看", en: "Looking Back" } },
+      { type: "paragraph", text: { zh: "这个项目里我做了两件性质不同但逻辑相通的事。协作系统是在危机中被动响应——团队要崩了，我必须找到问题并解出来。娜娜是在稳定期主动进攻——我识别到一个技术机会，判断它能创造价值，然后推动它落地。", en: "This project split into two parts, but the logic was the same. The collaboration system was a reactive response to crisis — the team was falling apart, and I had to find the problem and solve it. Nana was a proactive move during a stable period — I spotted a technical opportunity, judged it could create value, and pushed it to launch." } },
+      { type: "paragraph", text: { zh: "两件事的共同点是：在每个关键节点，我的判断比我的执行更重要。判断\u201C不是人的问题是系统的问题\u201D决定了协作系统的方向；判断\u201CDeepSeek能用在社区场景\u201D决定了AI线的启动；判断\u201C先找技术总监不找项目经理\u201D决定了娜娜项目能活过萌芽期。", en: "What the two had in common: at every critical decision point, my judgment mattered more than my execution. Judging “this isn’t a people problem, it’s a systems problem” set the direction for the collaboration system. Judging “DeepSeek can work in a community scenario” started the AI track. Judging “go to the CTO first, not the PM” kept Nana alive long enough to get built." } },
+      { type: "paragraph", text: { zh: "但这些判断都是靠经验和直觉驱动的，缺少系统性的方法论支撑。我能从零设计一套协作系统，但说不清楚它背后的理论框架；我能识别AI落地机会并推动客户买单，但对AI产品管理的完整知识体系还有明显的缺口。", en: "But all of those judgments were driven by experience and instinct, without any formal framework behind them. I could design a collaboration system from zero, but I couldn’t articulate the theoretical framework underneath it. I could spot an AI opportunity and push the client to buy in, but I had clear gaps in my knowledge of AI product management as a field." } },
+      { type: "pull-quote", text: { zh: "这也是我想进一步深入学习的原因——把散装的实践经验，整合进一个专业的、可复用的框架里。", en: "That’s exactly why I want to go deeper — to turn five years of hands-on experience into something structured and transferable." } },
     ],
     supportingScreenshots: [],
   },
   {
     id: 2,
-    name: "客户说改UI，但UI不是问题",
+    name: { zh: "客户说改UI，但UI不是问题", en: "The client said fix the UI — but UI wasn't the problem" },
     navName: "02",
-    roleLine: "自发介入者 // 2025",
-    summary: "订单写的是UI改版。我在交付UI方案的同时，自费走查了全站、访谈了30多位用户——最后交出去的不只是一套界面，是一份完整的产品重构规划。",
-    cardSummary: "订单范围是UI迭代，没有人让我做全站走查，更没有人让我自掏腰包找三四十个用户做访谈。但我需要先搞清楚这个产品到底卡在哪——走查报告和三期规划是未收费主动交出去的，拿着它直接过了客户VP的审批。",
-    cardHook: "订单范围是UI迭代，我做了全站走查和用户访谈。",
-    cardTag: "¥10万→¥150万",
+    roleLine: { zh: "自发介入者 // 2025", en: "Self-Initiated Lead // 2025" },
+    summary: { zh: "订单写的是UI改版。我在交付UI方案的同时，自费走查了全站、访谈了30多位用户——最后交出去的不只是一套界面，是一份完整的产品重构规划。", en: "The scope was UI redesign. While delivering the UI proposal, I did a full-site UX walkthrough and interviewed 30+ users — entirely on my own dime, outside the contracted scope. What I delivered wasn't just a redesign, but a full product restructuring plan." },
+    cardSummary: { zh: "订单范围是UI迭代，没有人让我做全站走查，更没有人让我自掏腰包找三四十个用户做访谈。但我需要先搞清楚这个产品到底卡在哪——走查报告和三期规划是未收费主动交出去的，拿着它直接过了客户VP的审批。", en: "The scope was UI iteration. Nobody asked me to do a full-site UX walkthrough, let alone fund interviews with 30+ users out of my own pocket. But I needed to understand where this product was actually stuck — so the walkthrough report and three-phase plan were delivered unbilled, on my own initiative. It went straight to the client's VP and got approved." },
+    cardHook: { zh: "订单范围是UI迭代，我做了全站走查和用户访谈。", en: "The scope was UI iteration. I did a full-site UX walkthrough and 30+ user interviews — all self-initiated." },
+    cardTag: { zh: "¥10万→¥150万", en: "¥100K → ¥1.5M (15×)" },
     cardImage: "images/case2-new-homepage.png",
-    cardHighlights: ["¥10万→¥150万", "三期产品规划", "20人执行团队"],
-    cardStat: { number: "15", unit: "×", label: "合同价值增长" },
+    cardHighlights: [{ zh: "¥10万→¥150万", en: "¥100K → ¥1.5M (15×)" }, { zh: "三期产品规划", en: "Three-phase product roadmap" }, { zh: "20人执行团队", en: "20-person execution team" }],
+    cardStat: { number: "15", unit: "×", label: { zh: "合同价值增长", en: "Contract value growth" } },
     layoutMode: "before-after",
     metricsMode: "numbers",
     metrics: [
-      { number: "30+", label: "用户访谈" },
-      { number: "全站", label: "逐页走查" },
-      { number: "未收费", label: "主动交付" },
+      { number: "30+", label: { zh: "用户访谈", en: "User interviews" } },
+      { number: { zh: "全站", en: "Full site" }, label: { zh: "逐页走查", en: "Page-by-page walkthrough" } },
+      { number: { zh: "未收费", en: "Unbilled" }, label: { zh: "主动交付", en: "Self-initiated delivery" } },
     ],
-    teamInfo: "跨5个部门联动",
-    context: "客户病急投医，方向不明",
+    teamInfo: { zh: "跨5个部门联动", en: "Coordinated across 5 departments" },
+    context: { zh: "客户病急投医，方向不明", en: "Client stuck with no clear direction" },
     skillTags: ["问题重定义", "信任策略", "用户研究", "分阶段落地"],
+    skillTagsEn: ["Problem Reframing", "Trust Strategy", "User Research", "Phased Delivery"],
     skillTagJumps: {
-      "问题重定义": { scrollTo: 6, borderRange: [6, 15], keySentence: "客户的问题不是UI，是产品定位", keyBlock: 15 },
-      "信任策略": { scrollTo: 16, borderRange: [16, 16], keySentence: "先解决客户说的问题，再引出客户没看到的问题", keyBlock: 16 },
-      "用户研究": { scrollTo: 21, borderRange: [20, 24], keySentence: "这个判断需要第三方验证", keyBlock: 21 },
-      "分阶段落地": { scrollTo: 26, borderRange: [25, 32], keySentence: "不是三选一，是分阶段全做", keyBlock: 28 },
+      "问题重定义": { scrollTo: 6, borderRange: [6, 15], keySentence: { zh: "客户的问题不是UI，是产品定位", en: "product positioning" }, keyBlock: 15 },
+      "信任策略": { scrollTo: 16, borderRange: [16, 16], keySentence: { zh: "先解决客户说的问题，再引出客户没看到的问题", en: "Answer the question the client asked first, then surface the question they hadn" }, keyBlock: 16 },
+      "用户研究": { scrollTo: 21, borderRange: [20, 24], keySentence: { zh: "这个判断需要第三方验证", en: "I needed real users to test my assumptions" }, keyBlock: 21 },
+      "分阶段落地": { scrollTo: 26, borderRange: [25, 32], keySentence: { zh: "不是三选一，是分阶段全做", en: "Not pick one" }, keyBlock: 28 },
     },
-    heroStat: { number: "15×", unit: "商单价值增长" },
+    heroStat: { number: "15×", unit: { zh: "商单价值增长", en: "Contract value growth" } },
     heroNarrative: {
-      hook: "订单写的是UI改版，最后交出去的是一份完整的产品重构规划。",
-      detail: "我在交付UI方案的同时，自费走查了全站、访谈了30多位用户——发现真正的问题不在界面，而在产品方向。最后交出去的不只是一套界面，是一份让客户从\u201C病急投医\u201D变成\u201C方向清晰\u201D的完整规划。",
+      hook: { zh: "订单写的是UI改版，最后交出去的是一份完整的产品重构规划。", en: "The scope was UI redesign. What I delivered was a full product restructuring plan." },
+      detail: { zh: "我在交付UI方案的同时，自费走查了全站、访谈了30多位用户——发现真正的问题不在界面，而在产品方向。最后交出去的不只是一套界面，是一份让客户从\u201C病急投医\u201D变成\u201C方向清晰\u201D的完整规划。", en: "While delivering the UI proposal, I did a full-site UX walkthrough and interviewed 30+ users — entirely on my own dime, outside the contracted scope — discovering the real problem wasn't the interface, but the product direction. What I delivered wasn't just a redesign, but a plan that took the client from being stuck to a clear three-phase roadmap." },
     },
     heroMetrics: [
-      { value: "30+", label: "用户访谈", highlight: true },
-      { value: "全站", label: "逐页走查" },
-      { value: "未收费", label: "主动交付" },
+      { value: "30+", label: { zh: "用户访谈", en: "User interviews" }, highlight: true },
+      { value: { zh: "全站", en: "Full site" }, label: { zh: "逐页走查", en: "Page-by-page walkthrough" } },
+      { value: { zh: "未收费", en: "Unbilled" }, label: { zh: "主动交付", en: "Self-initiated delivery" } },
     ],
-    heroTitleLines: ["客户说改UI，", "但UI不是问题"],
+    heroTitleLines: [{ zh: "客户说改UI，", en: "The client said fix the UI —" }, { zh: "但UI不是问题", en: "but UI wasn't the problem" }],
     illustrations: [
-      { name: "诊断漏斗图", type: "漏斗图", note: "覆盖诊断链（从表象到根因）" },
-      { name: "三期递进图", type: "路线图", note: "覆盖落地路径和商业结果" },
+      { name: { zh: "诊断漏斗图", en: "Diagnostic funnel" }, type: "漏斗图", note: { zh: "覆盖诊断链（从表象到根因）", en: "Covers the diagnostic chain from symptoms to root cause" } },
+      { name: { zh: "三期递进图", en: "Three-phase progression" }, type: "路线图", note: { zh: "覆盖落地路径和商业结果", en: "Covers the delivery path and business outcomes" } },
     ],
     bodyStructure: [
       // === 起点 === Block 0-3
-      { type: "heading", text: "起点：一个卡住的客户，和一个即时冒出来的念头", navLabel: "起点" },
-      { type: "paragraph", text: "2025年初，一个攻略站项目转到我手上。我的正式角色是产品运营，这个项目最初只是一笔10万的常规UI外包订单。背景是这样的：客户之前找外包做了一版潮汐守望者游戏攻略站（移动端H5），一期上线后效果不好，想做二期但说不清楚该往哪个方向改。最后给出的需求是\u201C先把UI改一下\u201D——这不是一个明确的产品诉求，更像是找不到方向时退而求其次的兜底选项。" },
-      { type: "paragraph", text: "听到\u201C潮汐守望者\u201D这个名字的瞬间，我就搜索并下载了游戏。这是职业本能——你要帮一个游戏攻略站做产品判断，不深入理解它服务的游戏生态，所有判断都是空的。" },
-      { type: "paragraph", text: "下载游戏后几乎立刻注意到一件事：玩家之间有一个非常活跃的\u201C装备码\u201D分享习惯。在B站、YouTube这些平台上，玩家分享一串代码，其他人在游戏内输入就能直接复制整套英雄装备配置。这是游戏已有的、被玩家高频使用的打通机制。我当时脑子里冒出来一个念头：既然装备能用一串码打通，为什么攻略站的\u201C阵容\u201D不能？这个想法在那一刻就出现了，不是后来分析出来的。但直觉离落地很远，我先把它放着，开始做正事。" },
+      { type: "heading", text: { zh: "起点：一个卡住的客户，和一个即时冒出来的念头", en: "Starting point: A stuck client, and a hunch" }, navLabel: { zh: "起点", en: "Starting Point" } },
+      { type: "paragraph", text: { zh: "2025年初，一个攻略站项目转到我手上。我的正式角色是产品运营，这个项目最初只是一笔10万的常规UI外包订单。背景是这样的：客户之前找外包做了一版潮汐守望者游戏攻略站（移动端H5），一期上线后效果不好，想做二期但说不清楚该往哪个方向改。最后给出的需求是\u201C先把UI改一下\u201D——这不是一个明确的产品诉求，更像是找不到方向时退而求其次的兜底选项。", en: "In early 2025, a game guide project landed on my desk. My official title was still Product Operations. The project was originally just a standard ¥100K UI contract. Here’s the background: the client had previously hired a vendor to build a mobile web (H5) game guide site for Watcher of Realms. After Phase 1 launched and underperformed, they wanted a Phase 2 but couldn’t articulate what direction to take. The scope they gave us was “fix the UI first” — not a clear product vision, more like a default move when you can’t figure out what’s actually wrong." } },
+      { type: "paragraph", text: { zh: "听到\u201C潮汐守望者\u201D这个名字的瞬间，我就搜索并下载了游戏。这是职业本能——你要帮一个游戏攻略站做产品判断，不深入理解它服务的游戏生态，所有判断都是空的。", en: "[MISSING]" } },
+      { type: "paragraph", text: { zh: "下载游戏后几乎立刻注意到一件事：玩家之间有一个非常活跃的\u201C装备码\u201D分享习惯。在B站、YouTube这些平台上，玩家分享一串代码，其他人在游戏内输入就能直接复制整套英雄装备配置。这是游戏已有的、被玩家高频使用的打通机制。我当时脑子里冒出来一个念头：既然装备能用一串码打通，为什么攻略站的\u201C阵容\u201D不能？这个想法在那一刻就出现了，不是后来分析出来的。但直觉离落地很远，我先把它放着，开始做正事。", en: "Almost immediately after downloading the game, I noticed something: players were constantly sharing “gear codes.” On platforms like Bilibili and YouTube, players would share a string of characters, and others could enter it in-game to instantly copy an entire hero equipment setup. This was a built-in mechanism the game already had, and players used it all the time. It hit me right then: if gear can be shared through a single code, why can’t lineups on the guide site work the same way? The idea appeared in that moment — it wasn’t something I analyzed my way into later. But instinct is a long way from execution. I shelved it and got to work." } },
 
       // === 走查 === Block 4-16
-      { type: "heading", text: "走查：不是客户要求的，但我判断必须做的事", navLabel: "走查" },
-      { type: "paragraph", text: "客户说的是改UI。如果我只按这个需求做，正确的动作是拉一份界面修改清单，报价执行。但我没有这么做。原因很简单：我还不理解这个产品，没有足够的判断力来确认\u201C改UI\u201D是不是真正需要做的事。所以我给自己加了一项不在订单范围内的工作——全站体验走查，从首页到编辑器到收藏到个人中心，逐页记录问题并归类。没有人要求我做这件事。" },
-      { type: "paragraph", text: "打开攻略站的第一眼，两个感受同时出现：视觉层面不匹配，这是客观的；更重要的是一种\u201C四不像\u201D感——这个产品既不像一个内容平台，也不像一个工具站，说不清它到底想做什么。直觉层面就不对劲。" },
-      { type: "paragraph", text: "首页走完，判断加重了。问题不在于某个按钮丑或某处配色不对——而是整个页面没有信息优先级。哪些内容重要、哪些次要、用户该按什么顺序看，完全没有引导。功能堆在那里，但堆的逻辑不清楚。" },
-      { type: "pull-quote", text: "UI丑可以换皮，信息架构的混乱说明产品本身没想清楚自己要给用户呈现什么。" },
-      { type: "paragraph", text: "编辑器的问题更直接。攻略站的编辑器不只是给普通用户用的——在这个生态里，真正持续产出内容的人首先是能带来流量的游戏主播，其次是官方的内容运营人员。编辑器是他们的核心生产工具。但整条上传链路的操作逻辑跟游戏内搭阵容的逻辑完全不一致，玩家在游戏里习惯的交互方式到了攻略站变成另一套东西。" },
-      { type: "pull-quote", text: "如果连最核心的内容生产者都觉得难用，产品的问题就不在表面。" },
-      { type: "paragraph", text: "走查进行到大约一半的时候，我开始注意到一个反复出现的现象：很多问题表面上各不相同，但底下都是同一种冲突——功能和功能在打架。首页里，内容推荐和筛选工具在抢同一块空间，信息展示和操作入口互相挤压，谁都没有得到合理的优先级。编辑器里，攻略的文字描述流程和阵容的结构化配置被塞在同一条线性链路里，两种完全不同性质的任务被迫共用一套交互逻辑。一个想展示内容，一个想提供工具，但产品没有决定谁先谁后、怎么衔接，所以它们在每个页面里各自为战。" },
-      { type: "paragraph", text: "这个冲突反复出现之后，我才意识到它们不是各自独立的缺陷，是同一个根源。我回到\u201C攻略站\u201D这三个字本身去想：攻略站天然有双重身份，它是眼睛看的（玩家来这里看攻略内容），也是手上用的（玩家要把阵容拿到游戏里去用）。看和用，这两件事必须实现闭环。" },
-      { type: "pull-quote", text: "当前的产品把这两个角色既没有整合、也没有区分，互相干扰着挤在一起。" },
-      { type: "paragraph", text: "到这里，我之前下载游戏时冒出的那个念头突然有了落点。阵容码不只是一个功能想法——它恰好是连接\u201C看\u201D和\u201C用\u201D的枢纽。主播展示阵容码，玩家看完攻略后输入阵容码，在游戏内直接使用。两个角色通过一串代码实现统一。" },
-      { type: "paragraph", text: "我基本确认了两件事：第一，客户的问题不是UI，是产品定位——\u201C内容聚合\u201D和\u201C阵容工具\u201D两个身份没有找到统一的方式；第二，定位之外，执行层面的交互设计基础也出了问题。" },
-      { type: "paragraph", text: "但我知道不能一上来就跟客户说\u201C你的问题不是UI是定位\u201D。所以我在走查报告里做了一个刻意的安排：前半部分老老实实标注每一个UI和交互缺陷，配截图、写修复方案，回应客户\u201C先改UI\u201D的原始需求。你拿着这部分找更便宜的外包去改也行。真正的重点在报告后半部分——产品定位分析和分阶段规划。先解决客户说的问题，再引出客户没看到的问题。" },
+      { type: "heading", text: { zh: "走查：不是客户要求的，但我判断必须做的事", en: "UX walkthrough: Not what the client asked for, but what I judged had to be done" }, navLabel: { zh: "走查", en: "Walkthrough" } },
+      { type: "paragraph", text: { zh: "客户说的是改UI。如果我只按这个需求做，正确的动作是拉一份界面修改清单，报价执行。但我没有这么做。原因很简单：我还不理解这个产品，没有足够的判断力来确认\u201C改UI\u201D是不是真正需要做的事。所以我给自己加了一项不在订单范围内的工作——全站体验走查，从首页到编辑器到收藏到个人中心，逐页记录问题并归类。没有人要求我做这件事。", en: "The client said fix the UI. If I’d just followed that scope, the right move was to pull together a list of interface changes, quote it, and execute. But I didn’t do that. I didn’t yet understand this product — I didn’t have enough context to judge whether “fix the UI” was actually the right thing to do. So I gave myself an extra task outside the contracted scope — a full-site UX walkthrough, page by page, from homepage to editor to favorites to profile, logging and categorizing every issue. Nobody asked me to do this." } },
+      { type: "paragraph", text: { zh: "打开攻略站的第一眼，两个感受同时出现：视觉层面不匹配，这是客观的；更重要的是一种\u201C四不像\u201D感——这个产品既不像一个内容平台，也不像一个工具站，说不清它到底想做什么。直觉层面就不对劲。", en: "The first time I opened the guide site, two things hit me at once: the visual layer clearly didn’t fit. But more importantly, the whole thing had an identity crisis — it didn’t look like a content platform, didn’t look like a tool site, and you couldn’t tell what it was trying to be. Something felt off at a gut level." } },
+      { type: "paragraph", text: { zh: "首页走完，判断加重了。问题不在于某个按钮丑或某处配色不对——而是整个页面没有信息优先级。哪些内容重要、哪些次要、用户该按什么顺序看，完全没有引导。功能堆在那里，但堆的逻辑不清楚。", en: "After walking through the homepage, that initial impression only got stronger. The problem wasn’t that a button was ugly or a color was wrong — the entire page had no information hierarchy. What’s important, what’s secondary, where the user’s eye should go — no guidance at all. Features were piled on the page with no clear organizing principle." } },
+      { type: "pull-quote", text: { zh: "UI丑可以换皮，信息架构的混乱说明产品本身没想清楚自己要给用户呈现什么。", en: "Ugly UI is a skin problem — you can reskin it. But when the information architecture is a mess, it means the product itself hasn’t figured out what it wants to show users." } },
+      { type: "paragraph", text: { zh: "编辑器的问题更直接。攻略站的编辑器不只是给普通用户用的——在这个生态里，真正持续产出内容的人首先是能带来流量的游戏主播，其次是官方的内容运营人员。编辑器是他们的核心生产工具。但整条上传链路的操作逻辑跟游戏内搭阵容的逻辑完全不一致，玩家在游戏里习惯的交互方式到了攻略站变成另一套东西。", en: "The editor had a more direct problem. The guide site’s editor wasn’t just for casual users — in this ecosystem, the people who actually produce content consistently are primarily the streamers who drive traffic, and then the client’s own content ops team. The editor is their core production tool. But the entire upload flow worked completely differently from how players build lineups in-game. The interaction patterns players were used to inside the game turned into an entirely unfamiliar workflow on the guide site." } },
+      { type: "pull-quote", text: { zh: "如果连最核心的内容生产者都觉得难用，产品的问题就不在表面。", en: "If even your most important content creators find the tool hard to use, the problem isn’t skin-deep." } },
+      { type: "paragraph", text: { zh: "走查进行到大约一半的时候，我开始注意到一个反复出现的现象：很多问题表面上各不相同，但底下都是同一种冲突——功能和功能在打架。首页里，内容推荐和筛选工具在抢同一块空间，信息展示和操作入口互相挤压，谁都没有得到合理的优先级。编辑器里，攻略的文字描述流程和阵容的结构化配置被塞在同一条线性链路里，两种完全不同性质的任务被迫共用一套交互逻辑。一个想展示内容，一个想提供工具，但产品没有决定谁先谁后、怎么衔接，所以它们在每个页面里各自为战。", en: "About halfway through the walkthrough, I started noticing a pattern: the problems looked different on the surface, but underneath they were all the same conflict — features fighting features. On the homepage, content recommendations and filtering tools were competing for the same space. Information display and interactive elements crowded each other out, with neither getting clear priority. In the editor, the text-based guide writing flow and the structured lineup configuration were crammed into a single linear path — two fundamentally different tasks forced to share one UX pattern. One side wanted to show content, the other wanted to provide a tool, but the product had never decided which comes first or how they connect. So on every page, they just fought it out." } },
+      { type: "paragraph", text: { zh: "这个冲突反复出现之后，我才意识到它们不是各自独立的缺陷，是同一个根源。我回到\u201C攻略站\u201D这三个字本身去想：攻略站天然有双重身份，它是眼睛看的（玩家来这里看攻略内容），也是手上用的（玩家要把阵容拿到游戏里去用）。看和用，这两件事必须实现闭环。", en: "Once I saw this conflict repeating, I realized these weren’t separate defects. They shared the same root. I went back to the most basic question: what is a game guide site? It’s inherently two things at once — something you read (players come to consume guide content) and something you use (players need to take lineups into the game). Reading and using — those two sides have to come together into a single flow." } },
+      { type: "pull-quote", text: { zh: "当前的产品把这两个角色既没有整合、也没有区分，互相干扰着挤在一起。", en: "The current product had neither integrated these two roles nor separated them. They were just jammed together, interfering with each other." } },
+      { type: "paragraph", text: { zh: "到这里，我之前下载游戏时冒出的那个念头突然有了落点。阵容码不只是一个功能想法——它恰好是连接\u201C看\u201D和\u201C用\u201D的枢纽。主播展示阵容码，玩家看完攻略后输入阵容码，在游戏内直接使用。两个角色通过一串代码实现统一。", en: "That’s when the idea I’d had while downloading the game suddenly clicked into place. Lineup Code wasn’t just a feature idea — it was the hinge between “read” and “use.” A streamer shares a Lineup Code, a player reads the guide and enters the code, and the lineup is live in-game. Two roles, connected by a single string of characters." } },
+      { type: "paragraph", text: { zh: "我基本确认了两件事：第一，客户的问题不是UI，是产品定位——\u201C内容聚合\u201D和\u201C阵容工具\u201D两个身份没有找到统一的方式；第二，定位之外，执行层面的交互设计基础也出了问题。", en: "I was now fairly confident about two things. First, the client’s problem wasn’t UI — it was product positioning. The “content hub” identity and the “lineup tool” identity had never found a way to coexist. Second, beyond positioning, the actual interaction patterns were also broken." } },
+      { type: "paragraph", text: { zh: "但我知道不能一上来就跟客户说\u201C你的问题不是UI是定位\u201D。所以我在走查报告里做了一个刻意的安排：前半部分老老实实标注每一个UI和交互缺陷，配截图、写修复方案，回应客户\u201C先改UI\u201D的原始需求。你拿着这部分找更便宜的外包去改也行。真正的重点在报告后半部分——产品定位分析和分阶段规划。先解决客户说的问题，再引出客户没看到的问题。", en: "But I knew I couldn\u2019t walk into the room and tell the client \u201Cyour problem isn\u2019t UI, it\u2019s positioning.\u201D So I was strategic about how I structured the walkthrough report: the first half documented every UI and interaction flaw honestly \u2014 screenshots, fix recommendations, directly addressing the client\u2019s original \u201Cfix the UI\u201D scope. They could take that section to a cheaper vendor and get it done. The real weight was in the second half \u2014 product positioning analysis and a phased roadmap. Answer the question the client asked first, then surface the question they hadn\u2019t seen." } },
       { type: "screenshot-group", items: [
-        { src: "images/case2-old-homepage.png", label: "旧版首页", note: "信息架构混乱，无优先级引导" },
-        { src: "images/case2-old-detail.png", label: "旧版详情页", note: "内容展示和工具功能互相干扰" },
+        { src: "images/case2-old-homepage.png", label: { zh: "旧版首页", en: "Old homepage" }, note: { zh: "信息架构混乱，无优先级引导", en: "Disorganized information architecture, no clear hierarchy" } },
+        { src: "images/case2-old-detail.png", label: { zh: "旧版详情页", en: "Old detail page" }, note: { zh: "内容展示和工具功能互相干扰", en: "Content and tools competing for space" } },
       ]},
-      { type: "screenshot-inline", label: "旧版编辑器", note: "上传链路与游戏内逻辑不一致", src: "images/case2-old-editor.png", filter: "saturate(0.65) brightness(1.05)", height: 500, objectFit: "contain", objectPosition: "top center" },
+      { type: "screenshot-inline", label: { zh: "旧版编辑器", en: "Old editor" }, note: { zh: "上传链路与游戏内逻辑不一致", en: "Upload flow misaligned with in-game logic" }, src: "images/case2-old-editor.png", filter: "saturate(0.65) brightness(1.05)", height: 500, objectFit: "contain", objectPosition: "top center" },
       { type: "illustration", index: 0, initialScale: 0.95 },
 
       // === 验证 === Block 17-21
-      { type: "heading", text: "验证：走查能看到产品，看不到人", navLabel: "验证" },
-      { type: "paragraph", text: "走查告诉我产品本身有什么问题，但有一个天然局限：看不到真实用户在实际使用中卡在哪里。我对这款游戏的理解也可能不够深。这个判断需要第三方验证。" },
-      { type: "paragraph", text: "还是那个前提——没有人要求我做这件事。10万的UI迭代订单不包含用户调研，公司不会报销访谈费用。但我判断不做不行。我自掏腰包做了一对一访谈：给国内主播发50块红包、国外主播发10美金，换半小时深度对话；普通玩家每人约聊10分钟；官方的内容填报人员不需要花钱，这是他们工作的一部分，直接聊。前后接触大约三四十人。" },
-      { type: "paragraph", text: "几类关键反馈逐渐清晰，每一类都接回了我在走查中形成的诊断：\n\n官方内容填报人员说上传流程太繁琐、步骤太多——这直接印证了走查中编辑器的判断：上传链路跟游戏内逻辑不一致，连最核心的内容生产者都觉得难用，问题确实不在UI层面。\n\n头部主播的反馈补充了走查完全看不到的维度：写完攻略之后分发量不够，分享出去只是一个链接，点击量和用户反馈作者完全不知道，没有激励也没有反馈，持续创作动力很难维持。这告诉我：产品不只是\u201C内容聚合\u201D这个角色没做好，它根本没想清楚内容生产出来之后往哪走——内容的流通和生态的循环是整体缺失的。\n\n最重要的观察来自普通用户。攻略站上目前全是图文，但潮汐守望者是一款高度策略化的游戏，阵容的英雄站位、出手顺序、操作时机都是通关关键。这类信息靠图文很难讲清楚。在游戏内容的信息传递中，文字的效率低于图片，图片低于视频——尤其对操作密集的策略型游戏，玩家需要的是\u201C手把手跟着做\u201D，需要知道几分几秒该做什么。这意味着产品形态本身也需要重新考虑。" },
-      { type: "paragraph", text: "走查、访谈、玩游戏是同步推进的。深度玩了大约两个月后，之前脑子里零散的判断全部串起来了。" },
+      { type: "heading", text: { zh: "验证：走查能看到产品，看不到人", en: "Validation: The walkthrough showed the product, not the people" }, navLabel: { zh: "验证", en: "Validation" } },
+      { type: "paragraph", text: { zh: "走查告诉我产品本身有什么问题，但有一个天然局限：看不到真实用户在实际使用中卡在哪里。我对这款游戏的理解也可能不够深。这个判断需要第三方验证。", en: "The walkthrough told me what was wrong with the product itself, but it had a natural limitation: I couldn’t see where real users were actually getting stuck during real usage. My understanding of the game might not be deep enough either. I needed real users to test my assumptions." } },
+      { type: "paragraph", text: { zh: "还是那个前提——没有人要求我做这件事。10万的UI迭代订单不包含用户调研，公司不会报销访谈费用。但我判断不做不行。我自掏腰包做了一对一访谈：给国内主播发50块红包、国外主播发10美金，换半小时深度对话；普通玩家每人约聊10分钟；官方的内容填报人员不需要花钱，这是他们工作的一部分，直接聊。前后接触大约三四十人。", en: "Same premise as before — nobody asked me to do this. The ¥100K UI contract didn’t include user research, and the company wouldn’t reimburse interview costs. But I judged it had to be done. I funded the interviews myself: ¥50 red envelopes for domestic streamers, $10 for international ones, in exchange for a thirty-minute deep conversation. Casual players got about ten minutes each. The client’s content editors didn’t cost anything — this was part of their job, so I just talked to them directly. In total, I talked to about thirty to forty people." } },
+      { type: "paragraph", text: { zh: "几类关键反馈逐渐清晰，每一类都接回了我在走查中形成的诊断：\n\n官方内容填报人员说上传流程太繁琐、步骤太多——这直接印证了走查中编辑器的判断：上传链路跟游戏内逻辑不一致，连最核心的内容生产者都觉得难用，问题确实不在UI层面。\n\n头部主播的反馈补充了走查完全看不到的维度：写完攻略之后分发量不够，分享出去只是一个链接，点击量和用户反馈作者完全不知道，没有激励也没有反馈，持续创作动力很难维持。这告诉我：产品不只是\u201C内容聚合\u201D这个角色没做好，它根本没想清楚内容生产出来之后往哪走——内容的流通和生态的循环是整体缺失的。\n\n最重要的观察来自普通用户。攻略站上目前全是图文，但潮汐守望者是一款高度策略化的游戏，阵容的英雄站位、出手顺序、操作时机都是通关关键。这类信息靠图文很难讲清楚。在游戏内容的信息传递中，文字的效率低于图片，图片低于视频——尤其对操作密集的策略型游戏，玩家需要的是\u201C手把手跟着做\u201D，需要知道几分几秒该做什么。这意味着产品形态本身也需要重新考虑。", en: "A few clear patterns came out of the interviews.\n\n\nThe client’s content editors said the upload process was too cumbersome — too many steps. This directly confirmed what the walkthrough had shown about the editor: the upload flow didn’t match in-game logic, and even the most important content producers found it painful. The problem clearly wasn’t at the UI level.\n\n\nThe top streamers surfaced something the walkthrough had no way of catching: after writing a guide, distribution was weak. Sharing meant sending a bare link — authors had no visibility into clicks or reader feedback. No incentive, no feedback loop, no reason to keep creating. This told me the product hadn’t just failed at “content hub” — it had never thought through what happens to content after it’s produced. There was no content lifecycle at all.\n\n\nThe most important observation came from regular players. The guide site was entirely text-and-image, but Watcher of Realms is a deeply strategic game — hero positioning, turn order, and timing are all critical to clearing stages. That kind of information is nearly impossible to communicate through static text and images. For game content like this, text shows less than images, and images show less than video — especially for execution-heavy strategy games, where players need to follow along step by step, knowing exactly when to do what. This meant the product format itself needed rethinking." } },
+      { type: "paragraph", text: { zh: "走查、访谈、玩游戏是同步推进的。深度玩了大约两个月后，之前脑子里零散的判断全部串起来了。", en: "The walkthrough, interviews, and playing the game were all happening in parallel. After about two months of deep play, every loose thread I’d been tracking finally came together." } },
 
       // === 方案 === Block 22-31
-      { type: "heading", text: "方案：分阶段实施，阵容码是枢纽", navLabel: "方案" },
-      { type: "paragraph", text: "基于走查和访谈的完整诊断，阵容码从最初的产品直觉变成了整个方案的枢纽。它是攻略站相较于任何外部平台的独家优势——B站和YouTube只能看视频，不能实现阵容数据的直接复用。" },
-      { type: "paragraph", text: "但阵容码不能第一步就做，它依赖游戏客户端的功能支持。我产出了三期规划：第一期解决当前竖版交互的基础体验问题，优化上传链路和信息架构，让产品先能用；第二期做横版适配——游戏内核心操作界面全是横版，主播和核心玩家普遍用PC端或模拟器，竖版H5在主力使用场景下体验断裂；第三期横版内嵌游戏、联动阵容码，打通\u201C看攻略\u201D和\u201C用攻略\u201D的完整闭环。" },
-      { type: "paragraph", text: "不是三选一，是分阶段全做——总预算150万。" },
-      { type: "paragraph", text: "走查报告和三期规划都是未收费主动产出的。我拿走查报告直接跟客户VP团队做了汇报，方案获得审批。订单从10万UI迭代扩展为150万的完整产品重构，分三阶段执行。我离职时前两个阶段约110万已在执行中，内部团队20人。" },
+      { type: "heading", text: { zh: "方案：分阶段实施，阵容码是枢纽", en: "Solution: Phased delivery, with the Lineup Code as the pivot" }, navLabel: { zh: "方案", en: "Solution" } },
+      { type: "paragraph", text: { zh: "基于走查和访谈的完整诊断，阵容码从最初的产品直觉变成了整个方案的枢纽。它是攻略站相较于任何外部平台的独家优势——B站和YouTube只能看视频，不能实现阵容数据的直接复用。", en: "Lineup Code evolved from an initial product hunch into the centerpiece of the entire plan. It was the one thing the guide site could do that no external platform could — Bilibili and YouTube let you watch videos, but they can’t let you directly reuse lineup data." } },
+      { type: "paragraph", text: { zh: "但阵容码不能第一步就做，它依赖游戏客户端的功能支持。我产出了三期规划：第一期解决当前竖版交互的基础体验问题，优化上传链路和信息架构，让产品先能用；第二期做横版适配——游戏内核心操作界面全是横版，主播和核心玩家普遍用PC端或模拟器，竖版H5在主力使用场景下体验断裂；第三期横版内嵌游戏、联动阵容码，打通\u201C看攻略\u201D和\u201C用攻略\u201D的完整闭环。", en: "But Lineup Code couldn’t come first — it depended on support from the game client. I produced a three-phase roadmap: Phase 1 fixes the baseline experience of the current portrait-mode layout, optimizes the upload flow and information architecture, and makes the product functional. Phase 2 adds landscape-mode support — the game’s core interface runs entirely in landscape, streamers and serious players overwhelmingly use PC or emulators, and a portrait-only H5 site falls apart in the main use case. Phase 3 embeds the game in landscape mode and integrates Lineup Code, bringing “reading guides” and “using guides” together into a complete user journey." } },
+      { type: "paragraph", text: { zh: "不是三选一，是分阶段全做——总预算150万。", en: "Not pick one — all three, phased. Total budget: ¥1.5M." } },
+      { type: "paragraph", text: { zh: "走查报告和三期规划都是未收费主动产出的。我拿走查报告直接跟客户VP团队做了汇报，方案获得审批。订单从10万UI迭代扩展为150万的完整产品重构，分三阶段执行。我离职时前两个阶段约110万已在执行中，内部团队20人。", en: "The walkthrough report and the three-phase roadmap were both produced on my own initiative, unbilled. I presented the walkthrough report directly to the client’s VP team. They approved it. The contract expanded from a ¥100K UI refresh to a ¥1.5M full product rebuild, executed in three phases. By the time I left the company, the first two phases — roughly ¥1.1M — were already in execution, with a 20-person internal team." } },
       { type: "screenshot-group", items: [
-        { src: "images/case2-new-homepage.png", label: "新版首页", note: "重构后的信息架构和视觉层级" },
-        { src: "images/case2-new-detail.png", label: "新版详情页", note: "内容与工具分层呈现" },
+        { src: "images/case2-new-homepage.png", label: { zh: "新版首页", en: "New homepage" }, note: { zh: "重构后的信息架构和视觉层级", en: "Restructured information architecture and visual hierarchy" } },
+        { src: "images/case2-new-detail.png", label: { zh: "新版详情页", en: "New detail page" }, note: { zh: "内容与工具分层呈现", en: "Content and tools cleanly separated" } },
       ]},
-      { type: "screenshot-inline", label: "新版编辑器", note: "双层难度编辑器，对齐游戏内（操作逻辑+用户心智）", src: "images/case2-new-editor.jpg", filter: "saturate(0.65) brightness(1.05)", height: "auto", objectFit: "contain", featured: true },
+      { type: "screenshot-inline", label: { zh: "新版编辑器", en: "New editor" }, note: { zh: "双层难度编辑器，对齐游戏内（操作逻辑+用户心智）", en: "Two-tier difficulty editor, aligned with in-game logic and user mental models" }, src: "images/case2-new-editor.jpg", filter: "saturate(0.65) brightness(1.05)", height: "auto", objectFit: "contain", featured: true },
       { type: "illustration", index: 1 },
 
       // === 回头看 === Block 30-31
-      { type: "heading", text: "回头看：没有人要求我做这些", navLabel: "回头看" },
-      { type: "paragraph", text: "我之前处理过一次已经爆发的团队协作危机，那次是问题摆在所有人面前，合同快丢了，我必须找到根源并解出来。这次完全不同。客户只说\u201C改UI\u201D，没有人让我做全站走查，没有人让我找三四十个用户访谈，走查报告和三期规划不在订单范围内，访谈费用是自己出的。" },
-      { type: "paragraph", text: "但这个项目也暴露了我的方法边界。我能诊断出\u201C问题不是UI是定位\u201D，但这个判断靠的是什么？是花两个月深度玩游戏、自费找三四十个人聊、逐页走查全站——本质上是用大量时间和个人投入换来的直觉判断。这次管用了，因为我有时间、有热情、对这个领域恰好有足够的沉浸。但如果下一个项目是我不熟悉的领域？如果没有两个月让我沉浸？我的判断方法是不可复制的——它依赖于\u201C恰好足够了解这个领域\u201D这个前提。" },
-      { type: "pull-quote", text: "我需要的是一套不依赖深度沉浸也能做产品定位分析的系统方法——用户研究框架、信息架构方法论、数据驱动的产品决策工具。这样判断力就不再被\u201C碰巧熟不熟这个领域\u201D限制住。" },
+      { type: "heading", text: { zh: "回头看：没有人要求我做这些", en: "Looking Back: Nobody asked me to do any of this" }, navLabel: { zh: "回头看", en: "Looking Back" } },
+      { type: "paragraph", text: { zh: "我之前处理过一次已经爆发的团队协作危机，那次是问题摆在所有人面前，合同快丢了，我必须找到根源并解出来。这次完全不同。客户只说\u201C改UI\u201D，没有人让我做全站走查，没有人让我找三四十个用户访谈，走查报告和三期规划不在订单范围内，访谈费用是自己出的。", en: "In Case 1, I’d dealt with a team collaboration crisis that had already exploded — the problem was staring everyone in the face, the contract was about to be lost, and I had to find the root cause and solve it. This was completely different. The client just said “fix the UI.” Nobody asked me to do a full-site walkthrough. Nobody asked me to interview thirty to forty users. The walkthrough report and three-phase roadmap weren’t part of the contract. The interview costs came out of my own pocket." } },
+      { type: "paragraph", text: { zh: "但这个项目也暴露了我的方法边界。我能诊断出\u201C问题不是UI是定位\u201D，但这个判断靠的是什么？是花两个月深度玩游戏、自费找三四十个人聊、逐页走查全站——本质上是用大量时间和个人投入换来的直觉判断。这次管用了，因为我有时间、有热情、对这个领域恰好有足够的沉浸。但如果下一个项目是我不熟悉的领域？如果没有两个月让我沉浸？我的判断方法是不可复制的——它依赖于\u201C恰好足够了解这个领域\u201D这个前提。", en: "But this project also exposed the limits of my approach. I was able to diagnose “the problem isn’t UI, it’s positioning” — but what was that diagnosis built on? Two months of deep-playing the game, self-funded conversations with thirty to forty people, and a page-by-page walkthrough of the entire site. At its core, it was intuition earned through massive time investment and personal commitment. It worked this time because I had the time, the passion, and the domain immersion to pull it off. But what about the next project, in a domain I don’t know? What if I don’t have two months to immerse myself? My approach doesn’t scale — it only works if I happen to know the space well enough." } },
+      { type: "pull-quote", text: { zh: "我需要的是一套不依赖深度沉浸也能做产品定位分析的系统方法——用户研究框架、信息架构方法论、数据驱动的产品决策工具。这样判断力就不再被\u201C碰巧熟不熟这个领域\u201D限制住。", en: "What I need is a systematic method for product positioning analysis that doesn’t depend on deep immersion — user research frameworks, information architecture methodology, data-driven product decision tools — so I can do this in any domain, not just the ones I happen to know." } },
     ],
     supportingScreenshots: [],
   },
   {
     id: 3,
-    name: "AI落地最难的部分，不是技术",
+    name: { zh: "AI落地最难的部分，不是技术", en: "The hardest part of shipping AI isn't the tech" },
     navName: "03",
-    roleLine: "AI产品负责人 // 2024–2025",
-    summary: "做完公司第一个AI产品后，我做了一场内部培训，培训后的调研发现了一个没人注意到的痛点——跨国业务的18语种翻译全靠分包，成本高、对接乱，带着一个实习生，从零把它做成了落地成品。",
-    cardSummary: "第一个AI产品上线后，我在公司做了一轮AI培训，但目的不是教人用工具——我想知道哪些业务场景真正值得用AI重做。挨个部门聊完之后，从十几个候选里筛出了翻译：需求高频、流程标准化、容错空间大。判断完该不该做，剩下的就是做。",
-    cardHook: "第一个AI产品上线后，我没教人用工具，而是去找值得重做的场景。",
-    cardTag: "AI产品 · 0→1",
+    roleLine: { zh: "AI产品负责人 // 2024–2025", en: "AI Product Lead // 2024–2025" },
+    summary: { zh: "做完公司第一个AI产品后，我做了一场内部培训，培训后的调研发现了一个没人注意到的痛点——跨国业务的18语种翻译全靠分包，成本高、对接乱，带着一个实习生，从零把它做成了落地成品。", en: "After shipping the company's first AI product, I ran an internal training session. The post-training survey uncovered a pain point no one had noticed — 18-language translation for international business was fully outsourced, expensive, and chaotic. With one intern, I took it from zero to shipped." },
+    cardSummary: { zh: "第一个AI产品上线后，我在公司做了一轮AI培训，但目的不是教人用工具——我想知道哪些业务场景真正值得用AI重做。挨个部门聊完之后，从十几个候选里筛出了翻译：需求高频、流程标准化、容错空间大。判断完该不该做，剩下的就是做。", en: "After shipping the first AI product, I ran an AI training at the company — not to teach tools, but to find which business use cases were worth rebuilding with AI. After talking to every department, I narrowed it down from a dozen candidates to translation: high-frequency demand, standardized workflow, and room for imperfection. Once I decided it was worth doing, I went and made it happen." },
+    cardHook: { zh: "第一个AI产品上线后，我没教人用工具，而是去找值得重做的场景。", en: "After shipping the first AI product, I didn't teach people tools — I went looking for use cases worth rebuilding." },
+    cardTag: { zh: "AI产品 · 0→1", en: "AI Product · 0 → 1" },
     cardImage: "images/case3-18lang-output.png",
-    cardHighlights: ["18语种翻译系统", "节省十几万翻译成本", "2人团队"],
-    cardStat: { number: "2", unit: "人", label: "核心团队" },
+    cardHighlights: [{ zh: "18语种翻译系统", en: "18-language translation system" }, { zh: "节省十几万翻译成本", en: "Cut out the outsourced translation workflow entirely, saving ¥100K+ annually" }, { zh: "2人团队", en: "2-person team" }],
+    cardStat: { number: "2", unit: { zh: "人", en: "people" }, label: { zh: "核心团队", en: "Core team" } },
     layoutMode: "iteration",
     metricsMode: "numbers",
     metrics: [
@@ -263,84 +280,85 @@ const PROJECTS = [
       { number: "5", label: "Iteration steps" },
       { number: "4", label: "Business scenarios" },
     ],
-    teamInfo: "2人（我 + 1名实习生）",
-    context: "无人要求，自主立项",
+    teamInfo: { zh: "2人（我 + 1名实习生）", en: "2 people (me + 1 intern)" },
+    context: { zh: "无人要求，自主立项", en: "No one asked for it — self-initiated" },
     skillTags: ["场景识别", "可行性判断", "迭代落地", "执行韧性"],
+    skillTagsEn: ["Use Case Identification", "Feasibility Assessment", "Iterative Shipping", "Execution Resilience"],
     skillTagJumps: {
-      "场景识别": { scrollTo: 1, borderRange: [1, 3], keySentence: "十八种语言意味着要同时管理多条外包线", keyBlock: 2 },
-      "可行性判断": { scrollTo: 3, borderRange: [3, 5], keySentence: "翻译是高度标准化的输入输出任务", keyBlock: 3 },
-      "迭代落地": { scrollTo: 9, borderRange: [6, 23], keySentence: "用户实际工作中处理的不是一句一句的文本，而是整份文档", keyBlock: 14 },
-      "执行韧性": { scrollTo: 25, borderRange: [24, 26], keySentence: "核心的架构决策和排错方向都是我在定", keyBlock: 25 },
+      "场景识别": { scrollTo: 1, borderRange: [1, 3], keySentence: { zh: "十八种语言意味着要同时管理多条外包线", en: "eighteen languages meant managing multiple vendor relationships simultaneously" }, keyBlock: 2 },
+      "可行性判断": { scrollTo: 3, borderRange: [3, 5], keySentence: { zh: "翻译是高度标准化的输入输出任务", en: "Translation is a highly standardized input-output task" }, keyBlock: 3 },
+      "迭代落地": { scrollTo: 9, borderRange: [6, 23], keySentence: { zh: "用户实际工作中处理的不是一句一句的文本，而是整份文档", en: "sentence-by-sentence text" }, keyBlock: 14 },
+      "执行韧性": { scrollTo: 25, borderRange: [24, 26], keySentence: { zh: "核心的架构决策和排错方向都是我在定", en: "every core architecture decision and troubleshooting direction was mine" }, keyBlock: 25 },
     },
-    heroStat: { number: "2人", unit: "自主立项 · 从零到上线" },
+    heroStat: { number: { zh: "2人", en: "2 people" }, unit: { zh: "自主立项 · 从零到上线", en: "Self-initiated · From zero to launch" } },
     heroNarrative: {
-      hook: "没人要求，没有预算，带一个实习生做出了公司的18语种翻译产品。",
-      detail: "做完公司第一个AI产品后，一场内部培训的调研让我发现了被忽视的痛点——跨国业务的18语种翻译全靠分包，成本高、对接乱。从零搞定再到落地成品。",
+      hook: { zh: "没人要求，没有预算，带一个实习生做出了公司的18语种翻译产品。", en: "No request, no budget. With one intern, I built the company's 18-language translation product." },
+      detail: { zh: "做完公司第一个AI产品后，一场内部培训的调研让我发现了被忽视的痛点——跨国业务的18语种翻译全靠分包，成本高、对接乱。从零搞定再到落地成品。", en: "After shipping the company's first AI product, I ran an internal training session. The post-training survey led me to a pain point no one had noticed — 18-language translation for international business was fully outsourced, expensive, and chaotic to coordinate. I took it from zero to shipped." },
     },
     heroMetrics: [
       { value: "18", label: "Languages supported", highlight: true },
       { value: "5", label: "Iteration steps" },
       { value: "4", label: "Business scenarios" },
     ],
-    heroTitleLines: ["AI落地最难的部分，", "不是技术"],
+    heroTitleLines: [{ zh: "AI落地最难的部分，", en: "The hardest part of shipping AI —" }, { zh: "不是技术", en: "isn't the tech" }],
     illustrations: [
-      { name: "线性迭代流程图", type: "流程图", note: "从MVP到business-ready的五步迭代路径与关键决策节点" },
+      { name: { zh: "线性迭代流程图", en: "Linear iteration flow" }, type: "流程图", note: { zh: "从MVP到business-ready的五步迭代路径与关键决策节点", en: "Five-step iteration path from MVP to business-ready, with key decision points" } },
     ],
     bodyStructure: [
       // === 起源段 === Block 0-4
-      { type: "heading", text: "从一次内部培训开始的AI落地", navLabel: "背景" },
-      { type: "paragraph", text: "娜娜项目上线后，我在公司内部做了一场AI培训宣讲，主题是鼓励大家用Coze平台搭建自己的工作流。我当时的想法很简单——娜娜证明了AI在实际业务中能用，但如果只有我一个人在推，AI在公司内部的落地就始终是孤例。我希望更多人看到这个可能性。" },
-      { type: "paragraph", text: "培训结束后我做了用户调研，收到了一条让我停下来的反馈：政企部门说跨国业务的翻译特别痛苦。他们的业务覆盖十八种语言，但市面上很难找到一家供应商能同时处理这么多语种且价格合理，实际操作是每两三种语言找一家不同的外包公司。成本高是一方面，更大的问题是对接复杂——十八种语言意味着要同时管理多条外包线，沟通成本和出错概率都在翻倍增长。" },
-      { type: "paragraph", text: "我当时的判断是：这件事很适合用AI解决。原因有三点。第一，翻译是高度标准化的输入输出任务，AI大模型在这个场景下的能力已经足够成熟。第二，痛点不在翻译质量本身，而在多语种并行处理的效率和成本。第三，如果做成了，受益的不只是政企部门，公司所有全球业务线都有同样的需求。" },
-      { type: "pull-quote", text: "翻译是高度标准化的输入输出任务——这恰好是AI工作流最擅长解决的问题。" },
-      { type: "paragraph", text: "这个项目没有正式立项，没有预算，也没有指派的负责人——我的正式角色仍然是产品运营，但从场景判断、技术选型到上线推广，整条链路是我在主导。我带着初步方案去找了技术总监。确认技术上可行之后，我开始动手。" },
+      { type: "heading", text: { zh: "从一次内部培训开始的AI落地", en: "From an internal training session to shipping AI" }, navLabel: { zh: "背景", en: "Context" } },
+      { type: "paragraph", text: { zh: "娜娜项目上线后，我在公司内部做了一场AI培训宣讲，主题是鼓励大家用Coze平台搭建自己的工作流。我当时的想法很简单——娜娜证明了AI在实际业务中能用，但如果只有我一个人在推，AI在公司内部的落地就始终是孤例。我希望更多人看到这个可能性。", en: "After Nana launched, I ran an internal AI training session at the company. The goal was to get people building their own workflows in Coze. My thinking was simple — Nana had proved that AI could work in real business scenarios, but if I was the only one pushing, AI adoption inside the company would stay a one-off. I wanted more people to see the possibility." } },
+      { type: "paragraph", text: { zh: "培训结束后我做了用户调研，收到了一条让我停下来的反馈：政企部门说跨国业务的翻译特别痛苦。他们的业务覆盖十八种语言，但市面上很难找到一家供应商能同时处理这么多语种且价格合理，实际操作是每两三种语言找一家不同的外包公司。成本高是一方面，更大的问题是对接复杂——十八种语言意味着要同时管理多条外包线，沟通成本和出错概率都在翻倍增长。", en: "After the training, I ran a user survey. One piece of feedback made me stop: the government & enterprise division said multilingual translation was a massive pain point. Their business covered eighteen languages, but it was nearly impossible to find a single vendor that could handle that many at a reasonable price. In practice, they were hiring a different outsourcing company for every two or three languages. Cost was one issue, but the bigger problem was coordination — eighteen languages meant managing multiple vendor relationships simultaneously, and both communication overhead and error rates kept climbing." } },
+      { type: "paragraph", text: { zh: "我当时的判断是：这件事很适合用AI解决。原因有三点。第一，翻译是高度标准化的输入输出任务，AI大模型在这个场景下的能力已经足够成熟。第二，痛点不在翻译质量本身，而在多语种并行处理的效率和成本。第三，如果做成了，受益的不只是政企部门，公司所有全球业务线都有同样的需求。", en: "My read was: this was a perfect fit for AI. Translation is a highly standardized input-output task, and large language models were already mature enough for this scenario. The pain point wasn’t translation quality itself — it was the efficiency and cost of handling many languages in parallel. And if it worked, every global business line in the company had the same need, not just this one division." } },
+      { type: "pull-quote", text: { zh: "翻译是高度标准化的输入输出任务——这恰好是AI工作流最擅长解决的问题。", en: "Translation is a highly standardized input-output task — exactly the kind of problem AI workflows are built to solve." } },
+      { type: "paragraph", text: { zh: "这个项目没有正式立项，没有预算，也没有指派的负责人——我的正式角色仍然是产品运营，但从场景判断、技术选型到上线推广，整条链路是我在主导。我带着初步方案去找了技术总监。确认技术上可行之后，我开始动手。", en: "This project had no formal approval, no budget, and no assigned owner — my official title was still Product Operations, but I was driving the entire chain from spotting the opportunity to technical selection to launch. I brought a preliminary plan to the CTO. Once he confirmed it was technically feasible, I started building." } },
 
       // === 五步迭代段 === Block 5-18
-      { type: "iteration-step", version: "Step 1", heading: "MVP: 跑通中英文纯文本互换", navLabel: "MVP" },
-      { type: "paragraph", text: "最简单的 input/output，目的只有一个——验证翻译逻辑在 Coze 工作流里能不能跑通。这一步不追求完美，只追求「能用」。" },
-      { type: "paragraph", text: "MVP跑通后，我系统性地调查了Coze平台的功能边界和界面限制，再基于调查结果做后续的架构决策。" },
-      { type: "screenshot-inline", label: "Platform capability audit", note: "系统性调查平台功能边界和界面限制", src: "images/case3-platform-audit.png" },
+      { type: "iteration-step", version: "Step 1", heading: { zh: "MVP: 跑通中英文纯文本互换", en: "MVP: End-to-end Chinese-English plain text translation" }, navLabel: "MVP" },
+      { type: "paragraph", text: { zh: "最简单的 input/output，目的只有一个——验证翻译逻辑在 Coze 工作流里能不能跑通。这一步不追求完美，只追求「能用」。", en: "I started with the simplest possible input/output — one goal: verify that the translation logic could run end to end inside a Coze workflow. This step wasn’t about perfection. It was about proving it could work." } },
+      { type: "paragraph", text: { zh: "MVP跑通后，我系统性地调查了Coze平台的功能边界和界面限制，再基于调查结果做后续的架构决策。", en: "After the MVP ran, I mapped out what Coze could and couldn’t do — platform capabilities, UI constraints — then used that to make architecture decisions going forward." } },
+      { type: "screenshot-inline", label: "Platform capability audit", note: { zh: "系统性调查平台功能边界和界面限制", en: "Full review of platform capabilities and UI constraints" }, src: "images/case3-platform-audit.png" },
 
-      { type: "iteration-step", version: "Step 2", heading: "API 选型", navLabel: "API选型" },
-      { type: "paragraph", text: "这一步我花了比较多时间权衡。评估维度有三个：业务量适配度（我们的翻译量级适合哪种计费模式）、价格（在合适的前提下找最便宜的）、翻译准确度。三者不可能都是最优解，我需要找到平衡点。最终选定了在我们的业务量级下性价比最高的方案。" },
-      { type: "paragraph", text: "翻译质量是选型中最难量化的维度。我的做法是：用同一批中文原文分别接入不同模型的API，产出各语种的翻译结果，再找同一组评审人员对翻译质量进行盲评打分。通过控制输入文本和评分人两个变量，把\u201C哪个模型翻得好\u201D从主观感受变成了可比较的量化数据。最终基于质量评分、价格和业务量适配度三个维度的综合结果，确定了接入方案。" },
+      { type: "iteration-step", version: "Step 2", heading: { zh: "API 选型", en: "API Selection" }, navLabel: { zh: "API选型", en: "API Selection" } },
+      { type: "paragraph", text: { zh: "这一步我花了比较多时间权衡。评估维度有三个：业务量适配度（我们的翻译量级适合哪种计费模式）、价格（在合适的前提下找最便宜的）、翻译准确度。三者不可能都是最优解，我需要找到平衡点。最终选定了在我们的业务量级下性价比最高的方案。", en: "Then came model selection, which took me a while to work through. I was evaluating on three dimensions: volume fit (which pricing model matched our translation volume), cost (cheapest option that met quality requirements), and translation accuracy. All three couldn’t be optimized simultaneously — I needed to find the right trade-off. I picked the option with the best value at our volume level." } },
+      { type: "paragraph", text: { zh: "翻译质量是选型中最难量化的维度。我的做法是：用同一批中文原文分别接入不同模型的API，产出各语种的翻译结果，再找同一组评审人员对翻译质量进行盲评打分。通过控制输入文本和评分人两个变量，把\u201C哪个模型翻得好\u201D从主观感受变成了可比较的量化数据。最终基于质量评分、价格和业务量适配度三个维度的综合结果，确定了接入方案。", en: "Translation quality was the hardest dimension to quantify. My approach: I ran the same batch of Chinese source text through different models, generated translations across all target languages, and then had the same group of reviewers blind-score the results. By holding the input text and the reviewers constant, I turned “which model translates better” from a subjective impression into something I could actually compare. The final decision was based on the combined results across quality scores, cost, and volume fit." } },
 
-      { type: "iteration-step", version: "Step 3", heading: "从文本到文件，从政企到全公司", navLabel: "产品升级" },
-      { type: "paragraph", text: "MVP跑通之后我发现两件事。第一，翻译需求不只存在于政企部门——公司全球业务线都有「随手放进去就能翻」的需求，用户范围比我最初预想的大得多。第二，用户实际工作中处理的不是一句一句的文本，而是整份文档。这两个发现改变了我对产品边界的判断。" },
-      { type: "pull-quote", text: "这不是一个给政企部门用的小工具，而是需要支持文件级批量处理的通用翻译系统。" },
-      { type: "paragraph", text: "产品定位的升级直接决定了后续所有功能的设计方向。事实上翻译只是我在这一阶段推动的四个AI场景之一——另外三个是社区运营（娜娜）、财务报销和营销问答——但翻译的链路最长、判断最复杂，所以我选择用它来展开。" },
+      { type: "iteration-step", version: "Step 3", heading: { zh: "从文本到文件，从政企到全公司", en: "From text to files, from the government & enterprise division to company-wide" }, navLabel: { zh: "产品升级", en: "Product Upgrade" } },
+      { type: "paragraph", text: { zh: "MVP跑通之后我发现两件事。第一，翻译需求不只存在于政企部门——公司全球业务线都有「随手放进去就能翻」的需求，用户范围比我最初预想的大得多。第二，用户实际工作中处理的不是一句一句的文本，而是整份文档。这两个发现改变了我对产品边界的判断。", en: "After the MVP, I discovered two things. First, the translation need wasn’t limited to the government & enterprise division — every global business line in the company wanted a “drop it in and get it translated” tool. The user base was far larger than I’d originally expected. Second, what users actually dealt with in their daily work wasn’t sentence-by-sentence text — it was entire documents. These two discoveries changed what I thought the product needed to be." } },
+      { type: "pull-quote", text: { zh: "这不是一个给政企部门用的小工具，而是需要支持文件级批量处理的通用翻译系统。", en: "This wasn’t a small utility for one department. It needed to be a general-purpose translation system that could process entire documents in batch." } },
+      { type: "paragraph", text: { zh: "产品定位的升级直接决定了后续所有功能的设计方向。事实上翻译只是我在这一阶段推动的四个AI场景之一——另外三个是社区运营（娜娜）、财务报销和营销问答——但翻译的链路最长、判断最复杂，所以我选择用它来展开。", en: "That shift in positioning directly shaped every feature decision that followed. In fact, translation was only one of four AI scenarios I was pushing during this period — the other three were community operations (Nana), expense reimbursement, and a multi-agent marketing Q&A system — but translation had the longest development arc and the most complex judgment calls, so I chose it as the one to tell in depth." } },
 
-      { type: "iteration-step", version: "Step 4", heading: "格式转换——整个项目最难的环节", navLabel: "格式突破" },
-      { type: "paragraph", text: "问题在于：Excel输入只能Excel输出，Markdown同理，现有的Coze插件都做不到跨格式转换。但用户的真实需求是灵活的——他们希望文本输入之后，可以选择输出为Excel、云文档或其他格式。这里我面对一个选择：是接受技术限制、告诉用户「输入什么格式就输出什么格式」，还是想办法突破？我选择后者，因为如果用户还得自己做格式转换，这个系统的实际使用门槛并没有真正降下来。我把需求定义清楚后交给技术团队，他们用Coze的代码插件功能开发了自定义插件来解决这个问题。" },
+      { type: "iteration-step", version: "Step 4", heading: { zh: "格式转换——整个项目最难的环节", en: "Format conversion — the hardest challenge of the entire project" }, navLabel: { zh: "格式突破", en: "Format Breakthrough" } },
+      { type: "paragraph", text: { zh: "问题在于：Excel输入只能Excel输出，Markdown同理，现有的Coze插件都做不到跨格式转换。但用户的真实需求是灵活的——他们希望文本输入之后，可以选择输出为Excel、云文档或其他格式。这里我面对一个选择：是接受技术限制、告诉用户「输入什么格式就输出什么格式」，还是想办法突破？我选择后者，因为如果用户还得自己做格式转换，这个系统的实际使用门槛并没有真正降下来。我把需求定义清楚后交给技术团队，他们用Coze的代码插件功能开发了自定义插件来解决这个问题。", en: "The problem was: Excel in meant Excel out, Markdown in meant Markdown out — none of the existing Coze plugins could convert between formats. But what users actually wanted was flexibility — input text, then choose whether to output as Excel, cloud docs, or other formats. I faced a choice: accept the technical limitation and tell users “what goes in is what comes out,” or find a way past it. I chose the latter, because if users still had to handle format conversion themselves, the real friction hadn’t actually gone away. I defined the requirements clearly and handed them to the engineering team, who built custom plugins using Coze’s code extension to solve it." } },
 
-      { type: "iteration-step", version: "Step 5", heading: "飞书集成与前端搭建", navLabel: "整合上线" },
-      { type: "paragraph", text: "格式问题解决之后，下一个判断是：怎样才算「真正好用」？我的标准是用户拿来就能用，不需要任何额外操作。所以我推动了飞书集成——翻译完成后自动生成文档、直接写入对应人的文档库，省去转换和上传步骤。前端方面，因为这是一个公益性项目，没有独立的前端开发人力，我自己用低代码平台搭建了用户界面，包括单语种和多语种两个入口。这一步的判断不复杂，但它决定了最终产出是「能跑的demo」还是「同事们愿意打开来用的工具」。" },
+      { type: "iteration-step", version: "Step 5", heading: { zh: "飞书集成与前端搭建", en: "Feishu (Lark) integration and frontend development" }, navLabel: { zh: "整合上线", en: "Integration & Launch" } },
+      { type: "paragraph", text: { zh: "格式问题解决之后，下一个判断是：怎样才算「真正好用」？我的标准是用户拿来就能用，不需要任何额外操作。所以我推动了飞书集成——翻译完成后自动生成文档、直接写入对应人的文档库，省去转换和上传步骤。前端方面，因为这是一个公益性项目，没有独立的前端开发人力，我自己用低代码平台搭建了用户界面，包括单语种和多语种两个入口。这一步的判断不复杂，但它决定了最终产出是「能跑的demo」还是「同事们愿意打开来用的工具」。", en: "Once the format problem was solved, the next question was: what counts as “actually good to use”? My bar was: users pick it up and it just works — no extra steps. So I pushed for Feishu (Lark) integration — after translation, documents are auto-generated and saved directly into each person’s cloud workspace, skipping the conversion and upload steps. On the frontend side, since this was an internal initiative with no dedicated frontend developers, I built the user interface myself on a low-code platform, with separate entry points for single-language and multi-language translation. This wasn’t a complicated call, but it determined whether the final product would be “a demo that runs” or “a tool teammates actually open and use.”" } },
       { type: "screenshot-group", items: [
-        { src: "images/case3-workflow-nodes.jpg", label: "工作流节点近景", note: "Coze工作流节点结构与运行状态", filter: "saturate(0.65) brightness(1.05)" },
-        { src: "images/case3-workflow-full.jpg", label: "工作流全景 + 语种列表", note: "完整工作流架构与18语种并行处理" },
+        { src: "images/case3-workflow-nodes.jpg", label: { zh: "工作流节点近景", en: "Workflow node close-up" }, note: { zh: "Coze工作流节点结构与运行状态", en: "How the workflow nodes are set up and running" }, filter: "saturate(0.65) brightness(1.05)" },
+        { src: "images/case3-workflow-full.jpg", label: { zh: "工作流全景 + 语种列表", en: "Workflow overview + language list" }, note: { zh: "完整工作流架构与18语种并行处理", en: "The complete workflow, processing 18 languages in parallel" } },
       ]},
-      { type: "screenshot-inline", label: "自搭前端界面", note: "低代码平台搭建的用户界面（单语种 / 多语种两个入口）", src: "images/case3-frontend-ui.jpg", filter: "saturate(0.65) brightness(1.05)" },
+      { type: "screenshot-inline", label: { zh: "自搭前端界面", en: "Custom frontend interface" }, note: { zh: "低代码平台搭建的用户界面（单语种 / 多语种两个入口）", en: "Low-code UI with single-language and multi-language entry points" }, src: "images/case3-frontend-ui.jpg", filter: "saturate(0.65) brightness(1.05)" },
 
       { type: "illustration", index: 0 },
 
       // === 调试段 === Block 19-21
-      { type: "heading", text: "调试：最痛苦的部分", navLabel: "调试" },
-      { type: "paragraph", text: "坦白说，整个迭代过程中最让我崩溃的不是产品设计，而是调试。\n\n我不懂代码。但Coze工作流的调试不是「点一下就跑通」的事情——系统频繁报错，报错信息对我来说就是一堆看不懂的技术术语。我的做法是逼自己查资料、逐条读报错信息、试不同的节点组合、调整工作流搭配、切换节点，反复排查。没有人帮我做这件事，因为这个项目的团队只有我和一个实习生——实习生负责记录报错信息、汇报进展、编写提示词初稿（由我审核定稿）、知识库维护更新等基础工作，但核心的架构决策和排错方向都是我在定。\n\n这个过程极其痛苦，但它让我理解了一件事。" },
-      { type: "pull-quote", text: "AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」——至少能读懂报错信息意味着什么，能判断问题出在哪个环节，能跟工程师说清楚「我需要你在这个节点上做什么」。" },
+      { type: "heading", text: { zh: "调试：最痛苦的部分", en: "Troubleshooting: The most painful part" }, navLabel: { zh: "调试", en: "Troubleshooting" } },
+      { type: "paragraph", text: { zh: "坦白说，整个迭代过程中最让我崩溃的不是产品设计，而是调试。\n\n我不懂代码。但Coze工作流的调试不是「点一下就跑通」的事情——系统频繁报错，报错信息对我来说就是一堆看不懂的技术术语。我的做法是逼自己查资料、逐条读报错信息、试不同的节点组合、调整工作流搭配、切换节点，反复排查。没有人帮我做这件事，因为这个项目的团队只有我和一个实习生——实习生负责记录报错信息、汇报进展、编写提示词初稿（由我审核定稿）、知识库维护更新等基础工作，但核心的架构决策和排错方向都是我在定。\n\n这个过程极其痛苦，但它让我理解了一件事。", en: "Honestly, the most painful part of the entire iteration wasn’t product design — it was troubleshooting.\n\n\nI can’t write code. But troubleshooting a Coze workflow isn’t a “click and it works” situation — the system threw errors constantly, and the error messages were a wall of technical jargon I couldn’t read. What I did was force myself to look things up, read each error message line by line, try different node combinations, adjust the workflow configuration, swap components, and narrow down the problem by eliminating possibilities one by one. Nobody helped me with this, because the team was just me and one intern. The intern handled logging errors, tracking progress, drafting initial prompts, and maintaining the knowledge base. I reviewed and finalized all prompts, and every core architecture decision and troubleshooting direction was mine.\n\n\nThe process was brutal. But here’s what it taught me:" } },
+      { type: "pull-quote", text: { zh: "AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」——至少能读懂报错信息意味着什么，能判断问题出在哪个环节，能跟工程师说清楚「我需要你在这个节点上做什么」。", en: "An AI PM doesn’t need to write code — but they need to be able to get their hands dirty with the technical side. At minimum: read an error message and understand what it means, judge which part of the system is broken, and tell the engineer clearly “I need you to do X at this node.”" } },
 
       // === 结果段 === Block 22-24
-      { type: "heading", text: "结果", navLabel: "结果" },
-      { type: "paragraph", text: "系统正式投入公司使用，覆盖十八个语种的翻译需求。实际产出是标准化的多语种Excel表格——中文内容可以一次性转换为英语、泰语、土耳其语、马来语、缅甸语、越南语、印尼语、葡萄牙语、俄语、高棉语、菲律宾语、西班牙语等十八种目标语言。原来的翻译流程是三段式的：中文内容先发给翻译公司做粗翻，粗翻完成后再交给各语种的本地化团队做精细化翻译。翻译公司的粗翻是按单独计费的外包服务，十八个语种、每次翻译都要付费。这个系统直接替代了粗翻环节——AI产出的翻译质量足以跳过外包粗翻，直接进入本地化精翻阶段。相当于把一整层外包成本归零，同时把多语种并行处理从「逐条对接不同供应商」变成「一次提交、一次产出」。" },
-      { type: "screenshot-inline", label: "飞书云表格18语种产出", note: "实际翻译产出，展示系统覆盖的语言范围", src: "images/case3-18lang-output.png", featured: true },
-      { type: "screenshot-inline", label: "飞书机器人实际使用", note: "接入飞书方便同事快捷使用", src: "images/case3-feishu-bot.png" },
+      { type: "heading", text: { zh: "结果", en: "Results" }, navLabel: { zh: "结果", en: "Results" } },
+      { type: "paragraph", text: { zh: "系统正式投入公司使用，覆盖十八个语种的翻译需求。实际产出是标准化的多语种Excel表格——中文内容可以一次性转换为英语、泰语、土耳其语、马来语、缅甸语、越南语、印尼语、葡萄牙语、俄语、高棉语、菲律宾语、西班牙语等十八种目标语言。原来的翻译流程是三段式的：中文内容先发给翻译公司做粗翻，粗翻完成后再交给各语种的本地化团队做精细化翻译。翻译公司的粗翻是按单独计费的外包服务，十八个语种、每次翻译都要付费。这个系统直接替代了粗翻环节——AI产出的翻译质量足以跳过外包粗翻，直接进入本地化精翻阶段。相当于把一整层外包成本归零，同时把多语种并行处理从「逐条对接不同供应商」变成「一次提交、一次产出」。", en: "The system went live company-wide, covering translation needs across eighteen languages. The output was standardized multi-language Excel sheets — Chinese content could be converted in one pass into eighteen target languages, including English, Thai, Turkish, Malay, Vietnamese, Indonesian, Portuguese, Russian, Spanish, and others. The previous workflow was two-stage: Chinese content was first sent to a translation agency for a rough draft, then handed off to localization teams for each language to refine. The agency draft was a separately billed outsourcing service — eighteen languages, billed every time. This system replaced that entire layer — the AI output was good enough to skip the outsourced draft and go straight to localization. It eliminated a full layer of outsourcing cost, and turned what used to be “coordinate with different vendors one by one” into “one submission, one output.”" } },
+      { type: "screenshot-inline", label: { zh: "飞书云表格18语种产出", en: "Feishu spreadsheet with 18-language output" }, note: { zh: "实际翻译产出，展示系统覆盖的语言范围", en: "Actual translation output showing all 18 languages" }, src: "images/case3-18lang-output.png", featured: true },
+      { type: "screenshot-inline", label: { zh: "飞书机器人实际使用", en: "Feishu bot in action" }, note: { zh: "接入飞书方便同事快捷使用", en: "Integrated into Feishu for quick team access" }, src: "images/case3-feishu-bot.png" },
 
       // === 回头看 === Block 31-36
-      { type: "heading", text: "回头看", navLabel: "回头看" },
-      { type: "paragraph", text: "如果说娜娜项目让我证明了「我能从零做出一个AI产品」，翻译系统让我看到的是另一件事——一个人做出一个AI产品不够，关键是能不能让AI能力在组织内部扩散开来。" },
-      { type: "paragraph", text: "回头看整个链条：我先做了娜娜，然后做内部培训把经验推出去，通过培训后的调研发现了翻译场景，判断值得做之后从MVP迭代到完整系统。而这还没结束——在同一时期，我还在Coze平台上搭建了财务报销助手和多Agent架构的营销问答系统，覆盖了社区、翻译、财务、营销四个完全不同的业务场景。" },
-      { type: "paragraph", text: "这个过程让我意识到，AI在组织内部的落地不是一个项目一个项目单独发生的。它需要有人先做出第一个成功案例打开局面，再主动把能力和方法推广出去，再持续识别新的场景、判断优先级、推动落地。这个「推动者」的角色，技术能力不是门槛——公司有比我强得多的工程师——门槛是对业务场景的判断力，以及愿意主动去推的意愿。" },
-      { type: "paragraph", text: "但我也清楚，目前我做这些判断基本靠经验积累和直觉驱动。翻译系统之所以成功，一部分是判断准确，一部分是场景本身足够标准化、容错空间大。如果场景更复杂、风险更高，纯靠直觉是不够的。" },
-      { type: "pull-quote", text: "我需要系统性的方法论支撑——不是学怎么用Coze搭工作流，而是学怎么评估一个AI场景的可行性、优先级和投入产出比。这是我想通过硕士阶段补上的东西。" },
+      { type: "heading", text: { zh: "回头看", en: "Looking Back" }, navLabel: { zh: "回头看", en: "Looking Back" } },
+      { type: "paragraph", text: { zh: "如果说娜娜项目让我证明了「我能从零做出一个AI产品」，翻译系统让我看到的是另一件事——一个人做出一个AI产品不够，关键是能不能让AI能力在组织内部扩散开来。", en: "If Nana proved “I can build an AI product from zero,” the translation system showed me something different — building one AI product isn’t enough. What matters is whether AI capability can spread through an organization." } },
+      { type: "paragraph", text: { zh: "回头看整个链条：我先做了娜娜，然后做内部培训把经验推出去，通过培训后的调研发现了翻译场景，判断值得做之后从MVP迭代到完整系统。而这还没结束——在同一时期，我还在Coze平台上搭建了财务报销助手和多Agent架构的营销问答系统，覆盖了社区、翻译、财务、营销四个完全不同的业务场景。", en: "Looking back at the full chain: I built Nana first, then ran internal training to share what I’d learned, discovered the translation scenario through post-training research, judged it worth pursuing, and iterated from MVP to a complete system. And it didn’t stop there — during the same period, I also built an expense reimbursement assistant and a multi-agent marketing Q&A system on Coze, covering four completely different business scenarios: community, translation, finance, and marketing." } },
+      { type: "paragraph", text: { zh: "这个过程让我意识到，AI在组织内部的落地不是一个项目一个项目单独发生的。它需要有人先做出第一个成功案例打开局面，再主动把能力和方法推广出去，再持续识别新的场景、判断优先级、推动落地。这个「推动者」的角色，技术能力不是门槛——公司有比我强得多的工程师——门槛是对业务场景的判断力，以及愿意主动去推的意愿。", en: "This process made me realize that AI adoption inside an organization doesn’t happen project by project in isolation. Someone needs to ship the first success to open the door. Then actively spread the approach. Then keep identifying new use cases, prioritizing them, and pushing them to launch. To play that role, technical skill isn’t the barrier — the company had engineers far better than me. The barrier is the ability to judge which scenarios are worth pursuing, and the willingness to push without being asked." } },
+      { type: "paragraph", text: { zh: "但我也清楚，目前我做这些判断基本靠经验积累和直觉驱动。翻译系统之所以成功，一部分是判断准确，一部分是场景本身足够标准化、容错空间大。如果场景更复杂、风险更高，纯靠直觉是不够的。", en: "But I’m also clear-eyed: right now, those judgments are mostly driven by accumulated experience and instinct. The translation system succeeded partly because the judgment was sound, and partly because translation is structured enough that imperfect output still worked. If the scenario were more complex and the stakes higher, instinct alone wouldn’t be enough." } },
+      { type: "pull-quote", text: { zh: "我需要系统性的方法论支撑——不是学怎么用Coze搭工作流，而是学怎么评估一个AI场景的可行性、优先级和投入产出比。这是我想通过硕士阶段补上的东西。", en: "I need a formal methodology — not learning how to build workflows in Coze, but learning how to evaluate whether an AI use case is feasible, how to prioritize it, and what return it can deliver. That’s what I want to build during my master’s program." } },
     ],
     supportingScreenshots: [
       { label: "Coze平台工作流节点视图", proves: "工作流架构与迭代过程" },
@@ -750,7 +768,7 @@ function Footer({ isMobile }) {
   );
 }
 
-function Nav({ currentPage, onNavigate, isMobile }) {
+function Nav({ currentPage, onNavigate, isMobile, lang, setLang }) {
   const [hovered, setHovered] = useState(null);
   return (
     <nav style={{
@@ -813,13 +831,21 @@ function Nav({ currentPage, onNavigate, isMobile }) {
           );
         })}
         {!isMobile && <span style={{ color: "#d4cfc7", fontSize: 14, margin: "0 4px" }}>|</span>}
-        <span style={{
-          fontFamily: FONT_MONO, fontSize: 14, color: "#6b6560",
-          cursor: "not-allowed", userSelect: "none",
-          whiteSpace: "nowrap",
-          padding: "4px 10px",
-        }}>
-          {"EN / 中"}
+        <span
+          onClick={() => setLang(lang === "en" ? "zh" : "en")}
+          onMouseEnter={() => setHovered("lang")}
+          onMouseLeave={() => setHovered(null)}
+          style={{
+            fontFamily: FONT_MONO, fontSize: 14,
+            color: hovered === "lang" ? "#faf8f4" : "#6b6560",
+            cursor: "pointer", userSelect: "none",
+            whiteSpace: "nowrap",
+            padding: "4px 10px",
+            backgroundColor: hovered === "lang" ? "#1a1815" : "transparent",
+            transition: "color 0.2s ease, background-color 0.2s ease",
+          }}
+        >
+          {lang === "en" ? "中文" : "EN"}
         </span>
       </div>
       </div>
@@ -829,7 +855,7 @@ function Nav({ currentPage, onNavigate, isMobile }) {
 
 /* ===== Homepage ===== */
 
-function HomePage({ onNavigate, isMobile }) {
+function HomePage({ onNavigate, isMobile, lang }) {
   const maxW = 860;
   const [hoveredId, setHoveredId] = useState(null);
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
@@ -839,7 +865,11 @@ function HomePage({ onNavigate, isMobile }) {
   const [pressedId, setPressedId] = useState(null);
 
   // Hero typewriter animation
-  const HERO_LINES = [
+  const HERO_LINES = lang === "en" ? [
+    { text: "Product, Design, Project Management, Client Management", type: "normal" },
+    { text: "pulled together into one PM foundation,", type: "normal" },
+    { text: "Next direction:", type: "normal", inline: true },
+  ] : [
     { text: "产品、设计、项目管理、客户", type: "normal" },
     { text: "收拢成一个 PM 底座，", type: "normal" },
     { text: "下一步方向：", type: "normal", inline: true },
@@ -852,7 +882,7 @@ function HomePage({ onNavigate, isMobile }) {
       }
     });
     return chars;
-  }, []);
+  }, [lang]);
   const HERO_TOTAL = heroChars.length;
   const HERO_CHAR_DELAY = 100;
   const heroPlayed = typeof sessionStorage !== "undefined" && sessionStorage.getItem("hero-played");
@@ -1170,7 +1200,7 @@ function HomePage({ onNavigate, isMobile }) {
             <span id="hero-question" style={{
               display: "inline-block", color: "#d4cdc2", fontWeight: 700,
               opacity: 0, transform: "scale(0.8)", transition: "none",
-            }}>{"\uff1f"}</span>
+            }}>{lang === "en" ? "?" : "\uff1f"}</span>
             <span id="hero-ai" style={{
               position: "absolute", left: "50%", top: "50%",
               transform: animationComplete ? "translate(-50%, -50%) scale(1.0)" : "translate(-50%, -50%) scale(0.7)",
@@ -1212,7 +1242,7 @@ function HomePage({ onNavigate, isMobile }) {
           transform: subtitleVisible ? "translateY(0)" : "translateY(10px)",
           transition: "all 0.8s cubic-bezier(0.23,1,0.32,1) 0.1s",
         }}>
-          {"三个项目，做的事越来越不一样——但切入点始终一样：先把问题拆对。"}
+          {lang === "en" ? "Three projects, each completely different \u2014 but the entry point was always the same: get the problem breakdown right." : "\u4E09\u4E2A\u9879\u76EE\uFF0C\u505A\u7684\u4E8B\u8D8A\u6765\u8D8A\u4E0D\u4E00\u6837\u2014\u2014\u4F46\u5207\u5165\u70B9\u59CB\u7EC8\u4E00\u6837\uFF1A\u5148\u628A\u95EE\u9898\u62C6\u5BF9\u3002"}
         </p>
       </div>
 
@@ -1295,7 +1325,7 @@ function HomePage({ onNavigate, isMobile }) {
                     color: "#6b6560",
                     marginLeft: 2,
                     letterSpacing: 0,
-                  }}>{stat.unit}</span>
+                  }}>{t(stat.unit, lang)}</span>
                 </div>
                 <span style={{
                   display: "block",
@@ -1307,7 +1337,7 @@ function HomePage({ onNavigate, isMobile }) {
                   letterSpacing: "0.03em",
                   marginTop: 6,
                   transition: "opacity 0.3s",
-                }}>{stat.label}</span>
+                }}>{t(stat.label, lang)}</span>
               </div>
 
               {/* Center: index + title + hook + tags */}
@@ -1331,7 +1361,7 @@ function HomePage({ onNavigate, isMobile }) {
                   lineHeight: 1.35,
                   letterSpacing: "-0.01em",
                   margin: 0,
-                }}>{p.name}</h3>
+                }}>{t(p.name, lang)}</h3>
                 <p style={{
                   fontSize: 14,
                   color: isHovered ? "#1a1815" : "#6b6560",
@@ -1339,7 +1369,7 @@ function HomePage({ onNavigate, isMobile }) {
                   lineHeight: 1.5,
                   margin: 0,
                   transition: "color 0.3s",
-                }}>{p.cardHook || p.cardSummary}</p>
+                }}>{t(p.cardHook, lang) || t(p.cardSummary, lang)}</p>
                 {p.cardHighlights && p.cardHighlights.length > 0 && (
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 }}>
                     {p.cardHighlights.map((h, hi) => (
@@ -1352,7 +1382,7 @@ function HomePage({ onNavigate, isMobile }) {
                         borderRadius: 2,
                         letterSpacing: "0.02em",
                         whiteSpace: "nowrap",
-                      }}>{h}</span>
+                      }}>{t(h, lang)}</span>
                     ))}
                   </div>
                 )}
@@ -1403,20 +1433,19 @@ function HomePage({ onNavigate, isMobile }) {
           fontSize: isMobile ? 18 : "clamp(18px, 2.2vw, 24px)",
           lineHeight: 1.4, color: "#6b6560", marginBottom: 8,
         }}>
-          {"\u95EE\u9898\u62C6\u5BF9\u4E86\uFF0C\u624D\u503C\u5F97\u52A8\u624B\u3002"}
+          {lang === "en" ? "Get the problem right, then it\u2019s worth building." : "\u95EE\u9898\u62C6\u5BF9\u4E86\uFF0C\u624D\u503C\u5F97\u52A8\u624B\u3002"}
         </p>
         <h2 style={{
           fontFamily: FONT_DISPLAY, fontWeight: 900,
           fontSize: isMobile ? 26 : "clamp(26px, 3.8vw, 44px)",
           lineHeight: 1.3, letterSpacing: "-0.02em", marginBottom: 24,
         }}>
-          {"\u6211\u5728\u627E\u4E0B\u4E00\u4E2A\u503C\u5F97\u62C6\u7684\u95EE\u9898\u3002"}
+          {lang === "en" ? "I'm looking for the next problem worth breaking down." : "\u6211\u5728\u627E\u4E0B\u4E00\u4E2A\u503C\u5F97\u62C6\u7684\u95EE\u9898\u3002"}
         </h2>
         <p style={{
           fontSize: 14, lineHeight: 1.8, color: "#6b6560", fontWeight: 300, marginBottom: 36,
         }}>
-          <span style={{ color: "#1a1815", fontWeight: 500 }}>{"\u0032\u0030\u0032\u0037\u5E74\u79CB\u5B63"}</span>
-          {"\uFF0C\u6211\u51C6\u5907\u56DE\u5230\u5B66\u6821\uFF0C\u628A\u0035\u5E74\u4EA7\u54C1\u5B9E\u6218\u7CFB\u7EDF\u5316\uFF0C\u4E4B\u540E\u8FDB\u5165\u0041\u0049\u884C\u4E1A\u3002"}
+          {lang === "en" ? <><span style={{ color: "#1a1815", fontWeight: 500 }}>{"In Fall 2027"}</span>{", I\u2019m going back to school to build a formal framework around five years of product instinct \u2014 and bring it into AI."}</> : <><span style={{ color: "#1a1815", fontWeight: 500 }}>{"\u0032\u0030\u0032\u0037\u5E74\u79CB\u5B63"}</span>{"\uFF0C\u6211\u51C6\u5907\u56DE\u5230\u5B66\u6821\uFF0C\u628A\u0035\u5E74\u4EA7\u54C1\u5B9E\u6218\u7CFB\u7EDF\u5316\uFF0C\u4E4B\u540E\u8FDB\u5165\u0041\u0049\u884C\u4E1A\u3002"}</>}
         </p>
 
         <div ref={footerZoneRef} style={{ position: "relative", display: "inline-block" }}>
@@ -1468,7 +1497,7 @@ function HomePage({ onNavigate, isMobile }) {
             fontSize: 14, lineHeight: 1.6, color: "#6b6560", fontWeight: 300,
             marginTop: 28, position: "relative", zIndex: 2,
           }}>
-            {"\u5982\u679C\u4F60\u5BF9\u6211\u7684\u7ECF\u5386\u611F\u5174\u8DA3\uFF0C\u5F88\u4E50\u610F\u804A\u804A\u3002"}
+            {lang === "en" ? "If any of this resonates, I\u2019d love to talk." : "\u5982\u679C\u4F60\u5BF9\u6211\u7684\u7ECF\u5386\u611F\u5174\u8DA3\uFF0C\u5F88\u4E50\u610F\u804A\u804A\u3002"}
           </p>
 
           {/* Footer thread SVG — desktop only, ref-driven */}
@@ -1613,8 +1642,8 @@ function NavCard({ items, activeIdx, onSelect, title, count, accent, side }) {
 
 function SideNav({
   chapters, activeChapterIdx, onChapterClick,
-  skillTags, activeSkillIdx, onSkillClick,
-  navMode, onModeSwitch, onNavigate,
+  skillTags, skillTagKeys, activeSkillIdx, onSkillClick,
+  navMode, onModeSwitch, onNavigate, lang,
 }) {
   const isCompact = useIsMobile(1100);
   const [visible, setVisible] = useState(false);
@@ -1686,7 +1715,7 @@ function SideNav({
   };
 
   const handleChapterSelect = (_label, i) => onChapterClick(i);
-  const handleSkillSelect = (label) => onSkillClick(label);
+  const handleSkillSelect = (_label, i) => onSkillClick((skillTagKeys || skillTags)[i]);
 
   const cardH = Math.max(chapterLabels.length, skillLabels.length) * 34 + 40;
   const accentColor = isFrontA ? "#2A2A2A" : "#c4422b";
@@ -1748,7 +1777,7 @@ function SideNav({
                 fontWeight: 500,
                 transition: "color 0.4s",
                 animation: (!isFrontA && pivotHovered) ? "sidenavBreathe 1.2s ease-in-out infinite" : "none",
-              }}>{"\u53D9\u4E8B\u7EBF"}</span>
+              }}>{lang === "en" ? "Narrative" : "\u53D9\u4E8B\u7EBF"}</span>
               <div style={{ width: 2.5, height: 2.5, borderRadius: "50%", background: "#D5D0C8" }} />
               <span style={{
                 fontSize: 10, fontFamily: FONT_BODY, letterSpacing: 3,
@@ -1756,7 +1785,7 @@ function SideNav({
                 fontWeight: 500,
                 transition: "color 0.4s",
                 animation: (isFrontA && pivotHovered) ? "sidenavBreathe 1.2s ease-in-out infinite" : "none",
-              }}>{"\u65B9\u6CD5\u7EBF"}</span>
+              }}>{lang === "en" ? "Method" : "\u65B9\u6CD5\u7EBF"}</span>
             </div>
             {/* Spinner — 3D orbit + glow + dot + ripples + cursor */}
             {(() => {
@@ -1867,9 +1896,9 @@ function SideNav({
               willChange: "transform",
             }}>
               <NavCard items={chapterLabels} activeIdx={activeChapterIdx} onSelect={handleChapterSelect}
-                title={"\u53D9\u4E8B\u7EBF"} count={chapterLabels.length + " \u7AE0"} accent="dark" side="a" />
+                title={lang === "en" ? "Narrative" : "\u53D9\u4E8B\u7EBF"} count={chapterLabels.length + (lang === "en" ? " sections" : " \u7AE0")} accent="dark" side="a" />
               <NavCard items={skillLabels} activeIdx={activeSkillIdx} onSelect={handleSkillSelect}
-                title={"\u65B9\u6CD5\u7EBF"} count={skillLabels.length + " \u9879"} accent="warm" side="b" />
+                title={lang === "en" ? "Method" : "\u65B9\u6CD5\u7EBF"} count={skillLabels.length + (lang === "en" ? " skills" : " \u9879")} accent="warm" side="b" />
             </div>
           </div>
         </div>
@@ -2162,17 +2191,17 @@ function DualTrackTimeline() {
 
   const PHASES = [
     { phase: "Crisis", time: "2023", track: "A", nodes: [
-      { label: "Collaboration Breakdown", sub: "Client threatens to terminate contract", type: "context" },
-      { label: "Structural Diagnosis", sub: '15 interviews \u2192 "System failure, not people"', type: "core" },
+      { label: "Collaboration Breakdown", sub: "Client threatens to terminate", type: "context" },
+      { label: "Structural Diagnosis", sub: '15 interviews \u2192 "Systems problem, not people problem"', type: "core" },
     ]},
     { phase: "Recovery", time: "Early 2024", track: "A", nodes: [
-      { label: "Six-Module System", sub: "Zero cost, zero learning curve, immediate rollout", type: "action" },
-      { label: "Client Re-commits \u2192 Company-wide SOP", sub: "Contract renewed \u00B7 System adopted across all teams", type: "result" },
+      { label: "Six-Module System", sub: "No budget, no training, day-one switch", type: "action" },
+      { label: "Client Renews \u2192 Company-wide SOP", sub: "Contract renewed. System adopted company-wide", type: "result" },
     ]},
     { phase: "Innovation", time: "2025", track: "B", bridge: true, nodes: [
-      { label: "Identifies AI Opportunity", sub: "DeepSeek + community scenario fit", type: "core" },
-      { label: "Bypasses PM, Finds CTO", sub: "Right stakeholder, right sequence", type: "core" },
-      { label: "Nana AI Launches", sub: "VP approved \u00B7 2,000+ users \u00B7 25%\u2192100% retrieval accuracy", type: "result" },
+      { label: "Identifies AI Opportunity", sub: "DeepSeek + community use case = viable", type: "core" },
+      { label: "Goes to CTO, Bypasses PM", sub: "Right stakeholder, right pitch, right timing", type: "core" },
+      { label: "Nana AI Launches", sub: "VP approved \u00B7 2,000+ users \u00B7 25\u00D7 knowledge base accuracy", type: "result" },
     ]},
   ];
 
@@ -2259,7 +2288,7 @@ function DualTrackTimeline() {
                 <div style={{ marginLeft: 42, padding: "14px 18px", background: `linear-gradient(135deg, ${brown}06, ${amber}08)`, borderLeft: "3px solid", borderImage: `linear-gradient(to bottom, ${brown}50, ${amber}70) 1`, borderRadius: "0 8px 8px 0" }}>
                   <div style={{ fontSize: 9, fontWeight: 700, color: textLight, letterSpacing: "1.2px", textTransform: "uppercase", marginBottom: 5 }}>Turning Point</div>
                   <span style={{ fontSize: 13, fontWeight: 600, color: "#6b5f53", fontStyle: "italic", fontFamily: ffSerif, lineHeight: 1.4 }}>
-                    {"Stable delivery builds trust \u2192 unlocks AI proposal"}
+                    {"Stable delivery builds trust \u2192 unlocks innovation mandate"}
                   </span>
                 </div>
                 <div style={{ position: "absolute", bottom: 0, left: 15, right: 0, height: 1, background: `linear-gradient(to right, ${amber}25, ${amber}08)` }} />
@@ -2338,7 +2367,7 @@ function InfoHub() {
           <text x={modL + reqW - 35} y={govY + 22.5} textAnchor="middle" fontSize="8.5" fontWeight="700" fill="rgba(255,255,255,0.75)" letterSpacing="0.6">CORE</text>
           <text x={modL + 18} y={govY + 36} fontSize="15" fontWeight="700" fill="#fff" fontFamily={ffSerif}>Requirement Lifecycle</text>
           <text x={modL + 18} y={govY + 55} fontSize="10.5" fontWeight="600" fill="rgba(255,255,255,0.55)" letterSpacing="0.5">GATEWAY & ENGINE</text>
-          <text x={modL + 18} y={govY + 80} fontSize="9.5" fill="rgba(255,255,255,0.4)">{`Submit \u2192 Classify \u2192 Prioritize \u2192 Assign \u2192 Track \u2192 Close`}</text>
+          <text x={modL + 18} y={govY + 80} fontSize="9.5" fill="rgba(255,255,255,0.4)">{`Submit \u2192 Triage \u2192 Build \u2192 Ship`}</text>
           {[0, 1, 2, 3, 4, 5].map((i) => <circle key={i} cx={modL + 22 + i * 42} cy={govY + 100} r={2.5} fill="rgba(255,255,255,0.18)" />)}
           <line x1={modL + 22} y1={govY + 100} x2={modL + 22 + 5 * 42} y2={govY + 100} stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
         </g>
@@ -2368,7 +2397,7 @@ function InfoHub() {
           <text x={modL + 16} y={delY + 30} fontSize="14" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Acceptance Review</text>
           <text x={modL + 16} y={delY + 48} fontSize="10.5" fontWeight="600" fill={roleTint} letterSpacing="0.5">QUALITY GATE</text>
           <text x={modL + 16} y={delY + 72} fontSize="10" fill={textLight}>Design vs. implementation,</text>
-          <text x={modL + 16} y={delY + 86} fontSize="10" fill={textLight}>page by page</text>
+          <text x={modL + 16} y={delY + 86} fontSize="10" fill={textLight}>side-by-side</text>
         </g>
 
         {/* Release Management */}
@@ -2376,8 +2405,8 @@ function InfoHub() {
           <rect x={modL + acceptW + modGap} y={delY} width={releaseW} height={delH} rx={8} fill={bgModule} stroke={border} strokeWidth="1" />
           <text x={modL + acceptW + modGap + 16} y={delY + 30} fontSize="14" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Release Management</text>
           <text x={modL + acceptW + modGap + 16} y={delY + 48} fontSize="10.5" fontWeight="600" fill={roleTint} letterSpacing="0.5">PACKAGING</text>
-          <text x={modL + acceptW + modGap + 16} y={delY + 72} fontSize="10" fill={textLight}>Bundle verified deliverables</text>
-          <text x={modL + acceptW + modGap + 16} y={delY + 86} fontSize="10" fill={textLight}>into versioned releases</text>
+          <text x={modL + acceptW + modGap + 16} y={delY + 72} fontSize="10" fill={textLight}>Package verified work</text>
+          <text x={modL + acceptW + modGap + 16} y={delY + 86} fontSize="10" fill={textLight}>for deployment</text>
         </g>
 
         {/* Delivery arrows */}
@@ -2456,7 +2485,8 @@ function LinearIterationFlow() {
       <text x="90" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#5a5a5a">
         <tspan x="90" y="143">{"CN\u21D4EN plain text"}</tspan>
         <tspan x="90" dy="15">{"\u2014"}</tspan>
-        <tspan x="90" dy="15">{"\u201CCan it work?\u201D"}</tspan>
+        <tspan x="90" dy="15">{"Proved the pipeline"}</tspan>
+        <tspan x="90" dy="15">{"works"}</tspan>
       </text>
 
       {/* Arrow 1→2 */}
@@ -2470,8 +2500,8 @@ function LinearIterationFlow() {
       <line x1="215" y1="123" x2="285" y2="123" stroke="#C8C0B4" strokeWidth="1.2"/>
       <text x="250" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#5a5a5a">
         <tspan x="250" y="143">{"3 trade-offs:"}</tspan>
-        <tspan x="250" dy="15">{"volume fit / cost"}</tspan>
-        <tspan x="250" dy="15">{"/ accuracy"}</tspan>
+        <tspan x="250" dy="15">{"volume fit \u00B7 cost"}</tspan>
+        <tspan x="250" dy="15">{"\u00B7 accuracy"}</tspan>
       </text>
 
       {/* Arrow 2→3 */}
@@ -2486,10 +2516,10 @@ function LinearIterationFlow() {
       <text x="410" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Dept \u2192 Company"}</text>
       <line x1="375" y1="123" x2="445" y2="123" stroke="#B8B0A3" strokeWidth="1.2"/>
       <text x="410" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#5a5a5a">
-        <tspan x="410" y="143">{"Product scope"}</tspan>
-        <tspan x="410" dy="15">{"redefined: internal"}</tspan>
-        <tspan x="410" dy="15">{"tool \u2192 company-"}</tspan>
-        <tspan x="410" dy="15">{"wide system"}</tspan>
+        <tspan x="410" y="143">{"Business scope"}</tspan>
+        <tspan x="410" dy="15">{"expanded after MVP."}</tspan>
+        <tspan x="410" dy="15">{"Core feature"}</tspan>
+        <tspan x="410" dy="15">{"upgrade"}</tspan>
       </text>
 
       {/* Arrow 3→4 */}
@@ -2504,10 +2534,10 @@ function LinearIterationFlow() {
       <text x="570" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Conversion"}</text>
       <line x1="535" y1="123" x2="605" y2="123" stroke="#9A9590" strokeWidth="1.2"/>
       <text x="570" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#3a3a3a">
-        <tspan x="570" y="143">{"Accept limitation"}</tspan>
-        <tspan x="570" dy="15">{"or break through?"}</tspan>
-        <tspan x="570" dy="15">{"\u2192 Custom Coze"}</tspan>
-        <tspan x="570" dy="15">{"plugin"}</tspan>
+        <tspan x="570" y="143">{"All existing plugins:"}</tspan>
+        <tspan x="570" dy="15">{"same-format in/out."}</tspan>
+        <tspan x="570" dy="15">{"Built custom plugin"}</tspan>
+        <tspan x="570" dy="15">{"for cross-format"}</tspan>
       </text>
 
       {/* Arrow 4→5 */}
@@ -2520,9 +2550,9 @@ function LinearIterationFlow() {
       <text x="730" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#ffffff">{"+ Frontend"}</text>
       <line x1="695" y1="123" x2="765" y2="123" stroke="#4a4a4a" strokeWidth="1.2"/>
       <text x="730" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="500" fill="#cccccc">
-        <tspan x="730" y="143">{"Standard:"}</tspan>
-        <tspan x="730" dy="15">{"\u201CReady to use,"}</tspan>
-        <tspan x="730" dy="15">{"zero extra steps\u201D"}</tspan>
+        <tspan x="730" y="143">{"Drop-in ready for"}</tspan>
+        <tspan x="730" dy="15">{"teammates. Low-code"}</tspan>
+        <tspan x="730" dy="15">{"UI with 2 entry points"}</tspan>
       </text>
 
       {/* Bottom axis */}
@@ -2572,20 +2602,20 @@ function DiagnosticFunnel() {
       {/* Layer 2: First-Pass Walkthrough */}
       <path d="M 190,149 L 670,149 L 655,231 L 205,231 Z" fill="#EDEAE3"/>
       <text x="430" y="183" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#999">FIRST-PASS WALKTHROUGH</text>
-      <text x="430" y="205" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">{"Fragmented UX across homepage & editor"}</text>
+      <text x="430" y="205" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">{"Fragmented UX across homepage, detail, editor"}</text>
       {/* Layer 3: Pattern Recognition */}
       <path d="M 205,238 L 655,238 L 644,320 L 216,320 Z" fill="#D5D0C8"/>
       <text x="430" y="268" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#888">PATTERN RECOGNITION</text>
       <text x="430" y="288" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">
-        <tspan x="430" dy="0">Content display vs. tool functionality</tspan>
-        <tspan x="430" dy="17">competing on every page</tspan>
+        <tspan x="430" dy="0">{"Content display vs. tool function \u2014"}</tspan>
+        <tspan x="430" dy="17">features fighting features</tspan>
       </text>
       {/* Layer 4: Root Diagnosis */}
       <path d="M 216,327 L 644,327 L 636,409 L 224,409 Z" fill="#aaa"/>
       <text x="430" y="357" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#666">ROOT DIAGNOSIS</text>
       <text x="430" y="377" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">
         <tspan x="430" dy="0">{"Product identity crisis: \u201Ccontent hub\u201D"}</tspan>
-        <tspan x="430" dy="17">{"and \u201Clinup tool\u201D unresolved"}</tspan>
+        <tspan x="430" dy="17">{"vs. \u201Clinup tool\u201D unresolved"}</tspan>
       </text>
 
       {/* === Key transition gap === */}
@@ -2597,7 +2627,8 @@ function DiagnosticFunnel() {
       {/* Layer 5: Solution Anchor — shifted down */}
       <path d="M 224,458 L 636,458 L 630,540 L 230,540 Z" fill="#000"/>
       <text x="430" y="492" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#888">SOLUTION ANCHOR</text>
-      <text x="430" y="514" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#fff">Lineup Code as unifying mechanism</text>
+      <text x="430" y="514" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#fff">{"Lineup Code as unifying mechanism,"}
+      <tspan x="430" dy="17">{"connecting \u201Creading\u201D and \u201Cusing\u201D"}</tspan></text>
 
       {/* === Left method indicators — horizontal labels, different line styles === */}
 
@@ -2648,9 +2679,8 @@ function ThreePhaseRoadmap() {
       <line x1="120" y1="128" x2="210" y2="128" stroke="#D5D0C8" strokeWidth="1.5"/>
       <text x="165" y="152" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#666">
         <tspan x="165" dy="0">Optimize upload flow</tspan>
-        <tspan x="165" dy="18">and info architecture.</tspan>
-        <tspan x="165" dy="18">Make the product</tspan>
-        <tspan x="165" dy="18">usable first.</tspan>
+        <tspan x="165" dy="18">and info architecture</tspan>
+        <tspan x="165" dy="18">for portrait mode.</tspan>
       </text>
       {/* Arrow 1→2 */}
       <line x1="278" y1="160" x2="294" y2="160" stroke="#aaa" strokeWidth="2" markerEnd="url(#rm-arr)"/>
@@ -2661,9 +2691,9 @@ function ThreePhaseRoadmap() {
       <line x1="360" y1="128" x2="450" y2="128" stroke="#aaa" strokeWidth="1.5"/>
       <text x="405" y="152" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#666">
         <tspan x="405" dy="0">Game UI is landscape.</tspan>
-        <tspan x="405" dy="18">Streamers use PC.</tspan>
-        <tspan x="405" dy="18">Portrait H5 breaks</tspan>
-        <tspan x="405" dy="18">core use scenarios.</tspan>
+        <tspan x="405" dy="18">Core users on</tspan>
+        <tspan x="405" dy="18">PC/emulator.</tspan>
+        <tspan x="405" dy="18">Portrait H5 breaks it.</tspan>
       </text>
       {/* Arrow 2→3 */}
       <line x1="518" y1="160" x2="534" y2="160" stroke="#aaa" strokeWidth="2" markerEnd="url(#rm-arr)"/>
@@ -2675,8 +2705,8 @@ function ThreePhaseRoadmap() {
       <text x="645" y="152" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#999">
         <tspan x="645" dy="0">Embed game client.</tspan>
         <tspan x="645" dy="18">Lineup Code bridges</tspan>
-        <tspan x="645" dy="18">{"\u201Cwatch guides\u201D and"}</tspan>
-        <tspan x="645" dy="18">{"\u201Cuse lineups\u201D loop."}</tspan>
+        <tspan x="645" dy="18">reading + using.</tspan>
+        <tspan x="645" dy="18">{"\u00A5100K \u2192 \u00A51.5M"}</tspan>
       </text>
       {/* Bottom result line */}
       <text x="60" y="308" fontFamily={ff} fontSize="10" fontWeight="600" letterSpacing="0.08em" fill="#999">STARTING ORDER</text>
@@ -2685,7 +2715,7 @@ function ThreePhaseRoadmap() {
       <line x1="155" y1="330" x2="640" y2="330" stroke="#aaa" strokeWidth="2" strokeDasharray="6,4"/>
       <text x="750" y="308" textAnchor="end" fontFamily={ff} fontSize="10" fontWeight="600" letterSpacing="0.08em" fill="#000">VP-APPROVED SCOPE</text>
       <text x="750" y="332" textAnchor="end" fontFamily={ff} fontSize="18" fontWeight="700" fill="#000">{"\u00A51.5M"}</text>
-      <text x="750" y="348" textAnchor="end" fontFamily={ff} fontSize="12" fontWeight="500" fill="#999">Full product reconstruction</text>
+      <text x="750" y="348" textAnchor="end" fontFamily={ff} fontSize="12" fontWeight="500" fill="#999">3-phase product restructuring</text>
       {/* 15x badge */}
       <rect x="370" y="314" width="60" height="24" rx="12" fill="#000"/>
       <text x="400" y="331" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">{"\u00D715"}</text>
@@ -2695,7 +2725,7 @@ function ThreePhaseRoadmap() {
 
 /* ===== Project Detail Page ===== */
 
-function ProjectPage({ project, onNavigate, onToast, isMobile }) {
+function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
   const hasPrev = project.id > 1;
   const hasNext = project.id < PROJECTS.length;
   const prevProject = hasPrev ? PROJECTS.find((p) => p.id === project.id - 1) : null;
@@ -2718,14 +2748,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
     let idx = 0;
     const body = project.bodyStructure.map((block, bodyIdx) => {
       if (block.type === "heading" || block.type === "iteration-step") {
-        const fullLabel = block.type === "heading" ? block.text : block.heading;
-        headings.push(block.navLabel || fullLabel);
+        const fullLabel = block.type === "heading" ? t(block.text, lang) : t(block.heading, lang);
+        headings.push(t(block.navLabel, lang) || fullLabel);
         return { ...block, sectionId: idx++, bodyIndex: bodyIdx };
       }
       return { ...block, bodyIndex: bodyIdx };
     });
     return { sectionHeadings: headings, bodyWithIds: body };
-  }, [project.bodyStructure]);
+  }, [project.bodyStructure, lang]);
 
   // --- Pre-compute key sentence map for persistent highlights ---
   const keyBlockMap = useMemo(() => {
@@ -2771,8 +2801,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
     };
     const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(compute); };
     window.addEventListener("scroll", onScroll, { passive: true });
-    const t = setTimeout(compute, 100);
-    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(t); if (rafId) cancelAnimationFrame(rafId); };
+    const tm = setTimeout(compute, 100);
+    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(tm); if (rafId) cancelAnimationFrame(rafId); };
   }, [project.skillTags, project.skillTagJumps]);
 
   // --- Scroll-spy: track which chapter heading is currently in view ---
@@ -2872,12 +2902,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           const el = document.getElementById("section-" + idx);
           if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
         }}
-        skillTags={project.skillTags}
+        skillTags={lang === "en" && project.skillTagsEn ? project.skillTagsEn : project.skillTags}
+        skillTagKeys={project.skillTags}
         activeSkillIdx={activeScrollSection}
         onSkillClick={handleTagClick}
         navMode={navMode}
         onModeSwitch={setNavMode}
         onNavigate={onNavigate}
+        lang={lang}
       />
       <MobileProgressNav headings={sectionHeadings} />
       {/* ===== 5-LAYER HERO for ALL projects ===== */}
@@ -2953,9 +2985,9 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 4, paddingLeft: 24, borderLeft: "1px solid #d4cfc7" }}>
             {[
-              ["Role", project.roleLine.split(" // ")[0]],
-              ["Team", project.teamInfo],
-              ["Context", project.context],
+              ["Role", t(project.roleLine, lang).split(" // ")[0]],
+              ["Team", t(project.teamInfo, lang)],
+              ["Context", t(project.context, lang)],
             ].map(([label, val], i) => (
               <div key={i} style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: "#8a857d" }}>
                 {label}<span style={{ color: "#1a1815", fontFamily: FONT_BODY, fontWeight: 500, textTransform: "none", letterSpacing: 0, marginLeft: 8, fontSize: 13 }}>{val}</span>
@@ -2974,9 +3006,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               maxWidth: 780, margin: 0, position: "relative",
               paddingBottom: 20,
             }}>
-              {(project.heroTitleLines || [project.name]).map((line, i, arr) => (
-                <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
-              ))}
+              {(() => { const lines = project.heroTitleLines ? (Array.isArray(project.heroTitleLines) ? project.heroTitleLines.map(l => t(l, lang)) : t(project.heroTitleLines, lang)) : [t(project.name, lang)]; return lines.map((line, i, arr) => (<span key={i}>{line}{i < arr.length - 1 && <br />}</span>)); })()}
             </h1>
             {/* Red underline */}
             <div style={{ width: 64, height: 4, background: ACCENT, animation: "lineGrow 0.6s ease-out 0.8s both" }} />
@@ -2988,10 +3018,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               animation: "fadeUp 0.8s ease-out 0.5s both",
             }}>
               <div style={{ fontFamily: FONT_DISPLAY, fontSize: isMobile ? 48 : "clamp(48px, 7vw, 96px)", fontWeight: 900, lineHeight: 1, color: ACCENT, letterSpacing: "-0.03em" }}>
-                {project.heroStat.number}
+                {t(project.heroStat.number, lang)}
               </div>
               <div style={{ fontFamily: FONT_MONO, fontSize: 13, color: "#8a857d", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 4 }}>
-                {project.heroStat.unit}
+                {t(project.heroStat.unit, lang)}
               </div>
             </div>
           )}
@@ -3001,10 +3031,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         {project.heroNarrative && (
           <div style={{ maxWidth: 720, margin: "0 auto 64px", animation: "fadeUp 0.8s ease-out 0.35s both" }}>
             <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: "#1a1815" }}>
-              {project.heroNarrative.hook}
+              {t(project.heroNarrative.hook, lang)}
             </div>
             <div style={{ fontSize: 15, lineHeight: 1.8, color: "#8a857d", fontWeight: 300 }}>
-              {project.heroNarrative.detail}
+              {t(project.heroNarrative.detail, lang)}
             </div>
           </div>
         )}
@@ -3015,7 +3045,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             <div style={{ padding: "28px 36px", background: "#eae7e1", borderRadius: 6, marginRight: isMobile ? 12 : 20 }}>
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#aaa69f", marginBottom: 10 }}>Before</div>
               <div style={{ fontSize: 15, lineHeight: 1.7, color: "#aaa69f", textDecoration: "line-through", textDecorationColor: "rgba(196, 66, 43, 0.25)", textDecorationThickness: 1 }}>
-                {project.stateBefore}
+                {t(project.stateBefore, lang)}
               </div>
             </div>
             <div style={{
@@ -3025,7 +3055,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             }}>
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: ACCENT, marginBottom: 10 }}>After</div>
               <div style={{ fontFamily: FONT_DISPLAY, fontSize: 18, fontWeight: 700, lineHeight: 1.6, color: "#1a1815" }}>
-                {project.stateAfter.split("·").map((part, i, arr) => {
+                {t(project.stateAfter, lang).split("·").map((part, i, arr) => {
                   const trimmed = part.trim();
                   const isLast = i === arr.length - 1;
                   return <span key={i}>{isLast ? <span style={{ color: ACCENT }}>{trimmed}</span> : trimmed}{!isLast && " · "}</span>;
@@ -3053,10 +3083,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                 ...(isMobile && i < project.heroMetrics.length - 1 ? { borderBottom: "1px solid #d4cfc7" } : {}),
               }}>
                 <div style={{ fontFamily: FONT_DISPLAY, fontSize: 36, fontWeight: 900, lineHeight: 1, color: m.highlight ? ACCENT : "#1a1815", marginBottom: 8 }}>
-                  {m.value}
+                  {t(m.value, lang)}
                 </div>
                 <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: "#8a857d", letterSpacing: "0.06em" }}>
-                  {m.label}
+                  {t(m.label, lang)}
                 </div>
               </div>
             ))}
@@ -3066,7 +3096,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         {/* Layer 5: Section navigation */}
         <div style={{ paddingBottom: 48, animation: "fadeUp 0.7s ease-out 0.55s both", textAlign: "center" }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8a857d", marginBottom: 12 }}>
-            {"跳转至正文"}
+            {lang === "en" ? "Skip to content" : "跳转至正文"}
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
             {(project.skillTags || []).map((tag, i) => {
@@ -3092,7 +3122,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   }}
                 >
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2"><line x1="6" y1="2" x2="6" y2="10"/><polyline points="3,7 6,10 9,7"/></svg>
-                  {tag}
+                  {lang === "en" && project.skillTagsEn ? project.skillTagsEn[i] : tag}
                 </span>
               );
             })}
@@ -3124,35 +3154,38 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           const blockId = "body-block-" + block.bodyIndex;
 
           if (block.type === "heading") {
-            const isReflection = block.navLabel === "\u56DE\u5934\u770B";
+            const isReflection = (typeof block.navLabel === "object" ? block.navLabel.zh : block.navLabel) === "\u56DE\u5934\u770B";
             if (isReflection) {
               return (
                 <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "56px auto 0", padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
                   <div style={{ height: 1, background: "#D5D0C8" }} />
-                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const ci = block.text.indexOf("\uff1a"); if (ci === -1) return block.text; return (<><span style={{ color: "#c4422b" }}>{block.text.slice(0, ci + 1)}</span>{block.text.slice(ci + 1)}</>); })()}</h2>
+                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: "#c4422b" }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
                 </div>
               );
             }
             return (
               <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "56px auto 0", padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
                 <div style={{ height: 1, background: "#D5D0C8" }} />
-                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const ci = block.text.indexOf("\uff1a"); if (ci === -1) return block.text; return (<><span style={{ color: "#c4422b" }}>{block.text.slice(0, ci + 1)}</span>{block.text.slice(ci + 1)}</>); })()}</h2>
+                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: "#c4422b" }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
               </div>
             );
           }
 
           if (block.type === "paragraph") {
             if (block.text) {
+              const txt = t(block.text, lang);
               // Check for click-triggered highlight (temporary animation)
               const isClickKeyBlock = activeTagJump && block.bodyIndex === activeTagJump.keyBlock && activeTagJump.sentencePhase !== "done";
               // Check for persistent highlight (always visible for key sentences)
               const persistentKeyInfo = keyBlockMap[block.bodyIndex];
-              const hasPersistentKey = persistentKeyInfo && block.text.includes(persistentKeyInfo.keySentence);
-              let paragraphContent = block.text;
+              const resolvedPersistentKs = persistentKeyInfo ? t(persistentKeyInfo.keySentence, lang) : null;
+              const hasPersistentKey = resolvedPersistentKs && txt.includes(resolvedPersistentKs);
+              let paragraphContent = txt;
+              const resolvedClickKs = activeTagJump ? t(activeTagJump.keySentence, lang) : null;
 
-              if (isClickKeyBlock && activeTagJump.keySentence && block.text.includes(activeTagJump.keySentence)) {
+              if (isClickKeyBlock && resolvedClickKs && txt.includes(resolvedClickKs)) {
                 // Click-triggered: stronger highlight with animation
-                const parts = block.text.split(activeTagJump.keySentence);
+                const parts = txt.split(resolvedClickKs);
                 const phase = activeTagJump.sentencePhase;
                 const hlOpacity = phase === "mounting" ? 0 : phase === "in" ? 1 : phase === "out" ? 0 : 0;
                 paragraphContent = (
@@ -3161,21 +3194,21 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     transition: "background-color 1s ease",
                     borderRadius: 2,
                     padding: "1px 3px",
-                  }}>{activeTagJump.keySentence}</span>{parts.slice(1).join(activeTagJump.keySentence)}</>
+                  }}>{resolvedClickKs}</span>{parts.slice(1).join(resolvedClickKs)}</>
                 );
               } else if (hasPersistentKey) {
                 // Persistent: subtle always-visible highlight
-                const ks = persistentKeyInfo.keySentence;
-                const parts = block.text.split(ks);
+                const parts = txt.split(resolvedPersistentKs);
                 paragraphContent = (
                   <>{parts[0]}<span style={{
                     backgroundColor: "rgba(218, 212, 203, 0.45)",
                     borderRadius: 2,
                     padding: "1px 3px",
-                  }}>{ks}</span>{parts.slice(1).join(ks)}</>
+                  }}>{resolvedPersistentKs}</span>{parts.slice(1).join(resolvedPersistentKs)}</>
                 );
               }
-              return <p key={i} id={blockId} style={{ width: "100%", fontSize: T.body, color: "#333", lineHeight: 1.85, margin: "0 auto", maxWidth: 640, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>{paragraphContent}</p>;
+              const missingStyle = tStyle(block.text, lang);
+              return <p key={i} id={blockId} style={{ width: "100%", fontSize: T.body, color: "#333", lineHeight: 1.85, margin: "0 auto", maxWidth: 640, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80, ...missingStyle }}>{paragraphContent}</p>;
             }
             return <TextPlaceholder key={i} lines={5} />;
           }
@@ -3205,17 +3238,19 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                           width: 90,
                           minWidth: 90,
                           flexShrink: 0,
+                          ...tStyle(q.role, lang),
                         }}>
-                          {q.role}
+                          {t(q.role, lang)}
                         </span>
                         <span style={{
                           fontSize: 15,
                           lineHeight: 1.75,
                           color: "#2A2A2A",
                           flex: 1,
+                          ...tStyle(q.text, lang),
                         }}>
                           <span style={{ color: "#B8B0A3" }}>{"\u201C"}</span>
-                          {q.text}
+                          {t(q.text, lang)}
                           <span style={{ color: "#B8B0A3" }}>{"\u201D"}</span>
                         </span>
                         {qi < block.items.length - 1 && (
@@ -3258,11 +3293,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     borderBottom: mi < block.items.length - 1 ? "1px solid #E5E2DC" : "none",
                     flexDirection: isMobile ? "column" : "row",
                   }}>
-                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#1a1815", minWidth: isMobile ? "auto" : 140, flexShrink: 0, paddingTop: 2 }}>
-                      {m.name}
+                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#1a1815", minWidth: isMobile ? "auto" : 140, flexShrink: 0, paddingTop: 2, ...tStyle(m.name, lang) }}>
+                      {t(m.name, lang)}
                     </span>
-                    <span style={{ fontSize: T.body, color: "#6b6560", lineHeight: 1.85 }}>
-                      {m.desc}
+                    <span style={{ fontSize: T.body, color: "#6b6560", lineHeight: 1.85, ...tStyle(m.desc, lang) }}>
+                      {t(m.desc, lang)}
                     </span>
                   </div>
                 ))}
@@ -3282,19 +3317,21 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   color: "#000",
                   lineHeight: 1.4,
                   fontFamily: FONT_DISPLAY,
+                  ...tStyle(block.text, lang),
                 }}>
-                  {block.text}
+                  {t(block.text, lang)}
                 </blockquote>
               </div>
             );
           }
 
           if (block.type === "screenshot-carousel") {
+            const resolvedCarouselBlock = { ...block, items: block.items.map(item => ({ ...item, label: t(item.label, lang), note: t(item.note, lang) })) };
             return (
               <div key={i} id={blockId} style={{ margin: "12px 0" }}>
                 <ScreenshotCarousel
                   blockId={blockId}
-                  block={block}
+                  block={resolvedCarouselBlock}
                   carouselActive={carouselActive}
                   setCarouselActive={setCarouselActive}
                   setLightboxContent={setLightboxContent}
@@ -3312,17 +3349,20 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                   gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
                   gap: 16,
                 }}>
-                  {block.items.map((item, ii) => (
+                  {block.items.map((item, ii) => {
+                    const resolvedItem = { ...item, label: t(item.label, lang), note: t(item.note, lang) };
+                    return (
                     <div key={ii} style={{ position: "relative" }}>
                       <ScreenshotItem
-                        item={item}
+                        item={resolvedItem}
                         onLightbox={() => setLightboxContent({
-                          content: <img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
+                          content: <img src={item.src} alt={resolvedItem.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
                           initialScale: item.initialScale || 0.85
                         })}
                       />
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             );
@@ -3330,7 +3370,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
 
           if (block.type === "illustration") {
             const ill = project.illustrations[block.index];
-            const IllComponent = ILLUSTRATION_MAP[ill.name];
+            const illNameZh = typeof ill.name === "object" ? ill.name.zh : ill.name;
+            const IllComponent = ILLUSTRATION_MAP[illNameZh];
             if (IllComponent) {
               return (
                 <div
@@ -3368,7 +3409,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                     >
                       {isMobile && (
                         <p style={{ fontSize: 10, color: "#aaa", margin: "0 0 6px 0", textAlign: "center" }}>
-                          {"← 左右滑动查看 / scroll to explore →"}
+                          {lang === "en" ? "← Scroll to explore →" : "← 左右滑动查看 / scroll to explore →"}
                         </p>
                       )}
                       <div style={{ minWidth: isMobile ? 600 : "auto", width: "100%" }}>
@@ -3405,7 +3446,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
                       justifyContent: "space-between",
                       alignItems: "center",
                     }}>
-                      <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{ill.name}</p>
+                      <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{t(ill.name, lang)}</p>
                       <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{ill.type}</p>
                     </div>
                   </div>
@@ -3414,19 +3455,20 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             }
             return (
               <div key={i} id={blockId} style={{ scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}>
-                <PlaceholderBox label={ill.name} sublabel={ill.type + " \u00B7 " + ill.note} height={240} dark />
+                <PlaceholderBox label={t(ill.name, lang)} sublabel={ill.type + " \u00B7 " + t(ill.note, lang)} height={240} dark />
               </div>
             );
           }
 
           if (block.type === "screenshot-inline") {
             if (block.src) {
+              const resolvedBlock = { ...block, label: t(block.label, lang), note: t(block.note, lang), ...(block.sourceLink ? { sourceLink: { ...block.sourceLink, text: t(block.sourceLink.text, lang) } } : {}) };
               return (
                 <div key={i} id={blockId} style={{ margin: "12px 0" }}>
                   <ScreenshotInlineCard
-                    block={block}
+                    block={resolvedBlock}
                     onLightbox={() => setLightboxContent({
-                      content: <img src={block.src} alt={block.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
+                      content: <img src={block.src} alt={resolvedBlock.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
                       initialScale: 0.85
                     })}
                   />
@@ -3435,7 +3477,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
             }
             return (
               <div key={i} id={blockId} style={{ scrollMarginTop: 80 }}>
-                <PlaceholderBox label={block.label} sublabel={block.note} height={200} />
+                <PlaceholderBox label={t(block.label, lang)} sublabel={t(block.note, lang)} height={200} />
               </div>
             );
           }
@@ -3445,7 +3487,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           }
 
           if (block.type === "iteration-step") {
-            return <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "0 auto", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={block.heading} /></div></div>;
+            return <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "0 auto", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={t(block.heading, lang)} /></div></div>;
           }
 
           return null;
@@ -3461,9 +3503,9 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
         const renderCard = (s, i) => (
           <ScreenshotItem
             key={i}
-            item={{ src: s.src, label: s.label, note: s.proves }}
+            item={{ src: s.src, label: t(s.label, lang), note: t(s.proves, lang) }}
             onLightbox={() => setLightboxContent({
-              content: <img src={s.src} alt={s.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
+              content: <img src={s.src} alt={t(s.label, lang)} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
               initialScale: 0.85
             })}
           />
@@ -3474,7 +3516,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
               {"System in Action"}
             </h3>
             <p style={{ fontSize: T.small, color: "#999", marginBottom: 24 }}>
-              {"Evidence of live deployment"}
+              {lang === "en" ? "Deployed and in use" : "Evidence of live deployment"}
             </p>
             {featured.map((s, i) => (
               <div key={"f" + i} style={{ marginBottom: 20 }}>
@@ -3517,7 +3559,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           }}
         >
           <span style={{ fontSize: T.small, color: hoveredNav === "prev" ? "rgba(255,255,255,0.5)" : "#999", display: "block", transition: "color 0.2s ease" }}>{"\u2190 Previous"}</span>
-          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "prev" ? "#fff" : "#000", transition: "color 0.2s ease" }}>{hasPrev ? prevProject.name : "回到首页"}</span>
+          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "prev" ? "#fff" : "#000", transition: "color 0.2s ease" }}>{hasPrev ? t(prevProject.name, lang) : (lang === "en" ? "Back to Home" : "回到首页")}</span>
         </div>
         <div
           onClick={() => onNavigate(hasNext ? "project-" + nextProject.id : "home", { scrollToBottom: !hasNext })}
@@ -3536,7 +3578,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile }) {
           }}
         >
           <span style={{ fontSize: T.small, color: hoveredNav === "next" ? "rgba(255,255,255,0.5)" : "#999", display: "block", transition: "color 0.2s ease" }}>{"Next \u2192"}</span>
-          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "next" ? "#fff" : "#000", transition: "color 0.2s ease" }}>{hasNext ? nextProject.name : "回到首页"}</span>
+          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "next" ? "#fff" : "#000", transition: "color 0.2s ease" }}>{hasNext ? t(nextProject.name, lang) : (lang === "en" ? "Back to Home" : "回到首页")}</span>
         </div>
       </nav>
       </div>
@@ -3804,6 +3846,7 @@ export default function App() {
   const [page, setPage] = useState(getPageFromHash);
   const [toast, setToast] = useState(null);
   const [fade, setFade] = useState(1);
+  const [lang, setLang] = useState("en");
   const pendingNav = useRef(null);
   const pendingScroll = useRef(null);
   const pageRef = useRef(page);
@@ -3869,10 +3912,10 @@ export default function App() {
       display: "flex",
       flexDirection: "column",
     }}>
-      <Nav currentPage={page} onNavigate={navigate} isMobile={isMobile} />
+      <Nav currentPage={page} onNavigate={navigate} isMobile={isMobile} lang={lang} setLang={setLang} />
       <div style={{ opacity: fade, transition: "opacity 0.25s ease", flex: 1 }}>
-        {page === "home" && <HomePage onNavigate={navigate} isMobile={isMobile} />}
-        {cp && <ProjectPage project={cp} onNavigate={navigate} onToast={showToast} isMobile={isMobile} />}
+        {page === "home" && <HomePage onNavigate={navigate} isMobile={isMobile} lang={lang} />}
+        {cp && <ProjectPage project={cp} onNavigate={navigate} onToast={showToast} isMobile={isMobile} lang={lang} />}
       </div>
       <BackToTop />
       {toast && <Toast message={toast.msg} position={toast.position} onDone={() => setToast(null)} />}

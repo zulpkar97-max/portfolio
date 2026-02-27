@@ -3,7 +3,8 @@
 ## 项目概况
 
 React 19 + Vite 7.3 单页应用，hash 路由（#project-1/2/3）。
-所有组件、数据、样式都在 `src/App.jsx` 一个文件里（~3300行）。
+所有组件、数据、样式都在 `src/App.jsx` 一个文件里（~3600行）。
+中英双语：`t(v, lang)` 解析 `{zh, en}` 对象，`tStyle(v, lang)` 缺失翻译红色高亮。
 
 ## 技术栈
 
@@ -52,10 +53,10 @@ index.html
 
 ## App.jsx 关键区域（按行号区间）
 
-- **PROJECTS 数据数组**：~第15-340行
+- **PROJECTS 数据数组**：~第15-350行
   - Project 1（协作危机）：id=1，lines ~15-146
-  - Project 2（攻略站）：id=2，lines ~148-240
-  - Project 3（18语种翻译）：id=3，lines ~242-340
+  - Project 2（攻略站）：id=2，lines ~148-246
+  - Project 3（18语种翻译）：id=3，lines ~248-350
 - **共享组件**：PlaceholderBox, ScreenshotItem, TextPlaceholder ~345-390
 - **ILLUSTRATION_MAP**（SVG组件注册表）：搜索 `ILLUSTRATION_MAP`
 - **SideNav 组件**：搜索 `function SideNav`
@@ -81,6 +82,18 @@ index.html
 - **body block 渲染循环**：搜索 `block.type === "heading"`
   - 支持类型：heading, paragraph, quote-list, module-list, pull-quote, screenshot-inline, screenshot-carousel, screenshot-group, screenshot-pair, illustration, iteration-step
 
+## 中英双语系统
+
+- `t(v, lang)`: `{zh, en}` 对象 → 当前语言字符串；纯字符串直接返回
+- `tStyle(v, lang)`: `lang==="en"` 时，缺失翻译返回红色高亮样式 `{backgroundColor: "rgba(196,66,43,0.15)", color: "#c4422b"}`
+- `lang` 状态默认 `"en"`，顶部导航栏切换按钮
+- `skillTags`（中文数组）+ `skillTagsEn`（英文数组）并列使用，不是 `{zh, en}` 对象
+- `keySentence`: `{zh, en}` 格式，EN 必须是对应 `keyBlock` 英文段落的子字符串
+- 共享组件（ScreenshotItem, CarouselSlide 等）接收**已解析的字符串**，不需要 `lang`
+- `sourceLink.text` 也在调用处通过 `resolvedBlock` 预解析
+- 翻译来源：`网页翻译校对终版.xlsx`（4 sheet：T1-AI直翻, T2-你过一遍, T3-需要校对, SVG-已为英文）
+- 13 条 `[MISSING]` 占位符（Excel en 列为空），EN 模式下自动红色高亮
+
 ## 核心机制：skillTag 跳转 + 两层高亮
 
 每个 Project 有 `skillTags`（4个标签）和 `skillTagJumps` 对象：
@@ -90,7 +103,7 @@ skillTagJumps: {
   "标签名": {
     scrollTo: 6,              // 点击跳转到的 block index
     borderRange: [6, 12],     // 左边线覆盖的 block 范围
-    keySentence: "关键句文本", // 高亮的关键句（必须在正文中存在）
+    keySentence: { zh: "中文关键句", en: "EN substring" }, // 高亮的关键句
     keyBlock: 12              // 关键句所在的 block index
   }
 }
@@ -165,13 +178,23 @@ skillTagJumps: {
 - [x] Batch 4 诊断区重构：DiagnosisCascadeSVG + quote-list 左标签/右引言布局
 - [x] Batch 5 宽度居中：body 880px / text 720px / illustration 无 breakout / SideNav fixed / screenshot-group aspectRatio
 - [x] 首页 replay 按钮：?→AI 动画重播 SVG 按钮
+- [x] P1 内容打磨：角色说明、技术截图 filter+sourceLink、featured 娜娜截图、量化结果、pull-quote 收束
+- [x] P2 内容打磨：角色说明、3 条 pull-quote 打断文字墙、heading 去重、回头看扩写、截图 filter+sizing
+- [x] P3 内容打磨：角色说明、"4 Business scenarios" Step 3 铺垫、pull-quote 收束、截图 filter、featured 18 语种产出
+- [x] 视觉对齐：iteration-step/paragraph/pull-quote `width:"100%"` 修复 flex shrink-wrap 居中
+- [x] pull-quote maxWidth 720→640 对齐段落
+- [x] 底部导航：无下一项时 → "回到首页" + scroll-to-footer（去掉死路 placeholder）
+- [x] ScreenshotItem 组件：新增 `item.filter` 支持（screenshot-group 降饱和）
+- [x] 全量中英翻译替换：Excel 4 sheet 357行 → PROJECTS 数据 + 首页 + SVG 插图全部替换
+- [x] `tStyle()` 缺失翻译红色高亮 + 渲染逻辑 `t()` 适配所有 block 类型
+- [x] 12 个 keySentence 转 `{zh, en}` 格式 + sourceLink.text 双语
 
 ## 宽度网格系统
 
 - **Body 容器**: maxWidth 880, padding 0 40px 80px
-- **文本块** (paragraph, heading, pull-quote): maxWidth 720, margin "0 auto", padding "0 8px"
+- **文本块**: paragraph/pull-quote maxWidth **640**, heading maxWidth 720, all `margin: "0 auto", padding: "0 8px"`
 - **视觉块** (illustration, carousel, screenshot-group, screenshot-inline): 填满 880px 容器
-- **Heading 必须** `width: "100%"` 防止 flex shrink-wrap 居中
+- **Flex shrink-wrap 修复**: heading/iteration-step/paragraph/pull-quote 都必须 `width: "100%"`
 - **SideNav + ProgressBar**: 对称定位 `max(24px, calc((100vw - 720px) / 2 - 220px))`
 
 ## 轮播架构
@@ -188,12 +211,24 @@ npx vite --port 5173          # 开发服务器
 npx vite build                # 构建
 ```
 
+## 截图数据字段扩展
+
+- `filter: "saturate(0.65) brightness(1.05)"` — 外部截图降饱和，ScreenshotInlineCard 用 `block.filter`，ScreenshotItem 用 `item.filter`
+- `featured: true` — screenshot-inline 放大处理（margin 48px, border 1.5px #c4b5a4, boxShadow）
+- `sourceLink: { url, text }` — screenshot-inline 底部标签栏可点击链接
+
+## 导航系统
+
+- 路由值：`"home"`, `"project-1"`, `"project-2"`, `"project-3"`（不是 "landing"）
+- `navigate(target, { scrollToBottom: true })` — 页面切换后滚到底部
+- Prev/Next 底部导航：无上/下一项时显示 "回到首页"，点击跳首页 footer CTA 区域
+
 ## 注意事项
 
 - 编辑只涉及 `src/App.jsx` 和 `src/index.css`，没有其他代码文件
 - SVG 插图是内联 React 组件，不是外部文件
 - body block 的 `bodyIndex` 从0开始计数，`skillTagJumps` 里的 index 必须与实际 block 位置对应
-- `keySentence` 文本必须在对应 `keyBlock` 的正文中完全匹配（子字符串匹配）
+- `keySentence` 是 `{zh, en}` 对象，EN 文本必须在对应 `keyBlock` 英文段落中完全匹配（子字符串匹配）
 - screenshot-inline 需要 `src` 属性指向 `images/` 下的文件
 - screenshot-group / screenshot-carousel 的 items 数组每项也需要 `src`
 - screenshot-carousel 的 `carouselActive` state 在 ProjectPage 组件顶层声明
