@@ -119,7 +119,7 @@ skillTagJumps: {
 
 5层杂志化布局，`key={project.id}` 强制 remount 以重置动画：
 - Layer 1: 项目编号 "01/02/03"（DM Mono 64px）+ 元数据竖排（Role/Team/Context）
-- Layer 2: 标题（Noto Serif SC 900, clamp 36-72px）+ stat hook（大号数字 + 说明）
+- Layer 2: 标题（Noto Serif SC 900, ZH clamp 36-72px / EN clamp 32-56px maxWidth 620）+ stat hook（大号数字 + 说明，EN 模式改为 block layout 避免重叠）
 - Layer 3: 叙事段落（hook 句 700 + detail 句 300）
 - Layer 4: 条件渲染 — P1 用 Before→After 堆叠卡片，P2/P3 用 3列 Metrics 卡片
 - Layer 5: Section nav（4个 skillTag 锚点按钮）
@@ -188,6 +188,8 @@ skillTagJumps: {
 - [x] 全量中英翻译替换：Excel 4 sheet 357行 → PROJECTS 数据 + 首页 + SVG 插图全部替换
 - [x] `tStyle()` 缺失翻译红色高亮 + 渲染逻辑 `t()` 适配所有 block 类型
 - [x] 12 个 keySentence 转 `{zh, en}` 格式 + sourceLink.text 双语
+- [x] EN 样式走查修复：首页 Hero 字号缩小、项目 Hero 标题/Stat 布局分离、SideNav 标签字号缩小、Footer CTA 字号缩小
+- [x] EN 引号规范化：192 处中文弯引号 `' ' " "` → 英文直引号 `' "`
 
 ## 宽度网格系统
 
@@ -222,6 +224,27 @@ npx vite build                # 构建
 - 路由值：`"home"`, `"project-1"`, `"project-2"`, `"project-3"`（不是 "landing"）
 - `navigate(target, { scrollToBottom: true })` — 页面切换后滚到底部
 - Prev/Next 底部导航：无上/下一项时显示 "回到首页"，点击跳首页 footer CTA 区域
+
+## EN 适配样式（2026-02-27）
+
+英文文本普遍比中文长，以下区域在 `lang === "en"` 时使用独立样式：
+
+- **首页 Hero 标题**: EN `clamp(22px, 3.2vw, 34px)` / ZH `clamp(32px, 5.5vw, 56px)`，移动端 EN 22 / ZH 32
+- **项目 Hero 标题**: EN `clamp(32px, 4.5vw, 56px)` maxWidth 620 / ZH `clamp(36px, 5.5vw, 72px)` maxWidth 780
+- **heroStat 定位**: EN 模式（含非移动端）使用 block layout（`marginTop:24, textAlign:"right"`），不用 `position:absolute`，避免与长英文标题重叠
+- **SideNav 标签字号**: active 13px / inactive 11.5px，letterSpacing active 2 / inactive 0.5（中英共用，原值 15/12.5 太大导致 EN 溢出）
+- **Footer CTA 标题**: EN `clamp(22px, 3.2vw, 36px)` / ZH `clamp(26px, 3.8vw, 44px)`
+- **EN 引号规范**: 所有 EN 字段中使用英文直引号 `' "` 而非中文弯引号 `' ' " "`
+
+## 绝对禁令（翻译内容）
+
+以下规则具有最高优先级，**任何情况下都不允许违反**：
+
+1. **禁止填充任何英文翻译** — `[MISSING]` 占位符和所有未填充的英文内容，必须由用户人工填充。Claude 不允许自行翻译、补充、或猜测任何英文文案。
+2. **禁止删除任何已有英文文本** — 不得以任何理由删除、清空、或替换已有的英文翻译内容。
+3. **[MISSING] 红色高亮是故意的** — `tStyle()` 产生的红色高亮（`rgba(196,66,43,0.15)` 背景 + `#c4422b` 文字色）是用户特意设计的人工校对标记，绝对不允许移除、隐藏、或用其他颜色替代。
+4. **拿不准的内容问题只标注不修改** — 对于任何不确定的英文文案问题（措辞、长度、标签文案等），只能高亮标注或向用户提问，**绝对不允许自行修改内容**。
+5. **样式修改必须隔离** — EN 样式调整必须用 `lang === "en"` 条件分支，确保中文版不受任何影响。中文版是用户逐页校对过的标杆。
 
 ## 注意事项
 
