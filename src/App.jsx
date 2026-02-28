@@ -928,7 +928,7 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
       onMouseLeave={() => setCarouselPaused(false)}
     >
       {/* Carousel stage with arrows inside */}
-      <div style={{ position: "relative", height: Math.max(...items.map(it => it.height || 460)) + 60, overflow: "hidden", marginBottom: 16 }}>
+      <div style={{ position: "relative", height: Math.max(...items.map(it => it.height || 460)) + 100, overflow: "hidden", marginBottom: 16 }}>
         {items.map((item, ii) => {
           const pos = getPos(ii);
           const isCenter = pos === "center";
@@ -1035,6 +1035,25 @@ function Footer({ isMobile, th }) {
 
 function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, mode, setMode, th }) {
   const [hovered, setHovered] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close menu on navigation
+  const navTo = (target) => { setMenuOpen(false); onNavigate(target); };
+
+  const ModeIcon = ({ size = 16, color }) => mode === "light" ? (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  ) : (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  );
+
   return (
     <nav style={{
       position: "sticky",
@@ -1046,15 +1065,16 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, m
       <div style={{
         maxWidth: 880,
         margin: "0 auto",
-        padding: isMobile ? "10px 16px 8px" : "12px 40px 8px",
+        padding: isMobile ? "0 16px" : "12px 40px 8px",
+        height: isMobile ? 48 : undefined,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         position: "relative",
       }}>
-        <div style={{ position: "absolute", bottom: 0, left: isMobile ? 16 : 16, right: isMobile ? 16 : 16, height: 1, background: th.borderLight }} />
+        <div style={{ position: "absolute", bottom: 0, left: 16, right: 16, height: 1, background: th.borderLight }} />
         <span
-          onClick={() => { if (currentPage !== "home") onNavigate("home"); }}
+          onClick={() => { if (currentPage !== "home") { setMenuOpen(false); onNavigate("home"); } }}
           onMouseEnter={() => setHovered("home")}
           onMouseLeave={() => setHovered(null)}
           style={{
@@ -1070,81 +1090,130 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, m
             transition: "color 0.2s ease, background-color 0.2s ease",
           }}
         >{lang === "en" ? "Zulpkar Tuerxun" : "祖力卡尔·吐尔逊江"}</span>
-      <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 12 : 6, flexWrap: "wrap", justifyContent: "flex-end" }}>
-        {PROJECTS.map((p) => {
-          const isActive = currentPage === "project-" + p.id;
-          const isItemHovered = hovered === p.id;
-          return (
-            <span
-              key={p.id}
-              onClick={() => { if (!isActive) onNavigate("project-" + p.id); }}
-              onMouseEnter={() => setHovered(p.id)}
-              onMouseLeave={() => setHovered(null)}
-              style={{
-                fontSize: 14,
-                fontFamily: FONT_MONO,
-                fontWeight: 400,
-                color: isItemHovered ? th.navHoverText : isActive ? th.navActiveText : th.navText,
-                padding: "4px 10px",
-                backgroundColor: isItemHovered ? th.navHoverBg : isActive ? th.navActiveBg : "transparent",
-                borderRadius: 0,
-                whiteSpace: "nowrap",
-                cursor: "pointer",
-                transition: "color 0.2s ease, background-color 0.2s ease",
-              }}
-            >
-              {p.navName}
-            </span>
-          );
-        })}
-        {!isMobile && <span style={{ color: th.dividerColor, fontSize: 14, margin: "0 4px" }}>|</span>}
+
+      {isMobile ? (
+        /* ---- Mobile: hamburger button ---- */
         <span
-          onClick={() => { if (onLangSwitch) onLangSwitch(); }}
-          onMouseEnter={() => setHovered("lang")}
-          onMouseLeave={() => setHovered(null)}
-          style={{
-            fontFamily: FONT_MONO, fontSize: 14,
-            color: hovered === "lang" ? th.navHoverText : th.navText,
-            cursor: "pointer", userSelect: "none",
-            whiteSpace: "nowrap",
-            padding: "4px 10px",
-            minWidth: 40, textAlign: "center", display: "inline-block",
-            backgroundColor: hovered === "lang" ? th.navHoverBg : "transparent",
-            transition: "color 0.2s ease, background-color 0.2s ease",
-          }}
-        >
-          {lang === "en" ? "中文" : "EN"}
-        </span>
-        <span
-          onClick={() => setMode(mode === "light" ? "dark" : "light")}
-          onMouseEnter={() => setHovered("mode")}
-          onMouseLeave={() => setHovered(null)}
+          onClick={() => setMenuOpen(!menuOpen)}
           style={{
             cursor: "pointer", userSelect: "none",
-            whiteSpace: "nowrap",
-            padding: "4px 8px",
+            padding: "6px 8px",
             display: "inline-flex", alignItems: "center", justifyContent: "center",
-            backgroundColor: hovered === "mode" ? th.navHoverBg : "transparent",
-            transition: "background-color 0.2s ease",
             lineHeight: 0,
           }}
         >
-          {mode === "light" ? (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={hovered === "mode" ? th.navHoverText : th.navText} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          {menuOpen ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={th.text} strokeWidth="2" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
           ) : (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={hovered === "mode" ? th.navHoverText : th.navText} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="5"/>
-              <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={th.text} strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
           )}
         </span>
+      ) : (
+        /* ---- Desktop: inline items ---- */
+        <div style={{ display: "flex", alignItems: "center", gap: 6, justifyContent: "flex-end" }}>
+          {PROJECTS.map((p) => {
+            const isActive = currentPage === "project-" + p.id;
+            const isItemHovered = hovered === p.id;
+            return (
+              <span
+                key={p.id}
+                onClick={() => { if (!isActive) onNavigate("project-" + p.id); }}
+                onMouseEnter={() => setHovered(p.id)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  fontSize: 14, fontFamily: FONT_MONO, fontWeight: 400,
+                  color: isItemHovered ? th.navHoverText : isActive ? th.navActiveText : th.navText,
+                  padding: "4px 10px",
+                  backgroundColor: isItemHovered ? th.navHoverBg : isActive ? th.navActiveBg : "transparent",
+                  whiteSpace: "nowrap", cursor: "pointer",
+                  transition: "color 0.2s ease, background-color 0.2s ease",
+                }}
+              >{p.navName}</span>
+            );
+          })}
+          <span style={{ color: th.dividerColor, fontSize: 14, margin: "0 4px" }}>|</span>
+          <span
+            onClick={() => { if (onLangSwitch) onLangSwitch(); }}
+            onMouseEnter={() => setHovered("lang")}
+            onMouseLeave={() => setHovered(null)}
+            style={{
+              fontFamily: FONT_MONO, fontSize: 14,
+              color: hovered === "lang" ? th.navHoverText : th.navText,
+              cursor: "pointer", userSelect: "none", whiteSpace: "nowrap",
+              padding: "4px 10px", minWidth: 40, textAlign: "center", display: "inline-block",
+              backgroundColor: hovered === "lang" ? th.navHoverBg : "transparent",
+              transition: "color 0.2s ease, background-color 0.2s ease",
+            }}
+          >{lang === "en" ? "中文" : "EN"}</span>
+          <span
+            onClick={() => setMode(mode === "light" ? "dark" : "light")}
+            onMouseEnter={() => setHovered("mode")}
+            onMouseLeave={() => setHovered(null)}
+            style={{
+              cursor: "pointer", userSelect: "none", padding: "4px 8px",
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              backgroundColor: hovered === "mode" ? th.navHoverBg : "transparent",
+              transition: "background-color 0.2s ease", lineHeight: 0,
+            }}
+          ><ModeIcon color={hovered === "mode" ? th.navHoverText : th.navText} /></span>
+        </div>
+      )}
       </div>
-      </div>
+
+      {/* ---- Mobile dropdown menu ---- */}
+      {isMobile && menuOpen && (
+        <>
+          {/* Backdrop */}
+          <div onClick={() => setMenuOpen(false)} style={{ position: "fixed", inset: 0, zIndex: 98 }} />
+          {/* Panel */}
+          <div style={{
+            position: "absolute", top: "100%", left: 0, right: 0, zIndex: 99,
+            backgroundColor: th.navBg,
+            borderBottom: `1px solid ${th.borderLight}`,
+            padding: "12px 16px 16px",
+            display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
+          }}>
+            {PROJECTS.map((p) => {
+              const isActive = currentPage === "project-" + p.id;
+              return (
+                <span
+                  key={p.id}
+                  onClick={() => { if (!isActive) navTo("project-" + p.id); }}
+                  style={{
+                    fontSize: 15, fontFamily: FONT_MONO,
+                    color: isActive ? th.navActiveText : th.text,
+                    backgroundColor: isActive ? th.navActiveBg : "transparent",
+                    padding: "10px 20px", cursor: "pointer", textAlign: "center",
+                    transition: "background-color 0.15s ease",
+                  }}
+                >{p.navName}</span>
+              );
+            })}
+            <div style={{ width: "100%", height: 1, background: th.borderLight, margin: "4px 0" }} />
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, padding: "6px 0" }}>
+              <span
+                onClick={() => { if (onLangSwitch) onLangSwitch(); }}
+                style={{
+                  fontFamily: FONT_MONO, fontSize: 14, color: th.text,
+                  cursor: "pointer", userSelect: "none", padding: "6px 10px",
+                }}
+              >{lang === "en" ? "中文" : "EN"}</span>
+              <span
+                onClick={() => setMode(mode === "light" ? "dark" : "light")}
+                style={{
+                  cursor: "pointer", userSelect: "none", padding: "6px 8px",
+                  display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  lineHeight: 0,
+                }}
+              ><ModeIcon color={th.text} /></span>
+            </div>
+          </div>
+        </>
+      )}
     </nav>
   );
 }
@@ -3991,10 +4060,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
 
 
       {/* === Prev / Next Nav === */}
+      {!isMobile && (
       <nav style={{
         display: "flex",
         marginTop: 72, paddingTop: 28, borderTop: `1px solid ${th.prevNextBorder}`,
-        flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 16,
+        flexDirection: "row", gap: 16,
       }}>
         <div
           onClick={() => onNavigate(hasPrev ? "project-" + prevProject.id : "home", { scrollToBottom: !hasPrev })}
@@ -4023,7 +4093,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
             flex: 1,
             border: `1px solid ${th.prevNextBorder}`,
             padding: "14px 20px",
-            textAlign: isMobile ? "left" : "right",
+            textAlign: "right",
             cursor: "pointer",
             backgroundColor: hoveredNav === "next" ? th.prevNextHoverBg : "transparent",
             backgroundImage: hoveredNav === "next" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, ${th.prevNextGlow}, rgba(17,17,17,0))` : "none",
@@ -4034,7 +4104,49 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
           <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "next" ? th.prevNextHoverTitle : th.prevNextTitle, transition: "color 0.2s ease" }}>{hasNext ? t(nextProject.name, lang) : (lang === "en" ? "Back to Home" : "回到首页")}</span>
         </div>
       </nav>
+      )}
+      {/* Mobile: spacer for fixed bottom nav */}
+      {isMobile && <div style={{ height: 72 }} />}
       </div>
+      {/* Mobile fixed bottom nav */}
+      {isMobile && (
+        <nav style={{
+          position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 100,
+          backgroundColor: th.navBg,
+          borderTop: `1px solid ${th.borderLight}`,
+          display: "flex", flexDirection: "row",
+          height: 60,
+          transition: "background-color 0.3s ease",
+        }}>
+          <div
+            onClick={() => onNavigate(hasPrev ? "project-" + prevProject.id : "home", { scrollToBottom: !hasPrev })}
+            style={{
+              width: "50%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+              cursor: "pointer", padding: "6px 12px", boxSizing: "border-box",
+              borderRight: `1px solid ${th.borderLight}`,
+              textAlign: "center", overflow: "hidden",
+            }}
+          >
+            <span style={{ fontSize: 10, color: th.prevNextLabel, letterSpacing: 0.5 }}>{"\u2190 Previous"}</span>
+            <span style={{ fontSize: 12, fontWeight: 500, color: th.prevNextTitle, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", width: "100%", textAlign: "center" }}>
+              {hasPrev ? t(prevProject.name, lang) : (lang === "en" ? "Home" : "首页")}
+            </span>
+          </div>
+          <div
+            onClick={() => onNavigate(hasNext ? "project-" + nextProject.id : "home", { scrollToBottom: !hasNext })}
+            style={{
+              width: "50%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+              cursor: "pointer", padding: "6px 12px", boxSizing: "border-box",
+              textAlign: "center", overflow: "hidden",
+            }}
+          >
+            <span style={{ fontSize: 10, color: th.prevNextLabel, letterSpacing: 0.5 }}>{"Next \u2192"}</span>
+            <span style={{ fontSize: 12, fontWeight: 500, color: th.prevNextTitle, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", width: "100%", textAlign: "center" }}>
+              {hasNext ? t(nextProject.name, lang) : (lang === "en" ? "Home" : "首页")}
+            </span>
+          </div>
+        </nav>
+      )}
       {lightboxContent && (
         <Lightbox onClose={() => setLightboxContent(null)} initialScale={lightboxContent.initialScale || 0.85} th={th}>
           {lightboxContent.content}
@@ -4047,7 +4159,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
 /* ===== App ===== */
 
 function Lightbox({ children, onClose, initialScale = 0.85, th }) {
-  const [scale, setScale] = useState(initialScale);
+  const isMobileLB = window.innerWidth < 720;
+  const [scale, setScale] = useState(isMobileLB ? 1 : initialScale);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const dragging = useRef(false);
   const dragStart = useRef({ x: 0, y: 0 });
@@ -4122,7 +4235,7 @@ function Lightbox({ children, onClose, initialScale = 0.85, th }) {
     if (!dragging.current) return;
     const nx = e.clientX - dragStart.current.x;
     const ny = e.clientY - dragStart.current.y;
-    if (Math.abs(nx - posRef.current.x) > 10 || Math.abs(ny - posRef.current.y) > 10) {
+    if (Math.abs(nx) > 15 || Math.abs(ny) > 15) {
       hasDragged.current = true;
     }
     posRef.current = { x: nx, y: ny };
@@ -4131,7 +4244,14 @@ function Lightbox({ children, onClose, initialScale = 0.85, th }) {
 
   const onPointerUp = () => {
     dragging.current = false;
-    if (!hasDragged.current) onClose();
+    if (!hasDragged.current) {
+      // Ghost-click shield: prevent the underlying card from re-opening lightbox
+      const shield = document.createElement("div");
+      Object.assign(shield.style, { position: "fixed", inset: "0", zIndex: "9999", background: "transparent" });
+      document.body.appendChild(shield);
+      setTimeout(() => shield.remove(), 400);
+      onClose();
+    }
   };
 
   return (
@@ -4175,9 +4295,9 @@ function Lightbox({ children, onClose, initialScale = 0.85, th }) {
         transition: dragging.current ? "none" : "transform 0.15s ease-out",
         display: "flex", flexDirection: "column", alignItems: "center",
         justifyContent: "center",
-        maxWidth: "min(85vw, 900px)",
+        maxWidth: isMobileLB ? "95vw" : "min(85vw, 900px)",
       }}>
-        <div style={{ backgroundColor: th.lightboxCardBg, padding: 24, boxSizing: "border-box", borderRadius: "8px" }}>
+        <div style={{ backgroundColor: th.lightboxCardBg, padding: isMobileLB ? 10 : 24, boxSizing: "border-box", borderRadius: "8px" }}>
           {children}
         </div>
         {/* Hint bar right below the card */}
@@ -4231,6 +4351,7 @@ function Lightbox({ children, onClose, initialScale = 0.85, th }) {
 }
 
 function BackToTop({ th }) {
+  const isMobileBTT = window.innerWidth < 720;
   const [show, setShow] = useState(false);
   const [hovered, setHovered] = useState(false);
   useEffect(() => {
@@ -4245,8 +4366,8 @@ function BackToTop({ th }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        position: "fixed", bottom: 80,
-        right: "max(24px, calc((100% - 720px) / 2 - 220px))",
+        position: "fixed", bottom: isMobileBTT ? 70 : 80,
+        right: isMobileBTT ? 16 : "max(24px, calc((100% - 720px) / 2 - 220px))",
         zIndex: 200, width: 40, height: 40,
         border: hovered ? `1px solid ${th.backToTopHoverBorder}` : `1px solid ${th.backToTopBorder}`,
         backgroundColor: hovered ? th.backToTopHoverBg : th.backToTopBg,
