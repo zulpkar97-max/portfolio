@@ -1013,20 +1013,17 @@ function Footer({ isMobile, th }) {
             transition: "all 0.2s ease",
           }}
         >{"zulpkar97@gmail.com"}</a>
-        <a
-          href="#"
-          onMouseEnter={() => setHBtn("link")}
-          onMouseLeave={() => setHBtn(null)}
+        <span
+          title="Coming soon"
           style={{
             fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
-            padding: "8px 20px", borderRadius: 2, cursor: "pointer",
-            textDecoration: "none", display: "inline-flex", alignItems: "center",
-            border: hBtn === "link" ? `1px solid ${th.btnHoverBorder}` : `1px solid ${th.btnBorder}`,
-            color: hBtn === "link" ? th.btnHoverText : th.btnText,
-            backgroundColor: hBtn === "link" ? th.btnHoverBg : "transparent",
-            transition: "all 0.2s ease",
+            padding: "8px 20px", borderRadius: 2, cursor: "not-allowed",
+            display: "inline-flex", alignItems: "center",
+            border: `1px solid ${th.btnBorder}`,
+            color: th.btnText,
+            opacity: 0.4,
           }}
-        >{"LinkedIn"}</a>
+        >{"LinkedIn"}</span>
       </div>
       <p style={{ fontFamily: FONT_MONO, fontSize: 12, color: th.footerText, letterSpacing: "0.04em", marginTop: 16 }}>{"zulpkar.com"}</p>
     </footer>
@@ -1876,24 +1873,20 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
             >
               {"zulpkar97@gmail.com"}
             </a>
-            <a
+            <span
               ref={btnLinkedinRef}
-              href="#"
-              onMouseEnter={(e) => { setHoveredBtn("link"); setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
-              onMouseMove={(e) => setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })}
-              onMouseLeave={() => setHoveredBtn(null)}
+              title="Coming soon"
               style={{
                 fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
-                padding: "12px 28px", borderRadius: 2, cursor: "pointer",
-                textDecoration: "none", display: "inline-flex", alignItems: "center",
-                border: hoveredBtn === "link" ? `1px solid ${th.btnHoverBorder}` : `1px solid ${th.btnBorder}`,
-                color: hoveredBtn === "link" ? th.btnHoverText : th.btnText,
-                backgroundColor: hoveredBtn === "link" ? th.btnHoverBg : "transparent",
-                transition: "all 0.2s ease",
+                padding: "12px 28px", borderRadius: 2, cursor: "not-allowed",
+                display: "inline-flex", alignItems: "center",
+                border: `1px solid ${th.btnBorder}`,
+                color: th.btnText,
+                opacity: 0.4,
               }}
             >
               {"LinkedIn"}
-            </a>
+            </span>
           </div>
 
           <p ref={detailBelowRef} style={{
