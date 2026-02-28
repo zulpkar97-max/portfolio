@@ -31,7 +31,267 @@ const MOBILE_NAV_H = 50;
  */
 
 const T = { heading: 18, body: 16, small: 13 };
-const ACCENT = "#c4422b";
+const ACCENT_LIGHT = "#c4422b";
+const ACCENT_DARK = "#d4513a";
+
+const THEME = {
+  light: {
+    accent: ACCENT_LIGHT,
+    bg: "#faf8f4",
+    bgPage: "#f0ebe3",
+    bgCard: "#fff",
+    bgCardAlt: "#faf9f7",
+    bgHover: "rgba(26, 24, 21, 0.02)",
+    bgOverlay: "rgba(20,18,15,0.85)",
+    text: "#000",
+    textPrimary: "#1a1815",
+    textSecondary: "#6b6560",
+    textMuted: "#8a857d",
+    textLight: "#a09688",
+    textPlaceholder: "#d4cdc2",
+    textHero: "#2a2520",
+    textInverse: "#faf8f4",
+    border: "#d4cfc7",
+    borderLight: "#E5E2DC",
+    borderMedium: "#D5D0C8",
+    borderNav: "#B8B0A3",
+    separator: "#d4cfc7",
+    headingDivider: "#D5D0C8",
+    navBg: "#faf8f4",
+    navHoverBg: "#1a1815",
+    navHoverText: "#faf8f4",
+    navActiveBg: "#F2EFEA",
+    navActiveText: "#1a1815",
+    navText: "#6b6560",
+    divider: "|",
+    dividerColor: "#d4cfc7",
+    footerText: "#d4cfc7",
+    tagBorder: "#d4cfc7",
+    tagText: "#6b6560",
+    skillBtnBorder: "#B8B0A3",
+    skillBtnText: "#1a1815",
+    skillBtnHoverBg: "#1a1815",
+    skillBtnHoverText: "#faf8f4",
+    arrowBg: "rgba(255,255,255,0.85)",
+    arrowBorder: "#D5D0C8",
+    arrowColor: "#B8B0A3",
+    arrowHoverBg: "#fff",
+    arrowHoverBorder: "#B8B0A3",
+    arrowHoverColor: "#2A2A2A",
+    dotActive: "#6b6560",
+    dotInactive: "#d4cfc7",
+    cardBg: "#eae7e1",
+    cardBorder: "#d4cdc2",
+    stateBefore: "#eae7e1",
+    stateAfter: "#faf9f7",
+    illustrationBg: "#fff",
+    illustrationBorder: "#d4cdc2",
+    illustrationLabelBg: "#e8e3da",
+    imgContainerBg: "#f5f3f0",
+    pullQuoteBorder: ACCENT_LIGHT,
+    progressTrack: "#E5E2DC",
+    progressFill: "#000",
+    progressText: "#888",
+    mobileNavBg: "rgba(250,249,247,0.92)",
+    mobileNavFlash: "rgba(250,249,247,0.97)",
+    sideNavCardBg: "rgba(255,255,255,0.45)",
+    sideNavCardBorder: "rgba(255,255,255,0.5)",
+    sideNavHeaderBorder: "rgba(255,255,255,0.4)",
+    lightboxBg: "rgba(20,18,15,0.85)",
+    lightboxCardBg: "#fff",
+    toastBg: "#2A2A2A",
+    toastText: "#fff",
+    backToTopBg: "#faf8f4",
+    backToTopBorder: "#D5D0C8",
+    backToTopHoverBg: "#1a1815",
+    backToTopHoverBorder: "#1a1815",
+    backToTopText: "#666",
+    backToTopHoverText: "#faf8f4",
+    btnBorder: "#d4cfc7",
+    btnHoverBorder: "#1a1815",
+    btnText: "#1a1815",
+    btnHoverText: "#faf8f4",
+    btnHoverBg: "#1a1815",
+    cursorGradient: "radial-gradient(circle, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 60%)",
+    cursorBlend: "multiply",
+    paragraphColor: "#333",
+    quoteListRole: "#999",
+    quoteListText: "#2A2A2A",
+    quoteListQuoteMark: "#B8B0A3",
+    quoteListSep: "rgba(213,208,200,0.45)",
+    moduleNameColor: "#1a1815",
+    moduleDescColor: "#6b6560",
+    moduleBorder: "#E5E2DC",
+    pullQuoteText: "#000",
+    headingColor: "#000",
+    iterVersionBg: "#333",
+    iterVersionText: "#fff",
+    iterLineBg: "#E5E2DC",
+    iterHeadingColor: "#000",
+    beforeLabel: "#888",
+    afterLabel: ACCENT_LIGHT,
+    beforeText: "#aaa69f",
+    noteColor: "#aaa",
+    heroNarrativeHook: "#1a1815",
+    heroNarrativeDetail: "#8a857d",
+    metricText: "#1a1815",
+    metricLabelColor: "#8a857d",
+    prevNextBg: "transparent",
+    prevNextHoverBg: "#1a1815",
+    prevNextBorder: "#D5D0C8",
+    prevNextLabel: "#999",
+    prevNextHoverLabel: "rgba(255,255,255,0.5)",
+    prevNextTitle: "#000",
+    prevNextHoverTitle: "#fff",
+    prevNextGlow: "rgba(255,255,255,0.12)",
+    screenshotLabelColor: "#333",
+    screenshotNoteColor: "#999",
+    expandCursorBg: "rgba(17,17,17,0.85)",
+    expandCursorText: "#fff",
+    // SVG illustration colors — keep original
+    svgTextDark: "#3a3632",
+    svgTextLight: "#a09688",
+    svgBorderLight: "#d4cdc2",
+    svgBgZone: "#e8e2d8",
+    svgBgModule: "#ffffff",
+    svgBorder: "#d4cdc2",
+    svgRoleTint: "#8a7b6e",
+    // Diagram-specific
+    diagNodeFill: "#E8E4DE",
+    diagNodeStroke: "#C8C2B8",
+    diagLineStroke: "#B8B0A3",
+    diagFocalLine: "#C8C2B8",
+  },
+  dark: {
+    accent: ACCENT_DARK,
+    bg: "#1a1a1a",
+    bgPage: "#111111",
+    bgCard: "#252525",
+    bgCardAlt: "#1e1e1e",
+    bgHover: "rgba(255, 255, 255, 0.04)",
+    bgOverlay: "rgba(0,0,0,0.88)",
+    text: "#e8e4df",
+    textPrimary: "#e8e4df",
+    textSecondary: "#9a958d",
+    textMuted: "#7a756d",
+    textLight: "#6a655d",
+    textPlaceholder: "#3a3632",
+    textHero: "#e8e4df",
+    textInverse: "#1a1a1a",
+    border: "#3a3632",
+    borderLight: "#2e2b27",
+    borderMedium: "#3a3632",
+    borderNav: "#5a5550",
+    separator: "#3a3632",
+    headingDivider: "#3a3632",
+    navBg: "#1a1a1a",
+    navHoverBg: "#e8e4df",
+    navHoverText: "#1a1a1a",
+    navActiveBg: "#2a2725",
+    navActiveText: "#e8e4df",
+    navText: "#9a958d",
+    divider: "|",
+    dividerColor: "#3a3632",
+    footerText: "#3a3632",
+    tagBorder: "#3a3632",
+    tagText: "#9a958d",
+    skillBtnBorder: "#5a5550",
+    skillBtnText: "#e8e4df",
+    skillBtnHoverBg: "#e8e4df",
+    skillBtnHoverText: "#1a1a1a",
+    arrowBg: "rgba(30,30,30,0.85)",
+    arrowBorder: "#3a3632",
+    arrowColor: "#5a5550",
+    arrowHoverBg: "#252525",
+    arrowHoverBorder: "#5a5550",
+    arrowHoverColor: "#e8e4df",
+    dotActive: "#9a958d",
+    dotInactive: "#3a3632",
+    cardBg: "#252525",
+    cardBorder: "#3a3632",
+    stateBefore: "#252525",
+    stateAfter: "#1e1e1e",
+    illustrationBg: "#252525",
+    illustrationBorder: "#3a3632",
+    illustrationLabelBg: "#2e2b27",
+    imgContainerBg: "#2a2725",
+    pullQuoteBorder: ACCENT_DARK,
+    progressTrack: "#2e2b27",
+    progressFill: "#e8e4df",
+    progressText: "#7a756d",
+    mobileNavBg: "rgba(26,26,26,0.92)",
+    mobileNavFlash: "rgba(26,26,26,0.97)",
+    sideNavCardBg: "rgba(30,30,30,0.65)",
+    sideNavCardBorder: "rgba(60,58,54,0.5)",
+    sideNavHeaderBorder: "rgba(60,58,54,0.4)",
+    lightboxBg: "rgba(0,0,0,0.88)",
+    lightboxCardBg: "#252525",
+    toastBg: "#e8e4df",
+    toastText: "#1a1a1a",
+    backToTopBg: "#252525",
+    backToTopBorder: "#3a3632",
+    backToTopHoverBg: "#e8e4df",
+    backToTopHoverBorder: "#e8e4df",
+    backToTopText: "#9a958d",
+    backToTopHoverText: "#1a1a1a",
+    btnBorder: "#3a3632",
+    btnHoverBorder: "#e8e4df",
+    btnText: "#e8e4df",
+    btnHoverText: "#1a1a1a",
+    btnHoverBg: "#e8e4df",
+    cursorGradient: "radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%)",
+    cursorBlend: "screen",
+    paragraphColor: "#c8c4bd",
+    quoteListRole: "#7a756d",
+    quoteListText: "#e8e4df",
+    quoteListQuoteMark: "#5a5550",
+    quoteListSep: "rgba(60,58,54,0.45)",
+    moduleNameColor: "#e8e4df",
+    moduleDescColor: "#9a958d",
+    moduleBorder: "#2e2b27",
+    pullQuoteText: "#e8e4df",
+    headingColor: "#e8e4df",
+    iterVersionBg: "#e8e4df",
+    iterVersionText: "#1a1a1a",
+    iterLineBg: "#2e2b27",
+    iterHeadingColor: "#e8e4df",
+    beforeLabel: "#7a756d",
+    afterLabel: ACCENT_DARK,
+    beforeText: "#6a655d",
+    noteColor: "#5a5550",
+    heroNarrativeHook: "#e8e4df",
+    heroNarrativeDetail: "#7a756d",
+    metricText: "#e8e4df",
+    metricLabelColor: "#7a756d",
+    prevNextBg: "transparent",
+    prevNextHoverBg: "#e8e4df",
+    prevNextBorder: "#3a3632",
+    prevNextLabel: "#7a756d",
+    prevNextHoverLabel: "rgba(26,26,26,0.5)",
+    prevNextTitle: "#e8e4df",
+    prevNextHoverTitle: "#1a1a1a",
+    prevNextGlow: "rgba(255,255,255,0.06)",
+    screenshotLabelColor: "#c8c4bd",
+    screenshotNoteColor: "#7a756d",
+    expandCursorBg: "rgba(232,228,223,0.9)",
+    expandCursorText: "#1a1a1a",
+    // SVG illustration colors — dark adapted
+    svgTextDark: "#c8c4bd",
+    svgTextLight: "#6a655d",
+    svgBorderLight: "#3a3632",
+    svgBgZone: "#2a2725",
+    svgBgModule: "#2e2b27",
+    svgBorder: "#3a3632",
+    svgRoleTint: "#7a756d",
+    // Diagram-specific
+    diagNodeFill: "#2e2b27",
+    diagNodeStroke: "#4a4540",
+    diagLineStroke: "#5a5550",
+    diagFocalLine: "#4a4540",
+  },
+};
+
+const ACCENT = ACCENT_LIGHT; // legacy reference kept for data objects only
 
 // --- i18n helpers ---
 // t(value, lang): if value is {zh, en} object, return the right language string; otherwise pass through.
@@ -369,23 +629,23 @@ const PROJECTS = [
 
 /* ===== Shared Components ===== */
 
-function PlaceholderBox({ label, sublabel, height = 180, dark = false }) {
+function PlaceholderBox({ label, sublabel, height = 180, dark = false, th }) {
   return (
     <div style={{
       width: "100%", height,
-      border: dark ? "1px solid #B8B0A3" : "1px dashed #D5D0C8",
-      backgroundColor: dark ? "#EDEAE3" : "#F2EFEA",
+      border: dark ? `1px solid ${th.borderNav}` : `1px dashed ${th.borderMedium}`,
+      backgroundColor: dark ? th.cardBg : th.imgContainerBg,
       display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
       padding: 16, boxSizing: "border-box",
     }}>
-      <span style={{ fontSize: T.small, color: "#888", textAlign: "center", lineHeight: 1.5 }}>{label}</span>
-      {sublabel && <span style={{ fontSize: T.small, color: "#aaa", marginTop: 4, textAlign: "center" }}>{sublabel}</span>}
+      <span style={{ fontSize: T.small, color: th.textMuted, textAlign: "center", lineHeight: 1.5 }}>{label}</span>
+      {sublabel && <span style={{ fontSize: T.small, color: th.noteColor, marginTop: 4, textAlign: "center" }}>{sublabel}</span>}
     </div>
   );
 }
 
-function ScreenshotItem({ item, onLightbox }) {
+function ScreenshotItem({ item, onLightbox, th }) {
   const [failed, setFailed] = useState(false);
   const [imgDimensions, setImgDimensions] = useState(null);
   const containerRef = useRef(null);
@@ -412,9 +672,9 @@ function ScreenshotItem({ item, onLightbox }) {
   return (
     <div ref={containerRef} onClick={() => hasImage && onLightbox()} onMouseEnter={() => hasImage && setExpandCursor(c => ({ ...c, visible: true }))} onMouseMove={(e) => { if (!hasImage) return; const rect = e.currentTarget.getBoundingClientRect(); setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top }); }} onMouseLeave={() => setExpandCursor(c => ({ ...c, visible: false }))} style={{ cursor: hasImage ? "zoom-in" : "default", position: "relative" }}>
       <div style={{
-        background: "#fff",
+        background: th.illustrationBg,
         borderRadius: "10px",
-        border: "1px solid #d4cdc2",
+        border: `1px solid ${th.illustrationBorder}`,
         overflow: "hidden",
       }}>
         {hasImage ? (
@@ -422,7 +682,7 @@ function ScreenshotItem({ item, onLightbox }) {
             position: "relative",
             width: "100%",
             height: 320,
-            backgroundColor: "#f5f3f0",
+            backgroundColor: th.imgContainerBg,
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
@@ -456,21 +716,21 @@ function ScreenshotItem({ item, onLightbox }) {
             />
           </div>
         ) : (
-          <PlaceholderBox label={item.label} sublabel={item.note} height={200} />
+          <PlaceholderBox label={item.label} sublabel={item.note} height={200} th={th} />
         )}
         <div style={{
           padding: "12px 16px",
-          borderTop: "1px solid #e8e3da",
+          borderTop: `1px solid ${th.illustrationLabelBg}`,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}>
-          <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
-          {item.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{item.note}</p>}
+          <p style={{ fontSize: T.small, fontWeight: 600, color: th.screenshotLabelColor, margin: 0 }}>{item.label}</p>
+          {item.note && <p style={{ fontSize: T.small, color: th.screenshotNoteColor, margin: 0 }}>{item.note}</p>}
         </div>
       </div>
       {hasImage && expandCursor.visible && (
-        <div style={{ position: "absolute", left: expandCursor.x, top: expandCursor.y, transform: "translate(12px, 12px)", pointerEvents: "none", zIndex: 10, display: "flex", alignItems: "center", gap: 5, fontSize: T.small, color: "#fff", backgroundColor: "rgba(17,17,17,0.85)", padding: "6px 12px", whiteSpace: "nowrap" }}>
+        <div style={{ position: "absolute", left: expandCursor.x, top: expandCursor.y, transform: "translate(12px, 12px)", pointerEvents: "none", zIndex: 10, display: "flex", alignItems: "center", gap: 5, fontSize: T.small, color: th.expandCursorText, backgroundColor: th.expandCursorBg, padding: "6px 12px", whiteSpace: "nowrap" }}>
           <svg width="12" height="12" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
           Expand
         </div>
@@ -479,27 +739,27 @@ function ScreenshotItem({ item, onLightbox }) {
   );
 }
 
-function TextPlaceholder({ lines = 4 }) {
+function TextPlaceholder({ lines = 4, th }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       {Array.from({ length: lines }).map((_, i) => (
-        <div key={i} style={{ height: 10, backgroundColor: "#E5E2DC", width: i === lines - 1 ? "55%" : "100%" }} />
+        <div key={i} style={{ height: 10, backgroundColor: th.borderLight, width: i === lines - 1 ? "55%" : "100%" }} />
       ))}
     </div>
   );
 }
 
 /* ===== Screenshot Inline Card Component (with proper Hooks) ===== */
-function ScreenshotInlineCard({ block, onLightbox }) {
+function ScreenshotInlineCard({ block, onLightbox, th }) {
   const containerRef = useRef(null);
   const [expandCursor, setExpandCursor] = useState({ visible: false, x: 0, y: 0 });
 
   return (
     <div ref={containerRef} style={{ margin: block.featured ? "48px 0" : "32px 0", scrollMarginTop: 80, position: "relative" }} onClick={() => onLightbox()} onMouseEnter={() => setExpandCursor(c => ({ ...c, visible: true }))} onMouseMove={(e) => { const rect = e.currentTarget.getBoundingClientRect(); setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top }); }} onMouseLeave={() => setExpandCursor(c => ({ ...c, visible: false }))}>
       <div style={{
-        background: "#fff",
+        background: th.illustrationBg,
         borderRadius: "10px",
-        border: block.featured ? "1.5px solid #c4b5a4" : "1px solid #d4cdc2",
+        border: block.featured ? `1.5px solid ${th.borderNav}` : `1px solid ${th.illustrationBorder}`,
         overflow: "hidden",
         cursor: "zoom-in",
         boxShadow: block.featured ? "0 6px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" : "none",
@@ -508,7 +768,7 @@ function ScreenshotInlineCard({ block, onLightbox }) {
           position: "relative",
           width: "100%",
           ...(block.height === "auto" ? {} : { height: block.height || 550, overflow: "hidden" }),
-          backgroundColor: "#f5f3f0",
+          backgroundColor: th.imgContainerBg,
         }}>
           <img src={block.src} alt={block.label} style={{
             width: "100%",
@@ -519,20 +779,20 @@ function ScreenshotInlineCard({ block, onLightbox }) {
         </div>
         <div style={{
           padding: "12px 16px",
-          borderTop: "1px solid #e8e3da",
+          borderTop: `1px solid ${th.illustrationLabelBg}`,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{block.label}</p>
-            {block.sourceLink && <a href={block.sourceLink.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} style={{ fontSize: 11, fontFamily: FONT_MONO, color: "#8a857d", textDecoration: "none", letterSpacing: "0.02em", cursor: "pointer" }} onMouseEnter={(e) => e.currentTarget.style.color = "#c4422b"} onMouseLeave={(e) => e.currentTarget.style.color = "#8a857d"}>{block.sourceLink.text}</a>}
+            <p style={{ fontSize: T.small, fontWeight: 600, color: th.screenshotLabelColor, margin: 0 }}>{block.label}</p>
+            {block.sourceLink && <a href={block.sourceLink.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} style={{ fontSize: 11, fontFamily: FONT_MONO, color: th.textMuted, textDecoration: "none", letterSpacing: "0.02em", cursor: "pointer" }} onMouseEnter={(e) => e.currentTarget.style.color = th.accent} onMouseLeave={(e) => e.currentTarget.style.color = th.textMuted}>{block.sourceLink.text}</a>}
           </div>
-          {block.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{block.note}</p>}
+          {block.note && <p style={{ fontSize: T.small, color: th.screenshotNoteColor, margin: 0 }}>{block.note}</p>}
         </div>
       </div>
       {expandCursor.visible && (
-        <div style={{ position: "absolute", left: expandCursor.x, top: expandCursor.y, transform: "translate(12px, 12px)", pointerEvents: "none", zIndex: 10, display: "flex", alignItems: "center", gap: 5, fontSize: T.small, color: "#fff", backgroundColor: "rgba(17,17,17,0.85)", padding: "6px 12px", whiteSpace: "nowrap" }}>
+        <div style={{ position: "absolute", left: expandCursor.x, top: expandCursor.y, transform: "translate(12px, 12px)", pointerEvents: "none", zIndex: 10, display: "flex", alignItems: "center", gap: 5, fontSize: T.small, color: th.expandCursorText, backgroundColor: th.expandCursorBg, padding: "6px 12px", whiteSpace: "nowrap" }}>
           <svg width="12" height="12" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
           Expand
         </div>
@@ -542,7 +802,7 @@ function ScreenshotInlineCard({ block, onLightbox }) {
 }
 
 /* ===== Carousel Slide Component (with proper Hooks) ===== */
-function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
+function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick, th }) {
   const containerRef = useRef(null);
   const [expandCursor, setExpandCursor] = useState({ visible: false, x: 0, y: 0 });
 
@@ -569,9 +829,9 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
       }}
     >
       <div style={{
-        background: "#fff",
+        background: th.illustrationBg,
         borderRadius: "10px",
-        border: isCenter ? "1px solid #d4cdc2" : "1px solid #b8b0a3",
+        border: isCenter ? `1px solid ${th.illustrationBorder}` : `1px solid ${th.borderNav}`,
         overflow: "hidden",
         boxShadow: isCenter ? "0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)" : "none",
       }}>
@@ -579,7 +839,7 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
           position: "relative",
           width: "100%",
           height: item.height || 460,
-          backgroundColor: "#f5f3f0",
+          backgroundColor: th.imgContainerBg,
           overflow: "hidden",
         }}>
           {item.src ? (
@@ -591,22 +851,22 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
               display: "block",
             }} />
           ) : (
-            <span style={{ fontSize: 13, color: "#B8B0A3", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>[ {item.label} ]</span>
+            <span style={{ fontSize: 13, color: th.borderNav, position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>[ {item.label} ]</span>
           )}
         </div>
         <div style={{
           padding: "12px 16px",
-          borderTop: "1px solid #e8e3da",
+          borderTop: `1px solid ${th.illustrationLabelBg}`,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}>
-          <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{item.label}</p>
-          {item.note && <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{item.note}</p>}
+          <p style={{ fontSize: T.small, fontWeight: 600, color: th.screenshotLabelColor, margin: 0 }}>{item.label}</p>
+          {item.note && <p style={{ fontSize: T.small, color: th.screenshotNoteColor, margin: 0 }}>{item.note}</p>}
         </div>
       </div>
       {isCenter && item.src && expandCursor.visible && (
-        <div style={{ position: "absolute", left: expandCursor.x, top: expandCursor.y, transform: "translate(12px, 12px)", pointerEvents: "none", zIndex: 10, display: "flex", alignItems: "center", gap: 5, fontSize: T.small, color: "#fff", backgroundColor: "rgba(17,17,17,0.85)", padding: "6px 12px", whiteSpace: "nowrap" }}>
+        <div style={{ position: "absolute", left: expandCursor.x, top: expandCursor.y, transform: "translate(12px, 12px)", pointerEvents: "none", zIndex: 10, display: "flex", alignItems: "center", gap: 5, fontSize: T.small, color: th.expandCursorText, backgroundColor: th.expandCursorBg, padding: "6px 12px", whiteSpace: "nowrap" }}>
           <svg width="12" height="12" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
           Expand
         </div>
@@ -616,7 +876,7 @@ function CarouselSlide({ item, isCenter, posStyle, onLightbox, onClick }) {
 }
 
 /* ===== Screenshot Carousel Component (with proper Hooks for auto-play) ===== */
-function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive, setLightboxContent, flashBg }) {
+function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive, setLightboxContent, flashBg, th }) {
   const items = block.items || [];
   const total = items.length;
   const [carouselPaused, setCarouselPaused] = useState(false);
@@ -645,9 +905,9 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
     width: 32,
     height: 32,
     borderRadius: "50%",
-    border: "1px solid #D5D0C8",
-    backgroundColor: "rgba(255,255,255,0.85)",
-    color: "#B8B0A3",
+    border: `1px solid ${th.arrowBorder}`,
+    backgroundColor: th.arrowBg,
+    color: th.arrowColor,
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
@@ -674,6 +934,7 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
               item={item}
               isCenter={isCenter}
               posStyle={posStyles[pos]}
+              th={th}
               onLightbox={() => setLightboxContent({ content: <img src={item.src} alt={item.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block" }} />, initialScale: item.initialScale || 0.85 })}
               onClick={() => setCarouselActive(ii)}
             />
@@ -683,8 +944,8 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
         <button
           onClick={() => setCarouselActive((prev) => (prev - 1 + total) % total)}
           style={{ ...arrowBase, position: "absolute", left: "4%", top: "50%", transform: "translate(-50%, -50%)", zIndex: 5 }}
-          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#2A2A2A"; e.currentTarget.style.borderColor = "#B8B0A3"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.85)"; e.currentTarget.style.color = "#B8B0A3"; e.currentTarget.style.borderColor = "#D5D0C8"; }}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = th.arrowHoverBg || "#fff"; e.currentTarget.style.color = th.arrowHoverColor || "#2A2A2A"; e.currentTarget.style.borderColor = th.arrowHoverBorder || th.arrowBorder; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = th.arrowBg; e.currentTarget.style.color = th.arrowColor; e.currentTarget.style.borderColor = th.arrowBorder; }}
         >
           ‹
         </button>
@@ -692,8 +953,8 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
         <button
           onClick={() => setCarouselActive((prev) => (prev + 1) % total)}
           style={{ ...arrowBase, position: "absolute", left: "96%", top: "50%", transform: "translate(-50%, -50%)", zIndex: 5 }}
-          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#2A2A2A"; e.currentTarget.style.borderColor = "#B8B0A3"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.85)"; e.currentTarget.style.color = "#B8B0A3"; e.currentTarget.style.borderColor = "#D5D0C8"; }}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.backgroundColor = th.arrowHoverBg || "#fff"; e.currentTarget.style.color = th.arrowHoverColor || "#2A2A2A"; e.currentTarget.style.borderColor = th.arrowHoverBorder || th.arrowBorder; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.backgroundColor = th.arrowBg; e.currentTarget.style.color = th.arrowColor; e.currentTarget.style.borderColor = th.arrowBorder; }}
         >
           ›
         </button>
@@ -710,7 +971,7 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
               height: 6,
               borderRadius: 3,
               border: "none",
-              backgroundColor: ii === carouselActive ? "#6b6560" : "#d4cfc7",
+              backgroundColor: ii === carouselActive ? th.dotActive : th.dotInactive,
               cursor: "pointer",
               padding: 0,
               transition: "all 0.4s",
@@ -722,7 +983,7 @@ function ScreenshotCarousel({ blockId, block, carouselActive, setCarouselActive,
   );
 }
 
-function Footer({ isMobile }) {
+function Footer({ isMobile, th }) {
   const maxW = 860;
   const [hBtn, setHBtn] = useState(null);
   return (
@@ -731,7 +992,7 @@ function Footer({ isMobile }) {
       margin: "0 auto",
       padding: isMobile ? "24px 16px 24px" : "24px 40px 32px",
       textAlign: "center",
-      borderTop: "1px solid #E5E2DC",
+      borderTop: `1px solid ${th.borderLight}`,
     }}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
         <a
@@ -742,9 +1003,9 @@ function Footer({ isMobile }) {
             fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
             padding: "8px 20px", borderRadius: 2, cursor: "pointer",
             textDecoration: "none", display: "inline-flex", alignItems: "center",
-            border: hBtn === "email" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-            color: hBtn === "email" ? "#faf8f4" : "#1a1815",
-            backgroundColor: hBtn === "email" ? "#1a1815" : "transparent",
+            border: hBtn === "email" ? `1px solid ${th.btnHoverBorder}` : `1px solid ${th.btnBorder}`,
+            color: hBtn === "email" ? th.btnHoverText : th.btnText,
+            backgroundColor: hBtn === "email" ? th.btnHoverBg : "transparent",
             transition: "all 0.2s ease",
           }}
         >{"zulpkar97@gmail.com"}</a>
@@ -756,26 +1017,27 @@ function Footer({ isMobile }) {
             fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
             padding: "8px 20px", borderRadius: 2, cursor: "pointer",
             textDecoration: "none", display: "inline-flex", alignItems: "center",
-            border: hBtn === "link" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-            color: hBtn === "link" ? "#faf8f4" : "#1a1815",
-            backgroundColor: hBtn === "link" ? "#1a1815" : "transparent",
+            border: hBtn === "link" ? `1px solid ${th.btnHoverBorder}` : `1px solid ${th.btnBorder}`,
+            color: hBtn === "link" ? th.btnHoverText : th.btnText,
+            backgroundColor: hBtn === "link" ? th.btnHoverBg : "transparent",
             transition: "all 0.2s ease",
           }}
         >{"LinkedIn"}</a>
       </div>
-      <p style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#d4cfc7", letterSpacing: "0.04em", marginTop: 16 }}>{"zulpkar.com"}</p>
+      <p style={{ fontFamily: FONT_MONO, fontSize: 12, color: th.footerText, letterSpacing: "0.04em", marginTop: 16 }}>{"zulpkar.com"}</p>
     </footer>
   );
 }
 
-function Nav({ currentPage, onNavigate, isMobile, lang, setLang }) {
+function Nav({ currentPage, onNavigate, isMobile, lang, setLang, mode, setMode, th }) {
   const [hovered, setHovered] = useState(null);
   return (
     <nav style={{
       position: "sticky",
       top: 0,
       zIndex: 100,
-      backgroundColor: "#faf8f4",
+      backgroundColor: th.navBg,
+      transition: "background-color 0.3s ease",
     }}>
       <div style={{
         maxWidth: 860,
@@ -784,7 +1046,7 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang }) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderBottom: "1px solid #E5E2DC",
+        borderBottom: `1px solid ${th.borderLight}`,
       }}>
         <span
           onClick={() => { if (currentPage !== "home") onNavigate("home"); }}
@@ -793,13 +1055,13 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang }) {
           style={{
             fontSize: T.heading,
             fontWeight: 700,
-            color: hovered === "home" ? "#faf8f4" : "#000",
+            color: hovered === "home" ? th.navHoverText : th.text,
             fontFamily: FONT_DISPLAY,
             flexShrink: 0,
             cursor: "pointer",
             padding: "4px 12px",
             borderRadius: 0,
-            backgroundColor: hovered === "home" ? "#1a1815" : "transparent",
+            backgroundColor: hovered === "home" ? th.navHoverBg : "transparent",
             transition: "color 0.2s ease, background-color 0.2s ease",
           }}
         >{"Zulpkar Tuerxun"}</span>
@@ -817,9 +1079,9 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang }) {
                 fontSize: 14,
                 fontFamily: FONT_MONO,
                 fontWeight: 400,
-                color: isItemHovered ? "#faf8f4" : isActive ? "#1a1815" : "#6b6560",
+                color: isItemHovered ? th.navHoverText : isActive ? th.navActiveText : th.navText,
                 padding: "4px 10px",
-                backgroundColor: isItemHovered ? "#1a1815" : isActive ? "#F2EFEA" : "transparent",
+                backgroundColor: isItemHovered ? th.navHoverBg : isActive ? th.navActiveBg : "transparent",
                 borderRadius: 0,
                 whiteSpace: "nowrap",
                 cursor: "pointer",
@@ -830,22 +1092,50 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang }) {
             </span>
           );
         })}
-        {!isMobile && <span style={{ color: "#d4cfc7", fontSize: 14, margin: "0 4px" }}>|</span>}
+        {!isMobile && <span style={{ color: th.dividerColor, fontSize: 14, margin: "0 4px" }}>|</span>}
         <span
           onClick={() => setLang(lang === "en" ? "zh" : "en")}
           onMouseEnter={() => setHovered("lang")}
           onMouseLeave={() => setHovered(null)}
           style={{
             fontFamily: FONT_MONO, fontSize: 14,
-            color: hovered === "lang" ? "#faf8f4" : "#6b6560",
+            color: hovered === "lang" ? th.navHoverText : th.navText,
             cursor: "pointer", userSelect: "none",
             whiteSpace: "nowrap",
             padding: "4px 10px",
-            backgroundColor: hovered === "lang" ? "#1a1815" : "transparent",
+            backgroundColor: hovered === "lang" ? th.navHoverBg : "transparent",
             transition: "color 0.2s ease, background-color 0.2s ease",
           }}
         >
           {lang === "en" ? "中文" : "EN"}
+        </span>
+        <span
+          onClick={() => setMode(mode === "light" ? "dark" : "light")}
+          onMouseEnter={() => setHovered("mode")}
+          onMouseLeave={() => setHovered(null)}
+          style={{
+            cursor: "pointer", userSelect: "none",
+            whiteSpace: "nowrap",
+            padding: "4px 8px",
+            display: "inline-flex", alignItems: "center", justifyContent: "center",
+            backgroundColor: hovered === "mode" ? th.navHoverBg : "transparent",
+            transition: "background-color 0.2s ease",
+            lineHeight: 0,
+          }}
+        >
+          {mode === "light" ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={hovered === "mode" ? th.navHoverText : th.navText} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={hovered === "mode" ? th.navHoverText : th.navText} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          )}
         </span>
       </div>
       </div>
@@ -855,7 +1145,7 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang }) {
 
 /* ===== Homepage ===== */
 
-function HomePage({ onNavigate, isMobile, lang }) {
+function HomePage({ onNavigate, isMobile, lang, th, mode }) {
   const maxW = 860;
   const [hoveredId, setHoveredId] = useState(null);
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
@@ -1125,10 +1415,9 @@ function HomePage({ onNavigate, isMobile, lang }) {
             width: 120,
             height: 120,
             borderRadius: "999px",
-            background:
-              "radial-gradient(circle, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 60%)",
+            background: th.cursorGradient,
             pointerEvents: "none",
-            mixBlendMode: "multiply",
+            mixBlendMode: th.cursorBlend,
             opacity: 0,
             transition: "opacity 0.15s ease",
           }}
@@ -1151,7 +1440,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
         }}
       >
         <div style={{
-          fontFamily: FONT_MONO, fontSize: 14, color: "#a09688",
+          fontFamily: FONT_MONO, fontSize: 14, color: th.textLight,
           letterSpacing: "0.08em", marginBottom: 32,
           opacity: revealedCount > 0 ? 1 : 0,
           transform: revealedCount > 0 ? "translateY(0)" : "translateY(6px)",
@@ -1180,10 +1469,10 @@ function HomePage({ onNavigate, isMobile, lang }) {
                 return (
                   <span key={c.gi} style={{
                     display: "inline-block",
-                    color: isRevealed ? "#2a2520" : "#d4cdc2",
+                    color: isRevealed ? th.textHero : th.textPlaceholder,
                     transition: "color 0.25s ease",
                     textShadow: c.gi === revealedCount - 1 && isRevealed
-                      ? "0 0 20px rgba(42,37,32,0.15)" : "none",
+                      ? (mode === "dark" ? "0 0 20px rgba(232,228,223,0.15)" : "0 0 20px rgba(42,37,32,0.15)") : "none",
                     minWidth: c.char === " " ? "0.3em" : undefined,
                   }}>
                     {c.char}
@@ -1220,13 +1509,13 @@ function HomePage({ onNavigate, isMobile, lang }) {
           })()}
           <span style={{ display: "inline-block", position: "relative", verticalAlign: "baseline" }}>
             <span id="hero-question" style={{
-              display: "inline-block", color: "#d4cdc2", fontWeight: 700,
+              display: "inline-block", color: th.textPlaceholder, fontWeight: 700,
               opacity: 0, transform: "scale(0.8)", transition: "none",
             }}>{lang === "en" ? "?" : "\uff1f"}</span>
             <span id="hero-ai" style={{
               position: "absolute", left: "50%", top: "50%",
               transform: animationComplete ? "translate(-50%, -50%) scale(1.0)" : "translate(-50%, -50%) scale(0.7)",
-              display: "inline-block", color: "#C4422B", fontWeight: 700,
+              display: "inline-block", color: th.accent, fontWeight: 700,
               opacity: animationComplete ? 1 : 0,
               filter: animationComplete ? "blur(0px)" : "blur(16px)",
               transition: "none", whiteSpace: "nowrap", fontSize: "inherit",
@@ -1249,8 +1538,8 @@ function HomePage({ onNavigate, isMobile, lang }) {
                 }}
               >
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" style={{ display: "block" }}>
-                  <path d="M23 4v6h-6" stroke={replayHovered ? "#c4422b" : "#999"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" stroke={replayHovered ? "#c4422b" : "#999"} strokeWidth="2" strokeLinecap="round" />
+                  <path d="M23 4v6h-6" stroke={replayHovered ? th.accent : th.textSecondary} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" stroke={replayHovered ? th.accent : th.textSecondary} strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </span>
             )}
@@ -1258,7 +1547,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
         </h1>
 
         <p style={{
-          marginTop: 40, fontSize: 15, color: "#8a857d",
+          marginTop: 40, fontSize: 15, color: th.textMuted,
           letterSpacing: "0.02em", lineHeight: 1.6,
           opacity: subtitleVisible ? 1 : 0,
           transform: subtitleVisible ? "translateY(0)" : "translateY(10px)",
@@ -1301,13 +1590,13 @@ function HomePage({ onNavigate, isMobile, lang }) {
               {/* Top separator — extends beyond content */}
               <div style={{
                 position: "absolute", top: 0, left: -24, right: -24,
-                height: 1, background: "#d4cfc7", zIndex: 1,
+                height: 1, background: th.separator, zIndex: 1,
               }} />
               {/* Bottom separator for last card */}
               {idx === PROJECTS.length - 1 && (
                 <div style={{
                   position: "absolute", bottom: 0, left: -24, right: -24,
-                  height: 1, background: "#d4cfc7", zIndex: 1,
+                  height: 1, background: th.separator, zIndex: 1,
                 }} />
               )}
               {/* Hover background overlay */}
@@ -1315,7 +1604,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
                 <div style={{
                   position: "absolute",
                   inset: "0 -24px",
-                  background: "rgba(26, 24, 21, 0.02)",
+                  background: th.bgHover,
                   borderRadius: 4,
                   opacity: isHovered ? 1 : 0,
                   transition: "opacity 0.3s",
@@ -1334,7 +1623,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
                   fontWeight: 900,
                   fontSize: isMobile ? 40 : 56,
                   lineHeight: 1,
-                  color: ACCENT,
+                  color: th.accent,
                   letterSpacing: "-0.03em",
                   opacity: isHovered ? 1 : 0.85,
                   transition: "opacity 0.3s",
@@ -1344,7 +1633,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
                   <span style={{
                     fontSize: 24,
                     fontWeight: 400,
-                    color: "#6b6560",
+                    color: th.textSecondary,
                     marginLeft: 2,
                     letterSpacing: 0,
                   }}>{t(stat.unit, lang)}</span>
@@ -1354,7 +1643,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
                   fontFamily: FONT_MONO,
                   fontSize: 11,
                   fontWeight: 400,
-                  color: "#6b6560",
+                  color: th.textSecondary,
                   opacity: isHovered ? 1 : 0.7,
                   letterSpacing: "0.03em",
                   marginTop: 6,
@@ -1373,7 +1662,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
                 <span style={{
                   fontFamily: FONT_MONO,
                   fontSize: 11,
-                  color: "#B8B0A3",
+                  color: th.borderNav,
                   letterSpacing: "0.06em",
                 }}>{String(idx + 1).padStart(2, "0")}</span>
                 <h3 style={{
@@ -1386,7 +1675,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
                 }}>{t(p.name, lang)}</h3>
                 <p style={{
                   fontSize: 14,
-                  color: isHovered ? "#1a1815" : "#6b6560",
+                  color: isHovered ? th.textPrimary : th.textSecondary,
                   fontWeight: 300,
                   lineHeight: 1.5,
                   margin: 0,
@@ -1398,9 +1687,9 @@ function HomePage({ onNavigate, isMobile, lang }) {
                       <span key={hi} title={lang === "en" ? t(h, lang) : undefined} style={{
                         fontFamily: FONT_MONO,
                         fontSize: 11,
-                        color: "#6b6560",
+                        color: th.tagText,
                         padding: "4px 10px",
-                        border: "1px solid #d4cfc7",
+                        border: `1px solid ${th.tagBorder}`,
                         borderRadius: 2,
                         letterSpacing: "0.02em",
                         whiteSpace: "nowrap",
@@ -1418,11 +1707,11 @@ function HomePage({ onNavigate, isMobile, lang }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                border: isHovered ? "1px solid #1a1815" : "1px solid #d4cfc7",
+                border: isHovered ? `1px solid ${th.navHoverBg}` : `1px solid ${th.border}`,
                 borderRadius: "50%",
                 transition: "all 0.2s ease",
                 flexShrink: 0,
-                backgroundColor: isHovered ? "#1a1815" : "transparent",
+                backgroundColor: isHovered ? th.navHoverBg : "transparent",
                 position: "relative", zIndex: 1,
               }}>
                 <svg
@@ -1435,7 +1724,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
                   }}
                   strokeWidth="2"
                   strokeLinecap="round"
-                  stroke={isHovered ? "#faf8f4" : "#6b6560"}
+                  stroke={isHovered ? th.textInverse : th.textSecondary}
                 >
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
@@ -1454,7 +1743,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
         <p style={{
           fontFamily: FONT_DISPLAY, fontWeight: 400,
           fontSize: isMobile ? 18 : "clamp(18px, 2.2vw, 24px)",
-          lineHeight: 1.4, color: "#6b6560", marginBottom: 8,
+          lineHeight: 1.4, color: th.textSecondary, marginBottom: 8,
         }}>
           {lang === "en" ? "Get the problem right, then it's worth building." : "\u95EE\u9898\u62C6\u5BF9\u4E86\uFF0C\u624D\u503C\u5F97\u52A8\u624B\u3002"}
         </p>
@@ -1466,9 +1755,9 @@ function HomePage({ onNavigate, isMobile, lang }) {
           {lang === "en" ? "I'm looking for the next problem worth breaking down." : "\u6211\u5728\u627E\u4E0B\u4E00\u4E2A\u503C\u5F97\u62C6\u7684\u95EE\u9898\u3002"}
         </h2>
         <p style={{
-          fontSize: 14, lineHeight: 1.8, color: "#6b6560", fontWeight: 300, marginBottom: 36,
+          fontSize: 14, lineHeight: 1.8, color: th.textSecondary, fontWeight: 300, marginBottom: 36,
         }}>
-          {lang === "en" ? <><span style={{ color: "#1a1815", fontWeight: 500 }}>{"In Fall 2027"}</span>{", I'm going back to school to build a formal framework around five years of product instinct \u2014 and bring it into AI."}</> : <><span style={{ color: "#1a1815", fontWeight: 500 }}>{"\u0032\u0030\u0032\u0037\u5E74\u79CB\u5B63"}</span>{"\uFF0C\u6211\u51C6\u5907\u56DE\u5230\u5B66\u6821\uFF0C\u628A\u0035\u5E74\u4EA7\u54C1\u5B9E\u6218\u7CFB\u7EDF\u5316\uFF0C\u4E4B\u540E\u8FDB\u5165\u0041\u0049\u884C\u4E1A\u3002"}</>}
+          {lang === "en" ? <><span style={{ color: th.textPrimary, fontWeight: 500 }}>{"In Fall 2027"}</span>{", I'm going back to school to build a formal framework around five years of product instinct \u2014 and bring it into AI."}</> : <><span style={{ color: th.textPrimary, fontWeight: 500 }}>{"\u0032\u0030\u0032\u0037\u5E74\u79CB\u5B63"}</span>{"\uFF0C\u6211\u51C6\u5907\u56DE\u5230\u5B66\u6821\uFF0C\u628A\u0035\u5E74\u4EA7\u54C1\u5B9E\u6218\u7CFB\u7EDF\u5316\uFF0C\u4E4B\u540E\u8FDB\u5165\u0041\u0049\u884C\u4E1A\u3002"}</>}
         </p>
 
         <div ref={footerZoneRef} style={{ position: "relative", display: "inline-block" }}>
@@ -1488,9 +1777,9 @@ function HomePage({ onNavigate, isMobile, lang }) {
                 fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
                 padding: "12px 28px", borderRadius: 2, cursor: "pointer",
                 textDecoration: "none", display: "inline-flex", alignItems: "center",
-                border: hoveredBtn === "email" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-                color: hoveredBtn === "email" ? "#faf8f4" : "#1a1815",
-                backgroundColor: hoveredBtn === "email" ? "#1a1815" : "transparent",
+                border: hoveredBtn === "email" ? `1px solid ${th.btnHoverBorder}` : `1px solid ${th.btnBorder}`,
+                color: hoveredBtn === "email" ? th.btnHoverText : th.btnText,
+                backgroundColor: hoveredBtn === "email" ? th.btnHoverBg : "transparent",
                 transition: "all 0.2s ease",
               }}
             >
@@ -1506,9 +1795,9 @@ function HomePage({ onNavigate, isMobile, lang }) {
                 fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
                 padding: "12px 28px", borderRadius: 2, cursor: "pointer",
                 textDecoration: "none", display: "inline-flex", alignItems: "center",
-                border: hoveredBtn === "link" ? "1px solid #1a1815" : "1px solid #d4cfc7",
-                color: hoveredBtn === "link" ? "#faf8f4" : "#1a1815",
-                backgroundColor: hoveredBtn === "link" ? "#1a1815" : "transparent",
+                border: hoveredBtn === "link" ? `1px solid ${th.btnHoverBorder}` : `1px solid ${th.btnBorder}`,
+                color: hoveredBtn === "link" ? th.btnHoverText : th.btnText,
+                backgroundColor: hoveredBtn === "link" ? th.btnHoverBg : "transparent",
                 transition: "all 0.2s ease",
               }}
             >
@@ -1517,7 +1806,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
           </div>
 
           <p ref={detailBelowRef} style={{
-            fontSize: 14, lineHeight: 1.6, color: "#6b6560", fontWeight: 300,
+            fontSize: 14, lineHeight: 1.6, color: th.textSecondary, fontWeight: 300,
             marginTop: 28, position: "relative", zIndex: 2,
           }}>
             {lang === "en" ? "If any of this resonates, I'd love to talk." : "\u5982\u679C\u4F60\u5BF9\u6211\u7684\u7ECF\u5386\u611F\u5174\u8DA3\uFF0C\u5F88\u4E50\u610F\u804A\u804A\u3002"}
@@ -1538,7 +1827,7 @@ function HomePage({ onNavigate, isMobile, lang }) {
         display: "flex", justifyContent: "center",
         padding: isMobile ? 24 : "24px 48px 24px", marginTop: 32,
       }}>
-        <span style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#d4cfc7", letterSpacing: "0.04em" }}>
+        <span style={{ fontFamily: FONT_MONO, fontSize: 12, color: th.footerText, letterSpacing: "0.04em" }}>
           {"zulpkar.com"}
         </span>
       </div>
@@ -1548,41 +1837,41 @@ function HomePage({ onNavigate, isMobile, lang }) {
 
 /* ===== Detail Page Components ===== */
 
-function BeforeAfterPair({ labelBefore, labelAfter, note, isMobile }) {
+function BeforeAfterPair({ labelBefore, labelAfter, note, isMobile, th }) {
   return (
     <div>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
         <div>
-          <div style={{ fontSize: T.small, fontWeight: 600, color: "#888", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em" }}>{"Before"}</div>
-          <PlaceholderBox label={labelBefore} height={220} />
+          <div style={{ fontSize: T.small, fontWeight: 600, color: th.beforeLabel, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em" }}>{"Before"}</div>
+          <PlaceholderBox label={labelBefore} height={220} th={th} />
         </div>
         <div>
-          <div style={{ fontSize: T.small, fontWeight: 600, color: "#333", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em" }}>{"After"}</div>
-          <PlaceholderBox label={labelAfter} height={220} />
+          <div style={{ fontSize: T.small, fontWeight: 600, color: th.headingColor, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em" }}>{"After"}</div>
+          <PlaceholderBox label={labelAfter} height={220} th={th} />
         </div>
       </div>
-      <p style={{ fontSize: T.small, color: "#aaa", marginTop: 8, textAlign: "center" }}>{note}</p>
+      <p style={{ fontSize: T.small, color: th.noteColor, marginTop: 8, textAlign: "center" }}>{note}</p>
     </div>
   );
 }
 
-function IterationStep({ version, heading }) {
+function IterationStep({ version, heading, th }) {
   return (
     <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
       <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{
-          padding: "4px 12px", backgroundColor: "#333", color: "#fff",
+          padding: "4px 12px", backgroundColor: th.iterVersionBg, color: th.iterVersionText,
           fontSize: T.small, fontWeight: 600, letterSpacing: "0.05em",
         }}>{version}</div>
-        <div style={{ width: 1, height: 24, backgroundColor: "#E5E2DC", marginTop: 4 }} />
+        <div style={{ width: 1, height: 24, backgroundColor: th.iterLineBg, marginTop: 4 }} />
       </div>
-      <h3 style={{ fontSize: T.heading, fontWeight: 600, color: "#000", margin: 0, paddingTop: 2 }}>{heading}</h3>
+      <h3 style={{ fontSize: T.heading, fontWeight: 600, color: th.iterHeadingColor, margin: 0, paddingTop: 2 }}>{heading}</h3>
     </div>
   );
 }
 
 /* ── Turntable Nav Card (used inside SideNav) ── */
-function NavCard({ items, activeIdx, onSelect, title, count, accent, side }) {
+function NavCard({ items, activeIdx, onSelect, title, count, accent, side, th }) {
   const [hovIdx, setHovIdx] = useState(-1);
   return (
     <div style={{
@@ -1594,12 +1883,12 @@ function NavCard({ items, activeIdx, onSelect, title, count, accent, side }) {
       backfaceVisibility: "hidden",
       WebkitBackfaceVisibility: "hidden",
       transform: side === "a" ? "rotateY(0deg) translateZ(1px)" : "rotateY(180deg) translateZ(1px)",
-      background: "rgba(255,255,255,0.45)",
+      background: th.sideNavCardBg,
       backdropFilter: "blur(16px)",
       WebkitBackdropFilter: "blur(16px)",
       borderRadius: 8,
       boxShadow: "none",
-      border: "1px solid rgba(255,255,255,0.5)",
+      border: `1px solid ${th.sideNavCardBorder}`,
       overflow: "hidden",
       WebkitFontSmoothing: "antialiased",
       MozOsxFontSmoothing: "grayscale",
@@ -1607,18 +1896,18 @@ function NavCard({ items, activeIdx, onSelect, title, count, accent, side }) {
       {/* Card header */}
       <div style={{
         padding: "10px 12px 7px",
-        borderBottom: "1px solid rgba(255,255,255,0.4)",
+        borderBottom: `1px solid ${th.sideNavHeaderBorder}`,
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        <span style={{ fontSize: 10, fontFamily: FONT_BODY, fontWeight: 500, color: accent === "dark" ? "#2A2A2A" : "#c4422b", letterSpacing: 3 }}>{title}</span>
-        <span style={{ fontSize: 9, fontFamily: FONT_MONO, color: accent === "dark" ? "#2A2A2A" : "#c4422b", letterSpacing: 1 }}>{count}</span>
+        <span style={{ fontSize: 10, fontFamily: FONT_BODY, fontWeight: 500, color: accent === "dark" ? th.textPrimary : th.accent, letterSpacing: 3 }}>{title}</span>
+        <span style={{ fontSize: 9, fontFamily: FONT_MONO, color: accent === "dark" ? th.textPrimary : th.accent, letterSpacing: 1 }}>{count}</span>
       </div>
       {/* Card items */}
       <div style={{ padding: "4px 4px 8px" }}>
         {items.map((label, i) => {
           const isActive = activeIdx === i;
           const isHov = hovIdx === i;
-          const accentColor = accent === "dark" ? "#2A2A2A" : "#c4422b";
+          const accentColor = accent === "dark" ? th.textPrimary : th.accent;
           const bg = isActive
             ? (accent === "dark" ? "rgba(42,42,42,0.12)" : "rgba(196,66,43,0.10)")
             : isHov ? (accent === "dark" ? "rgba(42,42,42,0.05)" : "rgba(196,66,43,0.05)") : "transparent";
@@ -1649,7 +1938,7 @@ function NavCard({ items, activeIdx, onSelect, title, count, accent, side }) {
                 fontSize: isActive ? 13 : 11.5,
                 fontFamily: FONT_DISPLAY,
                 fontWeight: isActive ? 700 : 400,
-                color: isActive ? accentColor : (isHov ? accentColor : "#B8B0A3"),
+                color: isActive ? accentColor : (isHov ? accentColor : th.borderNav),
                 letterSpacing: isActive ? 2 : 0.5,
                 transition: "all 0.25s cubic-bezier(0.4,0,0.2,1)",
                 display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
@@ -1667,7 +1956,7 @@ function NavCard({ items, activeIdx, onSelect, title, count, accent, side }) {
 function SideNav({
   chapters, activeChapterIdx, onChapterClick,
   skillTags, skillTagKeys, activeSkillIdx, onSkillClick,
-  navMode, onModeSwitch, onNavigate, lang,
+  navMode, onModeSwitch, onNavigate, lang, th,
 }) {
   const isCompact = useIsMobile(1100);
   const [visible, setVisible] = useState(false);
@@ -1742,7 +2031,7 @@ function SideNav({
   const handleSkillSelect = (_label, i) => onSkillClick((skillTagKeys || skillTags)[i]);
 
   const cardH = Math.max(chapterLabels.length, skillLabels.length) * 34 + 40;
-  const accentColor = isFrontA ? "#2A2A2A" : "#c4422b";
+  const accentColor = isFrontA ? th.textPrimary : th.accent;
 
   const sideNavRight = "max(24px, calc((100vw - 720px) / 2 - 220px))";
 
@@ -1757,13 +2046,13 @@ function SideNav({
           position: "fixed", top: 72, right: sideNavRight,
           zIndex: 50, pointerEvents: "auto",
           width: 40, height: 40,
-          border: `1px solid ${backHovered ? "#1a1815" : "#D5D0C8"}`,
-          backgroundColor: backHovered ? "#1a1815" : "transparent",
+          border: `1px solid ${backHovered ? th.navHoverBg : th.borderMedium}`,
+          backgroundColor: backHovered ? th.navHoverBg : "transparent",
           display: "flex", alignItems: "center", justifyContent: "center",
           cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
         }}
       >
-        <span style={{ fontSize: 14, color: backHovered ? "#faf8f4" : "#555", transition: "color 0.2s ease" }}>{"\u2190"}</span>
+        <span style={{ fontSize: 14, color: backHovered ? th.textInverse : th.textSecondary, transition: "color 0.2s ease" }}>{"\u2190"}</span>
       </div>
 
       {/* Turntable nav */}
@@ -1797,15 +2086,15 @@ function SideNav({
             }}>
               <span style={{
                 fontSize: 10, fontFamily: FONT_BODY, letterSpacing: 3,
-                color: isFrontA ? "#2A2A2A" : (pivotHovered ? "#2A2A2A" : "#B8B0A3"),
+                color: isFrontA ? th.textPrimary : (pivotHovered ? th.textPrimary : th.borderNav),
                 fontWeight: 500,
                 transition: "color 0.4s",
                 animation: (!isFrontA && pivotHovered) ? "sidenavBreathe 1.2s ease-in-out infinite" : "none",
               }}>{lang === "en" ? "Narrative" : "\u53D9\u4E8B\u7EBF"}</span>
-              <div style={{ width: 2.5, height: 2.5, borderRadius: "50%", background: "#D5D0C8" }} />
+              <div style={{ width: 2.5, height: 2.5, borderRadius: "50%", background: th.borderMedium }} />
               <span style={{
                 fontSize: 10, fontFamily: FONT_BODY, letterSpacing: 3,
-                color: !isFrontA ? "#c4422b" : (pivotHovered ? "#c4422b" : "#B8B0A3"),
+                color: !isFrontA ? th.accent : (pivotHovered ? th.accent : th.borderNav),
                 fontWeight: 500,
                 transition: "color 0.4s",
                 animation: (isFrontA && pivotHovered) ? "sidenavBreathe 1.2s ease-in-out infinite" : "none",
@@ -1920,9 +2209,9 @@ function SideNav({
               willChange: "transform",
             }}>
               <NavCard items={chapterLabels} activeIdx={activeChapterIdx} onSelect={handleChapterSelect}
-                title={lang === "en" ? "Narrative" : "\u53D9\u4E8B\u7EBF"} count={chapterLabels.length + (lang === "en" ? " sections" : " \u7AE0")} accent="dark" side="a" />
+                title={lang === "en" ? "Narrative" : "\u53D9\u4E8B\u7EBF"} count={chapterLabels.length + (lang === "en" ? " sections" : " \u7AE0")} accent="dark" side="a" th={th} />
               <NavCard items={skillLabels} activeIdx={activeSkillIdx} onSelect={handleSkillSelect}
-                title={lang === "en" ? "Method" : "\u65B9\u6CD5\u7EBF"} count={skillLabels.length + (lang === "en" ? " skills" : " \u9879")} accent="warm" side="b" />
+                title={lang === "en" ? "Method" : "\u65B9\u6CD5\u7EBF"} count={skillLabels.length + (lang === "en" ? " skills" : " \u9879")} accent="warm" side="b" th={th} />
             </div>
           </div>
         </div>
@@ -1931,7 +2220,7 @@ function SideNav({
   );
 }
 
-function MobileProgressNav({ headings }) {
+function MobileProgressNav({ headings, th }) {
   const isCompact = useIsMobile(1100);
   const [active, setActive] = useState(-1);
   const [progress, setProgress] = useState(0);
@@ -1986,10 +2275,10 @@ function MobileProgressNav({ headings }) {
       {/* Progress bar — pinned under nav */}
       <div style={{
         position: "fixed", top: MOBILE_NAV_H, left: 0, right: 0,
-        zIndex: 99, height: 3, backgroundColor: "#EDEAE3",
+        zIndex: 99, height: 3, backgroundColor: th.progressTrack,
       }}>
         <div style={{
-          height: "100%", backgroundColor: "#2A2A2A",
+          height: "100%", backgroundColor: th.progressFill,
           width: `${progress * 100}%`,
           transition: "width 0.1s linear",
         }} />
@@ -2001,8 +2290,8 @@ function MobileProgressNav({ headings }) {
         style={{
           position: "fixed", top: MOBILE_NAV_H + 3, left: 0, right: 0,
           zIndex: 98,
-          backgroundColor: labelFlash ? "rgba(250,249,247,0.97)" : "rgba(250,249,247,0.92)",
-          borderBottom: showList ? "1px solid #E5E2DC" : "none",
+          backgroundColor: labelFlash ? th.mobileNavFlash : th.mobileNavBg,
+          borderBottom: showList ? `1px solid ${th.borderLight}` : "none",
           padding: "8px 16px",
           display: "flex", justifyContent: "space-between", alignItems: "center",
           cursor: "pointer",
@@ -2010,13 +2299,13 @@ function MobileProgressNav({ headings }) {
         }}
       >
         <span style={{
-          fontSize: T.small, fontWeight: 600, color: "#2A2A2A",
+          fontSize: T.small, fontWeight: 600, color: th.textPrimary,
           transition: "opacity 0.3s",
         }}>
           {active >= 0 ? `${active + 1}/${headings.length}  \u00B7  ${headings[active]}` : ""}
         </span>
         <span style={{
-          fontSize: 10, color: "#999",
+          fontSize: 10, color: th.textSecondary,
           transform: showList ? "rotate(180deg)" : "rotate(0deg)",
           transition: "transform 0.2s",
         }}>{"\u25BC"}</span>
@@ -2027,8 +2316,8 @@ function MobileProgressNav({ headings }) {
         <div style={{
           position: "fixed", top: MOBILE_NAV_H + 3 + 30, left: 0, right: 0,
           zIndex: 97,
-          backgroundColor: "rgba(250,249,247,0.97)",
-          borderBottom: "1px solid #E5E2DC",
+          backgroundColor: th.mobileNavFlash,
+          borderBottom: `1px solid ${th.borderLight}`,
           padding: "4px 0",
           maxHeight: "50vh", overflowY: "auto",
         }}>
@@ -2044,7 +2333,7 @@ function MobileProgressNav({ headings }) {
               style={{
                 padding: "10px 16px",
                 fontSize: T.small,
-                color: i === active ? "#2A2A2A" : "#999",
+                color: i === active ? th.textPrimary : th.textSecondary,
                 fontWeight: i === active ? 600 : 400,
                 display: "flex", alignItems: "center", gap: 8,
                 cursor: "pointer",
@@ -2052,7 +2341,7 @@ function MobileProgressNav({ headings }) {
             >
               <span style={{
                 width: 20, textAlign: "right",
-                fontSize: 11, color: "#B8B0A3",
+                fontSize: 11, color: th.borderNav,
               }}>{i + 1}</span>
               {h}
             </div>
@@ -2074,7 +2363,7 @@ const CONFETTI_PARTICLES = [
   { dx:  42, dy: -42, rot: -165, color: "#5B8C7E" },
 ];
 
-function ReadingProgressBar() {
+function ReadingProgressBar({ th }) {
   const isCompact = useIsMobile(1100);
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -2119,7 +2408,7 @@ function ReadingProgressBar() {
       zIndex: 50,
       height: 200,
       width: 2,
-      backgroundColor: "#E5E2DC",
+      backgroundColor: th.progressTrack,
       opacity: visible ? 1 : 0,
       transition: "opacity 0.3s ease",
       pointerEvents: "none",
@@ -2130,7 +2419,7 @@ function ReadingProgressBar() {
         left: 0,
         width: 2,
         height: `${progress * 100}%`,
-        backgroundColor: "#000",
+        backgroundColor: th.progressFill,
       }} />
       {progress > 0 && (
         <div style={{
@@ -2139,7 +2428,7 @@ function ReadingProgressBar() {
           left: 8,
           transform: "translateY(-50%)",
           fontSize: 10,
-          color: "#888",
+          color: th.progressText,
           lineHeight: 1,
           whiteSpace: "nowrap",
           fontFamily: FONT_BODY,
@@ -2169,7 +2458,7 @@ function ReadingProgressBar() {
 
 /* ===== Decoration: Diagnosis Cascade (Project 1 quote-list) ===== */
 
-function DiagnosisCascadeSVG({ height = 290 }) {
+function DiagnosisCascadeSVG({ height = 290, th }) {
   const w = 110;
   const nodes = [
     { x: 35, y: 22 },
@@ -2182,22 +2471,22 @@ function DiagnosisCascadeSVG({ height = 290 }) {
   return (
     <svg width={w} height={height} viewBox={`0 0 ${w} ${height}`} style={{ display: "block" }}>
       {nodes.map((n, i) => (
-        <line key={`f${i}`} x1={n.x} y1={n.y} x2={focal.x} y2={focal.y} stroke="#C8C2B8" strokeWidth={0.8} opacity={0.5} />
+        <line key={`f${i}`} x1={n.x} y1={n.y} x2={focal.x} y2={focal.y} stroke={th.diagFocalLine} strokeWidth={0.8} opacity={0.5} />
       ))}
       {nodes.map((n, i) => {
         if (i === nodes.length - 1) return null;
         const next = nodes[i + 1];
         return (
-          <line key={`c${i}`} x1={n.x} y1={n.y} x2={next.x} y2={next.y} stroke="#B8B0A3" strokeWidth={1} opacity={0.5} />
+          <line key={`c${i}`} x1={n.x} y1={n.y} x2={next.x} y2={next.y} stroke={th.diagLineStroke} strokeWidth={1} opacity={0.5} />
         );
       })}
       {nodes.map((n, i) => (
         <g key={`n${i}`}>
-          <circle cx={n.x} cy={n.y} r={5} fill="#E8E4DE" />
-          <circle cx={n.x} cy={n.y} r={5} fill="none" stroke="#C8C2B8" strokeWidth={0.8} />
+          <circle cx={n.x} cy={n.y} r={5} fill={th.diagNodeFill} />
+          <circle cx={n.x} cy={n.y} r={5} fill="none" stroke={th.diagNodeStroke} strokeWidth={0.8} />
         </g>
       ))}
-      <circle cx={focal.x} cy={focal.y} r={7} fill="#c4422b" opacity={0.85} />
+      <circle cx={focal.x} cy={focal.y} r={7} fill={th.accent} opacity={0.85} />
     </svg>
   );
 }
@@ -2749,7 +3038,7 @@ function ThreePhaseRoadmap() {
 
 /* ===== Project Detail Page ===== */
 
-function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
+function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode }) {
   const hasPrev = project.id > 1;
   const hasNext = project.id < PROJECTS.length;
   const prevProject = hasPrev ? PROJECTS.find((p) => p.id === project.id - 1) : null;
@@ -2912,13 +3201,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
           width: 120,
           height: 120,
           borderRadius: "999px",
-          background: "radial-gradient(circle, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 60%)",
+          background: th.cursorGradient,
           pointerEvents: "none",
-          mixBlendMode: "multiply",
+          mixBlendMode: th.cursorBlend,
           zIndex: 0,
         }} />
       )}
-      <ReadingProgressBar />
+      <ReadingProgressBar th={th} />
       <SideNav
         chapters={sectionHeadings}
         activeChapterIdx={activeChapterIdx}
@@ -2934,8 +3223,9 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
         onModeSwitch={setNavMode}
         onNavigate={onNavigate}
         lang={lang}
+        th={th}
       />
-      <MobileProgressNav headings={sectionHeadings} />
+      <MobileProgressNav headings={sectionHeadings} th={th} />
       {/* ===== 5-LAYER HERO for ALL projects ===== */}
       <section key={project.id} style={{ position: "relative", maxWidth: 860, margin: "0 auto", padding: isMobile ? "0 24px" : "0 40px", paddingTop: isMobile ? 32 : 56 }}>
 
@@ -2951,70 +3241,68 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
             pointerEvents: "none", zIndex: 0,
             animation: "fadeUp 1s ease-out 0.6s both",
           }}>
-            {project.id === 1 && (
+            {(() => { const deco = mode === "dark" ? "#e8e4df" : "#1a1815"; return project.id === 1 ? (
               <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0" y="0" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
-                <rect x="70" y="0" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
-                <rect x="140" y="0" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
-                <rect x="0" y="70" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
-                <rect x="70" y="70" width="60" height="60" fill="#1a1815"/>
-                <rect x="140" y="70" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
-                <rect x="0" y="140" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
-                <rect x="70" y="140" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
-                <rect x="140" y="140" width="60" height="60" stroke="#1a1815" strokeWidth="1.5"/>
+                <rect x="0" y="0" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
+                <rect x="70" y="0" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
+                <rect x="140" y="0" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
+                <rect x="0" y="70" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
+                <rect x="70" y="70" width="60" height="60" fill={deco}/>
+                <rect x="140" y="70" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
+                <rect x="0" y="140" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
+                <rect x="70" y="140" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
+                <rect x="140" y="140" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
               </svg>
-            )}
-            {project.id === 2 && (
+            ) : project.id === 2 ? (
               <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="110" cy="110" r="108" stroke="#1a1815" strokeWidth="1"/>
-                <circle cx="110" cy="110" r="85" stroke="#1a1815" strokeWidth="1"/>
-                <circle cx="110" cy="110" r="62" stroke="#1a1815" strokeWidth="1"/>
-                <circle cx="110" cy="110" r="39" stroke="#1a1815" strokeWidth="1.5"/>
-                <circle cx="110" cy="110" r="16" fill="#1a1815"/>
-                <line x1="110" y1="0" x2="110" y2="70" stroke="#1a1815" strokeWidth="0.75"/>
-                <line x1="110" y1="150" x2="110" y2="220" stroke="#1a1815" strokeWidth="0.75"/>
-                <line x1="0" y1="110" x2="70" y2="110" stroke="#1a1815" strokeWidth="0.75"/>
-                <line x1="150" y1="110" x2="220" y2="110" stroke="#1a1815" strokeWidth="0.75"/>
+                <circle cx="110" cy="110" r="108" stroke={deco} strokeWidth="1"/>
+                <circle cx="110" cy="110" r="85" stroke={deco} strokeWidth="1"/>
+                <circle cx="110" cy="110" r="62" stroke={deco} strokeWidth="1"/>
+                <circle cx="110" cy="110" r="39" stroke={deco} strokeWidth="1.5"/>
+                <circle cx="110" cy="110" r="16" fill={deco}/>
+                <line x1="110" y1="0" x2="110" y2="70" stroke={deco} strokeWidth="0.75"/>
+                <line x1="110" y1="150" x2="110" y2="220" stroke={deco} strokeWidth="0.75"/>
+                <line x1="0" y1="110" x2="70" y2="110" stroke={deco} strokeWidth="0.75"/>
+                <line x1="150" y1="110" x2="220" y2="110" stroke={deco} strokeWidth="0.75"/>
               </svg>
-            )}
-            {project.id === 3 && (
+            ) : project.id === 3 ? (
               <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="30" r="8" fill="#1a1815"/>
-                <circle cx="40" cy="100" r="6" stroke="#1a1815" strokeWidth="1.5"/>
-                <circle cx="100" cy="100" r="12" fill="#1a1815"/>
-                <circle cx="160" cy="100" r="6" stroke="#1a1815" strokeWidth="1.5"/>
-                <circle cx="60" cy="170" r="6" stroke="#1a1815" strokeWidth="1.5"/>
-                <circle cx="140" cy="170" r="6" stroke="#1a1815" strokeWidth="1.5"/>
-                <circle cx="170" cy="40" r="4" stroke="#1a1815" strokeWidth="1"/>
-                <circle cx="30" cy="50" r="4" stroke="#1a1815" strokeWidth="1"/>
-                <line x1="100" y1="38" x2="100" y2="88" stroke="#1a1815" strokeWidth="1"/>
-                <line x1="46" y1="100" x2="88" y2="100" stroke="#1a1815" strokeWidth="1"/>
-                <line x1="112" y1="100" x2="154" y2="100" stroke="#1a1815" strokeWidth="1"/>
-                <line x1="94" y1="110" x2="66" y2="164" stroke="#1a1815" strokeWidth="0.75"/>
-                <line x1="106" y1="110" x2="134" y2="164" stroke="#1a1815" strokeWidth="0.75"/>
-                <line x1="100" y1="30" x2="170" y2="40" stroke="#1a1815" strokeWidth="0.5"/>
-                <line x1="100" y1="30" x2="30" y2="50" stroke="#1a1815" strokeWidth="0.5"/>
-                <line x1="40" y1="100" x2="30" y2="50" stroke="#1a1815" strokeWidth="0.5"/>
-                <line x1="160" y1="100" x2="170" y2="40" stroke="#1a1815" strokeWidth="0.5"/>
-                <line x1="60" y1="170" x2="140" y2="170" stroke="#1a1815" strokeWidth="0.5"/>
+                <circle cx="100" cy="30" r="8" fill={deco}/>
+                <circle cx="40" cy="100" r="6" stroke={deco} strokeWidth="1.5"/>
+                <circle cx="100" cy="100" r="12" fill={deco}/>
+                <circle cx="160" cy="100" r="6" stroke={deco} strokeWidth="1.5"/>
+                <circle cx="60" cy="170" r="6" stroke={deco} strokeWidth="1.5"/>
+                <circle cx="140" cy="170" r="6" stroke={deco} strokeWidth="1.5"/>
+                <circle cx="170" cy="40" r="4" stroke={deco} strokeWidth="1"/>
+                <circle cx="30" cy="50" r="4" stroke={deco} strokeWidth="1"/>
+                <line x1="100" y1="38" x2="100" y2="88" stroke={deco} strokeWidth="1"/>
+                <line x1="46" y1="100" x2="88" y2="100" stroke={deco} strokeWidth="1"/>
+                <line x1="112" y1="100" x2="154" y2="100" stroke={deco} strokeWidth="1"/>
+                <line x1="94" y1="110" x2="66" y2="164" stroke={deco} strokeWidth="0.75"/>
+                <line x1="106" y1="110" x2="134" y2="164" stroke={deco} strokeWidth="0.75"/>
+                <line x1="100" y1="30" x2="170" y2="40" stroke={deco} strokeWidth="0.5"/>
+                <line x1="100" y1="30" x2="30" y2="50" stroke={deco} strokeWidth="0.5"/>
+                <line x1="40" y1="100" x2="30" y2="50" stroke={deco} strokeWidth="0.5"/>
+                <line x1="160" y1="100" x2="170" y2="40" stroke={deco} strokeWidth="0.5"/>
+                <line x1="60" y1="170" x2="140" y2="170" stroke={deco} strokeWidth="0.5"/>
               </svg>
-            )}
+            ) : null; })()}
           </div>
         )}
 
         {/* Layer 1: Project number + metadata */}
         <div style={{ display: "flex", alignItems: "center", gap: 24, marginBottom: 40, animation: "fadeUp 0.6s ease-out 0.1s both" }}>
-          <div style={{ fontFamily: FONT_MONO, fontSize: isMobile ? 48 : 64, fontWeight: 300, color: "#d4cfc7", lineHeight: 1, letterSpacing: "-0.03em" }}>
+          <div style={{ fontFamily: FONT_MONO, fontSize: isMobile ? 48 : 64, fontWeight: 300, color: th.textPlaceholder, lineHeight: 1, letterSpacing: "-0.03em" }}>
             {project.navName}
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 4, paddingLeft: 24, borderLeft: "1px solid #d4cfc7" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4, paddingLeft: 24, borderLeft: `1px solid ${th.border}` }}>
             {[
               ["Role", t(project.roleLine, lang).split(" // ")[0]],
               ["Team", t(project.teamInfo, lang)],
               ["Context", t(project.context, lang)],
             ].map(([label, val], i) => (
-              <div key={i} style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: "#8a857d" }}>
-                {label}<span style={{ color: "#1a1815", fontFamily: FONT_BODY, fontWeight: 500, textTransform: "none", letterSpacing: 0, marginLeft: 8, fontSize: 13 }}>{val}</span>
+              <div key={i} style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: th.textMuted }}>
+                {label}<span style={{ color: th.textPrimary, fontFamily: FONT_BODY, fontWeight: 500, textTransform: "none", letterSpacing: 0, marginLeft: 8, fontSize: 13 }}>{val}</span>
               </div>
             ))}
           </div>
@@ -3033,7 +3321,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
               {(() => { const lines = project.heroTitleLines ? (Array.isArray(project.heroTitleLines) ? project.heroTitleLines.map(l => t(l, lang)) : t(project.heroTitleLines, lang)) : [t(project.name, lang)]; return lines.map((line, i, arr) => (<span key={i}>{line}{i < arr.length - 1 && <br />}</span>)); })()}
             </h1>
             {/* Red underline */}
-            <div style={{ width: 64, height: 4, background: ACCENT, animation: "lineGrow 0.6s ease-out 0.8s both" }} />
+            <div style={{ width: 64, height: 4, background: th.accent, animation: "lineGrow 0.6s ease-out 0.8s both" }} />
           </div>
           {/* Stat hook — right side on desktop, below title on mobile */}
           {project.heroStat && (
@@ -3041,10 +3329,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
               ...(isMobile || lang === "en" ? { marginTop: 24, textAlign: lang === "en" && !isMobile ? "right" : "left" } : { position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", textAlign: "right" }),
               animation: "fadeUp 0.8s ease-out 0.5s both",
             }}>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: isMobile ? 48 : "clamp(48px, 7vw, 96px)", fontWeight: 900, lineHeight: 1, color: ACCENT, letterSpacing: "-0.03em" }}>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: isMobile ? 48 : "clamp(48px, 7vw, 96px)", fontWeight: 900, lineHeight: 1, color: th.accent, letterSpacing: "-0.03em" }}>
                 {t(project.heroStat.number, lang)}
               </div>
-              <div style={{ fontFamily: FONT_MONO, fontSize: 13, color: "#8a857d", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 4 }}>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 13, color: th.textMuted, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 4 }}>
                 {t(project.heroStat.unit, lang)}
               </div>
             </div>
@@ -3054,10 +3342,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
         {/* Layer 3: Narrative */}
         {project.heroNarrative && (
           <div style={{ maxWidth: 720, margin: "0 auto 64px", animation: "fadeUp 0.8s ease-out 0.35s both" }}>
-            <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: "#1a1815" }}>
+            <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: th.heroNarrativeHook }}>
               {t(project.heroNarrative.hook, lang)}
             </div>
-            <div style={{ fontSize: 15, lineHeight: 1.8, color: "#8a857d", fontWeight: 300 }}>
+            <div style={{ fontSize: 15, lineHeight: 1.8, color: th.heroNarrativeDetail, fontWeight: 300 }}>
               {t(project.heroNarrative.detail, lang)}
             </div>
           </div>
@@ -3066,23 +3354,23 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
         {/* Layer 4: Before/After cards OR Metrics card */}
         {project.stateBefore ? (
           <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.45s both", maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
-            <div style={{ padding: "28px 36px", background: "#eae7e1", borderRadius: 6, marginRight: isMobile ? 12 : 20 }}>
-              <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#aaa69f", marginBottom: 10 }}>Before</div>
-              <div style={{ fontSize: 15, lineHeight: 1.7, color: "#aaa69f", textDecoration: "line-through", textDecorationColor: "rgba(196, 66, 43, 0.25)", textDecorationThickness: 1 }}>
+            <div style={{ padding: "28px 36px", background: th.stateBefore, borderRadius: 6, marginRight: isMobile ? 12 : 20 }}>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: th.beforeLabel, marginBottom: 10 }}>Before</div>
+              <div style={{ fontSize: 15, lineHeight: 1.7, color: th.beforeLabel, textDecoration: "line-through", textDecorationColor: "rgba(196, 66, 43, 0.25)", textDecorationThickness: 1 }}>
                 {t(project.stateBefore, lang)}
               </div>
             </div>
             <div style={{
               position: "relative", marginTop: -20, marginLeft: isMobile ? 12 : 20, marginRight: 0,
-              padding: "32px 36px", background: "#faf9f7", borderRadius: 6,
+              padding: "32px 36px", background: th.stateAfter, borderRadius: 6,
               boxShadow: "0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02)",
             }}>
-              <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: ACCENT, marginBottom: 10 }}>After</div>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: 18, fontWeight: 700, lineHeight: 1.6, color: "#1a1815" }}>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: th.afterLabel, marginBottom: 10 }}>After</div>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: 18, fontWeight: 700, lineHeight: 1.6, color: th.textPrimary }}>
                 {t(project.stateAfter, lang).split("·").map((part, i, arr) => {
                   const trimmed = part.trim();
                   const isLast = i === arr.length - 1;
-                  return <span key={i}>{isLast ? <span style={{ color: ACCENT }}>{trimmed}</span> : trimmed}{!isLast && " · "}</span>;
+                  return <span key={i}>{isLast ? <span style={{ color: th.accent }}>{trimmed}</span> : trimmed}{!isLast && " · "}</span>;
                 })}
               </div>
             </div>
@@ -3093,7 +3381,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
             gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
             marginBottom: 64,
             animation: "fadeUp 0.8s ease-out 0.45s both",
-            background: "#faf9f7",
+            background: th.bgCardAlt,
             borderRadius: 6,
             boxShadow: "0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02)",
             overflow: "hidden",
@@ -3103,13 +3391,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                 padding: "32px 28px",
                 textAlign: "center",
                 position: "relative",
-                ...(!isMobile && i < project.heroMetrics.length - 1 ? { borderRight: "1px solid #d4cfc7" } : {}),
-                ...(isMobile && i < project.heroMetrics.length - 1 ? { borderBottom: "1px solid #d4cfc7" } : {}),
+                ...(!isMobile && i < project.heroMetrics.length - 1 ? { borderRight: `1px solid ${th.border}` } : {}),
+                ...(isMobile && i < project.heroMetrics.length - 1 ? { borderBottom: `1px solid ${th.border}` } : {}),
               }}>
-                <div style={{ fontFamily: FONT_DISPLAY, fontSize: 36, fontWeight: 900, lineHeight: 1, color: m.highlight ? ACCENT : "#1a1815", marginBottom: 8 }}>
+                <div style={{ fontFamily: FONT_DISPLAY, fontSize: 36, fontWeight: 900, lineHeight: 1, color: m.highlight ? th.accent : th.metricText, marginBottom: 8 }}>
                   {t(m.value, lang)}
                 </div>
-                <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: "#8a857d", letterSpacing: "0.06em" }}>
+                <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: th.metricLabelColor, letterSpacing: "0.06em" }}>
                   {t(m.label, lang)}
                 </div>
               </div>
@@ -3119,7 +3407,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
 
         {/* Layer 5: Section navigation */}
         <div style={{ paddingBottom: 48, animation: "fadeUp 0.7s ease-out 0.55s both", textAlign: "center" }}>
-          <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8a857d", marginBottom: 12 }}>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: th.textMuted, marginBottom: 12 }}>
             {lang === "en" ? "Skip to content" : "跳转至正文"}
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
@@ -3134,14 +3422,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                       setNavMode("skill");
                     }
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "#1a1815"; e.currentTarget.style.color = "#faf8f4"; e.currentTarget.style.borderColor = "#1a1815"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#1a1815"; e.currentTarget.style.borderColor = "#B8B0A3"; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = th.skillBtnHoverBg; e.currentTarget.style.color = th.skillBtnHoverText; e.currentTarget.style.borderColor = th.skillBtnHoverBg; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = th.skillBtnText; e.currentTarget.style.borderColor = th.skillBtnBorder; }}
                   style={{
                     display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
                     fontFamily: FONT_BODY, fontSize: 13, fontWeight: 500,
                     minWidth: 120, padding: "8px 18px",
-                    color: "#1a1815", cursor: "pointer", textDecoration: "none",
-                    border: "1px solid #B8B0A3", borderRadius: 2,
+                    color: th.skillBtnText, cursor: "pointer", textDecoration: "none",
+                    border: `1px solid ${th.skillBtnBorder}`, borderRadius: 2,
                     transition: "all 0.2s ease",
                   }}
                 >
@@ -3182,15 +3470,15 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
             if (isReflection) {
               return (
                 <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "56px auto 0", padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
-                  <div style={{ height: 1, background: "#D5D0C8" }} />
-                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: "#c4422b" }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
+                  <div style={{ height: 1, background: th.headingDivider }} />
+                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: th.headingColor, margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: th.accent }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
                 </div>
               );
             }
             return (
               <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "56px auto 0", padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
-                <div style={{ height: 1, background: "#D5D0C8" }} />
-                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: "#c4422b" }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
+                <div style={{ height: 1, background: th.headingDivider }} />
+                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: th.headingColor, margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: th.accent }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
               </div>
             );
           }
@@ -3232,9 +3520,9 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                 );
               }
               const missingStyle = tStyle(block.text, lang);
-              return <p key={i} id={blockId} style={{ width: "100%", fontSize: T.body, color: "#333", lineHeight: 1.85, margin: "0 auto", maxWidth: 640, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80, ...missingStyle }}>{paragraphContent}</p>;
+              return <p key={i} id={blockId} style={{ width: "100%", fontSize: T.body, color: th.paragraphColor, lineHeight: 1.85, margin: "0 auto", maxWidth: 640, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80, ...missingStyle }}>{paragraphContent}</p>;
             }
-            return <TextPlaceholder key={i} lines={5} />;
+            return <TextPlaceholder key={i} lines={5} th={th} />;
           }
 
           if (block.type === "quote-list") {
@@ -3258,7 +3546,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                         <span style={{
                           fontFamily: "'DM Mono', monospace",
                           fontSize: 13,
-                          color: "#999",
+                          color: th.quoteListRole,
                           width: 90,
                           minWidth: 90,
                           flexShrink: 0,
@@ -3269,13 +3557,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                         <span style={{
                           fontSize: 15,
                           lineHeight: 1.75,
-                          color: "#2A2A2A",
+                          color: th.quoteListText,
                           flex: 1,
                           ...tStyle(q.text, lang),
                         }}>
-                          <span style={{ color: "#B8B0A3" }}>{"\u201C"}</span>
+                          <span style={{ color: th.quoteListQuoteMark }}>{"\u201C"}</span>
                           {t(q.text, lang)}
-                          <span style={{ color: "#B8B0A3" }}>{"\u201D"}</span>
+                          <span style={{ color: th.quoteListQuoteMark }}>{"\u201D"}</span>
                         </span>
                         {qi < block.items.length - 1 && (
                           <div style={{
@@ -3284,7 +3572,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                             left: 0,
                             width: "calc(100% + 120px)",
                             height: 1,
-                            background: "rgba(213,208,200,0.45)",
+                            background: th.quoteListSep,
                           }} />
                         )}
                       </div>
@@ -3300,7 +3588,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                     opacity: 0.85,
                     transform: "translateX(40px)",
                   }}>
-                    <DiagnosisCascadeSVG height={290} />
+                    <DiagnosisCascadeSVG height={290} th={th} />
                   </div>
                 </div>
               </div>
@@ -3314,13 +3602,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                   <div key={mi} style={{
                     display: "flex", gap: isMobile ? 8 : 20, alignItems: "flex-start",
                     padding: "14px 0",
-                    borderBottom: mi < block.items.length - 1 ? "1px solid #E5E2DC" : "none",
+                    borderBottom: mi < block.items.length - 1 ? `1px solid ${th.moduleBorder}` : "none",
                     flexDirection: isMobile ? "column" : "row",
                   }}>
-                    <span style={{ fontSize: T.small, fontWeight: 600, color: "#1a1815", minWidth: isMobile ? "auto" : 140, flexShrink: 0, paddingTop: 2, ...tStyle(m.name, lang) }}>
+                    <span style={{ fontSize: T.small, fontWeight: 600, color: th.moduleNameColor, minWidth: isMobile ? "auto" : 140, flexShrink: 0, paddingTop: 2, ...tStyle(m.name, lang) }}>
                       {t(m.name, lang)}
                     </span>
-                    <span style={{ fontSize: T.body, color: "#6b6560", lineHeight: 1.85, ...tStyle(m.desc, lang) }}>
+                    <span style={{ fontSize: T.body, color: th.moduleDescColor, lineHeight: 1.85, ...tStyle(m.desc, lang) }}>
                       {t(m.desc, lang)}
                     </span>
                   </div>
@@ -3334,11 +3622,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
               <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "16px auto", padding: "0 8px", scrollMarginTop: 80 }}>
                 <blockquote style={{
                   margin: 0,
-                  borderLeft: "3px solid #c4422b",
+                  borderLeft: `3px solid ${th.pullQuoteBorder}`,
                   paddingLeft: 20,
                   fontSize: T.body,
                   fontWeight: 600,
-                  color: "#000",
+                  color: th.pullQuoteText,
                   lineHeight: lang === "en" ? 1.55 : 1.4,
                   fontFamily: FONT_DISPLAY,
                   ...tStyle(block.text, lang),
@@ -3360,6 +3648,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                   setCarouselActive={setCarouselActive}
                   setLightboxContent={setLightboxContent}
                   flashBg={flashBg}
+                  th={th}
                 />
               </div>
             );
@@ -3379,6 +3668,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                     <div key={ii} style={{ position: "relative" }}>
                       <ScreenshotItem
                         item={resolvedItem}
+                        th={th}
                         onLightbox={() => setLightboxContent({
                           content: <img src={item.src} alt={resolvedItem.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
                           initialScale: item.initialScale || 0.85
@@ -3409,9 +3699,9 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                 >
                   {/* Card shell */}
                   <div style={{
-                    background: "#fff",
+                    background: th.illustrationBg,
                     borderRadius: "10px",
-                    border: "1px solid #d4cdc2",
+                    border: `1px solid ${th.illustrationBorder}`,
                     overflow: "hidden",
                   }}>
                     {/* On mobile: horizontally scrollable so SVG text remains legible */}
@@ -3429,14 +3719,14 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                         setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top });
                       }}
                       onMouseLeave={() => !isMobile && setExpandCursor(c => ({ ...c, visible: false }))}
-                      onClick={() => setLightboxContent({ content: <div style={{ width: "min(90vw, 1052px)" }}><IllComponent /></div>, initialScale: block.initialScale || ill.initialScale || 0.85 })}
+                      onClick={() => setLightboxContent({ content: <div style={{ width: "min(90vw, 1052px)", ...(mode === "dark" ? { filter: "invert(0.88) hue-rotate(180deg)" } : {}) }}><IllComponent /></div>, initialScale: block.initialScale || ill.initialScale || 0.85 })}
                     >
                       {isMobile && (
-                        <p style={{ fontSize: 10, color: "#aaa", margin: "0 0 6px 0", textAlign: "center" }}>
+                        <p style={{ fontSize: 10, color: th.noteColor, margin: "0 0 6px 0", textAlign: "center" }}>
                           {lang === "en" ? "← Scroll to explore →" : "← 左右滑动查看 / scroll to explore →"}
                         </p>
                       )}
-                      <div style={{ minWidth: isMobile ? 600 : "auto", width: "100%" }}>
+                      <div style={{ minWidth: isMobile ? 600 : "auto", width: "100%", ...(mode === "dark" ? { filter: "invert(0.88) hue-rotate(180deg)", transition: "filter 0.3s ease" } : {}) }}>
                         <IllComponent />
                       </div>
                       {/* Floating expand indicator — follows mouse */}
@@ -3465,13 +3755,13 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                     {/* Bottom label bar */}
                     <div style={{
                       padding: "12px 16px",
-                      borderTop: "1px solid #e8e3da",
+                      borderTop: `1px solid ${th.illustrationLabelBg}`,
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
                     }}>
-                      <p style={{ fontSize: T.small, fontWeight: 600, color: "#333", margin: 0 }}>{t(ill.name, lang)}</p>
-                      <p style={{ fontSize: T.small, color: "#999", margin: 0 }}>{ill.type}</p>
+                      <p style={{ fontSize: T.small, fontWeight: 600, color: th.screenshotLabelColor, margin: 0 }}>{t(ill.name, lang)}</p>
+                      <p style={{ fontSize: T.small, color: th.screenshotNoteColor, margin: 0 }}>{ill.type}</p>
                     </div>
                   </div>
                 </div>
@@ -3479,7 +3769,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
             }
             return (
               <div key={i} id={blockId} style={{ scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}>
-                <PlaceholderBox label={t(ill.name, lang)} sublabel={ill.type + " \u00B7 " + t(ill.note, lang)} height={240} dark />
+                <PlaceholderBox label={t(ill.name, lang)} sublabel={ill.type + " \u00B7 " + t(ill.note, lang)} height={240} dark th={th} />
               </div>
             );
           }
@@ -3491,6 +3781,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
                 <div key={i} id={blockId} style={{ margin: "12px 0" }}>
                   <ScreenshotInlineCard
                     block={resolvedBlock}
+                    th={th}
                     onLightbox={() => setLightboxContent({
                       content: <img src={block.src} alt={resolvedBlock.label} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
                       initialScale: 0.85
@@ -3501,17 +3792,17 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
             }
             return (
               <div key={i} id={blockId} style={{ scrollMarginTop: 80 }}>
-                <PlaceholderBox label={t(block.label, lang)} sublabel={t(block.note, lang)} height={200} />
+                <PlaceholderBox label={t(block.label, lang)} sublabel={t(block.note, lang)} height={200} th={th} />
               </div>
             );
           }
 
           if (block.type === "screenshot-pair") {
-            return <div key={i} id={blockId} style={{ scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><BeforeAfterPair labelBefore={block.labelBefore} labelAfter={block.labelAfter} note={block.note} isMobile={isMobile} /></div>;
+            return <div key={i} id={blockId} style={{ scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><BeforeAfterPair labelBefore={block.labelBefore} labelAfter={block.labelAfter} note={block.note} isMobile={isMobile} th={th} /></div>;
           }
 
           if (block.type === "iteration-step") {
-            return <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "0 auto", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={t(block.heading, lang)} /></div></div>;
+            return <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "0 auto", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={t(block.heading, lang)} th={th} /></div></div>;
           }
 
           return null;
@@ -3528,6 +3819,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
           <ScreenshotItem
             key={i}
             item={{ src: s.src, label: t(s.label, lang), note: t(s.proves, lang) }}
+            th={th}
             onLightbox={() => setLightboxContent({
               content: <img src={s.src} alt={t(s.label, lang)} draggable={false} style={{ maxWidth: "100%", maxHeight: "90vh", display: "block", WebkitUserDrag: "none" }} />,
               initialScale: 0.85
@@ -3535,11 +3827,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
           />
         );
         return (
-          <section style={{ marginTop: 72, paddingTop: 36, borderTop: "1px solid #D5D0C8" }}>
-            <h3 style={{ fontSize: T.small, fontWeight: 600, color: "#000", margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+          <section style={{ marginTop: 72, paddingTop: 36, borderTop: `1px solid ${th.prevNextBorder}` }}>
+            <h3 style={{ fontSize: T.small, fontWeight: 600, color: th.headingColor, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
               {"System in Action"}
             </h3>
-            <p style={{ fontSize: T.small, color: "#999", marginBottom: 24 }}>
+            <p style={{ fontSize: T.small, color: th.screenshotNoteColor, marginBottom: 24 }}>
               {lang === "en" ? "Deployed and in use" : "Evidence of live deployment"}
             </p>
             {featured.map((s, i) => (
@@ -3564,7 +3856,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
       {/* === Prev / Next Nav === */}
       <nav style={{
         display: "flex",
-        marginTop: 72, paddingTop: 28, borderTop: "1px solid #D5D0C8",
+        marginTop: 72, paddingTop: 28, borderTop: `1px solid ${th.prevNextBorder}`,
         flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 16,
       }}>
         <div
@@ -3574,16 +3866,16 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
           onMouseLeave={() => setHoveredNav(null)}
           style={{
             flex: 1,
-            border: "1px solid #D5D0C8",
+            border: `1px solid ${th.prevNextBorder}`,
             padding: "14px 20px",
             cursor: "pointer",
-            backgroundColor: hoveredNav === "prev" ? "#1a1815" : "transparent",
-            backgroundImage: hoveredNav === "prev" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
+            backgroundColor: hoveredNav === "prev" ? th.prevNextHoverBg : "transparent",
+            backgroundImage: hoveredNav === "prev" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, ${th.prevNextGlow}, rgba(17,17,17,0))` : "none",
             transition: "background-color 0.2s ease",
           }}
         >
-          <span style={{ fontSize: T.small, color: hoveredNav === "prev" ? "rgba(255,255,255,0.5)" : "#999", display: "block", transition: "color 0.2s ease" }}>{"\u2190 Previous"}</span>
-          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "prev" ? "#fff" : "#000", transition: "color 0.2s ease" }}>{hasPrev ? t(prevProject.name, lang) : (lang === "en" ? "Back to Home" : "回到首页")}</span>
+          <span style={{ fontSize: T.small, color: hoveredNav === "prev" ? th.prevNextHoverLabel : th.prevNextLabel, display: "block", transition: "color 0.2s ease" }}>{"\u2190 Previous"}</span>
+          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "prev" ? th.prevNextHoverTitle : th.prevNextTitle, transition: "color 0.2s ease" }}>{hasPrev ? t(prevProject.name, lang) : (lang === "en" ? "Back to Home" : "回到首页")}</span>
         </div>
         <div
           onClick={() => onNavigate(hasNext ? "project-" + nextProject.id : "home", { scrollToBottom: !hasNext })}
@@ -3592,22 +3884,22 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
           onMouseLeave={() => setHoveredNav(null)}
           style={{
             flex: 1,
-            border: "1px solid #D5D0C8",
+            border: `1px solid ${th.prevNextBorder}`,
             padding: "14px 20px",
             textAlign: isMobile ? "left" : "right",
             cursor: "pointer",
-            backgroundColor: hoveredNav === "next" ? "#1a1815" : "transparent",
-            backgroundImage: hoveredNav === "next" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, rgba(255,255,255,0.12), rgba(17,17,17,0))` : "none",
+            backgroundColor: hoveredNav === "next" ? th.prevNextHoverBg : "transparent",
+            backgroundImage: hoveredNav === "next" ? `radial-gradient(circle at ${navPos.x}px ${navPos.y}px, ${th.prevNextGlow}, rgba(17,17,17,0))` : "none",
             transition: "background-color 0.2s ease",
           }}
         >
-          <span style={{ fontSize: T.small, color: hoveredNav === "next" ? "rgba(255,255,255,0.5)" : "#999", display: "block", transition: "color 0.2s ease" }}>{"Next \u2192"}</span>
-          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "next" ? "#fff" : "#000", transition: "color 0.2s ease" }}>{hasNext ? t(nextProject.name, lang) : (lang === "en" ? "Back to Home" : "回到首页")}</span>
+          <span style={{ fontSize: T.small, color: hoveredNav === "next" ? th.prevNextHoverLabel : th.prevNextLabel, display: "block", transition: "color 0.2s ease" }}>{"Next \u2192"}</span>
+          <span style={{ fontSize: T.body, fontWeight: 500, color: hoveredNav === "next" ? th.prevNextHoverTitle : th.prevNextTitle, transition: "color 0.2s ease" }}>{hasNext ? t(nextProject.name, lang) : (lang === "en" ? "Back to Home" : "回到首页")}</span>
         </div>
       </nav>
       </div>
       {lightboxContent && (
-        <Lightbox onClose={() => setLightboxContent(null)} initialScale={lightboxContent.initialScale || 0.85}>
+        <Lightbox onClose={() => setLightboxContent(null)} initialScale={lightboxContent.initialScale || 0.85} th={th}>
           {lightboxContent.content}
         </Lightbox>
       )}
@@ -3617,7 +3909,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang }) {
 
 /* ===== App ===== */
 
-function Lightbox({ children, onClose, initialScale = 0.85 }) {
+function Lightbox({ children, onClose, initialScale = 0.85, th }) {
   const [scale, setScale] = useState(initialScale);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const dragging = useRef(false);
@@ -3714,7 +4006,7 @@ function Lightbox({ children, onClose, initialScale = 0.85 }) {
       onPointerUp={onPointerUp}
       style={{
         position: "fixed", inset: 0, zIndex: 500,
-        backgroundColor: "rgba(20,18,15,0.85)",
+        backgroundColor: th.lightboxBg,
         cursor: dragging.current ? "grabbing" : "grab",
         touchAction: "none", userSelect: "none",
       }}
@@ -3748,7 +4040,7 @@ function Lightbox({ children, onClose, initialScale = 0.85 }) {
         justifyContent: "center",
         maxWidth: "min(85vw, 900px)",
       }}>
-        <div style={{ backgroundColor: "#fff", padding: 24, boxSizing: "border-box", borderRadius: "8px" }}>
+        <div style={{ backgroundColor: th.lightboxCardBg, padding: 24, boxSizing: "border-box", borderRadius: "8px" }}>
           {children}
         </div>
         {/* Hint bar right below the card */}
@@ -3801,7 +4093,7 @@ function Lightbox({ children, onClose, initialScale = 0.85 }) {
   );
 }
 
-function BackToTop() {
+function BackToTop({ th }) {
   const [show, setShow] = useState(false);
   const [hovered, setHovered] = useState(false);
   useEffect(() => {
@@ -3819,18 +4111,18 @@ function BackToTop() {
         position: "fixed", bottom: 80,
         right: "max(24px, calc((100% - 720px) / 2 - 220px))",
         zIndex: 200, width: 40, height: 40,
-        border: hovered ? "1px solid #1a1815" : "1px solid #D5D0C8",
-        backgroundColor: hovered ? "#1a1815" : "#faf8f4",
+        border: hovered ? `1px solid ${th.backToTopHoverBorder}` : `1px solid ${th.backToTopBorder}`,
+        backgroundColor: hovered ? th.backToTopHoverBg : th.backToTopBg,
         display: "flex", alignItems: "center", justifyContent: "center",
         cursor: "pointer", transition: "background-color 0.2s ease, border-color 0.2s ease",
       }}
     >
-      <span style={{ fontSize: 14, color: hovered ? "#faf8f4" : "#666", transition: "color 0.2s ease", display: "inline-block", transform: "rotate(90deg)" }}>{"\u2190"}</span>
+      <span style={{ fontSize: 14, color: hovered ? th.backToTopHoverText : th.backToTopText, transition: "color 0.2s ease", display: "inline-block", transform: "rotate(90deg)" }}>{"\u2190"}</span>
     </div>
   );
 }
 
-function Toast({ message, position, onDone }) {
+function Toast({ message, position, onDone, th }) {
   const [phase, setPhase] = useState("in");
   const onDoneRef = useRef(onDone);
   useEffect(() => { onDoneRef.current = onDone; }, [onDone]);
@@ -3847,7 +4139,7 @@ function Toast({ message, position, onDone }) {
     <div style={{
       position: "fixed", left: "50%", transform: "translateX(-50%)",
       ...posStyle,
-      zIndex: 300, backgroundColor: "#2A2A2A", color: "#fff",
+      zIndex: 300, backgroundColor: th.toastBg, color: th.toastText,
       fontSize: T.small, padding: "10px 24px",
       boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
       opacity: phase === "in" ? 0 : phase === "out" ? 0 : 1,
@@ -3871,10 +4163,20 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const [fade, setFade] = useState(1);
   const [lang, setLang] = useState("en");
+  const [mode, setMode] = useState(() => {
+    try { return localStorage.getItem("theme-mode") || "light"; } catch { return "light"; }
+  });
+  const th = THEME[mode];
   const pendingNav = useRef(null);
   const pendingScroll = useRef(null);
   const pageRef = useRef(page);
   const isMobile = useIsMobile();
+
+  // Persist mode preference and sync CSS custom property for animations
+  useEffect(() => {
+    try { localStorage.setItem("theme-mode", mode); } catch {}
+    document.documentElement.style.setProperty("--theme-accent", th.accent);
+  }, [mode, th.accent]);
 
   useEffect(() => { pageRef.current = page; }, [page]);
 
@@ -3930,19 +4232,20 @@ export default function App() {
   return (
     <div style={{
       fontFamily: FONT_BODY,
-      color: "#000",
+      color: th.text,
       minHeight: "100vh",
-      backgroundColor: "#faf8f4",
+      backgroundColor: th.bg,
       display: "flex",
       flexDirection: "column",
+      transition: "background-color 0.3s ease, color 0.3s ease",
     }}>
-      <Nav currentPage={page} onNavigate={navigate} isMobile={isMobile} lang={lang} setLang={setLang} />
+      <Nav currentPage={page} onNavigate={navigate} isMobile={isMobile} lang={lang} setLang={setLang} mode={mode} setMode={setMode} th={th} />
       <div style={{ opacity: fade, transition: "opacity 0.25s ease", flex: 1 }}>
-        {page === "home" && <HomePage onNavigate={navigate} isMobile={isMobile} lang={lang} />}
-        {cp && <ProjectPage project={cp} onNavigate={navigate} onToast={showToast} isMobile={isMobile} lang={lang} />}
+        {page === "home" && <HomePage onNavigate={navigate} isMobile={isMobile} lang={lang} th={th} mode={mode} />}
+        {cp && <ProjectPage project={cp} onNavigate={navigate} onToast={showToast} isMobile={isMobile} lang={lang} th={th} mode={mode} />}
       </div>
-      <BackToTop />
-      {toast && <Toast message={toast.msg} position={toast.position} onDone={() => setToast(null)} />}
+      <BackToTop th={th} />
+      {toast && <Toast message={toast.msg} position={toast.position} onDone={() => setToast(null)} th={th} />}
     </div>
   );
 }
