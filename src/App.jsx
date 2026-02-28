@@ -32,7 +32,7 @@ const MOBILE_NAV_H = 50;
 
 const T = { heading: 18, body: 16, small: 13 };
 const ACCENT_LIGHT = "#c4422b";
-const ACCENT_DARK = "#d4513a";
+const ACCENT_DARK = "#e06a55";
 
 const THEME = {
   light: {
@@ -46,7 +46,7 @@ const THEME = {
     text: "#000",
     textPrimary: "#1a1815",
     textSecondary: "#6b6560",
-    textMuted: "#8a857d",
+    textMuted: "#6b6660",
     textLight: "#a09688",
     textPlaceholder: "#d4cdc2",
     textHero: "#2a2520",
@@ -91,7 +91,7 @@ const THEME = {
     pullQuoteBorder: ACCENT_LIGHT,
     progressTrack: "#E5E2DC",
     progressFill: "#000",
-    progressText: "#888",
+    progressText: "#6b6660",
     mobileNavBg: "rgba(250,249,247,0.92)",
     mobileNavFlash: "rgba(250,249,247,0.97)",
     sideNavCardBg: "rgba(255,255,255,0.45)",
@@ -115,7 +115,7 @@ const THEME = {
     cursorGradient: "radial-gradient(circle, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 60%)",
     cursorBlend: "multiply",
     paragraphColor: "#333",
-    quoteListRole: "#999",
+    quoteListRole: "#6b6660",
     quoteListText: "#2A2A2A",
     quoteListQuoteMark: "#B8B0A3",
     quoteListSep: "rgba(213,208,200,0.45)",
@@ -128,29 +128,29 @@ const THEME = {
     iterVersionText: "#fff",
     iterLineBg: "#E5E2DC",
     iterHeadingColor: "#000",
-    beforeLabel: "#888",
+    beforeLabel: "#6b6660",
     afterLabel: ACCENT_LIGHT,
     beforeText: "#aaa69f",
-    noteColor: "#aaa",
+    noteColor: "#6b6660",
     heroNarrativeHook: "#1a1815",
-    heroNarrativeDetail: "#8a857d",
+    heroNarrativeDetail: "#6b6660",
     metricText: "#1a1815",
-    metricLabelColor: "#8a857d",
+    metricLabelColor: "#6b6660",
     prevNextBg: "transparent",
     prevNextHoverBg: "#1a1815",
     prevNextBorder: "#D5D0C8",
-    prevNextLabel: "#999",
+    prevNextLabel: "#6b6660",
     prevNextHoverLabel: "rgba(255,255,255,0.5)",
     prevNextTitle: "#000",
     prevNextHoverTitle: "#fff",
     prevNextGlow: "rgba(255,255,255,0.12)",
     screenshotLabelColor: "#333",
-    screenshotNoteColor: "#999",
+    screenshotNoteColor: "#6b6660",
     expandCursorBg: "rgba(17,17,17,0.85)",
     expandCursorText: "#fff",
     // SVG illustration colors — keep original
     svgTextDark: "#3a3632",
-    svgTextLight: "#a09688",
+    svgTextLight: "#847968",
     svgBorderLight: "#d4cdc2",
     svgBgZone: "#e8e2d8",
     svgBgModule: "#ffffff",
@@ -173,7 +173,7 @@ const THEME = {
     text: "#e8e4df",
     textPrimary: "#e8e4df",
     textSecondary: "#9a958d",
-    textMuted: "#7a756d",
+    textMuted: "#9a917d",
     textLight: "#6a655d",
     textPlaceholder: "#3a3632",
     textHero: "#e8e4df",
@@ -218,7 +218,7 @@ const THEME = {
     pullQuoteBorder: ACCENT_DARK,
     progressTrack: "#2e2b27",
     progressFill: "#e8e4df",
-    progressText: "#7a756d",
+    progressText: "#9a917d",
     mobileNavBg: "rgba(26,26,26,0.92)",
     mobileNavFlash: "rgba(26,26,26,0.97)",
     sideNavCardBg: "rgba(30,30,30,0.65)",
@@ -242,7 +242,7 @@ const THEME = {
     cursorGradient: "radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%)",
     cursorBlend: "screen",
     paragraphColor: "#c8c4bd",
-    quoteListRole: "#7a756d",
+    quoteListRole: "#9a917d",
     quoteListText: "#e8e4df",
     quoteListQuoteMark: "#5a5550",
     quoteListSep: "rgba(60,58,54,0.45)",
@@ -255,29 +255,29 @@ const THEME = {
     iterVersionText: "#1a1a1a",
     iterLineBg: "#2e2b27",
     iterHeadingColor: "#e8e4df",
-    beforeLabel: "#7a756d",
+    beforeLabel: "#9a917d",
     afterLabel: ACCENT_DARK,
     beforeText: "#6a655d",
     noteColor: "#5a5550",
     heroNarrativeHook: "#e8e4df",
-    heroNarrativeDetail: "#7a756d",
+    heroNarrativeDetail: "#9a917d",
     metricText: "#e8e4df",
-    metricLabelColor: "#7a756d",
+    metricLabelColor: "#9a917d",
     prevNextBg: "transparent",
     prevNextHoverBg: "#e8e4df",
     prevNextBorder: "#3a3632",
-    prevNextLabel: "#7a756d",
+    prevNextLabel: "#9a917d",
     prevNextHoverLabel: "rgba(26,26,26,0.5)",
     prevNextTitle: "#e8e4df",
     prevNextHoverTitle: "#1a1a1a",
     prevNextGlow: "rgba(255,255,255,0.06)",
     screenshotLabelColor: "#c8c4bd",
-    screenshotNoteColor: "#7a756d",
+    screenshotNoteColor: "#9a917d",
     expandCursorBg: "rgba(232,228,223,0.9)",
     expandCursorText: "#1a1a1a",
     // SVG illustration colors — dark adapted
     svgTextDark: "#c8c4bd",
-    svgTextLight: "#6a655d",
+    svgTextLight: "#8a847c",
     svgBorderLight: "#3a3632",
     svgBgZone: "#2a2725",
     svgBgModule: "#2e2b27",
@@ -307,9 +307,9 @@ function tStyle(v, lang) {
     return { backgroundColor: "rgba(196,66,43,0.15)", color: "#c4422b" };
   return {};
 }
-const FONT_BODY = "'Noto Sans SC', 'Helvetica Neue', sans-serif";
-const FONT_DISPLAY = "'Noto Serif SC', 'Georgia', serif";
-const FONT_MONO = "'DM Mono', 'Courier New', monospace";
+const FONT_BODY = "'Noto Sans SC', system-ui, sans-serif";
+const FONT_DISPLAY = "'Noto Serif SC', system-ui, serif";
+const FONT_MONO = "'DM Mono', 'Noto Sans SC', monospace";
 
 const PROJECTS = [
   {
@@ -345,8 +345,8 @@ const PROJECTS = [
     },
     heroTitleLines: { zh: ["不是人的问题，", "是系统的问题"], en: ["Not a people problem —", "it's a systems problem"] },
     illustrations: [
-      { name: { zh: "双轨时间轴", en: "Dual-track timeline" }, type: "时间线", note: { zh: "覆盖从危机诊断到AI上线的完整双线叙事", en: "Covers the full dual narrative from crisis diagnosis to AI launch" } },
-      { name: { zh: "六模块信息枢纽", en: "Six-module information hub" }, type: "架构图", note: { zh: "覆盖协作系统的信息流动设计逻辑", en: "Covers the information flow logic of the collaboration system" } },
+      { name: { zh: "双轨时间轴", en: "Dual-track timeline" }, type: { zh: "一个项目的两条线——危机中搭建的协作系统，与它所赢得的信任催生的AI智能体。", en: "Two threads of one project — a collaboration system built amid crisis, and the AI agent it later made possible by earning the client's trust." }, note: { zh: "覆盖从危机诊断到AI上线的完整双线叙事", en: "Covers the full dual narrative from crisis diagnosis to AI launch" } },
+      { name: { zh: "六模块信息枢纽", en: "Six-module information hub" }, type: { zh: "六个模块构成客户与执行团队之间的信息枢纽——控制什么能进入系统、如何处理、以什么形式交付。", en: "Six modules forming an information hub between client and execution team, controlling what enters the system, how it's processed, and what form it takes on delivery." }, note: { zh: "覆盖协作系统的信息流动设计逻辑", en: "Covers the information flow logic of the collaboration system" } },
     ],
     bodyStructure: [
       // === 背景 ===
@@ -362,11 +362,11 @@ const PROJECTS = [
       { type: "paragraph", text: { zh: "带着这些假设，我跟团队里不同角色做了15次一对一访谈。不是问卷，不是群体会议，是把人一个一个叫到办公室，正式坐下来，录音，开放式提问：\u201C你觉得现在最大的问题是什么？你需要什么样的支持？\u201D", en: "Armed with those hypotheses, I did 15 one-on-one interviews with people in different roles across the team. Not surveys. Not group meetings. I brought people into the office one by one, sat down, hit record, and asked open-ended questions: \"What do you think the biggest problem is right now? What kind of support do you need?\"" } },
       { type: "pull-quote", text: { zh: "我拿到了几乎一致的诊断线索：", en: "What I got back was strikingly consistent:" } },
       { type: "quote-list", items: [
-        { role: { zh: "前端开发", en: "[MISSING]" }, text: { zh: "需求总是不明确，我不知道做到什么程度算完成。", en: "[MISSING]" } },
-        { role: { zh: "后端开发", en: "[MISSING]" }, text: { zh: "我不知道前端在做什么，经常重复开发。", en: "[MISSING]" } },
-        { role: { zh: "设计师", en: "[MISSING]" },   text: { zh: "我的稿子改了，但不知道开发有没有看到新版本。", en: "[MISSING]" } },
-        { role: { zh: "客户方", en: "[MISSING]" },   text: { zh: "我提的需求，不知道有没有进入开发流程。", en: "[MISSING]" } },
-        { role: { zh: "技术部领导", en: "[MISSING]" }, text: { zh: "我看不到整体进度，不知道哪里卡住了。", en: "[MISSING]" } },
+        { role: { zh: "前端开发", en: "Frontend Developer" }, text: { zh: "需求总是不明确，我不知道做到什么程度算完成。", en: "Requirements are always unclear. I never know what 'done' looks like." } },
+        { role: { zh: "后端开发", en: "Backend Developer" }, text: { zh: "我不知道前端在做什么，经常重复开发。", en: "I have no idea what frontend is working on. We end up building the same things twice." } },
+        { role: { zh: "设计师", en: "Designer" },   text: { zh: "我的稿子改了，但不知道开发有没有看到新版本。", en: "I've updated my files, but I don't know if the developers ever see the new version." } },
+        { role: { zh: "客户方", en: "Client" },   text: { zh: "我提的需求，不知道有没有进入开发流程。", en: "I've submitted requests, but I have no idea if anyone's actually working on them." } },
+        { role: { zh: "技术部领导", en: "Engineering Lead" }, text: { zh: "我看不到整体进度，不知道哪里卡住了。", en: "I can't see overall progress. I don't know where things are stuck." } },
       ]},
       { type: "paragraph", text: { zh: "每个人描述的症状不一样，但根源指向同一件事：信息在人和人之间流转不了。不是谁不愿意干活，是现有的群聊式协作方式，在一两周短项目里勉强能用，但放到两年长线项目里完全崩溃了。", en: "Everyone described different symptoms, but they all pointed to the same root cause: information couldn't flow between people. It wasn't that anyone refused to work — it was that collaborating through group chats barely held up for one-to-two-week projects. Stretched across a two-year engagement, it completely collapsed." } },
       { type: "pull-quote", text: { zh: "不是人的问题，是系统的问题。", en: "Not a people problem — a systems problem." } },
@@ -379,12 +379,12 @@ const PROJECTS = [
       { type: "paragraph", text: { zh: "我回到三个最基本的问题来推导。问题本质是什么？——信息不对称、流程不清晰、责任不明确。最小可行方案是什么？——用一份结构化的中枢文档，把所有信息、流程、责任固定下来。怎么保证执行？——规则公开透明，所有人只有一个信息来源。", en: "I worked backward from there. The core problem was information asymmetry, unclear processes, and undefined responsibilities. The minimum viable fix was a single structured document that pins down every process, responsibility, and piece of information in one place. And the only way to enforce it was to make the rules visible to everyone — one source of truth, no exceptions." } },
       { type: "pull-quote", text: { zh: "基于这个逻辑，我设计了六个模块：", en: "From there, I designed six modules:" } },
       { type: "module-list", items: [
-        { name: { zh: "变更日志", en: "[MISSING]" },           desc: { zh: "强制记录所有改动，任何人都能追溯历史，解决「我改了但你不知道」的问题。", en: "[MISSING]" } },
-        { name: { zh: "资产归集", en: "[MISSING]" },           desc: { zh: "把环境链接、文档、第三方平台凭证集中管理，终结「那个链接在哪」的重复提问。", en: "[MISSING]" } },
-        { name: { zh: "组织职责", en: "[MISSING]" },           desc: { zh: "列清每个人的角色和职责边界，终结「这个问题该找谁」的困惑。", en: "[MISSING]" } },
-        { name: { zh: "需求全生命周期管理", en: "[MISSING]" }, desc: { zh: "核心模块。所有需求必须进入统一需求池，经过「待评估 / 已排期 / 开发中 / 已完成 / 已拒绝」完整状态流转，拒绝必须写明原因，决策过程透明可追溯。", en: "[MISSING]" } },
-        { name: { zh: "迭代发布", en: "[MISSING]" },           desc: { zh: "每次发版前生成发布清单，明确本次上线什么、修复了什么。", en: "[MISSING]" } },
-        { name: { zh: "验收走查", en: "[MISSING]" },           desc: { zh: "为每个页面建独立走查表，并列放设计稿和前端还原截图，把主观验收变成可比对、可追溯的结构化流程。", en: "[MISSING]" } },
+        { name: { zh: "变更日志", en: "Change Log:" },           desc: { zh: "强制记录所有改动，任何人都能追溯历史，解决「我改了但你不知道」的问题。", en: "Every change gets recorded — mandatory. Anyone can trace the full history. Solves the \"I updated it but you never knew\" problem." } },
+        { name: { zh: "资产归集", en: "Asset Repository:" },           desc: { zh: "把环境链接、文档、第三方平台凭证集中管理，终结「那个链接在哪」的重复提问。", en: "Environment links, documents, third-party platform credentials — all centralized in one place. No more \"where's that link?\"" } },
+        { name: { zh: "组织职责", en: "Role Map:" },           desc: { zh: "列清每个人的角色和职责边界，终结「这个问题该找谁」的困惑。", en: "Every person's role and scope of responsibility, spelled out. No more \"who do I talk to about this?\"" } },
+        { name: { zh: "需求全生命周期管理", en: "Requirement Lifecycle\nManagement:" }, desc: { zh: "核心模块。所有需求必须进入统一需求池，经过「待评估 / 已排期 / 开发中 / 已完成 / 已拒绝」完整状态流转，拒绝必须写明原因，决策过程透明可追溯。", en: "The core module. Every requirement must enter a unified backlog and move through a full status flow — Pending Review → Scheduled → In Development → Complete → Rejected. Rejections require a written reason. Every decision is transparent and traceable." } },
+        { name: { zh: "迭代发布", en: "Release Management:" },           desc: { zh: "每次发版前生成发布清单，明确本次上线什么、修复了什么。", en: "Before each release, generate a checklist — what's going live, what's been fixed." } },
+        { name: { zh: "验收走查", en: "Acceptance Review:" },           desc: { zh: "为每个页面建独立走查表，并列放设计稿和前端还原截图，把主观验收变成可比对、可追溯的结构化流程。", en: "A dedicated review sheet for every page, with design mockups and frontend screenshots placed side by side. Turns sign-off from a judgment call into a structured, trackable process." } },
       ]},
       { type: "illustration", index: 1, initialScale: 1 },
       { type: "paragraph", text: { zh: "六个模块不是拍脑袋拆的，每一个都对应着访谈中反复出现的具体痛点。需求全生命周期管理对应的是前端\u201C不知道做到什么程度\u201D和客户\u201C不知道需求有没有进流程\u201D的问题；变更日志对应的是设计师\u201C改了但开发不知道\u201D的问题；组织职责对应的是所有人\u201C不知道找谁\u201D的问题。", en: "These six modules weren't pulled out of thin air. Each one traced directly back to a pain point from the interviews. The lifecycle module addressed the frontend developer's \"I never know what 'done' looks like\" and the client's \"I have no idea if anyone's actually working on my requests.\" Change Log addressed the designer's \"I've updated my files but I don't know if developers ever see the new version.\" Role Map addressed everyone's \"I don't know who to go to.\"" } },
@@ -446,7 +446,7 @@ const PROJECTS = [
     skillTagsEn: ["Problem Reframing", "Trust Strategy", "User Research", "Phased Delivery"],
     skillTagJumps: {
       "问题重定义": { scrollTo: 6, borderRange: [6, 15], keySentence: { zh: "客户的问题不是UI，是产品定位", en: "product positioning" }, keyBlock: 15 },
-      "信任策略": { scrollTo: 16, borderRange: [16, 16], keySentence: { zh: "先解决客户说的问题，再引出客户没看到的问题", en: "Answer the question the client asked first, then surface the question they hadn" }, keyBlock: 16 },
+      "信任策略": { scrollTo: 16, borderRange: [16, 16], keySentence: { zh: "先解决客户说的问题，再引出客户没看到的问题", en: "Answer the question the client asked first, then surface the question they hadn't seen" }, keyBlock: 16 },
       "用户研究": { scrollTo: 21, borderRange: [20, 24], keySentence: { zh: "这个判断需要第三方验证", en: "I needed real users to test my assumptions" }, keyBlock: 21 },
       "分阶段落地": { scrollTo: 26, borderRange: [25, 32], keySentence: { zh: "不是三选一，是分阶段全做", en: "Not pick one" }, keyBlock: 28 },
     },
@@ -460,16 +460,16 @@ const PROJECTS = [
       { value: { zh: "全站", en: "Full site" }, label: { zh: "逐页走查", en: "Page-by-page walkthrough" } },
       { value: { zh: "未收费", en: "Unbilled" }, label: { zh: "主动交付", en: "Self-initiated delivery" } },
     ],
-    heroTitleLines: [{ zh: "客户说改UI，", en: "The client said fix the UI —" }, { zh: "但UI不是问题", en: "but UI wasn't the problem" }],
+    heroTitleLines: [{ zh: "客户说改UI，", en: "The client said fix the UI" }, { zh: "但UI不是问题", en: "— but UI wasn't the problem" }],
     illustrations: [
-      { name: { zh: "诊断漏斗图", en: "Diagnostic funnel" }, type: "漏斗图", note: { zh: "覆盖诊断链（从表象到根因）", en: "Covers the diagnostic chain from symptoms to root cause" } },
-      { name: { zh: "三期递进图", en: "Three-phase progression" }, type: "路线图", note: { zh: "覆盖落地路径和商业结果", en: "Covers the delivery path and business outcomes" } },
+      { name: { zh: "诊断漏斗图", en: "Diagnostic funnel" }, type: { zh: "从客户说的「改UI」出发，经全站走查与用户访谈逐层收敛，最终定位到产品身份未定义的根源问题。", en: "Starting from the client's ask to \"fix the UI,\" converging layer by layer through a full-site audit and user interviews, ultimately pinpointing the root cause: a product identity crisis." }, note: { zh: "覆盖诊断链（从表象到根因）", en: "Covers the diagnostic chain from symptoms to root cause" } },
+      { name: { zh: "三期递进图", en: "Three-phase progression" }, type: { zh: "10万UI改版订单如何演变为150万分三期落地的完整产品重构路径。", en: "How a ¥100K UI redesign contract evolved into a ¥1.5M product overhaul delivered across three phases." }, note: { zh: "覆盖落地路径和商业结果", en: "Covers the delivery path and business outcomes" } },
     ],
     bodyStructure: [
       // === 起点 === Block 0-3
       { type: "heading", text: { zh: "起点：一个卡住的客户，和一个即时冒出来的念头", en: "Starting point: A stuck client, and a hunch" }, navLabel: { zh: "起点", en: "Starting Point" } },
       { type: "paragraph", text: { zh: "2025年初，一个攻略站项目转到我手上。我的正式角色是产品运营，这个项目最初只是一笔10万的常规UI外包订单。背景是这样的：客户之前找外包做了一版潮汐守望者游戏攻略站（移动端H5），一期上线后效果不好，想做二期但说不清楚该往哪个方向改。最后给出的需求是\u201C先把UI改一下\u201D——这不是一个明确的产品诉求，更像是找不到方向时退而求其次的兜底选项。", en: "In early 2025, a game guide project landed on my desk. My official title was still Product Operations. The project was originally just a standard ¥100K UI contract. Here's the background: the client had previously hired a vendor to build a mobile web (H5) game guide site for Watcher of Realms. After Phase 1 launched and underperformed, they wanted a Phase 2 but couldn't articulate what direction to take. The scope they gave us was \"fix the UI first\" — not a clear product vision, more like a default move when you can't figure out what's actually wrong." } },
-      { type: "paragraph", text: { zh: "听到\u201C潮汐守望者\u201D这个名字的瞬间，我就搜索并下载了游戏。这是职业本能——你要帮一个游戏攻略站做产品判断，不深入理解它服务的游戏生态，所有判断都是空的。", en: "[MISSING]" } },
+      { type: "paragraph", text: { zh: "听到\u201C潮汐守望者\u201D这个名字的瞬间，我就搜索并下载了游戏。这是职业本能——你要帮一个游戏攻略站做产品判断，不深入理解它服务的游戏生态，所有判断都是空的。", en: "The moment I heard \"Watcher of Realms,\" I searched for the game and downloaded it. Professional instinct — if you're going to make product decisions for a game guide site without understanding the game ecosystem it serves, you're flying blind." } },
       { type: "paragraph", text: { zh: "下载游戏后几乎立刻注意到一件事：玩家之间有一个非常活跃的\u201C装备码\u201D分享习惯。在B站、YouTube这些平台上，玩家分享一串代码，其他人在游戏内输入就能直接复制整套英雄装备配置。这是游戏已有的、被玩家高频使用的打通机制。我当时脑子里冒出来一个念头：既然装备能用一串码打通，为什么攻略站的\u201C阵容\u201D不能？这个想法在那一刻就出现了，不是后来分析出来的。但直觉离落地很远，我先把它放着，开始做正事。", en: "Almost immediately after downloading the game, I noticed something: players were constantly sharing \"gear codes.\" On platforms like Bilibili and YouTube, players would share a string of characters, and others could enter it in-game to instantly copy an entire hero equipment setup. This was a built-in mechanism the game already had, and players used it all the time. It hit me right then: if gear can be shared through a single code, why can't lineups on the guide site work the same way? The idea appeared in that moment — it wasn't something I analyzed my way into later. But instinct is a long way from execution. I shelved it and got to work." } },
 
       // === 走查 === Block 4-16
@@ -562,7 +562,7 @@ const PROJECTS = [
     ],
     heroTitleLines: [{ zh: "AI落地最难的部分，", en: "The hardest part of shipping AI —" }, { zh: "不是技术", en: "isn't the tech" }],
     illustrations: [
-      { name: { zh: "线性迭代流程图", en: "Linear iteration flow" }, type: "流程图", note: { zh: "从MVP到business-ready的五步迭代路径与关键决策节点", en: "Five-step iteration path from MVP to business-ready, with key decision points" } },
+      { name: { zh: "线性迭代流程图", en: "Linear iteration flow" }, type: { zh: "从中英文纯文本验证到支持18语种文件级翻译的五步迭代路径，标注每一步的关键产品决策。", en: "A five-step iteration path from Chinese-to-English plain-text validation to 18-language file-level translation, with key product decisions marked at each step." }, note: { zh: "从MVP到business-ready的五步迭代路径与关键决策节点", en: "Five-step iteration path from MVP to business-ready, with key decision points" } },
     ],
     bodyStructure: [
       // === 起源段 === Block 0-4
@@ -670,12 +670,15 @@ function ScreenshotItem({ item, onLightbox, th }) {
   const isShortImage = displayHeight !== null && displayHeight < 260;
 
   return (
-    <div ref={containerRef} onClick={() => hasImage && onLightbox()} onMouseEnter={() => hasImage && setExpandCursor(c => ({ ...c, visible: true }))} onMouseMove={(e) => { if (!hasImage) return; const rect = e.currentTarget.getBoundingClientRect(); setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top }); }} onMouseLeave={() => setExpandCursor(c => ({ ...c, visible: false }))} style={{ cursor: hasImage ? "zoom-in" : "default", position: "relative" }}>
+    <div ref={containerRef} onClick={() => hasImage && onLightbox()} onMouseEnter={() => hasImage && setExpandCursor(c => ({ ...c, visible: true }))} onMouseMove={(e) => { if (!hasImage) return; const rect = e.currentTarget.getBoundingClientRect(); setExpandCursor({ visible: true, x: e.clientX - rect.left, y: e.clientY - rect.top }); }} onMouseLeave={() => setExpandCursor(c => ({ ...c, visible: false }))} style={{ cursor: hasImage ? "zoom-in" : "default", position: "relative", height: "100%" }}>
       <div style={{
         background: th.illustrationBg,
         borderRadius: "10px",
         border: `1px solid ${th.illustrationBorder}`,
         overflow: "hidden",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
       }}>
         {hasImage ? (
           <div style={{
@@ -722,8 +725,9 @@ function ScreenshotItem({ item, onLightbox, th }) {
           padding: "12px 16px",
           borderTop: `1px solid ${th.illustrationLabelBg}`,
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          flexDirection: "column",
+          gap: "4px",
+          marginTop: "auto",
         }}>
           <p style={{ fontSize: T.small, fontWeight: 600, color: th.screenshotLabelColor, margin: 0 }}>{item.label}</p>
           {item.note && <p style={{ fontSize: T.small, color: th.screenshotNoteColor, margin: 0 }}>{item.note}</p>}
@@ -1029,7 +1033,7 @@ function Footer({ isMobile, th }) {
   );
 }
 
-function Nav({ currentPage, onNavigate, isMobile, lang, setLang, mode, setMode, th }) {
+function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, mode, setMode, th }) {
   const [hovered, setHovered] = useState(null);
   return (
     <nav style={{
@@ -1040,20 +1044,21 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, mode, setMode, 
       transition: "background-color 0.3s ease",
     }}>
       <div style={{
-        maxWidth: 860,
+        maxWidth: 880,
         margin: "0 auto",
         padding: isMobile ? "10px 16px 8px" : "12px 40px 8px",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderBottom: `1px solid ${th.borderLight}`,
+        position: "relative",
       }}>
+        <div style={{ position: "absolute", bottom: 0, left: isMobile ? 16 : 16, right: isMobile ? 16 : 16, height: 1, background: th.borderLight }} />
         <span
           onClick={() => { if (currentPage !== "home") onNavigate("home"); }}
           onMouseEnter={() => setHovered("home")}
           onMouseLeave={() => setHovered(null)}
           style={{
-            fontSize: T.heading,
+            fontSize: lang === "en" ? T.heading : T.heading,
             fontWeight: 700,
             color: hovered === "home" ? th.navHoverText : th.text,
             fontFamily: FONT_DISPLAY,
@@ -1064,7 +1069,7 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, mode, setMode, 
             backgroundColor: hovered === "home" ? th.navHoverBg : "transparent",
             transition: "color 0.2s ease, background-color 0.2s ease",
           }}
-        >{"Zulpkar Tuerxun"}</span>
+        >{lang === "en" ? "Zulpkar Tuerxun" : "祖力卡尔·吐尔逊江"}</span>
       <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 12 : 6, flexWrap: "wrap", justifyContent: "flex-end" }}>
         {PROJECTS.map((p) => {
           const isActive = currentPage === "project-" + p.id;
@@ -1094,7 +1099,7 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, mode, setMode, 
         })}
         {!isMobile && <span style={{ color: th.dividerColor, fontSize: 14, margin: "0 4px" }}>|</span>}
         <span
-          onClick={() => setLang(lang === "en" ? "zh" : "en")}
+          onClick={() => { if (onLangSwitch) onLangSwitch(); }}
           onMouseEnter={() => setHovered("lang")}
           onMouseLeave={() => setHovered(null)}
           style={{
@@ -1103,6 +1108,7 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, mode, setMode, 
             cursor: "pointer", userSelect: "none",
             whiteSpace: "nowrap",
             padding: "4px 10px",
+            minWidth: 40, textAlign: "center", display: "inline-block",
             backgroundColor: hovered === "lang" ? th.navHoverBg : "transparent",
             transition: "color 0.2s ease, background-color 0.2s ease",
           }}
@@ -1156,9 +1162,9 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
 
   // Hero typewriter animation
   const HERO_LINES = lang === "en" ? [
-    { text: "Product, Design, Project Management, Client Management", type: "normal" },
-    { text: "pulled together into one PM foundation,", type: "normal" },
-    { text: "Next direction:", type: "normal", inline: true },
+    { text: "Product,| Design,| Project Management,| Stakeholder Management", type: "normal" },
+    { text: "|pulled together into one PM foundation,", type: "normal" },
+    { text: "|Next direction: ", type: "normal", inline: true },
   ] : [
     { text: "产品、设计、项目管理、客户", type: "normal" },
     { text: "收拢成一个 PM 底座，", type: "normal" },
@@ -1166,15 +1172,30 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
   ];
   const heroChars = useMemo(() => {
     const chars = [];
-    HERO_LINES.forEach((line, li) => {
-      for (let i = 0; i < line.text.length; i++) {
-        chars.push({ char: line.text[i], lineIndex: li, type: line.type, inline: line.inline || false });
-      }
-    });
+    if (lang === "en") {
+      // EN: custom group rhythm via "|" delimiter
+      let groupIdx = 0;
+      HERO_LINES.forEach((line, li) => {
+        const groups = line.text.split("|");
+        groups.forEach((chunk) => {
+          for (let i = 0; i < chunk.length; i++) {
+            chars.push({ char: chunk[i], lineIndex: li, type: line.type, inline: line.inline || false, group: groupIdx });
+          }
+          groupIdx++;
+        });
+      });
+    } else {
+      // ZH: character-by-character
+      HERO_LINES.forEach((line, li) => {
+        for (let i = 0; i < line.text.length; i++) {
+          chars.push({ char: line.text[i], lineIndex: li, type: line.type, inline: line.inline || false, group: chars.length });
+        }
+      });
+    }
     return chars;
   }, [lang]);
-  const HERO_TOTAL = heroChars.length;
-  const HERO_CHAR_DELAY = 100;
+  const HERO_TOTAL = lang === "en" ? (heroChars.length > 0 ? heroChars[heroChars.length - 1].group + 1 : 0) : heroChars.length;
+  const HERO_CHAR_DELAY = lang === "en" ? 400 : 100;
   const heroPlayed = typeof sessionStorage !== "undefined" && sessionStorage.getItem("hero-played");
   const [revealedCount, setRevealedCount] = useState(heroPlayed ? HERO_TOTAL : 0);
   const [subtitleVisible, setSubtitleVisible] = useState(!!heroPlayed);
@@ -1446,15 +1467,15 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
           transform: revealedCount > 0 ? "translateY(0)" : "translateY(6px)",
           transition: "all 0.8s cubic-bezier(0.23,1,0.32,1)",
         }}>
-          {"Product Operations \u00B7 5 years"}
+          {lang === "en" ? "Product Operations \u00B7 5 years" : "产品运营 \u00B7 5年"}
         </div>
 
         <h1 style={{
           fontFamily: FONT_DISPLAY,
-          fontSize: isMobile ? (lang === "en" ? 18 : 32) : (lang === "en" ? "clamp(22px, 3.2vw, 34px)" : "clamp(32px, 5.5vw, 56px)"),
-          fontWeight: 700, lineHeight: 1.45,
+          fontSize: isMobile ? (lang === "en" ? 22 : 32) : (lang === "en" ? "clamp(20px, 2.8vw, 30px)" : "clamp(32px, 5.5vw, 56px)"),
+          fontWeight: 700, lineHeight: lang === "en" ? 1.8 : 1.45,
           letterSpacing: "-0.02em",
-          margin: 0, maxWidth: 780,
+          margin: 0, maxWidth: lang === "en" ? "none" : 780,
         }}>
           {(() => {
             const lineGroups = {};
@@ -1465,13 +1486,13 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
             return Object.entries(lineGroups).map(([li, chars]) => {
               const lineData = HERO_LINES[parseInt(li)];
               const renderChar = (c) => {
-                const isRevealed = c.gi < revealedCount;
+                const isRevealed = c.group < revealedCount;
                 return (
                   <span key={c.gi} style={{
                     display: "inline-block",
                     color: isRevealed ? th.textHero : th.textPlaceholder,
                     transition: "color 0.25s ease",
-                    textShadow: c.gi === revealedCount - 1 && isRevealed
+                    textShadow: c.group === revealedCount - 1 && isRevealed
                       ? (mode === "dark" ? "0 0 20px rgba(232,228,223,0.15)" : "0 0 20px rgba(42,37,32,0.15)") : "none",
                     minWidth: c.char === " " ? "0.3em" : undefined,
                   }}>
@@ -1507,6 +1528,7 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
               );
             });
           })()}
+          {lang === "en" && " "}
           <span style={{ display: "inline-block", position: "relative", verticalAlign: "baseline" }}>
             <span id="hero-question" style={{
               display: "inline-block", color: th.textPlaceholder, fontWeight: 700,
@@ -1530,7 +1552,7 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
                   left: "100%",
                   top: "50%",
                   transform: replayHovered ? "translateY(-50%) scale(1.1) rotate(-30deg)" : "translateY(-50%)",
-                  marginLeft: 14,
+                  marginLeft: lang === "en" ? 36 : 14,
                   cursor: "pointer",
                   opacity: replayHovered ? 0.85 : 0.7,
                   transition: "all 0.4s cubic-bezier(0.23,1,0.32,1)",
@@ -1547,8 +1569,8 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
         </h1>
 
         <p style={{
-          marginTop: 40, fontSize: 15, color: th.textMuted,
-          letterSpacing: "0.02em", lineHeight: 1.6,
+          marginTop: 40, fontSize: lang === "en" ? 15 : 15, color: th.textMuted,
+          letterSpacing: lang === "en" ? "0.02em" : "0.02em", lineHeight: lang === "en" ? 1.6 : 1.6,
           opacity: subtitleVisible ? 1 : 0,
           transform: subtitleVisible ? "translateY(0)" : "translateY(10px)",
           transition: "all 0.8s cubic-bezier(0.23,1,0.32,1) 0.1s",
@@ -1579,7 +1601,7 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
               onTouchCancel={() => setPressedId(null)}
               style={{
                 display: "grid",
-                gridTemplateColumns: isMobile ? "1fr auto" : "140px 1fr auto",
+                gridTemplateColumns: isMobile ? "1fr auto" : (lang === "en" ? "140px 1fr auto" : "140px 1fr auto"),
                 alignItems: "center",
                 gap: isMobile ? 16 : "0 32px",
                 padding: isMobile ? "32px 0" : "48px 0",
@@ -1621,8 +1643,8 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
                 <div style={{
                   fontFamily: FONT_DISPLAY,
                   fontWeight: 900,
-                  fontSize: isMobile ? 40 : 56,
-                  lineHeight: 1,
+                  fontSize: isMobile ? (lang === "en" ? 40 : 40) : (lang === "en" ? 56 : 56),
+                  lineHeight: lang === "en" ? 1 : 1,
                   color: th.accent,
                   letterSpacing: "-0.03em",
                   opacity: isHovered ? 1 : 0.85,
@@ -1668,16 +1690,16 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
                 <h3 style={{
                   fontFamily: FONT_DISPLAY,
                   fontWeight: 900,
-                  fontSize: isMobile ? 18 : "clamp(18px, 2.2vw, 24px)",
-                  lineHeight: 1.35,
-                  letterSpacing: "-0.01em",
+                  fontSize: isMobile ? (lang === "en" ? 18 : 18) : (lang === "en" ? "clamp(18px, 2.2vw, 24px)" : "clamp(18px, 2.2vw, 24px)"),
+                  lineHeight: lang === "en" ? 1.35 : 1.35,
+                  letterSpacing: lang === "en" ? "-0.01em" : "-0.01em",
                   margin: 0,
                 }}>{t(p.name, lang)}</h3>
                 <p style={{
-                  fontSize: 14,
+                  fontSize: lang === "en" ? 14 : 14,
                   color: isHovered ? th.textPrimary : th.textSecondary,
                   fontWeight: 300,
-                  lineHeight: 1.5,
+                  lineHeight: lang === "en" ? 1.5 : 1.5,
                   margin: 0,
                   transition: "color 0.3s",
                 }}>{t(p.cardHook, lang) || t(p.cardSummary, lang)}</p>
@@ -1742,20 +1764,20 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
       }}>
         <p style={{
           fontFamily: FONT_DISPLAY, fontWeight: 400,
-          fontSize: isMobile ? 18 : "clamp(18px, 2.2vw, 24px)",
-          lineHeight: 1.4, color: th.textSecondary, marginBottom: 8,
+          fontSize: isMobile ? (lang === "en" ? 18 : 18) : (lang === "en" ? "clamp(18px, 2.2vw, 24px)" : "clamp(18px, 2.2vw, 24px)"),
+          lineHeight: lang === "en" ? 1.4 : 1.4, color: th.textSecondary, marginBottom: 8,
         }}>
           {lang === "en" ? "Get the problem right, then it's worth building." : "\u95EE\u9898\u62C6\u5BF9\u4E86\uFF0C\u624D\u503C\u5F97\u52A8\u624B\u3002"}
         </p>
         <h2 style={{
           fontFamily: FONT_DISPLAY, fontWeight: 900,
           fontSize: isMobile ? 26 : (lang === "en" ? "clamp(22px, 3.2vw, 36px)" : "clamp(26px, 3.8vw, 44px)"),
-          lineHeight: 1.3, letterSpacing: "-0.02em", marginBottom: 24,
+          lineHeight: lang === "en" ? 1.3 : 1.3, letterSpacing: lang === "en" ? "-0.02em" : "-0.02em", marginBottom: 24,
         }}>
           {lang === "en" ? "I'm looking for the next problem worth breaking down." : "\u6211\u5728\u627E\u4E0B\u4E00\u4E2A\u503C\u5F97\u62C6\u7684\u95EE\u9898\u3002"}
         </h2>
         <p style={{
-          fontSize: 14, lineHeight: 1.8, color: th.textSecondary, fontWeight: 300, marginBottom: 36,
+          fontSize: lang === "en" ? 14 : 14, lineHeight: lang === "en" ? 1.8 : 1.8, color: th.textSecondary, fontWeight: 300, marginBottom: 36,
         }}>
           {lang === "en" ? <><span style={{ color: th.textPrimary, fontWeight: 500 }}>{"In Fall 2027"}</span>{", I'm going back to school to build a formal framework around five years of product instinct \u2014 and bring it into AI."}</> : <><span style={{ color: th.textPrimary, fontWeight: 500 }}>{"\u0032\u0030\u0032\u0037\u5E74\u79CB\u5B63"}</span>{"\uFF0C\u6211\u51C6\u5907\u56DE\u5230\u5B66\u6821\uFF0C\u628A\u0035\u5E74\u4EA7\u54C1\u5B9E\u6218\u7CFB\u7EDF\u5316\uFF0C\u4E4B\u540E\u8FDB\u5165\u0041\u0049\u884C\u4E1A\u3002"}</>}
         </p>
@@ -1806,7 +1828,7 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
           </div>
 
           <p ref={detailBelowRef} style={{
-            fontSize: 14, lineHeight: 1.6, color: th.textSecondary, fontWeight: 300,
+            fontSize: lang === "en" ? 14 : 14, lineHeight: lang === "en" ? 1.6 : 1.6, color: th.textSecondary, fontWeight: 300,
             marginTop: 28, position: "relative", zIndex: 2,
           }}>
             {lang === "en" ? "If any of this resonates, I'd love to talk." : "\u5982\u679C\u4F60\u5BF9\u6211\u7684\u7ECF\u5386\u611F\u5174\u8DA3\uFF0C\u5F88\u4E50\u610F\u804A\u804A\u3002"}
@@ -1855,17 +1877,17 @@ function BeforeAfterPair({ labelBefore, labelAfter, note, isMobile, th }) {
   );
 }
 
-function IterationStep({ version, heading, th }) {
+function IterationStep({ version, heading, th, lang }) {
   return (
     <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
       <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{
           padding: "4px 12px", backgroundColor: th.iterVersionBg, color: th.iterVersionText,
-          fontSize: T.small, fontWeight: 600, letterSpacing: "0.05em",
+          fontSize: T.small, fontWeight: 600, letterSpacing: lang === "en" ? "0.05em" : "0.05em",
         }}>{version}</div>
         <div style={{ width: 1, height: 24, backgroundColor: th.iterLineBg, marginTop: 4 }} />
       </div>
-      <h3 style={{ fontSize: T.heading, fontWeight: 600, color: th.iterHeadingColor, margin: 0, paddingTop: 2 }}>{heading}</h3>
+      <h3 style={{ fontSize: lang === "en" ? T.heading : T.heading, fontWeight: 600, color: th.iterHeadingColor, margin: 0, lineHeight: lang === "en" ? 1.4 : 1.4 }}>{heading}</h3>
     </div>
   );
 }
@@ -1876,7 +1898,7 @@ function NavCard({ items, activeIdx, onSelect, title, count, accent, side, th })
   return (
     <div style={{
       position: "absolute",
-      width: 148,
+      width: "100%",
       top: 0,
       left: 0,
       pointerEvents: "auto",
@@ -1897,10 +1919,10 @@ function NavCard({ items, activeIdx, onSelect, title, count, accent, side, th })
       <div style={{
         padding: "10px 12px 7px",
         borderBottom: `1px solid ${th.sideNavHeaderBorder}`,
-        display: "flex", alignItems: "center", justifyContent: "space-between",
+        display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 2,
       }}>
-        <span style={{ fontSize: 10, fontFamily: FONT_BODY, fontWeight: 500, color: accent === "dark" ? th.textPrimary : th.accent, letterSpacing: 3 }}>{title}</span>
-        <span style={{ fontSize: 9, fontFamily: FONT_MONO, color: accent === "dark" ? th.textPrimary : th.accent, letterSpacing: 1 }}>{count}</span>
+        <span style={{ fontSize: 11, fontFamily: FONT_BODY, fontWeight: 500, color: accent === "dark" ? th.textPrimary : th.accent, letterSpacing: 3 }}>{title}</span>
+        <span style={{ fontSize: 11, fontFamily: FONT_MONO, color: accent === "dark" ? th.textPrimary : th.accent, letterSpacing: 1 }}>{count}</span>
       </div>
       {/* Card items */}
       <div style={{ padding: "4px 4px 8px" }}>
@@ -1935,7 +1957,7 @@ function NavCard({ items, activeIdx, onSelect, title, count, accent, side, th })
                 transition: "height 0.3s cubic-bezier(0.4,0,0.2,1)",
               }} />
               <span style={{
-                fontSize: isActive ? 13 : 11.5,
+                fontSize: isActive ? 13 : 12,
                 fontFamily: FONT_DISPLAY,
                 fontWeight: isActive ? 700 : 400,
                 color: isActive ? accentColor : (isHov ? accentColor : th.borderNav),
@@ -2011,12 +2033,11 @@ function SideNav({
     }
   }, [navMode, isFrontA]);
 
+  const rippleTimer = useRef(null);
   const chapterLabels = chapters || [];
   const skillLabels = skillTags || [];
 
   if (isCompact || (chapterLabels.length === 0 && skillLabels.length === 0)) return null;
-
-  const rippleTimer = useRef(null);
   const handleRotate = () => {
     setRotation(r => r + 180);
     const nextIsA = !isFrontA;
@@ -2030,6 +2051,7 @@ function SideNav({
   const handleChapterSelect = (_label, i) => onChapterClick(i);
   const handleSkillSelect = (_label, i) => onSkillClick((skillTagKeys || skillTags)[i]);
 
+  const cardW = lang === "en" ? 196 : 148;
   const cardH = Math.max(chapterLabels.length, skillLabels.length) * 34 + 40;
   const accentColor = isFrontA ? th.textPrimary : th.accent;
 
@@ -2059,8 +2081,8 @@ function SideNav({
       {visible && (
         <div style={{
           position: "fixed",
-          top: "calc(32px + (100vh - 112px) / 2)",
-          right: `max(8px, calc((100vw - 720px) / 2 - 280px))`,
+          top: lang === "en" ? "calc(50vh - 4px)" : "calc(32px + (100vh - 112px) / 2)",
+          right: lang === "en" ? `max(0px, calc((100vw - 720px) / 2 - 300px))` : `max(8px, calc((100vw - 720px) / 2 - 280px))`,
           transform: "translateY(-50%)",
           zIndex: 50,
           display: "flex", flexDirection: "column", alignItems: "center",
@@ -2200,9 +2222,9 @@ function SideNav({
           </div>
 
           {/* ③ 3D card scene */}
-          <div style={{ perspective: 900, perspectiveOrigin: "50% 0%", width: 148 }}>
+          <div style={{ perspective: 900, perspectiveOrigin: "50% 0%", width: cardW }}>
             <div style={{
-              position: "relative", width: 148, height: cardH,
+              position: "relative", width: cardW, height: cardH,
               transformStyle: "preserve-3d",
               transform: `rotateY(${rotation}deg)`,
               transition: "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -2499,7 +2521,7 @@ function DualTrackTimeline() {
   const brown = "#6B5B4E";
   const amber = "#B5743A";
   const textDark = "#3a3632";
-  const textLight = "#a09688";
+  const textLight = "#847968";
   const borderLight = "#d4cdc2";
 
   const PHASES = [
@@ -2583,8 +2605,8 @@ function DualTrackTimeline() {
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
                           <span style={{ fontSize: 15, fontWeight: isCore || isResult ? 700 : 500, color: isCore || isResult ? c : textDark, lineHeight: 1.3, fontFamily: ffSerif }}>{node.label}</span>
-                          {isCore && <span style={{ fontSize: 9, fontWeight: 700, color: c, background: `${c}14`, padding: "2px 7px", borderRadius: 4, letterSpacing: "0.6px", textTransform: "uppercase", whiteSpace: "nowrap" }}>Core Decision</span>}
-                          {isResult && <span style={{ fontSize: 9, fontWeight: 700, color: c, background: `${c}14`, padding: "2px 7px", borderRadius: 4, letterSpacing: "0.6px", textTransform: "uppercase", whiteSpace: "nowrap" }}>Outcome</span>}
+                          {isCore && <span style={{ fontSize: 10, fontWeight: 700, color: c, background: `${c}14`, padding: "2px 7px", borderRadius: 4, letterSpacing: "0.6px", textTransform: "uppercase", whiteSpace: "nowrap" }}>Core Decision</span>}
+                          {isResult && <span style={{ fontSize: 10, fontWeight: 700, color: c, background: `${c}14`, padding: "2px 7px", borderRadius: 4, letterSpacing: "0.6px", textTransform: "uppercase", whiteSpace: "nowrap" }}>Outcome</span>}
                         </div>
                         <p style={{ margin: "3px 0 0", fontSize: 13, color: isResult ? "#6b6560" : "#8a847c", fontWeight: isResult ? 500 : 400, lineHeight: 1.45 }}>{node.sub}</p>
                       </div>
@@ -2599,7 +2621,7 @@ function DualTrackTimeline() {
               <div style={{ margin: "8px 0", padding: "28px 0", position: "relative" }}>
                 <div style={{ position: "absolute", top: 0, left: 15, right: 0, height: 1, background: `linear-gradient(to right, ${brown}25, ${brown}08)` }} />
                 <div style={{ marginLeft: 42, padding: "14px 18px", background: `linear-gradient(135deg, ${brown}06, ${amber}08)`, borderLeft: "3px solid", borderImage: `linear-gradient(to bottom, ${brown}50, ${amber}70) 1`, borderRadius: "0 8px 8px 0" }}>
-                  <div style={{ fontSize: 9, fontWeight: 700, color: textLight, letterSpacing: "1.2px", textTransform: "uppercase", marginBottom: 5 }}>Turning Point</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: textLight, letterSpacing: "1.2px", textTransform: "uppercase", marginBottom: 5 }}>Turning Point</div>
                   <span style={{ fontSize: 13, fontWeight: 600, color: "#6b5f53", fontStyle: "italic", fontFamily: ffSerif, lineHeight: 1.4 }}>
                     {"Stable delivery builds trust \u2192 unlocks innovation mandate"}
                   </span>
@@ -2622,7 +2644,7 @@ function InfoHub() {
   const accent1 = "#6B5B4E";
   const accent2 = "#B5743A";
   const textDark = "#3a3632";
-  const textLight = "#a09688";
+  const textLight = "#847968";
   const bgZone = "#e8e2d8";
   const bgModule = "#ffffff";
   const border = "#d4cdc2";
@@ -2650,16 +2672,16 @@ function InfoHub() {
         <g>
           <rect x={0} y={zoneTop} width={zoneW} height={zoneH} rx={8} fill={bgZone} opacity="0.45" />
           <text x={zoneW / 2} y={zoneTop + zoneH / 2 - 16} textAnchor="middle" fontSize="13" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Client</text>
-          <text x={zoneW / 2} y={zoneTop + zoneH / 2 + 2} textAnchor="middle" fontSize="9" fill={textLight}>Demand</text>
-          <text x={zoneW / 2} y={zoneTop + zoneH / 2 + 14} textAnchor="middle" fontSize="9" fill={textLight}>Source</text>
+          <text x={zoneW / 2} y={zoneTop + zoneH / 2 + 2} textAnchor="middle" fontSize="10" fill={textLight}>Demand</text>
+          <text x={zoneW / 2} y={zoneTop + zoneH / 2 + 14} textAnchor="middle" fontSize="10" fill={textLight}>Source</text>
         </g>
 
         {/* EXECUTION ZONE */}
         <g>
           <rect x={execX} y={zoneTop} width={zoneW} height={zoneH} rx={8} fill={bgZone} opacity="0.45" />
           <text x={execX + zoneW / 2} y={zoneTop + zoneH / 2 - 16} textAnchor="middle" fontSize="13" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Execution</text>
-          <text x={execX + zoneW / 2} y={zoneTop + zoneH / 2 + 2} textAnchor="middle" fontSize="9" fill={textLight}>{`FE \u00B7 BE`}</text>
-          <text x={execX + zoneW / 2} y={zoneTop + zoneH / 2 + 14} textAnchor="middle" fontSize="9" fill={textLight}>{`Design \u00B7 QA`}</text>
+          <text x={execX + zoneW / 2} y={zoneTop + zoneH / 2 + 2} textAnchor="middle" fontSize="10" fill={textLight}>{`FE \u00B7 BE`}</text>
+          <text x={execX + zoneW / 2} y={zoneTop + zoneH / 2 + 14} textAnchor="middle" fontSize="10" fill={textLight}>{`Design \u00B7 QA`}</text>
         </g>
 
         {/* SYSTEM RULE BANNER */}
@@ -2670,17 +2692,17 @@ function InfoHub() {
 
         {/* GOVERNANCE ROW */}
         <g>
-          <text x={hubX + hubW / 2} y={58} textAnchor="middle" fontSize="9" fontWeight="700" fill={textLight} letterSpacing="1.5">{`GOVERNANCE \u2014 DEMAND FLOWS IN \u2192`}</text>
+          <text x={hubX + hubW / 2} y={58} textAnchor="middle" fontSize="10" fontWeight="700" fill={textLight} letterSpacing="1.5">{`GOVERNANCE \u2014 DEMAND FLOWS IN \u2192`}</text>
         </g>
 
         {/* Requirement Lifecycle — CORE */}
         <g>
           <rect x={modL} y={govY} width={reqW} height={govH} rx={8} fill={accent1} />
           <rect x={modL + reqW - 58} y={govY + 10} width={46} height={18} rx={9} fill="rgba(255,255,255,0.16)" />
-          <text x={modL + reqW - 35} y={govY + 22.5} textAnchor="middle" fontSize="8.5" fontWeight="700" fill="rgba(255,255,255,0.75)" letterSpacing="0.6">CORE</text>
+          <text x={modL + reqW - 35} y={govY + 22.5} textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(255,255,255,0.75)" letterSpacing="0.6">CORE</text>
           <text x={modL + 18} y={govY + 36} fontSize="15" fontWeight="700" fill="#fff" fontFamily={ffSerif}>Requirement Lifecycle</text>
           <text x={modL + 18} y={govY + 55} fontSize="10.5" fontWeight="600" fill="rgba(255,255,255,0.55)" letterSpacing="0.5">GATEWAY & ENGINE</text>
-          <text x={modL + 18} y={govY + 80} fontSize="9.5" fill="rgba(255,255,255,0.4)">{`Submit \u2192 Triage \u2192 Build \u2192 Ship`}</text>
+          <text x={modL + 18} y={govY + 80} fontSize="10" fill="rgba(255,255,255,0.4)">{`Submit \u2192 Triage \u2192 Build \u2192 Ship`}</text>
           {[0, 1, 2, 3, 4, 5].map((i) => <circle key={i} cx={modL + 22 + i * 42} cy={govY + 100} r={2.5} fill="rgba(255,255,255,0.18)" />)}
           <line x1={modL + 22} y1={govY + 100} x2={modL + 22 + 5 * 42} y2={govY + 100} stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
         </g>
@@ -2701,7 +2723,7 @@ function InfoHub() {
 
         {/* DELIVERY ROW */}
         <g>
-          <text x={hubX + hubW / 2} y={232} textAnchor="middle" fontSize="9" fontWeight="700" fill={textLight} letterSpacing="1.5">{`\u2190 OUTPUT FLOWS BACK \u2014 DELIVERY`}</text>
+          <text x={hubX + hubW / 2} y={232} textAnchor="middle" fontSize="10" fontWeight="700" fill={textLight} letterSpacing="1.5">{`\u2190 OUTPUT FLOWS BACK \u2014 DELIVERY`}</text>
         </g>
 
         {/* Acceptance Review */}
@@ -2732,7 +2754,7 @@ function InfoHub() {
           <line x1={modL} y1={delY + 30} x2={modL - 8} y2={delY + 30} stroke={textLight} strokeWidth="1.2" strokeDasharray="4,3" />
           <line x1={modL - 8} y1={delY + 30} x2={modL - 8} y2={govY + govH - 30} stroke={textLight} strokeWidth="1.2" strokeDasharray="4,3" />
           <line x1={modL - 8} y1={govY + govH - 30} x2={modL} y2={govY + govH - 30} stroke={textLight} strokeWidth="1.2" strokeDasharray="4,3" markerEnd="url(#af2)" />
-          <text x={modL + 4} y={(govY + govH + delY) / 2 + 3} fontSize="8.5" fontWeight="600" fill={textLight} fontStyle="italic">{`Issues feed back \u2192`}</text>
+          <text x={modL + 4} y={(govY + govH + delY) / 2 + 3} fontSize="10" fontWeight="600" fill={textLight} fontStyle="italic">{`Issues feed back \u2192`}</text>
         </g>
 
         {/* FOUNDATION LAYER */}
@@ -2743,26 +2765,26 @@ function InfoHub() {
           <line x1={modL + 14} y1={foundY + 26} x2={modL + 22} y2={foundY + 26} stroke={textLight} strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
           <line x1={modL + 14} y1={foundY + 32} x2={modL + 24} y2={foundY + 32} stroke={textLight} strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
           <text x={modL + 36} y={foundY + 25} fontSize="12" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Change Log</text>
-          <text x={modL + 36} y={foundY + 41} fontSize="9.5" fill={textLight}>Immutable audit trail</text>
+          <text x={modL + 36} y={foundY + 41} fontSize="10" fill={textLight}>Immutable audit trail</text>
 
           <rect x={modL + foundItemW + foundGap} y={foundY} width={foundItemW} height={foundH} rx={6} fill={bgModule} stroke={border} strokeWidth="1" />
           <rect x={modL + foundItemW + foundGap} y={foundY} width={foundItemW} height={foundH} rx={6} fill={bgZone} opacity="0.25" />
           <rect x={modL + foundItemW + foundGap + 14} y={foundY + 18} width={14} height={11} rx={2} stroke={textLight} strokeWidth="1.3" fill="none" />
           <rect x={modL + foundItemW + foundGap + 14} y={foundY + 16} width={7} height={4} rx={1} fill={textLight} opacity="0.5" />
           <text x={modL + foundItemW + foundGap + 36} y={foundY + 25} fontSize="12" fontWeight="700" fill={textDark} fontFamily={ffSerif}>Asset Repository</text>
-          <text x={modL + foundItemW + foundGap + 36} y={foundY + 41} fontSize="9.5" fill={textLight}>Centralized storage</text>
+          <text x={modL + foundItemW + foundGap + 36} y={foundY + 41} fontSize="10" fill={textLight}>Centralized storage</text>
 
-          <text x={hubX + hubW / 2} y={foundY + foundH + 16} textAnchor="middle" fontSize="9" fill={textLight} fontStyle="italic">{`Always on \u00B7 spans entire system`}</text>
+          <text x={hubX + hubW / 2} y={foundY + foundH + 16} textAnchor="middle" fontSize="10" fill={textLight} fontStyle="italic">{`Always on \u00B7 spans entire system`}</text>
         </g>
 
         {/* LEGEND */}
         <g>
           <line x1={hubX} y1={H - 10} x2={hubX + 24} y2={H - 10} stroke={accent1} strokeWidth="1.5" opacity="0.5" markerEnd="url(#ag2)" />
-          <text x={hubX + 32} y={H - 6} fontSize="9" fill={textLight} fontWeight="500">Demand in</text>
+          <text x={hubX + 32} y={H - 6} fontSize="10" fill={textLight} fontWeight="500">Demand in</text>
           <line x1={hubX + 110} y1={H - 10} x2={hubX + 134} y2={H - 10} stroke={accent2} strokeWidth="1.5" opacity="0.5" markerEnd="url(#ad2)" />
-          <text x={hubX + 142} y={H - 6} fontSize="9" fill={textLight} fontWeight="500">Output back</text>
+          <text x={hubX + 142} y={H - 6} fontSize="10" fill={textLight} fontWeight="500">Output back</text>
           <line x1={hubX + 230} y1={H - 10} x2={hubX + 254} y2={H - 10} stroke={textLight} strokeWidth="1.2" strokeDasharray="4,3" />
-          <text x={hubX + 262} y={H - 6} fontSize="9" fill={textLight} fontWeight="500">Feedback loop</text>
+          <text x={hubX + 262} y={H - 6} fontSize="10" fill={textLight} fontWeight="500">Feedback loop</text>
         </g>
       </svg>
     </div>
@@ -2791,7 +2813,7 @@ function LinearIterationFlow() {
 
       {/* Step 1 */}
       <rect x="25" y="52" width="130" height="210" rx="4" fill="#EDEAE3"/>
-      <text x="90" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#9A9590">{"STEP 1"}</text>
+      <text x="90" y="78" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#9A9590">{"STEP 1"}</text>
       <text x="90" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"MVP: Text"}</text>
       <text x="90" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Translation"}</text>
       <line x1="55" y1="123" x2="125" y2="123" stroke="#D6D1C8" strokeWidth="1.2"/>
@@ -2807,7 +2829,7 @@ function LinearIterationFlow() {
 
       {/* Step 2 */}
       <rect x="185" y="52" width="130" height="210" rx="4" fill="#E3DFD6"/>
-      <text x="250" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#9A9590">{"STEP 2"}</text>
+      <text x="250" y="78" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#9A9590">{"STEP 2"}</text>
       <text x="250" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"API"}</text>
       <text x="250" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Selection"}</text>
       <line x1="215" y1="123" x2="285" y2="123" stroke="#C8C0B4" strokeWidth="1.2"/>
@@ -2823,8 +2845,8 @@ function LinearIterationFlow() {
       {/* Step 3 — Pivot */}
       <rect x="345" y="52" width="130" height="210" rx="4" fill="#D6D1C8"/>
       <rect x="373" y="44" width="64" height="18" rx="9" fill="#7A8BA8"/>
-      <text x="405" y="56" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="700" letterSpacing="0.06em" fill="#ffffff">{"PIVOT POINT"}</text>
-      <text x="410" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#8A857E">{"STEP 3"}</text>
+      <text x="405" y="56" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.06em" fill="#ffffff">{"PIVOT POINT"}</text>
+      <text x="410" y="78" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#8A857E">{"STEP 3"}</text>
       <text x="410" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Text \u2192 File"}</text>
       <text x="410" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Dept \u2192 Company"}</text>
       <line x1="375" y1="123" x2="445" y2="123" stroke="#B8B0A3" strokeWidth="1.2"/>
@@ -2841,8 +2863,8 @@ function LinearIterationFlow() {
       {/* Step 4 — Hardest */}
       <rect x="505" y="52" width="130" height="210" rx="4" fill="#B8B0A3" stroke="#2A2A2A" strokeWidth="2.5"/>
       <rect x="516" y="44" width="108" height="18" rx="9" fill="#2A2A2A"/>
-      <text x="570" y="56" textAnchor="middle" fontFamily={ff} fontSize="8.5" fontWeight="700" letterSpacing="0.06em" fill="#ffffff">{"HARDEST CHALLENGE"}</text>
-      <text x="570" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#7A756E">{"STEP 4"}</text>
+      <text x="570" y="56" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.06em" fill="#ffffff">{"HARDEST CHALLENGE"}</text>
+      <text x="570" y="78" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#7A756E">{"STEP 4"}</text>
       <text x="570" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Format"}</text>
       <text x="570" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#1a1a1a">{"Conversion"}</text>
       <line x1="535" y1="123" x2="605" y2="123" stroke="#9A9590" strokeWidth="1.2"/>
@@ -2858,7 +2880,7 @@ function LinearIterationFlow() {
 
       {/* Step 5 */}
       <rect x="665" y="52" width="130" height="210" rx="4" fill="#2A2A2A"/>
-      <text x="730" y="78" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.12em" fill="#8A8A8A">{"STEP 5"}</text>
+      <text x="730" y="78" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#8A8A8A">{"STEP 5"}</text>
       <text x="730" y="98" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#ffffff">{"Feishu Integration"}</text>
       <text x="730" y="113" textAnchor="middle" fontFamily={ff} fontSize="12.5" fontWeight="700" fill="#ffffff">{"+ Frontend"}</text>
       <line x1="695" y1="123" x2="765" y2="123" stroke="#4a4a4a" strokeWidth="1.2"/>
@@ -2870,8 +2892,8 @@ function LinearIterationFlow() {
 
       {/* Bottom axis */}
       <line x1="60" y1="310" x2="800" y2="310" stroke="#B8B0A3" strokeWidth="1.5" markerEnd="url(#lif-axis)"/>
-      <text x="60" y="336" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.08em" fill="#9A9590">{"TECHNICAL VALIDATION"}</text>
-      <text x="800" y="336" textAnchor="end" fontFamily={ff} fontSize="9.5" fontWeight="600" letterSpacing="0.08em" fill="#2A2A2A">{"BUSINESS-READY PRODUCT"}</text>
+      <text x="60" y="336" fontFamily={ff} fontSize="10" fontWeight="600" letterSpacing="0.08em" fill="#9A9590">{"TECHNICAL VALIDATION"}</text>
+      <text x="800" y="336" textAnchor="end" fontFamily={ff} fontSize="10" fontWeight="600" letterSpacing="0.08em" fill="#2A2A2A">{"BUSINESS-READY PRODUCT"}</text>
 
       {/* Axis dots */}
       <circle cx="90" cy="310" r="3" fill="#EDEAE3" stroke="#B8B0A3" strokeWidth="1"/>
@@ -2905,27 +2927,27 @@ function DiagnosticFunnel() {
   return (
     <svg viewBox="0 0 800 590" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
       {/* Title */}
-      <text x="430" y="28" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="600" letterSpacing="0.1em" fill="#999">
+      <text x="430" y="28" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="600" letterSpacing="0.1em" fill="#6b6660">
         {"DIAGNOSTIC FUNNEL \u2014 FROM \u201CFIX THE UI\u201D TO PRODUCT REPOSITIONING"}
       </text>
       {/* Layer 1: Surface Request */}
       <path d="M 170,60 L 690,60 L 670,142 L 190,142 Z" fill="#F2EFEA"/>
-      <text x="430" y="94" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#999">SURFACE REQUEST</text>
+      <text x="430" y="94" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#6b6660">SURFACE REQUEST</text>
       <text x="430" y="116" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">{"\u201CFix the UI\u201D (\u00A5100K)"}</text>
       {/* Layer 2: First-Pass Walkthrough */}
       <path d="M 190,149 L 670,149 L 655,231 L 205,231 Z" fill="#EDEAE3"/>
-      <text x="430" y="183" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#999">FIRST-PASS WALKTHROUGH</text>
+      <text x="430" y="183" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#6b6660">FIRST-PASS WALKTHROUGH</text>
       <text x="430" y="205" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">{"Fragmented UX across homepage, detail, editor"}</text>
       {/* Layer 3: Pattern Recognition */}
       <path d="M 205,238 L 655,238 L 644,320 L 216,320 Z" fill="#D5D0C8"/>
-      <text x="430" y="268" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#888">PATTERN RECOGNITION</text>
+      <text x="430" y="268" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#6b6660">PATTERN RECOGNITION</text>
       <text x="430" y="288" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">
         <tspan x="430" dy="0">{"Content display vs. tool function \u2014"}</tspan>
         <tspan x="430" dy="17">features fighting features</tspan>
       </text>
       {/* Layer 4: Root Diagnosis */}
       <path d="M 216,327 L 644,327 L 636,409 L 224,409 Z" fill="#aaa"/>
-      <text x="430" y="357" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#666">ROOT DIAGNOSIS</text>
+      <text x="430" y="357" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#000">ROOT DIAGNOSIS</text>
       <text x="430" y="377" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#000">
         <tspan x="430" dy="0">{"Product identity crisis: \u201Ccontent hub\u201D"}</tspan>
         <tspan x="430" dy="17">{"vs. \u201Clinup tool\u201D unresolved"}</tspan>
@@ -2933,13 +2955,13 @@ function DiagnosticFunnel() {
 
       {/* === Key transition gap === */}
       <line x1="350" y1="428" x2="510" y2="428" stroke="#888" strokeWidth="1" strokeDasharray="4,3"/>
-      <text x="430" y="445" textAnchor="middle" fontFamily={ff} fontSize="9" fontWeight="600" letterSpacing="0.06em" fill="#aaa">
+      <text x="430" y="445" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="600" letterSpacing="0.06em" fill="#6b6660">
         {"PROBLEM \u2192 SOLUTION"}
       </text>
 
       {/* Layer 5: Solution Anchor — shifted down */}
       <path d="M 224,458 L 636,458 L 630,540 L 230,540 Z" fill="#000"/>
-      <text x="430" y="492" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#888">SOLUTION ANCHOR</text>
+      <text x="430" y="492" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#888">SOLUTION ANCHOR</text>
       <text x="430" y="514" textAnchor="middle" fontFamily={ff} fontSize="13.5" fontWeight="600" fill="#fff">{"Lineup Code as unifying mechanism,"}
       <tspan x="430" dy="17">{"connecting \u201Creading\u201D and \u201Cusing\u201D"}</tspan></text>
 
@@ -2950,22 +2972,22 @@ function DiagnosticFunnel() {
       <circle cx="132" cy="65" r="3.5" fill="#000"/>
       <circle cx="132" cy="405" r="3.5" fill="#000"/>
       {/* Horizontal label at top */}
-      <text x="40" y="60" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.08em" fill="#000" textAnchor="start">WALK-</text>
-      <text x="40" y="71" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.08em" fill="#000" textAnchor="start">THROUGH</text>
+      <text x="40" y="60" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.08em" fill="#000" textAnchor="start">WALK-</text>
+      <text x="40" y="71" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.08em" fill="#000" textAnchor="start">THROUGH</text>
 
       {/* Interviews: dashed line, covers layers 2-4 */}
       <line x1="100" y1="154" x2="100" y2="405" stroke="#888" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="6,4"/>
       <circle cx="100" cy="154" r="3.5" fill="#888"/>
       <circle cx="100" cy="405" r="3.5" fill="#888"/>
       {/* Horizontal label at top */}
-      <text x="40" y="149" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.08em" fill="#888" textAnchor="start">INTER-</text>
-      <text x="40" y="160" fontFamily={ff} fontSize="9" fontWeight="700" letterSpacing="0.08em" fill="#888" textAnchor="start">VIEWS</text>
+      <text x="40" y="149" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.08em" fill="#6b6660" textAnchor="start">INTER-</text>
+      <text x="40" y="160" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.08em" fill="#6b6660" textAnchor="start">VIEWS</text>
 
       {/* Legend: line styles */}
       <line x1="40" y1="185" x2="60" y2="185" stroke="#000" strokeWidth="2"/>
-      <text x="66" y="188" fontFamily={ff} fontSize="8" fill="#999">Solid = walkthrough</text>
+      <text x="66" y="188" fontFamily={ff} fontSize="10" fill="#6b6660">Solid = walkthrough</text>
       <line x1="40" y1="198" x2="60" y2="198" stroke="#888" strokeWidth="2" strokeDasharray="4,3"/>
-      <text x="66" y="201" fontFamily={ff} fontSize="8" fill="#999">Dashed = interviews</text>
+      <text x="66" y="201" fontFamily={ff} fontSize="10" fill="#6b6660">Dashed = interviews</text>
     </svg>
   );
 }
@@ -2982,12 +3004,12 @@ function ThreePhaseRoadmap() {
         </marker>
       </defs>
       {/* Title */}
-      <text x="400" y="28" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="600" letterSpacing="0.1em" fill="#999">
+      <text x="400" y="28" textAnchor="middle" fontFamily={ff} fontSize="10.5" fontWeight="600" letterSpacing="0.1em" fill="#6b6660">
         {"THREE-PHASE ROADMAP \u2014 FROM UI ORDER TO PRODUCT RECONSTRUCTION"}
       </text>
       {/* Phase 1 */}
       <rect x="60" y="60" width="210" height="200" fill="#F2EFEA"/>
-      <text x="165" y="90" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#999">PHASE 1</text>
+      <text x="165" y="90" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#6b6660">PHASE 1</text>
       <text x="165" y="114" textAnchor="middle" fontFamily={ff} fontSize="14" fontWeight="700" fill="#000">Vertical UX Fix</text>
       <line x1="120" y1="128" x2="210" y2="128" stroke="#D5D0C8" strokeWidth="1.5"/>
       <text x="165" y="152" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#666">
@@ -2999,7 +3021,7 @@ function ThreePhaseRoadmap() {
       <line x1="278" y1="160" x2="294" y2="160" stroke="#aaa" strokeWidth="2" markerEnd="url(#rm-arr)"/>
       {/* Phase 2 */}
       <rect x="300" y="60" width="210" height="200" fill="#EDEAE3"/>
-      <text x="405" y="90" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#888">PHASE 2</text>
+      <text x="405" y="90" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#6b6660">PHASE 2</text>
       <text x="405" y="114" textAnchor="middle" fontFamily={ff} fontSize="14" fontWeight="700" fill="#000">Horizontal Adapt</text>
       <line x1="360" y1="128" x2="450" y2="128" stroke="#aaa" strokeWidth="1.5"/>
       <text x="405" y="152" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#666">
@@ -3012,7 +3034,7 @@ function ThreePhaseRoadmap() {
       <line x1="518" y1="160" x2="534" y2="160" stroke="#aaa" strokeWidth="2" markerEnd="url(#rm-arr)"/>
       {/* Phase 3 */}
       <rect x="540" y="60" width="210" height="200" fill="#000"/>
-      <text x="645" y="90" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#888">PHASE 3</text>
+      <text x="645" y="90" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#888">PHASE 3</text>
       <text x="645" y="114" textAnchor="middle" fontFamily={ff} fontSize="14" fontWeight="700" fill="#fff">Lineup Code</text>
       <line x1="600" y1="128" x2="690" y2="128" stroke="#444" strokeWidth="1.5"/>
       <text x="645" y="152" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#999">
@@ -3022,16 +3044,186 @@ function ThreePhaseRoadmap() {
         <tspan x="645" dy="18">{"\u00A5100K \u2192 \u00A51.5M"}</tspan>
       </text>
       {/* Bottom result line */}
-      <text x="60" y="308" fontFamily={ff} fontSize="10" fontWeight="600" letterSpacing="0.08em" fill="#999">STARTING ORDER</text>
+      <text x="60" y="308" fontFamily={ff} fontSize="10" fontWeight="600" letterSpacing="0.08em" fill="#6b6660">STARTING ORDER</text>
       <text x="60" y="332" fontFamily={ff} fontSize="18" fontWeight="700" fill="#000">{"\u00A5100K"}</text>
-      <text x="60" y="348" fontFamily={ff} fontSize="12" fontWeight="500" fill="#999">UI iteration</text>
+      <text x="60" y="348" fontFamily={ff} fontSize="12" fontWeight="500" fill="#6b6660">UI iteration</text>
       <line x1="155" y1="330" x2="640" y2="330" stroke="#aaa" strokeWidth="2" strokeDasharray="6,4"/>
       <text x="750" y="308" textAnchor="end" fontFamily={ff} fontSize="10" fontWeight="600" letterSpacing="0.08em" fill="#000">VP-APPROVED SCOPE</text>
       <text x="750" y="332" textAnchor="end" fontFamily={ff} fontSize="18" fontWeight="700" fill="#000">{"\u00A51.5M"}</text>
-      <text x="750" y="348" textAnchor="end" fontFamily={ff} fontSize="12" fontWeight="500" fill="#999">3-phase product restructuring</text>
+      <text x="750" y="348" textAnchor="end" fontFamily={ff} fontSize="12" fontWeight="500" fill="#6b6660">3-phase product restructuring</text>
       {/* 15x badge */}
       <rect x="370" y="314" width="60" height="24" rx="12" fill="#000"/>
       <text x="400" y="331" textAnchor="middle" fontFamily={ff} fontSize="11" fontWeight="700" fill="#fff">{"\u00D715"}</text>
+    </svg>
+  );
+}
+
+/* ===== P1 Hero Grid Decoration (scatter → organize animation) ===== */
+
+function P1GridDeco({ mode }) {
+  const [organized, setOrganized] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setOrganized(true), 1800);
+    return () => clearTimeout(t);
+  }, []);
+
+  const deco = mode === "dark" ? "#e8e4df" : "#1a1815";
+  const accent = "#c4422b";
+
+  const cells = [
+    { r: -8, tx: -4, ty: 5 },
+    { r: 6,  tx:  3, ty: -4 },
+    { r: -4, tx: -6, ty: 2 },
+    { r: 10, tx:  5, ty: 6 },
+    { r: -5, tx: -2, ty: -3, center: true },
+    { r: 8,  tx:  4, ty: -2 },
+    { r: -6, tx: -3, ty: 4 },
+    { r: 9,  tx:  6, ty: 2 },
+    { r: -7, tx: -4, ty: -5 },
+  ];
+
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 60px)", gap: "10px", width: 200, height: 200 }}>
+      {cells.map((c, i) => {
+        const isCenter = !!c.center;
+        const transform = organized
+          ? "rotate(0deg) translate(0, 0)"
+          : `rotate(${c.r}deg) translate(${c.tx}px, ${c.ty}px)`;
+        const opacity = organized ? (isCenter ? 1 : 0.1) : (isCenter ? 0.55 : 0.35);
+        const bg = isCenter ? (organized ? accent : "rgba(196,67,43,0.45)") : "transparent";
+        const borderColor = isCenter ? (organized ? accent : "rgba(196,67,43,0.45)") : deco;
+        return (
+          <div key={i} style={{
+            width: 60, height: 60,
+            border: `1.5px solid ${borderColor}`,
+            borderRadius: 2,
+            background: bg,
+            opacity,
+            transform,
+            transition: "all 1.4s cubic-bezier(0.16, 1, 0.3, 1)",
+            boxShadow: (isCenter && organized) ? "0 0 20px rgba(196,67,43,0.2)" : "none",
+          }} />
+        );
+      })}
+    </div>
+  );
+}
+
+/* ===== P2 Hero Target Decoration (wander → center animation) ===== */
+
+function P2TargetDeco({ mode }) {
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    const timers = [
+      setTimeout(() => setStep(1), 960),
+      setTimeout(() => setStep(2), 1920),
+      setTimeout(() => setStep(3), 2880),
+      setTimeout(() => setStep(4), 3840),
+      setTimeout(() => setStep(5), 4320),
+      setTimeout(() => setStep(6), 4800),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  const darkDot  = mode === "dark" ? "#e8e4df" : "#1a1815";
+  const ringStroke = mode === "dark" ? "rgba(232,228,223,0.08)" : "rgba(26,24,21,0.08)";
+  const lineStroke = mode === "dark" ? "rgba(232,228,223,0.06)" : "rgba(26,24,21,0.06)";
+
+  const steps = [
+    { tx: -42, ty: -62, fill: darkDot },
+    { tx:  42, ty: -52, fill: darkDot },
+    { tx: -52, ty:  18, fill: darkDot },
+    { tx:  50, ty:  22, fill: darkDot },
+    { tx:   0, ty:   0, fill: darkDot },
+    { tx:   0, ty:   0, fill: "#c4422b" },
+    { tx:   0, ty:   0, fill: "#c4422b" },
+  ];
+  const pos = steps[step];
+
+  return (
+    <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Original crosshair design (gap in center) */}
+      <line x1="110" y1="0"   x2="110" y2="70"  stroke={lineStroke} strokeWidth="0.75"/>
+      <line x1="110" y1="150" x2="110" y2="220" stroke={lineStroke} strokeWidth="0.75"/>
+      <line x1="0"   y1="110" x2="70"  y2="110" stroke={lineStroke} strokeWidth="0.75"/>
+      <line x1="150" y1="110" x2="220" y2="110" stroke={lineStroke} strokeWidth="0.75"/>
+      {/* Original 4 rings */}
+      <circle cx="110" cy="110" r="108" stroke={ringStroke} strokeWidth="1"/>
+      <circle cx="110" cy="110" r="85"  stroke={ringStroke} strokeWidth="1"/>
+      <circle cx="110" cy="110" r="62"  stroke={ringStroke} strokeWidth="1.5"/>
+      <circle cx="110" cy="110" r="39"  stroke={ringStroke} strokeWidth="1.5"/>
+      {/* Animated dot */}
+      <circle cx="110" cy="110" r="14" fill={pos.fill} style={{
+        transform: `translate(${pos.tx}px, ${pos.ty}px)`,
+        transition: "transform 0.96s cubic-bezier(0.4, 0, 0.2, 1), fill 0.48s ease",
+      }}/>
+    </svg>
+  );
+}
+
+/* ===== P3 Hero Network Decoration (animated entrance, then static) ===== */
+
+function P3NetworkDeco({ mode }) {
+  const [progress, setProgress] = useState(0);
+  const rafRef = useRef(null);
+  const startRef = useRef(null);
+  const entranceDuration = 2200;
+
+  const deco = mode === "dark" ? "#e8e4df" : "#1a1815";
+  const accent = "#c4422b";
+
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  const ph = (start, end, p) => {
+    if (p < start) return 0;
+    if (p > end) return 1;
+    return ease((p - start) / (end - start));
+  };
+
+  useEffect(() => {
+    startRef.current = null;
+    const tick = (ts) => {
+      if (!startRef.current) startRef.current = ts;
+      const p = Math.min((ts - startRef.current) / entranceDuration, 1);
+      setProgress(p);
+      if (p < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, []);
+
+  const lead = { x: 93, y: 98, r: 12 };
+  const support = { x: 118, y: 88, r: 6 };
+  const outers = [
+    { x: 40, y: 100, r: 6 }, { x: 160, y: 100, r: 6 },
+    { x: 60, y: 170, r: 6 }, { x: 140, y: 170, r: 6 },
+    { x: 170, y: 45, r: 4 }, { x: 35, y: 50, r: 4 },
+  ];
+  const supportTargets = [0, 1, 4, 5];
+
+  const p_ = progress;
+  const p_lead = ph(0, 0.2, p_);
+  const p_support = ph(0.1, 0.28, p_);
+  const p_bond = ph(0.18, 0.38, p_);
+  const p_leadLines = outers.map((_, i) => { const s = 0.24 + i * 0.055; return ph(s, s + 0.22, p_); });
+  const p_supportLines = supportTargets.map((_, i) => { const s = 0.32 + i * 0.065; return ph(s, s + 0.2, p_); });
+  const p_nodes = outers.map((_, i) => { const s = 0.3 + i * 0.065; return ph(s, s + 0.2, p_); });
+
+  const drawLine = (from, to, prog, sw, baseOp) => ({
+    x1: from.x, y1: from.y,
+    x2: from.x + (to.x - from.x) * prog,
+    y2: from.y + (to.y - from.y) * prog,
+    strokeWidth: sw,
+    opacity: prog * baseOp,
+  });
+
+  return (
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {outers.map((node, i) => { const l = drawLine(lead, node, p_leadLines[i], 0.7, 0.32); return <line key={`ll-${i}`} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={deco} strokeWidth={l.strokeWidth} opacity={l.opacity} />; })}
+      {supportTargets.map((ni, i) => { const l = drawLine(support, outers[ni], p_supportLines[i], 0.4, 0.16); return <line key={`sl-${i}`} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={deco} strokeWidth={l.strokeWidth} opacity={l.opacity} />; })}
+      {(() => { const l = drawLine(lead, support, p_bond, 1.5, 0.65); return <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={deco} strokeWidth={l.strokeWidth} opacity={l.opacity} />; })()}
+      {outers.map((node, i) => <circle key={`n-${i}`} cx={node.x} cy={node.y} r={node.r * p_nodes[i]} fill="none" stroke={deco} strokeWidth={1.1} opacity={p_nodes[i]} />)}
+      <circle cx={lead.x} cy={lead.y} r={lead.r * p_lead} fill={accent} opacity={p_lead} />
+      <circle cx={support.x} cy={support.y} r={support.r * p_support} fill={deco} opacity={p_support} />
     </svg>
   );
 }
@@ -3233,66 +3425,27 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
         {!isMobile && (
           <div style={{
             position: "absolute",
-            top: project.id === 2 ? 20 : 24,
+            top: 48,
             right: 48,
             width: project.id === 2 ? 220 : 200,
             height: project.id === 2 ? 220 : 200,
-            opacity: project.id === 2 ? 0.05 : 0.06,
+            opacity: 1,
             pointerEvents: "none", zIndex: 0,
             animation: "fadeUp 1s ease-out 0.6s both",
           }}>
-            {(() => { const deco = mode === "dark" ? "#e8e4df" : "#1a1815"; return project.id === 1 ? (
-              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0" y="0" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
-                <rect x="70" y="0" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
-                <rect x="140" y="0" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
-                <rect x="0" y="70" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
-                <rect x="70" y="70" width="60" height="60" fill={deco}/>
-                <rect x="140" y="70" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
-                <rect x="0" y="140" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
-                <rect x="70" y="140" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
-                <rect x="140" y="140" width="60" height="60" stroke={deco} strokeWidth="1.5"/>
-              </svg>
+            {(() => { return project.id === 1 ? (
+              <P1GridDeco mode={mode} />
             ) : project.id === 2 ? (
-              <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="110" cy="110" r="108" stroke={deco} strokeWidth="1"/>
-                <circle cx="110" cy="110" r="85" stroke={deco} strokeWidth="1"/>
-                <circle cx="110" cy="110" r="62" stroke={deco} strokeWidth="1"/>
-                <circle cx="110" cy="110" r="39" stroke={deco} strokeWidth="1.5"/>
-                <circle cx="110" cy="110" r="16" fill={deco}/>
-                <line x1="110" y1="0" x2="110" y2="70" stroke={deco} strokeWidth="0.75"/>
-                <line x1="110" y1="150" x2="110" y2="220" stroke={deco} strokeWidth="0.75"/>
-                <line x1="0" y1="110" x2="70" y2="110" stroke={deco} strokeWidth="0.75"/>
-                <line x1="150" y1="110" x2="220" y2="110" stroke={deco} strokeWidth="0.75"/>
-              </svg>
+              <P2TargetDeco mode={mode} />
             ) : project.id === 3 ? (
-              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="30" r="8" fill={deco}/>
-                <circle cx="40" cy="100" r="6" stroke={deco} strokeWidth="1.5"/>
-                <circle cx="100" cy="100" r="12" fill={deco}/>
-                <circle cx="160" cy="100" r="6" stroke={deco} strokeWidth="1.5"/>
-                <circle cx="60" cy="170" r="6" stroke={deco} strokeWidth="1.5"/>
-                <circle cx="140" cy="170" r="6" stroke={deco} strokeWidth="1.5"/>
-                <circle cx="170" cy="40" r="4" stroke={deco} strokeWidth="1"/>
-                <circle cx="30" cy="50" r="4" stroke={deco} strokeWidth="1"/>
-                <line x1="100" y1="38" x2="100" y2="88" stroke={deco} strokeWidth="1"/>
-                <line x1="46" y1="100" x2="88" y2="100" stroke={deco} strokeWidth="1"/>
-                <line x1="112" y1="100" x2="154" y2="100" stroke={deco} strokeWidth="1"/>
-                <line x1="94" y1="110" x2="66" y2="164" stroke={deco} strokeWidth="0.75"/>
-                <line x1="106" y1="110" x2="134" y2="164" stroke={deco} strokeWidth="0.75"/>
-                <line x1="100" y1="30" x2="170" y2="40" stroke={deco} strokeWidth="0.5"/>
-                <line x1="100" y1="30" x2="30" y2="50" stroke={deco} strokeWidth="0.5"/>
-                <line x1="40" y1="100" x2="30" y2="50" stroke={deco} strokeWidth="0.5"/>
-                <line x1="160" y1="100" x2="170" y2="40" stroke={deco} strokeWidth="0.5"/>
-                <line x1="60" y1="170" x2="140" y2="170" stroke={deco} strokeWidth="0.5"/>
-              </svg>
+              <P3NetworkDeco mode={mode} />
             ) : null; })()}
           </div>
         )}
 
         {/* Layer 1: Project number + metadata */}
-        <div style={{ display: "flex", alignItems: "center", gap: 24, marginBottom: 40, animation: "fadeUp 0.6s ease-out 0.1s both" }}>
-          <div style={{ fontFamily: FONT_MONO, fontSize: isMobile ? 48 : 64, fontWeight: 300, color: th.textPlaceholder, lineHeight: 1, letterSpacing: "-0.03em" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 24, marginBottom: lang === "en" ? 40 : 40, animation: "fadeUp 0.6s ease-out 0.1s both" }}>
+          <div style={{ fontFamily: FONT_MONO, fontSize: isMobile ? (lang === "en" ? 48 : 48) : (lang === "en" ? 64 : 64), fontWeight: 300, color: th.textPlaceholder, lineHeight: 1, letterSpacing: "-0.03em" }}>
             {project.navName}
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 4, paddingLeft: 24, borderLeft: `1px solid ${th.border}` }}>
@@ -3301,38 +3454,38 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
               ["Team", t(project.teamInfo, lang)],
               ["Context", t(project.context, lang)],
             ].map(([label, val], i) => (
-              <div key={i} style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: th.textMuted }}>
-                {label}<span style={{ color: th.textPrimary, fontFamily: FONT_BODY, fontWeight: 500, textTransform: "none", letterSpacing: 0, marginLeft: 8, fontSize: 13 }}>{val}</span>
+              <div key={i} style={{ fontFamily: FONT_MONO, fontSize: lang === "en" ? 12 : 12, letterSpacing: lang === "en" ? "0.06em" : "0.06em", textTransform: "uppercase", color: th.textMuted }}>
+                {label}<span style={{ color: th.textPrimary, fontFamily: FONT_BODY, fontWeight: 500, textTransform: "none", letterSpacing: 0, marginLeft: 8, fontSize: lang === "en" ? 13 : 13 }}>{val}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Layer 2: Title + stat hook */}
-        <div style={{ position: "relative", marginBottom: 48, animation: "fadeUp 0.8s ease-out 0.2s both" }}>
-          <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", marginTop: lang === "en" ? 74 : 20, marginBottom: lang === "en" ? 148 : 48, animation: "fadeUp 0.8s ease-out 0.2s both" }}>
+          <div style={{ position: "relative", marginTop: lang === "en" ? 0 : 0 }}>
             <h1 style={{
               fontFamily: FONT_DISPLAY, fontWeight: 900,
-              fontSize: isMobile ? 36 : (lang === "en" ? "clamp(32px, 4.5vw, 56px)" : "clamp(36px, 5.5vw, 72px)"),
-              lineHeight: 1.15, letterSpacing: "-0.02em",
-              maxWidth: lang === "en" ? 620 : 780, margin: 0, position: "relative",
-              paddingBottom: 20,
+              fontSize: isMobile ? (lang === "en" ? 28 : 36) : (lang === "en" ? "clamp(28px, 3.8vw, 42px)" : "clamp(36px, 5.5vw, 72px)"),
+              lineHeight: lang === "en" ? 1.25 : 1.25, letterSpacing: lang === "en" ? "-0.02em" : "-0.02em",
+              maxWidth: lang === "en" ? 680 : 780, margin: 0, position: "relative",
+              paddingBottom: lang === "en" ? 20 : 20,
             }}>
               {(() => { const lines = project.heroTitleLines ? (Array.isArray(project.heroTitleLines) ? project.heroTitleLines.map(l => t(l, lang)) : t(project.heroTitleLines, lang)) : [t(project.name, lang)]; return lines.map((line, i, arr) => (<span key={i}>{line}{i < arr.length - 1 && <br />}</span>)); })()}
             </h1>
             {/* Red underline */}
-            <div style={{ width: 64, height: 4, background: th.accent, animation: "lineGrow 0.6s ease-out 0.8s both" }} />
+            <div style={{ width: lang === "en" ? 90 : 180, height: 4, background: th.accent, animation: "lineGrow 0.6s ease-out 0.8s both", marginTop: -6, transformOrigin: "left" }} />
           </div>
           {/* Stat hook — right side on desktop, below title on mobile */}
           {project.heroStat && (
             <div style={{
-              ...(isMobile || lang === "en" ? { marginTop: 24, textAlign: lang === "en" && !isMobile ? "right" : "left" } : { position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", textAlign: "right" }),
+              ...(isMobile ? { marginTop: 24, textAlign: "left" } : lang === "en" ? { position: "absolute", right: project.id === 2 ? 8 : 0, width: project.id === 2 ? 220 : undefined, bottom: -100, textAlign: project.id === 2 ? "center" : "right" } : { position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", textAlign: "right" }),
               animation: "fadeUp 0.8s ease-out 0.5s both",
             }}>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: isMobile ? 48 : "clamp(48px, 7vw, 96px)", fontWeight: 900, lineHeight: 1, color: th.accent, letterSpacing: "-0.03em" }}>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: isMobile ? (lang === "en" ? 48 : 48) : (lang === "en" ? "clamp(48px, 7vw, 96px)" : "clamp(48px, 7vw, 96px)"), fontWeight: 900, lineHeight: 1, color: th.accent, letterSpacing: "-0.03em" }}>
                 {t(project.heroStat.number, lang)}
               </div>
-              <div style={{ fontFamily: FONT_MONO, fontSize: 13, color: th.textMuted, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 4 }}>
+              <div style={{ fontFamily: FONT_MONO, fontSize: lang === "en" ? 13 : 13, color: th.textMuted, letterSpacing: lang === "en" ? "0.08em" : "0.08em", textTransform: "uppercase", marginTop: lang === "en" ? 22 : 4 }}>
                 {t(project.heroStat.unit, lang)}
               </div>
             </div>
@@ -3341,11 +3494,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
 
         {/* Layer 3: Narrative */}
         {project.heroNarrative && (
-          <div style={{ maxWidth: 720, margin: "0 auto 64px", animation: "fadeUp 0.8s ease-out 0.35s both" }}>
-            <div style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, lineHeight: 1.6, marginBottom: 12, color: th.heroNarrativeHook }}>
+          <div style={{ maxWidth: lang === "en" ? 720 : 720, margin: `0 auto ${lang === "en" ? 48 : 64}px`, animation: "fadeUp 0.8s ease-out 0.35s both" }}>
+            <div style={{ fontFamily: FONT_DISPLAY, fontSize: lang === "en" ? 20 : 20, fontWeight: 700, lineHeight: lang === "en" ? 1.6 : 1.6, marginBottom: 12, color: th.heroNarrativeHook }}>
               {t(project.heroNarrative.hook, lang)}
             </div>
-            <div style={{ fontSize: 15, lineHeight: 1.8, color: th.heroNarrativeDetail, fontWeight: 300 }}>
+            <div style={{ fontSize: lang === "en" ? 15 : 15, lineHeight: lang === "en" ? 1.8 : 1.8, color: th.heroNarrativeDetail, fontWeight: 300 }}>
               {t(project.heroNarrative.detail, lang)}
             </div>
           </div>
@@ -3353,20 +3506,20 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
 
         {/* Layer 4: Before/After cards OR Metrics card */}
         {project.stateBefore ? (
-          <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: 64, animation: "fadeUp 0.8s ease-out 0.45s both", maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
-            <div style={{ padding: "28px 36px", background: th.stateBefore, borderRadius: 6, marginRight: isMobile ? 12 : 20 }}>
+          <div style={{ position: "relative", paddingLeft: isMobile ? 12 : 20, marginBottom: lang === "en" ? 48 : 64, animation: "fadeUp 0.8s ease-out 0.45s both", maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
+            <div style={{ padding: lang === "en" ? "28px 36px" : "28px 36px", background: th.stateBefore, borderRadius: 6, marginRight: isMobile ? 12 : 20 }}>
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: th.beforeLabel, marginBottom: 10 }}>Before</div>
-              <div style={{ fontSize: 15, lineHeight: 1.7, color: th.beforeLabel, textDecoration: "line-through", textDecorationColor: "rgba(196, 66, 43, 0.25)", textDecorationThickness: 1 }}>
+              <div style={{ fontSize: lang === "en" ? 15 : 15, lineHeight: lang === "en" ? 1.7 : 1.7, color: th.beforeLabel, textDecoration: "line-through", textDecorationColor: "rgba(196, 66, 43, 0.25)", textDecorationThickness: 1 }}>
                 {t(project.stateBefore, lang)}
               </div>
             </div>
             <div style={{
               position: "relative", marginTop: -20, marginLeft: isMobile ? 12 : 20, marginRight: 0,
-              padding: "32px 36px", background: th.stateAfter, borderRadius: 6,
+              padding: lang === "en" ? "32px 36px" : "32px 36px", background: th.stateAfter, borderRadius: 6,
               boxShadow: "0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02)",
             }}>
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: th.afterLabel, marginBottom: 10 }}>After</div>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: 18, fontWeight: 700, lineHeight: 1.6, color: th.textPrimary }}>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: lang === "en" ? 18 : 18, fontWeight: 700, lineHeight: lang === "en" ? 1.6 : 1.6, color: th.textPrimary }}>
                 {t(project.stateAfter, lang).split("·").map((part, i, arr) => {
                   const trimmed = part.trim();
                   const isLast = i === arr.length - 1;
@@ -3379,7 +3532,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
           <div style={{
             display: "grid",
             gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-            marginBottom: 64,
+            marginBottom: lang === "en" ? 48 : 64,
             animation: "fadeUp 0.8s ease-out 0.45s both",
             background: th.bgCardAlt,
             borderRadius: 6,
@@ -3388,16 +3541,16 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
           }}>
             {project.heroMetrics.map((m, i) => (
               <div key={i} style={{
-                padding: "32px 28px",
+                padding: lang === "en" ? "32px 28px" : "32px 28px",
                 textAlign: "center",
                 position: "relative",
                 ...(!isMobile && i < project.heroMetrics.length - 1 ? { borderRight: `1px solid ${th.border}` } : {}),
                 ...(isMobile && i < project.heroMetrics.length - 1 ? { borderBottom: `1px solid ${th.border}` } : {}),
               }}>
-                <div style={{ fontFamily: FONT_DISPLAY, fontSize: 36, fontWeight: 900, lineHeight: 1, color: m.highlight ? th.accent : th.metricText, marginBottom: 8 }}>
+                <div style={{ fontFamily: FONT_DISPLAY, fontSize: lang === "en" ? 36 : 36, fontWeight: 900, lineHeight: 1, color: m.highlight ? th.accent : th.metricText, marginBottom: 8 }}>
                   {t(m.value, lang)}
                 </div>
-                <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: th.metricLabelColor, letterSpacing: "0.06em" }}>
+                <div style={{ fontFamily: FONT_MONO, fontSize: lang === "en" ? 11 : 11, color: th.metricLabelColor, letterSpacing: lang === "en" ? "0.06em" : "0.06em" }}>
                   {t(m.label, lang)}
                 </div>
               </div>
@@ -3406,7 +3559,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
         ) : null}
 
         {/* Layer 5: Section navigation */}
-        <div style={{ paddingBottom: 48, animation: "fadeUp 0.7s ease-out 0.55s both", textAlign: "center" }}>
+        <div style={{ paddingBottom: lang === "en" ? 40 : 48, animation: "fadeUp 0.7s ease-out 0.55s both", textAlign: "center" }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: th.textMuted, marginBottom: 12 }}>
             {lang === "en" ? "Skip to content" : "跳转至正文"}
           </div>
@@ -3426,8 +3579,8 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
                   onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = th.skillBtnText; e.currentTarget.style.borderColor = th.skillBtnBorder; }}
                   style={{
                     display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
-                    fontFamily: FONT_BODY, fontSize: 13, fontWeight: 500,
-                    minWidth: 120, padding: "8px 18px",
+                    fontFamily: FONT_BODY, fontSize: lang === "en" ? 13 : 13, fontWeight: 500,
+                    minWidth: lang === "en" ? 120 : 120, padding: lang === "en" ? "8px 18px" : "8px 18px",
                     color: th.skillBtnText, cursor: "pointer", textDecoration: "none",
                     border: `1px solid ${th.skillBtnBorder}`, borderRadius: 2,
                     transition: "all 0.2s ease",
@@ -3469,16 +3622,16 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
             const isReflection = (typeof block.navLabel === "object" ? block.navLabel.zh : block.navLabel) === "\u56DE\u5934\u770B";
             if (isReflection) {
               return (
-                <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "56px auto 0", padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
+                <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: `${lang === "en" ? 56 : 56}px auto 0`, padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
                   <div style={{ height: 1, background: th.headingDivider }} />
-                  <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: th.headingColor, margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: th.accent }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
+                  <h2 id={"section-" + block.sectionId} style={{ fontSize: lang === "en" ? 22 : 22, fontWeight: 600, color: th.headingColor, margin: 0, marginTop: lang === "en" ? 40 : 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: th.accent }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
                 </div>
               );
             }
             return (
-              <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: "56px auto 0", padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
+              <div key={i} id={blockId} style={{ width: "100%", maxWidth: 720, margin: `${lang === "en" ? 56 : 56}px auto 0`, padding: "0 8px", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4 }}>
                 <div style={{ height: 1, background: th.headingDivider }} />
-                <h2 id={"section-" + block.sectionId} style={{ fontSize: 20, fontWeight: 600, color: th.headingColor, margin: 0, marginTop: 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: th.accent }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
+                <h2 id={"section-" + block.sectionId} style={{ fontSize: lang === "en" ? 22 : 22, fontWeight: 600, color: th.headingColor, margin: 0, marginTop: lang === "en" ? 40 : 40, fontFamily: FONT_DISPLAY, textAlign: "left", scrollMarginTop: 80 }}>{(() => { const txt = t(block.text, lang); let ci = txt.indexOf("\uff1a"); if (ci === -1) ci = txt.indexOf(":"); if (ci === -1) return txt; return (<><span style={{ color: th.accent }}>{txt.slice(0, ci + 1)}</span>{txt.slice(ci + 1)}</>); })()}</h2>
               </div>
             );
           }
@@ -3520,7 +3673,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
                 );
               }
               const missingStyle = tStyle(block.text, lang);
-              return <p key={i} id={blockId} style={{ width: "100%", fontSize: T.body, color: th.paragraphColor, lineHeight: 1.85, margin: "0 auto", maxWidth: 640, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80, ...missingStyle }}>{paragraphContent}</p>;
+              return <p key={i} id={blockId} style={{ width: "100%", fontSize: lang === "en" ? T.body : T.body, color: th.paragraphColor, lineHeight: lang === "en" ? 1.85 : 1.85, margin: "0 auto", maxWidth: lang === "en" ? 640 : 640, whiteSpace: "pre-wrap", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80, ...missingStyle }}>{paragraphContent}</p>;
             }
             return <TextPlaceholder key={i} lines={5} th={th} />;
           }
@@ -3534,62 +3687,46 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
                 transition: "background-color 1s ease",
                 borderRadius: 4,
               }}>
-                <div style={{ display: "flex", gap: 0, alignItems: "stretch", maxWidth: 720, margin: "0 auto" }}>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    {block.items.map((q, qi) => (
-                      <div key={qi} style={{
-                        display: "flex",
-                        alignItems: "baseline",
-                        padding: "14px 0",
-                        position: "relative",
+                <div style={{ maxWidth: lang === "en" ? 640 : 640, margin: "0 auto", padding: "0 8px" }}>
+                  {block.items.map((q, qi) => (
+                    <div key={qi} style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      padding: "14px 0",
+                      position: "relative",
+                    }}>
+                      <span style={{
+                        fontSize: lang === "en" ? 15 : 15,
+                        lineHeight: lang === "en" ? 1.75 : 1.75,
+                        color: th.quoteListText,
+                        ...tStyle(q.text, lang),
                       }}>
-                        <span style={{
-                          fontFamily: "'DM Mono', monospace",
-                          fontSize: 13,
-                          color: th.quoteListRole,
-                          width: 90,
-                          minWidth: 90,
-                          flexShrink: 0,
-                          ...tStyle(q.role, lang),
-                        }}>
-                          {t(q.role, lang)}
-                        </span>
-                        <span style={{
-                          fontSize: 15,
-                          lineHeight: 1.75,
-                          color: th.quoteListText,
-                          flex: 1,
-                          ...tStyle(q.text, lang),
-                        }}>
-                          <span style={{ color: th.quoteListQuoteMark }}>{"\u201C"}</span>
-                          {t(q.text, lang)}
-                          <span style={{ color: th.quoteListQuoteMark }}>{"\u201D"}</span>
-                        </span>
-                        {qi < block.items.length - 1 && (
-                          <div style={{
-                            position: "absolute",
-                            bottom: 0,
-                            left: 0,
-                            width: "calc(100% + 120px)",
-                            height: 1,
-                            background: th.quoteListSep,
-                          }} />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                  <div style={{
-                    width: 110,
-                    minWidth: 90,
-                    flexShrink: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    opacity: 0.85,
-                    transform: "translateX(40px)",
-                  }}>
-                    <DiagnosisCascadeSVG height={290} th={th} />
-                  </div>
+                        <span style={{ color: th.quoteListQuoteMark }}>{"\u201C"}</span>
+                        {t(q.text, lang)}
+                        <span style={{ color: th.quoteListQuoteMark }}>{"\u201D"}</span>
+                      </span>
+                      <span style={{
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: 13,
+                        color: th.quoteListRole,
+                        alignSelf: "flex-end",
+                        ...tStyle(q.role, lang),
+                      }}>
+                        {"— "}{t(q.role, lang)}
+                      </span>
+                      {qi < block.items.length - 1 && (
+                        <div style={{
+                          position: "absolute",
+                          bottom: 0,
+                          left: 0,
+                          width: "100%",
+                          height: 1,
+                          background: th.quoteListSep,
+                        }} />
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             );
@@ -3597,7 +3734,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
 
           if (block.type === "module-list") {
             return (
-              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", maxWidth: 720, margin: "0 auto", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>
+              <div key={i} id={blockId} style={{ display: "flex", flexDirection: "column", maxWidth: lang === "en" ? 720 : 720, margin: "0 auto", backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px", scrollMarginTop: 80 }}>
                 {block.items.map((m, mi) => (
                   <div key={mi} style={{
                     display: "flex", gap: isMobile ? 8 : 20, alignItems: "flex-start",
@@ -3605,10 +3742,10 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
                     borderBottom: mi < block.items.length - 1 ? `1px solid ${th.moduleBorder}` : "none",
                     flexDirection: isMobile ? "column" : "row",
                   }}>
-                    <span style={{ fontSize: T.small, fontWeight: 600, color: th.moduleNameColor, minWidth: isMobile ? "auto" : 140, flexShrink: 0, paddingTop: 2, ...tStyle(m.name, lang) }}>
+                    <span style={{ fontSize: T.small, fontWeight: 600, color: th.moduleNameColor, minWidth: isMobile ? "auto" : (lang === "en" ? 140 : 140), flexShrink: 0, paddingTop: 2, whiteSpace: "pre-line", ...tStyle(m.name, lang) }}>
                       {t(m.name, lang)}
                     </span>
-                    <span style={{ fontSize: T.body, color: th.moduleDescColor, lineHeight: 1.85, ...tStyle(m.desc, lang) }}>
+                    <span style={{ fontSize: T.body, color: th.moduleDescColor, lineHeight: lang === "en" ? 1.85 : 1.85, ...tStyle(m.desc, lang) }}>
                       {t(m.desc, lang)}
                     </span>
                   </div>
@@ -3619,12 +3756,12 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
 
           if (block.type === "pull-quote") {
             return (
-              <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "16px auto", padding: "0 8px", scrollMarginTop: 80 }}>
+              <div key={i} id={blockId} style={{ width: "100%", maxWidth: lang === "en" ? 640 : 640, margin: "16px auto", padding: "0 8px", scrollMarginTop: 80 }}>
                 <blockquote style={{
                   margin: 0,
                   borderLeft: `3px solid ${th.pullQuoteBorder}`,
-                  paddingLeft: 20,
-                  fontSize: T.body,
+                  paddingLeft: lang === "en" ? 20 : 20,
+                  fontSize: lang === "en" ? T.body : T.body,
                   fontWeight: 600,
                   color: th.pullQuoteText,
                   lineHeight: lang === "en" ? 1.55 : 1.4,
@@ -3665,7 +3802,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
                   {block.items.map((item, ii) => {
                     const resolvedItem = { ...item, label: t(item.label, lang), note: t(item.note, lang) };
                     return (
-                    <div key={ii} style={{ position: "relative" }}>
+                    <div key={ii} style={{ position: "relative", height: "100%" }}>
                       <ScreenshotItem
                         item={resolvedItem}
                         th={th}
@@ -3757,11 +3894,11 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
                       padding: "12px 16px",
                       borderTop: `1px solid ${th.illustrationLabelBg}`,
                       display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
+                      flexDirection: "column",
+                      gap: "4px",
                     }}>
                       <p style={{ fontSize: T.small, fontWeight: 600, color: th.screenshotLabelColor, margin: 0 }}>{t(ill.name, lang)}</p>
-                      <p style={{ fontSize: T.small, color: th.screenshotNoteColor, margin: 0 }}>{ill.type}</p>
+                      <p style={{ fontSize: T.small, color: th.screenshotNoteColor, margin: 0, ...tStyle(ill.type, lang) }}>{t(ill.type, lang)}</p>
                     </div>
                   </div>
                 </div>
@@ -3769,7 +3906,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
             }
             return (
               <div key={i} id={blockId} style={{ scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}>
-                <PlaceholderBox label={t(ill.name, lang)} sublabel={ill.type + " \u00B7 " + t(ill.note, lang)} height={240} dark th={th} />
+                <PlaceholderBox label={t(ill.name, lang)} sublabel={t(ill.type, lang) + " \u00B7 " + t(ill.note, lang)} height={240} dark th={th} />
               </div>
             );
           }
@@ -3802,7 +3939,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
           }
 
           if (block.type === "iteration-step") {
-            return <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "0 auto", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={t(block.heading, lang)} th={th} /></div></div>;
+            return <div key={i} id={blockId} style={{ width: "100%", maxWidth: 640, margin: "0 auto", scrollMarginTop: 80, backgroundColor: flashBg, transition: "background-color 1s ease", borderRadius: 4, padding: "0 8px" }}><div id={"section-" + block.sectionId} style={{ scrollMarginTop: 80 }}><IterationStep version={block.version} heading={t(block.heading, lang)} th={th} lang={lang} /></div></div>;
           }
 
           return null;
@@ -4180,6 +4317,15 @@ export default function App() {
 
   useEffect(() => { pageRef.current = page; }, [page]);
 
+  // Language switch with fade transition
+  const handleLangSwitch = useCallback(() => {
+    setFade(0);
+    setTimeout(() => {
+      setLang(prev => prev === "en" ? "zh" : "en");
+      setTimeout(() => setFade(1), 50);
+    }, 250);
+  }, []);
+
   // Sync URL hash on navigation
   const navigate = (t, opts) => {
     const target = t.includes("#") ? t.split("#")[0] : t;
@@ -4239,7 +4385,7 @@ export default function App() {
       flexDirection: "column",
       transition: "background-color 0.3s ease, color 0.3s ease",
     }}>
-      <Nav currentPage={page} onNavigate={navigate} isMobile={isMobile} lang={lang} setLang={setLang} mode={mode} setMode={setMode} th={th} />
+      <Nav currentPage={page} onNavigate={navigate} isMobile={isMobile} lang={lang} setLang={setLang} onLangSwitch={handleLangSwitch} mode={mode} setMode={setMode} th={th} />
       <div style={{ opacity: fade, transition: "opacity 0.25s ease", flex: 1 }}>
         {page === "home" && <HomePage onNavigate={navigate} isMobile={isMobile} lang={lang} th={th} mode={mode} />}
         {cp && <ProjectPage project={cp} onNavigate={navigate} onToast={showToast} isMobile={isMobile} lang={lang} th={th} mode={mode} />}

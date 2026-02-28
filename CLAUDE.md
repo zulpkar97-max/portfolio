@@ -119,7 +119,7 @@ skillTagJumps: {
 
 5层杂志化布局，`key={project.id}` 强制 remount 以重置动画：
 - Layer 1: 项目编号 "01/02/03"（DM Mono 64px）+ 元数据竖排（Role/Team/Context）
-- Layer 2: 标题（Noto Serif SC 900, ZH clamp 36-72px / EN clamp 32-56px maxWidth 620）+ stat hook（大号数字 + 说明，EN 模式改为 block layout 避免重叠）
+- Layer 2: 标题（Noto Serif SC 900, ZH clamp 36-72px / EN clamp 28-42px maxWidth 680）+ stat hook（大号数字 + 说明，EN 桌面端 `position:absolute` + `bottom:-100` 独立于标题，P2 居中对齐靶心 SVG）
 - Layer 3: 叙事段落（hook 句 700 + detail 句 300）
 - Layer 4: 条件渲染 — P1 用 Before→After 堆叠卡片，P2/P3 用 3列 Metrics 卡片
 - Layer 5: Section nav（4个 skillTag 锚点按钮）
@@ -190,6 +190,11 @@ skillTagJumps: {
 - [x] 12 个 keySentence 转 `{zh, en}` 格式 + sourceLink.text 双语
 - [x] EN 样式走查修复：首页 Hero 字号缩小、项目 Hero 标题/Stat 布局分离、SideNav 标签字号缩小、Footer CTA 字号缩小
 - [x] EN 引号规范化：192 处中文弯引号 `' ' " "` → 英文直引号 `' "`
+- [x] 全站中英文排版分离：16 批次 ternary 拆分（fontSize/lineHeight/maxWidth/margin/padding/letterSpacing），IterationStep 增加 `lang` prop
+- [x] 装饰性 SVG 动画：P3NetworkDeco（入场动画 2.2s）、P2TargetDeco 位置打散（非对称）
+- [x] Hero title 渲染改为 `<br/>` 换行（中英文统一）、红色下划线 EN 90 / ZH 180
+- [x] EN heroStat 定位重构：桌面端 `position:absolute, bottom:-100`，与标题完全独立；P2 居中对齐靶心 SVG
+- [x] SideNav Hooks 违规修复：`useRef` 移到 early return 之前，修复窗口缩放白屏崩溃
 
 ## 宽度网格系统
 
@@ -230,8 +235,12 @@ npx vite build                # 构建
 英文文本普遍比中文长，以下区域在 `lang === "en"` 时使用独立样式：
 
 - **首页 Hero 标题**: EN `clamp(22px, 3.2vw, 34px)` / ZH `clamp(32px, 5.5vw, 56px)`，移动端 EN 22 / ZH 32
-- **项目 Hero 标题**: EN `clamp(32px, 4.5vw, 56px)` maxWidth 620 / ZH `clamp(36px, 5.5vw, 72px)` maxWidth 780
-- **heroStat 定位**: EN 模式（含非移动端）使用 block layout（`marginTop:24, textAlign:"right"`），不用 `position:absolute`，避免与长英文标题重叠
+- **heroStat 定位**: EN 桌面端使用 `position:absolute, right:0, bottom:-100`，与标题完全独立；P2 特殊处理 `right:8, width:220, textAlign:"center"` 居中对齐靶心 SVG；EN 移动端使用 flow layout `marginTop:24`
+- **heroStat unit 文字间距**: EN `marginTop:22`（防止大字 descender 遮挡小字）/ ZH `marginTop:4`
+- **Layer 2 容器**: EN `marginTop:74, marginBottom:148` / ZH `marginTop:20, marginBottom:48`
+- **装饰性 SVG**: P1GridDeco、P2TargetDeco（入场动画，位置打散非对称）、P3NetworkDeco（入场动画 2.2s）
+- **红色下划线**: EN width 90 / ZH width 180
+- **项目 Hero 标题**: EN `clamp(28px, 3.8vw, 42px)` maxWidth 680 / ZH `clamp(36px, 5.5vw, 72px)` maxWidth 780
 - **SideNav 标签字号**: active 13px / inactive 11.5px，letterSpacing active 2 / inactive 0.5（中英共用，原值 15/12.5 太大导致 EN 溢出）
 - **Footer CTA 标题**: EN `clamp(22px, 3.2vw, 36px)` / ZH `clamp(26px, 3.8vw, 44px)`
 - **EN 引号规范**: 所有 EN 字段中使用英文直引号 `' "` 而非中文弯引号 `' ' " "`

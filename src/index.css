@@ -32,8 +32,8 @@ body {
 }
 
 @keyframes lineGrow {
-  from { width: 0; }
-  to { width: 64px; }
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 /* Thread animation — single keyframes: draw then fade */
