@@ -3462,7 +3462,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
         </div>
 
         {/* Layer 2: Title + stat hook */}
-        <div style={{ position: "relative", marginTop: lang === "en" ? 74 : 20, marginBottom: lang === "en" ? 148 : 48, animation: "fadeUp 0.8s ease-out 0.2s both" }}>
+        <div style={{ position: "relative", marginTop: lang === "en" ? 74 : 20, marginBottom: lang === "en" ? (project.id === 3 ? 88 : 148) : 48, animation: "fadeUp 0.8s ease-out 0.2s both" }}>
           <div style={{ position: "relative", marginTop: lang === "en" ? 0 : 0 }}>
             <h1 style={{
               fontFamily: FONT_DISPLAY, fontWeight: 900,
@@ -3479,7 +3479,7 @@ function ProjectPage({ project, onNavigate, onToast, isMobile, lang, th, mode })
           {/* Stat hook — right side on desktop, below title on mobile */}
           {project.heroStat && (
             <div style={{
-              ...(isMobile ? { marginTop: 24, textAlign: "left" } : lang === "en" ? { position: "absolute", right: project.id === 2 ? 8 : 0, width: project.id === 2 ? 220 : undefined, bottom: -100, textAlign: project.id === 2 ? "center" : "right" } : { position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", textAlign: "right" }),
+              ...(isMobile ? { marginTop: 24, textAlign: "left" } : lang === "en" ? { position: "absolute", right: project.id === 2 ? 8 : 0, width: project.id === 2 ? 220 : undefined, bottom: project.id === 3 ? -40 : -100, textAlign: project.id === 2 ? "center" : "right" } : { position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", textAlign: "right" }),
               animation: "fadeUp 0.8s ease-out 0.5s both",
             }}>
               <div style={{ fontFamily: FONT_DISPLAY, fontSize: isMobile ? (lang === "en" ? 48 : 48) : (lang === "en" ? "clamp(48px, 7vw, 96px)" : "clamp(48px, 7vw, 96px)"), fontWeight: 900, lineHeight: 1, color: th.accent, letterSpacing: "-0.03em" }}>
