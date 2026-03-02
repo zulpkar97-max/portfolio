@@ -6204,8 +6204,6 @@ function PrintPage({ lang, th }) {
       })}
 
       {/* ── End Page ── */}
-      {/* If end page lands on the right (odd page), add blank left page first */}
-      {totalPages % 2 === 1 && <div style={{ width: A4_W, height: A4_H, flexShrink: 0 }} />}
       <div id="print-end" className="print-page" style={{ ...pageStyle, padding: 0, display: "flex", flexDirection: "column" }}>
         <div style={{ padding: "420px 72px 0 72px", textAlign: "center" }}>
           <div style={{ width: 48, height: 2.5, backgroundColor: ACCENT_LIGHT, margin: "0 auto 40px auto" }} />
