@@ -39,12 +39,15 @@ const OUT_PATH = 'public/portfolio.pdf';
     .print-page:last-child { page-break-after: avoid !important; }
   `});
 
-  console.log('Generating PDF...');
+  // Count actual .print-page elements to set page range
+  const pageCount = await page.evaluate(() => document.querySelectorAll('.print-page').length);
+  console.log(`Generating PDF (${pageCount} pages)...`);
   await page.pdf({
     path: OUT_PATH,
     format: 'A4',
     printBackground: true,
     margin: { top: 0, right: 0, bottom: 0, left: 0 },
+    pageRanges: `1-${pageCount}`,
   });
 
   await browser.close();
