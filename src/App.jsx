@@ -645,11 +645,11 @@ const PROJECTS = [
       { type: "pull-quote", text: { zh: "AI PM不需要自己写代码，但必须有能力在技术实现层面「够得着」——至少能读懂报错信息意味着什么，能判断问题出在哪个环节，能跟工程师说清楚「我需要你在这个节点上做什么」。", en: "An AI PM doesn't need to write code — but they need to be able to get their hands dirty with the technical side. At minimum: read an error message and understand what it means, judge which part of the system is broken, and tell the engineer clearly \"I need you to do X at this node.\"" } },
 
       // === 结果段 === Block 22-24
-      { type: "heading", text: { zh: "结果", en: "Results" }, navLabel: { zh: "结果", en: "Results" }, pageBreakBefore: true },
+      { type: "heading", text: { zh: "结果", en: "Results: What the system delivered" }, navLabel: { zh: "结果", en: "Results" }, pageBreakBefore: true },
       { type: "paragraph", text: { zh: "系统正式投入公司使用，覆盖十八个语种的翻译需求。实际产出是标准化的多语种Excel表格——中文内容可以一次性转换为英语、泰语、土耳其语、马来语、缅甸语、越南语、印尼语、葡萄牙语、俄语、高棉语、菲律宾语、西班牙语等十八种目标语言。原来的翻译流程是三段式的：中文内容先发给翻译公司做粗翻，粗翻完成后再交给各语种的本地化团队做精细化翻译。翻译公司的粗翻是按单独计费的外包服务，十八个语种、每次翻译都要付费。这个系统直接替代了粗翻环节——AI产出的翻译质量足以跳过外包粗翻，直接进入本地化精翻阶段。相当于把一整层外包成本归零，同时把多语种并行处理从「逐条对接不同供应商」变成「一次提交、一次产出」。", en: "The system went live company-wide, covering translation needs across eighteen languages. The output was standardized multi-language Excel sheets — Chinese content could be converted in one pass into eighteen target languages, including English, Thai, Turkish, Malay, Vietnamese, Indonesian, Portuguese, Russian, Spanish, and others. The previous workflow was two-stage: Chinese content was first sent to a translation agency for a rough draft, then handed off to localization teams for each language to refine. The agency draft was a separately billed outsourcing service — eighteen languages, billed every time. This system replaced that entire layer — the AI output was good enough to skip the outsourced draft and go straight to localization. It eliminated a full layer of outsourcing cost, and turned what used to be \"coordinate with different vendors one by one\" into \"one submission, one output.\"" } },
       { type: "key-stat-band", items: [
         { value: "18", label: { zh: "语种覆盖", en: "languages" } },
-        { value: { zh: "一次提交→一次产出", en: "1 submission → 1 output" }, label: { zh: "全流程自动化", en: "fully automated" } },
+        { value: { zh: "一次提交→一次产出", en: "1 in → 1 out" }, label: { zh: "全流程自动化", en: "fully automated" } },
         { value: { zh: "归零", en: "Eliminated" }, label: { zh: "外包粗翻层", en: "outsourcing layer" } },
       ]},
       { type: "screenshot-inline", label: { zh: "飞书云表格18语种产出", en: "Feishu spreadsheet with 18-language output" }, note: { zh: "实际翻译产出，展示系统覆盖的语言范围", en: "Actual translation output showing all 18 languages" }, src: "images/case3-18lang-output.png", featured: true },
@@ -5351,11 +5351,11 @@ function P1TurningPointPages({ startPageNum, pageStyle }) {
           </h2>
         </div>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"When Phase 2 entered its polishing stage, DeepSeek had just launched \u2014 extremely cheap, surprisingly powerful. I saw an opportunity: if we built an AI game guide assistant into the platform's community feature, it could directly boost user retention and engagement \u2014 exactly what the client cared about most."}
         </p>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"But I didn't go to the client first. The first thing I did was confirm whether this was technically feasible. I bypassed the project manager and went straight to the CTO \u2014 this plan would definitely lose money upfront, and the PM was constrained by budget KPIs. An idea like this would almost certainly get killed before it got off the ground. I needed the CTO to validate feasibility and help push for resources."}
         </p>
 
@@ -5367,19 +5367,19 @@ function P1TurningPointPages({ startPageNum, pageStyle }) {
           </div>
         </div>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"I sat down next to the CTO and we went through the technical documentation for Coze (ByteDance's AI agent builder) together. I can't read code, but I could identify which parts carried technical risk, and I confirmed them with him one by one. Once we'd confirmed it was feasible, I estimated the headcount: roughly 1.5 frontend developers, 2 backend. At the same time, I scoped out the admin-side requirements \u2014 event management, hero data input, knowledge base maintenance."}
         </p>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"Only after all the prep work was done did I start talking to the client. I predicted they'd push back \u2014 when the external vendor proposes adding new features, the client's first instinct is usually to question the motive. So the proposal had to be detailed enough that the direction, scope, and timeline were all explicit. And I built in an exit mechanism \u2014 if the data doesn't look good, pull the plug anytime. Make it easy for the client to say yes."}
         </p>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"The first pitch was a brief proposal, just to test the waters. The client's reaction wasn't rejection \u2014 it was uncertainty. They went back to discuss with their product lead. The product lead came over and asked me to walk through it again, gave revision notes, and asked for interaction design. Here's the key move: I did the interaction design myself, off the clock, without telling my company. The PM's budget couldn't cover it, but I wanted this to happen. For an external vendor, interaction design is normally billable. I absorbed the cost myself."}
         </p>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"The second pitch came with the full interaction design. More negotiation. Finally, in a formal meeting, I brought in our engineers and PM for a full team presentation. The client and their product lead took the proposal to their VP for budget approval \u2014 beyond that point, it was out of my hands. The VP approved it. From first pitch to approval, about six weeks."}
         </p>
 
@@ -5402,7 +5402,7 @@ function P1TurningPointPages({ startPageNum, pageStyle }) {
       <div className="print-page" style={pageStyle}>
         <div className="print-page-num">{pg(1)}</div>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"The agent that shipped was called \"Nana,\" built on Coze, running on DeepSeek R1/V3 and Doubao (ByteDance's LLM). It served over 2,000 users after launch. The biggest problem during troubleshooting was inaccurate knowledge base retrieval: when I ran the same question 20 times, the initial version only returned the right content 5 times \u2014 it pulled up the wrong hero 12 times and found nothing at all 3 times. The root cause wasn't the model \u2014 it was the knowledge base's information architecture. The original setup stored all of a hero's information as one large chunk, so the search engine couldn't match precisely when users asked specific questions. I redesigned the information architecture \u2014 splitting each hero into three segments (hero overview, skills + battlefield abilities + combos, gear + emblems). Once I'd mapped out the new field structure, the technical team migrated everything to VikingDB on Volcano Engine (ByteDance's cloud) and handled the embedding model selection and search parameter tuning. After optimization, the same 20-question test hit correctly every single time."}
         </p>
 
@@ -5448,15 +5448,15 @@ function P1TurningPointPages({ startPageNum, pageStyle }) {
           </h2>
         </div>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"This project split into two parts, but the logic was the same. The collaboration system was a reactive response to crisis \u2014 the team was falling apart, and I had to find the problem and solve it. Nana was a proactive move during a stable period \u2014 I spotted a technical opportunity, judged it could create value, and pushed it to launch."}
         </p>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"What the two had in common: at every critical decision point, my judgment mattered more than my execution. Judging \"this isn't a people problem, it's a systems problem\" set the direction for the collaboration system. Judging \"DeepSeek can work in a community scenario\" started the AI track. Judging \"go to the CTO first, not the PM\" kept Nana alive long enough to get built."}
         </p>
 
-        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.8, color: "#333", whiteSpace: "pre-wrap" }}>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
           {"But all of those judgments were driven by experience and instinct, without any formal framework behind them. I could design a collaboration system from zero, but I couldn't articulate the theoretical framework underneath it. I could spot an AI opportunity and push the client to buy in, but I had clear gaps in my knowledge of AI product management as a field."}
         </p>
 
