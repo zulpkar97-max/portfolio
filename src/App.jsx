@@ -6054,11 +6054,12 @@ function PrintPage({ lang, th }) {
               else { const r = t(titleLines, lang); title = Array.isArray(r) ? r.join("") : r; }
               const tocPageNum = pageMap.heroPages[p.id] || "...";
               return (
-                <div key={p.id} style={{ display: "flex", alignItems: "baseline", gap: 10, padding: "8px 0" }}>
+                <a key={p.id} href={"#print-p" + p.id} style={{ display: "flex", alignItems: "baseline", gap: 10, padding: "8px 0", textDecoration: "none", color: "inherit" }}>
                   <span style={{ fontFamily: FONT_MONO, fontSize: 11, color: ACCENT_LIGHT, letterSpacing: "0.05em", flexShrink: 0, width: 22 }}>{p.navName}</span>
                   <span style={{ fontFamily: FONT_BODY, fontSize: 13, fontWeight: 400, color: "#555", lineHeight: 1.5, flex: 1 }}>{title}</span>
                   <span style={{ fontFamily: FONT_MONO, fontSize: 11, color: "#c4b8a8", flexShrink: 0, textAlign: "right", minWidth: 20 }}>{tocPageNum}</span>
-                </div>
+                  <span style={{ fontSize: 11, color: "#c4b8a8", flexShrink: 0, marginLeft: 4 }}>{"→"}</span>
+                </a>
               );
             })}
           </div>
@@ -6073,12 +6074,9 @@ function PrintPage({ lang, th }) {
 
         {/* Spacer + bottom bar */}
         <div style={{ flex: 1 }} />
-        <div style={{ padding: "0 72px 52px 72px", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-          <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: "#999", lineHeight: 2 }}>
-            <div>{"zulpkar97@gmail.com"}</div>
-            <a href="https://zulpkar.com" style={{ color: "#999", textDecoration: "none" }}>{"zulpkar.com"}</a>
-          </div>
-          <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: "#ccc", letterSpacing: "0.06em" }}>{"1"}</div>
+        <div style={{ padding: "0 72px 52px 72px", display: "flex", justifyContent: "space-between", alignItems: "flex-end", fontFamily: FONT_MONO, fontSize: 11 }}>
+          <a href="mailto:zulpkar97@gmail.com" style={{ color: "#d9796a", textDecoration: "underline", textDecorationColor: "rgba(217,121,106,0.3)", textUnderlineOffset: "3px" }}>{"zulpkar97@gmail.com"}</a>
+          <a href="https://zulpkar.com" style={{ color: "#d9796a", textDecoration: "underline", textDecorationColor: "rgba(217,121,106,0.3)", textUnderlineOffset: "3px" }}>{"zulpkar.com"}</a>
         </div>
 
       </div>
@@ -6209,23 +6207,24 @@ function PrintPage({ lang, th }) {
       {/* If end page lands on the right (odd page), add blank left page first */}
       {totalPages % 2 === 1 && <div style={{ width: A4_W, height: A4_H, flexShrink: 0 }} />}
       <div id="print-end" className="print-page" style={{ ...pageStyle, padding: 0, display: "flex", flexDirection: "column" }}>
-        <div style={{ padding: "280px 72px 0 72px", textAlign: "center" }}>
+        <div style={{ padding: "420px 72px 0 72px", textAlign: "center" }}>
           <div style={{ width: 48, height: 2.5, backgroundColor: ACCENT_LIGHT, margin: "0 auto 40px auto" }} />
           <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: 30, fontWeight: 900, color: "#2A2A2A", lineHeight: 1.3, marginBottom: 28, maxWidth: 580, marginLeft: "auto", marginRight: "auto" }}>
             {"I'm looking for the next problem worth breaking down."}
           </h2>
-          <p style={{ fontFamily: FONT_BODY, fontSize: 14, fontWeight: 400, color: "#888", marginBottom: 40 }}>
+          <p style={{ fontFamily: FONT_BODY, fontSize: 14, fontWeight: 400, color: "#888", marginBottom: 10 }}>
             {"If any of this resonates, I'd love to talk."}
           </p>
-          <div style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#999", lineHeight: 2.2, marginBottom: 24 }}>
-            <div>{"zulpkar97@gmail.com"}</div>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 12 }}>
+            <a href="mailto:zulpkar97@gmail.com" style={{ color: "#d9796a", textDecoration: "underline", textDecorationColor: "rgba(217,121,106,0.3)", textUnderlineOffset: "3px" }}>{"zulpkar97@gmail.com"}</a>
           </div>
-          <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: "#B8B0A3", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>{"Full interactive version"}</div>
-          <a href="https://zulpkar.com" style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#999", letterSpacing: "0.02em", textDecoration: "none", display: "block" }}>{"zulpkar.com"}</a>
         </div>
         <div style={{ flex: 1 }} />
-        <div style={{ padding: "0 72px 52px 72px", display: "flex", justifyContent: "flex-end", alignItems: "flex-end" }}>
-          <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: "#ccc", letterSpacing: "0.06em" }}>{pageMap.endPage}</div>
+        <div style={{ padding: "0 72px 52px 72px" }}>
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: "#B8B0A3", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 4 }}>{"Full interactive version"}</div>
+            <a href="https://zulpkar.com" style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#d9796a", letterSpacing: "0.02em", textDecoration: "underline", textDecorationColor: "rgba(217,121,106,0.3)", textUnderlineOffset: "3px" }}>{"zulpkar.com"}</a>
+          </div>
         </div>
       </div>
 

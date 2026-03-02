@@ -227,7 +227,12 @@ skillTagJumps: {
 ```bash
 npx vite --port 5173          # 开发服务器
 npx vite build                # 构建
+node generate-pdf.mjs         # 重新生成 public/portfolio.pdf（需 dev server 运行中）
 ```
+
+## PDF 发布规则（强制）
+
+**任何涉及 Print/PDF 版本的代码改动，在 push 之前必须执行 `node generate-pdf.mjs` 重新生成 `public/portfolio.pdf`。** 未重新生成 PDF 就 push 会导致用户下载到过期版本。这是强制流程，不允许跳过。
 
 ## Print/PDF 版本（`#print` 路由）
 
