@@ -427,7 +427,7 @@ const PROJECTS = [
       { type: "paragraph", text: { zh: "第一次pitch写了简要提案，先探口风。客户的反应不是拒绝，是不确定——回去跟Leader讨论。Leader过来让我再讲一遍，提了修改意见，要求出交互设计。这里有一个关键动作：我用下班后的业余时间自己做了交互设计，没有跟公司报备。原因是项目经理的预算报不出去，但我想推这件事。作为外包方，出交互图通常是要收费的，我自己承担了这个成本。", en: "The first pitch was a brief proposal, just to test the waters. The client's reaction wasn't rejection — it was uncertainty. They went back to discuss with their product lead. The product lead came over and asked me to walk through it again, gave revision notes, and asked for interaction design. Here's the key move: I did the interaction design myself, off the clock, without telling my company. The PM's budget couldn't cover it, but I wanted this to happen. For an external vendor, interaction design is normally billable. I absorbed the cost myself." } },
       { type: "paragraph", text: { zh: "第二次pitch带着完整交互方案再讲一遍，过程中持续协商。最后在正式沟通会上，带上工程师和项目经理完成了集体宣讲。客户和Leader拿着方案去找VP要预算——我的权限到这里为止了，无法再介入。VP批了。从第一次pitch到审批通过，大约一个半月。", en: "The second pitch came with the full interaction design. More negotiation. Finally, in a formal meeting, I brought in our engineers and PM for a full team presentation. The client and their product lead took the proposal to their VP for budget approval — beyond that point, it was out of my hands. The VP approved it. From first pitch to approval, about six weeks." } },
       { type: "paragraph", text: { zh: "最终落地的智能体叫\u201C娜娜\u201D，基于Coze平台搭建，底层模型为DeepSeek R1/V3及豆包。上线后服务了2000多名用户。调试过程中遇到的最大问题是知识库检索不准：以同一个问题重复测试20次，初始版本仅5次命中正确内容，12次返回其他英雄的信息，3次检索不到任何结果。根因不是模型能力问题，而是知识库的信息架构——原来的知识库把每个英雄的所有信息作为一个大块存入，用户问具体问题时搜索引擎无法精准命中。我重新设计了知识库的信息架构——每个英雄拆成三段切片（英雄简介、技能+战场技能+连招、装备+徽记），字段对齐后迁移至火山引擎向量知识库VikingDB，由技术团队完成Embedding模型选型和检索参数的配置调试。优化后同样的测试20次全部准确命中。核心是信息架构的重设计，不是单纯换平台。", en: "The agent that shipped was called \"Nana,\" built on Coze, running on DeepSeek R1/V3 and Doubao (ByteDance's LLM). It served over 2,000 users after launch. The biggest problem during troubleshooting was inaccurate knowledge base retrieval: when I ran the same question 20 times, the initial version only returned the right content 5 times \u2014 it pulled up the wrong hero 12 times and found nothing at all 3 times. The root cause wasn't the model \u2014 it was the knowledge base's information architecture. The original setup stored all of a hero's information as one large chunk, so the search engine couldn't match precisely when users asked specific questions. I redesigned the information architecture \u2014 splitting each hero into three segments (hero overview, skills + battlefield abilities + combos, gear + emblems). Once I'd mapped out the new field structure, the technical team migrated everything to VikingDB on Volcano Engine (ByteDance's cloud) and handled the embedding model selection and search parameter tuning. After optimization, the same 20-question test hit correctly every single time. The fix was redesigning the information architecture, not just switching platforms." } },
-      { type: "screenshot-inline", label: { zh: "娜娜AI对话界面", en: "Nana AI chat interface" }, note: { zh: "正文讲AI产品时", en: "The AI agent in action" }, src: "images/nana-ai-chat-trimmed.jpg", height: "auto", objectFit: "contain", featured: true },
+      { type: "screenshot-inline", label: { zh: "娜娜AI对话界面", en: "Nana AI chat interface" }, note: { zh: "正文讲AI产品时", en: "AI-generated hero strategy response, including gear recommendations, counter-matchup advice, and gameplay tips for a specific hero query." }, src: "images/nana-ai-chat-trimmed.jpg", height: "auto", objectFit: "contain", featured: true },
 
       // === 回头看 ===
       { type: "heading", text: { zh: "回头看：这两件事教会我什么", en: "Looking Back: What these two things taught me" }, navLabel: { zh: "回头看", en: "Looking Back" } },
@@ -504,7 +504,7 @@ const PROJECTS = [
       { type: "pull-quote", text: { zh: "UI丑可以换皮，信息架构的混乱说明产品本身没想清楚自己要给用户呈现什么。", en: "Ugly UI is a skin problem — you can reskin it. But when the information architecture is a mess, it means the product itself hasn't figured out what it wants to show users." } },
       { type: "paragraph", text: { zh: "编辑器的问题更直接。攻略站的编辑器不只是给普通用户用的——在这个生态里，真正持续产出内容的人首先是能带来流量的游戏主播，其次是官方的内容运营人员。编辑器是他们的核心生产工具。但整条上传链路的操作逻辑跟游戏内搭阵容的逻辑完全不一致，玩家在游戏里习惯的交互方式到了攻略站变成另一套东西。", en: "The editor had a more direct problem. The guide site's editor wasn't just for casual users — in this ecosystem, the people who actually produce content consistently are primarily the streamers who drive traffic, and then the client's own content ops team. The editor is their core production tool. But the entire upload flow worked completely differently from how players build lineups in-game. The interaction patterns players were used to inside the game turned into an entirely unfamiliar workflow on the guide site." } },
       { type: "pull-quote", text: { zh: "如果连最核心的内容生产者都觉得难用，产品的问题就不在表面。", en: "If even your most important content creators find the tool hard to use, the problem isn't skin-deep." }, pageBreakBefore: true },
-      { type: "paragraph", text: { zh: "走查进行到大约一半的时候，我开始注意到一个反复出现的现象：很多问题表面上各不相同，但底下都是同一种冲突——功能和功能在打架。首页里，内容推荐和筛选工具在抢同一块空间，信息展示和操作入口互相挤压，谁都没有得到合理的优先级。编辑器里，攻略的文字描述流程和阵容的结构化配置被塞在同一条线性链路里，两种完全不同性质的任务被迫共用一套交互逻辑。一个想展示内容，一个想提供工具，但产品没有决定谁先谁后、怎么衔接，所以它们在每个页面里各自为战。", en: "About halfway through the walkthrough, I started noticing a pattern: the problems looked different on the surface, but underneath they were all the same conflict — features fighting features. On the homepage, content recommendations and filtering tools were competing for the same space. Information display and interactive elements crowded each other out, with neither getting clear priority. In the editor, the text-based guide writing flow and the structured lineup configuration were crammed into a single linear path — two fundamentally different tasks forced to share one UX pattern. One side wanted to show content, the other wanted to provide a tool, but the product had never decided which comes first or how they connect. So on every page, they just fought it out." } },
+      { type: "paragraph", printSplit: "In the editor,", text: { zh: "走查进行到大约一半的时候，我开始注意到一个反复出现的现象：很多问题表面上各不相同，但底下都是同一种冲突——功能和功能在打架。首页里，内容推荐和筛选工具在抢同一块空间，信息展示和操作入口互相挤压，谁都没有得到合理的优先级。编辑器里，攻略的文字描述流程和阵容的结构化配置被塞在同一条线性链路里，两种完全不同性质的任务被迫共用一套交互逻辑。一个想展示内容，一个想提供工具，但产品没有决定谁先谁后、怎么衔接，所以它们在每个页面里各自为战。", en: "About halfway through the walkthrough, I started noticing a pattern: the problems looked different on the surface, but underneath they were all the same conflict — features fighting features. On the homepage, content recommendations and filtering tools were competing for the same space. Information display and interactive elements crowded each other out, with neither getting clear priority. In the editor, the text-based guide writing flow and the structured lineup configuration were crammed into a single linear path — two fundamentally different tasks forced to share one UX pattern. One side wanted to show content, the other wanted to provide a tool, but the product had never decided which comes first or how they connect. So on every page, they just fought it out." } },
       { type: "paragraph", text: { zh: "这个冲突反复出现之后，我才意识到它们不是各自独立的缺陷，是同一个根源。我回到\u201C攻略站\u201D这三个字本身去想：攻略站天然有双重身份，它是眼睛看的（玩家来这里看攻略内容），也是手上用的（玩家要把阵容拿到游戏里去用）。看和用，这两件事必须实现闭环。", en: "Once I saw this conflict repeating, I realized these weren't separate defects. They shared the same root. I went back to the most basic question: what is a game guide site? It's inherently two things at once — something you read (players come to consume guide content) and something you use (players need to take lineups into the game). Reading and using — those two sides have to come together into a single flow." } },
       { type: "pull-quote", text: { zh: "当前的产品把这两个角色既没有整合、也没有区分，互相干扰着挤在一起。", en: "The current product had neither integrated these two roles nor separated them. They were just jammed together, interfering with each other." } },
       { type: "paragraph", text: { zh: "到这里，我之前下载游戏时冒出的那个念头突然有了落点。阵容码不只是一个功能想法——它恰好是连接\u201C看\u201D和\u201C用\u201D的枢纽。主播展示阵容码，玩家看完攻略后输入阵容码，在游戏内直接使用。两个角色通过一串代码实现统一。", en: "That's when the idea I'd had while downloading the game suddenly clicked into place. Lineup Code wasn't just a feature idea — it was the hinge between \"read\" and \"use.\" A streamer shares a Lineup Code, a player reads the guide and enters the code, and the lineup is live in-game. Two roles, connected by a single string of characters." } },
@@ -520,7 +520,7 @@ const PROJECTS = [
       // === 验证 === Block 23-30
       { type: "heading", text: { zh: "验证：走查能看到产品，看不到人", en: "Validation: The walkthrough showed the product, not the people" }, navLabel: { zh: "验证", en: "Validation" } },
       { type: "paragraph", text: { zh: "走查告诉我产品本身有什么问题，但有一个天然局限：看不到真实用户在实际使用中卡在哪里。我对这款游戏的理解也可能不够深。这个判断需要第三方验证。", en: "The walkthrough told me what was wrong with the product itself, but it had a natural limitation: I couldn't see where real users were actually getting stuck during real usage. My understanding of the game might not be deep enough either. I needed real users to test my assumptions." } },
-      { type: "paragraph", text: { zh: "还是那个前提——没有人要求我做这件事。10万的UI迭代订单不包含用户调研，公司不会报销访谈费用。但我判断不做不行。我自掏腰包做了一对一访谈：给国内主播发50块红包、国外主播发10美金，换半小时深度对话；普通玩家每人约聊10分钟；官方的内容填报人员不需要花钱，这是他们工作的一部分，直接聊。前后接触大约三四十人。", en: "Same premise as before — nobody asked me to do this. The ¥100K UI contract didn't include user research, and the company wouldn't reimburse interview costs. But I judged it had to be done. I funded the interviews myself: ¥50 red envelopes for domestic streamers, $10 for international ones, in exchange for a thirty-minute deep conversation. Casual players got about ten minutes each. The client's content editors didn't cost anything — this was part of their job, so I just talked to them directly. In total, I talked to about thirty to forty people." } },
+      { type: "paragraph", text: { zh: "还是那个前提——没有人要求我做这件事。10万的UI迭代订单不包含用户调研，公司不会报销访谈费用。但我判断不做不行。我自掏腰包做了一对一访谈：给国内主播发50块红包、国外主播发10美金，换半小时深度对话；普通玩家每人约聊10分钟；官方的内容填报人员不需要花钱，这是他们工作的一部分，直接聊。前后接触大约三四十人。", en: "Same premise as before — nobody asked me to do this. The ¥100K UI contract didn't include user research, and the company wouldn't reimburse interview costs. But I judged it had to be done. I funded the interviews myself: ¥50 red envelopes (cash gifts) for domestic streamers, $10 for international ones, in exchange for a thirty-minute deep conversation. Casual players got about ten minutes each. The client's content editors didn't cost anything — this was part of their job, so I just talked to them directly. In total, I talked to about thirty to forty people." } },
       { type: "paragraph", text: { zh: "几类关键反馈逐渐清晰，每一类都接回了我在走查中形成的诊断。", en: "A few clear patterns came out of the interviews." } },
       { type: "paragraph", labelPrefix: { zh: "官方内容填报人员", en: "Content editors" }, text: { zh: "说上传流程太繁琐、步骤太多——这直接印证了走查中编辑器的判断：上传链路跟游戏内逻辑不一致，连最核心的内容生产者都觉得难用，问题确实不在UI层面。", en: "said the upload process was too cumbersome \u2014 too many steps. This directly confirmed what the walkthrough had shown about the editor: the upload flow didn't match in-game logic, and even the most important content producers found it painful. The problem clearly wasn't at the UI level." } },
       { type: "paragraph", labelPrefix: { zh: "头部主播", en: "Top streamers" }, text: { zh: "的反馈补充了走查完全看不到的维度：写完攻略之后分发量不够，分享出去只是一个链接，点击量和用户反馈作者完全不知道，没有激励也没有反馈，持续创作动力很难维持。这告诉我：产品不只是\u201C内容聚合\u201D这个角色没做好，它根本没想清楚内容生产出来之后往哪走——内容的流通和生态的循环是整体缺失的。", en: "surfaced something the walkthrough had no way of catching: after writing a guide, distribution was weak. Sharing meant sending a bare link \u2014 authors had no visibility into clicks or reader feedback. No incentive, no feedback loop, no reason to keep creating. This told me the product hadn't just failed at \"content hub\" \u2014 it had never thought through what happens to content after it's produced. There was no content lifecycle at all." } },
@@ -530,7 +530,7 @@ const PROJECTS = [
       // === 方案 === Block 31-39
       { type: "heading", text: { zh: "方案：分阶段实施，阵容码是枢纽", en: "Solution: Phased delivery, with the Lineup Code as the pivot" }, navLabel: { zh: "方案", en: "Solution" } },
       { type: "paragraph", text: { zh: "基于走查和访谈的完整诊断，阵容码从最初的产品直觉变成了整个方案的枢纽。它是攻略站相较于任何外部平台的独家优势——B站和YouTube只能看视频，不能实现阵容数据的直接复用。", en: "Lineup Code evolved from an initial product hunch into the centerpiece of the entire plan. It was the one thing the guide site could do that no external platform could — Bilibili and YouTube let you watch videos, but they can't let you directly reuse lineup data." } },
-      { type: "paragraph", text: { zh: "但阵容码不能第一步就做，它依赖游戏客户端的功能支持。我产出了三期规划：第一期解决当前竖版交互的基础体验问题，优化上传链路和信息架构，让产品先能用；第二期做横版适配——游戏内核心操作界面全是横版，主播和核心玩家普遍用PC端或模拟器，竖版H5在主力使用场景下体验断裂；第三期横版内嵌游戏、联动阵容码，打通\u201C看攻略\u201D和\u201C用攻略\u201D的完整闭环。", en: "But Lineup Code couldn't come first — it depended on support from the game client. I produced a three-phase roadmap: Phase 1 fixes the baseline experience of the current portrait-mode layout, optimizes the upload flow and information architecture, and makes the product functional. Phase 2 adds landscape-mode support — the game's core interface runs entirely in landscape, streamers and serious players overwhelmingly use PC or emulators, and a portrait-only H5 site falls apart in the main use case. Phase 3 embeds the game in landscape mode and integrates Lineup Code, bringing \"reading guides\" and \"using guides\" together into a complete user journey." } },
+      { type: "paragraph", text: { zh: "但阵容码不能第一步就做，它依赖游戏客户端的功能支持。我产出了三期规划：第一期解决当前竖版交互的基础体验问题，优化上传链路和信息架构，让产品先能用；第二期做横版适配——游戏内核心操作界面全是横版，主播和核心玩家普遍用PC端或模拟器，竖版H5在主力使用场景下体验断裂；第三期横版内嵌游戏、联动阵容码，打通\u201C看攻略\u201D和\u201C用攻略\u201D的完整闭环。", en: "But Lineup Code couldn't come first — it depended on support from the game client. I produced a three-phase roadmap: Phase 1 fixes the baseline experience of the current portrait-mode layout, optimizes the upload flow and information architecture, and makes the product functional. Phase 2 adds landscape-mode support — the game's core interface runs entirely in landscape, streamers and serious players overwhelmingly use PC or emulators, and a portrait-only mobile web (H5) site falls apart in the main use case. Phase 3 embeds the game in landscape mode and integrates Lineup Code, bringing \"reading guides\" and \"using guides\" together into a complete user journey." } },
       { type: "paragraph", text: { zh: "不是三选一，是分阶段全做。", en: "Not pick one \u2014 all three, phased." } },
       { type: "key-stat-band", items: [
         { value: { zh: "¥10万→¥150万", en: "¥100K \u2192 ¥1.5M" }, label: { zh: "合同金额", en: "Contract" } },
@@ -3178,7 +3178,8 @@ function ThreePhaseRoadmap() {
         <tspan x="405" dy="0">Game UI is landscape.</tspan>
         <tspan x="405" dy="18">Core users on</tspan>
         <tspan x="405" dy="18">PC/emulator.</tspan>
-        <tspan x="405" dy="18">Portrait H5 breaks it.</tspan>
+        <tspan x="405" dy="18">Portrait H5 (mobile web)</tspan>
+        <tspan x="405" dy="18">breaks it.</tspan>
       </text>
       {/* Arrow 2→3 */}
       <line x1="518" y1="160" x2="534" y2="160" stroke="#aaa" strokeWidth="2" markerEnd="url(#rm-arr)"/>
@@ -4805,8 +4806,9 @@ function PrintBlock({ block, project, lang }) {
     const colonIdx = txt.indexOf(lang === "en" ? ":" : "\uFF1A");
     const prefix = colonIdx > -1 ? txt.slice(0, colonIdx + 1) : null;
     const rest = colonIdx > -1 ? txt.slice(colonIdx + 1) : txt;
+    const navId = block.navLabel ? t(block.navLabel, lang) : undefined;
     return (
-      <div style={{ breakInside: "avoid", maxWidth: PRINT_TXT, margin: "36px auto 0", padding: "0 4px" }}>
+      <div data-nav={navId} style={{ breakInside: "avoid", maxWidth: PRINT_TXT, margin: "36px auto 0", padding: "0 4px" }}>
         <div style={{ height: 1, backgroundColor: "#d4cfc7", marginBottom: 16 }}/>
         <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: 17, fontWeight: 600, lineHeight: 1.5, margin: 0, color: "#2A2A2A", ...missingStyle(block.text) }}>
           {prefix && <span style={{ color: ACCENT_LIGHT }}>{prefix}</span>}{rest}
@@ -4856,12 +4858,27 @@ function PrintBlock({ block, project, lang }) {
         pContent = <>{pText.slice(0, -boldTxt.length)}<strong style={{ color: "#2A2A2A" }}>{boldTxt}</strong></>;
       }
     }
+    // printSplit: split paragraph into two <p> at the marker text (Print-only visual improvement)
+    if (block.printSplit && typeof pText === "string") {
+      const splitIdx = pText.indexOf(block.printSplit);
+      if (splitIdx > 0) {
+        const pStyle = { maxWidth: PRINT_TXT, margin: "20px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap", ...missingStyle(block.text) };
+        return (
+          <>
+            <p style={pStyle}>{pText.slice(0, splitIdx).trim()}</p>
+            <p style={{ ...pStyle, marginTop: 8 }}>{pText.slice(splitIdx)}</p>
+          </>
+        );
+      } else {
+        console.warn(`[PrintBlock] printSplit marker "${block.printSplit}" not found in paragraph text`);
+      }
+    }
     if (block.labelPrefix) {
       const label = t(block.labelPrefix, lang);
       pContent = <><span style={{ fontWeight: 700, color: "#c4422b" }}>{label}</span>{typeof pContent === "string" ? " " + pContent : <>{" "}{pContent}</>}</>;
     }
     return (
-      <p style={{ maxWidth: PRINT_TXT, margin: "20px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap", ...missingStyle(block.text) }}>
+      <p style={{ maxWidth: PRINT_TXT, margin: block.labelPrefix ? "32px auto 0" : "20px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap", ...missingStyle(block.text) }}>
         {pContent}
       </p>
     );
@@ -4939,8 +4956,9 @@ function PrintBlock({ block, project, lang }) {
 
   // iteration-step
   if (tp === "iteration-step") {
+    const stepNav = block.navLabel ? t(block.navLabel, lang) : undefined;
     return (
-      <div style={{ breakInside: "avoid", maxWidth: PRINT_TXT, margin: "16px auto 0", padding: "0 4px", display: "flex", alignItems: "center", gap: 12 }}>
+      <div data-nav={stepNav} style={{ breakInside: "avoid", maxWidth: PRINT_TXT, margin: "16px auto 0", padding: "0 4px", display: "flex", alignItems: "center", gap: 12 }}>
         <span style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 600, padding: "3px 10px", backgroundColor: "#eae7e1", borderRadius: 2, letterSpacing: "0.05em" }}>{t(block.version, lang)}</span>
         <span style={{ fontSize: 15, fontWeight: 600, color: "#2A2A2A", ...missingStyle(block.heading) }}>{t(block.heading, lang)}</span>
       </div>
@@ -5385,7 +5403,7 @@ function P1TurningPointPages({ startPageNum, pageStyle }) {
   return (
     <>
       {/* ── PAGE 10: Turning point ── */}
-      <div className="print-page" style={pageStyle}>
+      <div id="print-p1-turning" className="print-page" style={pageStyle}>
         <div className="print-page-num">{pg(0)}</div>
 
         <div style={{ maxWidth: PRINT_TXT, margin: "20px auto 0", padding: "0 4px" }}>
@@ -5420,7 +5438,10 @@ function P1TurningPointPages({ startPageNum, pageStyle }) {
         </p>
 
         <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
-          {"The first pitch was a brief proposal, just to test the waters. The client's reaction wasn't rejection \u2014 it was uncertainty. They went back to discuss with their product lead. The product lead came over and asked me to walk through it again, gave revision notes, and asked for interaction design. Here's the key move: I did the interaction design myself, off the clock, without telling my company. The PM's budget couldn't cover it, but I wanted this to happen. For an external vendor, interaction design is normally billable. I absorbed the cost myself."}
+          {"The first pitch was a brief proposal, just to test the waters. The client's reaction wasn't rejection \u2014 it was uncertainty. They went back to discuss with their product lead. The product lead came over and asked me to walk through it again, gave revision notes, and asked for interaction design."}
+        </p>
+        <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
+          {"Here's the key move: I did the interaction design myself, off the clock, without telling my company. The PM's budget couldn't cover it, but I wanted this to happen. For an external vendor, interaction design is normally billable. I absorbed the cost myself."}
         </p>
 
         <p style={{ maxWidth: PRINT_TXT, margin: "8px auto 0", padding: "0 4px", fontSize: 14, lineHeight: 1.65, color: "#333", whiteSpace: "pre-wrap" }}>
@@ -5461,7 +5482,7 @@ function P1TurningPointPages({ startPageNum, pageStyle }) {
             <img alt="Nana AI chat interface" src="images/nana-ai-chat-trimmed.jpg" style={{ width: "100%", height: 280, objectFit: "cover", objectPosition: "center top", display: "block" }} />
             <div style={{ padding: "8px 12px", borderTop: "1px solid #e8e3da", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 11 }}>
               <span style={{ fontWeight: 600, color: "#666" }}>Nana AI chat interface</span>
-              <span style={{ color: "#999" }}>The AI agent in action</span>
+              <span style={{ color: "#999" }}>AI-generated hero strategy response, including gear recommendations, counter-matchup advice, and gameplay tips for a specific hero query.</span>
             </div>
           </div>
         </div>
@@ -5482,7 +5503,7 @@ function P1TurningPointPages({ startPageNum, pageStyle }) {
       </div>
 
       {/* ── PAGE 12: Looking Back ── */}
-      <div className="print-page" style={pageStyle}>
+      <div id="print-p1-lookback" className="print-page" style={pageStyle}>
         <div className="print-page-num">{pg(2)}</div>
 
         <div style={{ maxWidth: PRINT_TXT, margin: "180px auto 0", padding: "0 4px" }}>
@@ -5547,6 +5568,72 @@ function P1TurningPointPages({ startPageNum, pageStyle }) {
 }
 
 /* ── P2 Fixed Pages (Supporting Materials + Full-page Illustrations) ── */
+function P2TensionDiagramPage({ pageNum, pageStyle }) {
+  const ff = "'Noto Sans SC', system-ui, sans-serif";
+  return (
+    <div className="print-page" style={{ ...pageStyle, display: "flex", flexDirection: "column" }}>
+      <div className="print-page-num">{pageNum}</div>
+      <div style={{ maxWidth: PRINT_TXT, margin: "0 auto", padding: "0 4px", width: "100%" }}>
+        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, fontWeight: 500, letterSpacing: "0.14em", color: "#6b6660", textTransform: "uppercase", marginBottom: 12 }}>Product Tension</div>
+        <h1 style={{ fontFamily: FONT_DISPLAY, fontSize: 22, fontWeight: 600, lineHeight: 1.45, color: "#2A2A2A", margin: 0 }}>The core conflict — content hub vs. lineup tool</h1>
+      </div>
+      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", maxWidth: PRINT_TXT, margin: "0 auto", width: "100%", padding: "0 4px" }}>
+        <svg viewBox="0 0 620 460" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", display: "block" }}>
+          {/* Left box — Content Hub */}
+          <rect x="40" y="40" width="230" height="180" rx="4" fill="#F2EFEA" />
+          <text x="155" y="72" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#6b6660">CONTENT HUB</text>
+          <text x="155" y="98" textAnchor="middle" fontFamily={ff} fontSize="14" fontWeight="700" fill="#000">"Read guides"</text>
+          <line x1="110" y1="112" x2="200" y2="112" stroke="#D5D0C8" strokeWidth="1.5" />
+          <text x="155" y="136" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#666">
+            <tspan x="155" dy="0">Passive consumption</tspan>
+            <tspan x="155" dy="20">Text + image format</tspan>
+            <tspan x="155" dy="20">Browse and read</tspan>
+          </text>
+
+          {/* Right box — Lineup Tool */}
+          <rect x="350" y="40" width="230" height="180" rx="4" fill="#EDEAE3" />
+          <text x="465" y="72" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#6b6660">LINEUP TOOL</text>
+          <text x="465" y="98" textAnchor="middle" fontFamily={ff} fontSize="14" fontWeight="700" fill="#000">"Use lineups"</text>
+          <line x1="420" y1="112" x2="510" y2="112" stroke="#D5D0C8" strokeWidth="1.5" />
+          <text x="465" y="136" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#666">
+            <tspan x="465" dy="0">Active configuration</tspan>
+            <tspan x="465" dy="20">Structured data format</tspan>
+            <tspan x="465" dy="20">Copy and apply</tspan>
+          </text>
+
+          {/* Tension indicator between boxes */}
+          <line x1="280" y1="130" x2="340" y2="130" stroke="#c4422b" strokeWidth="2" />
+          <polygon points="282,126 275,130 282,134" fill="#c4422b" />
+          <polygon points="338,126 345,130 338,134" fill="#c4422b" />
+          <text x="310" y="118" textAnchor="middle" fontFamily={ff} fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#c4422b">TENSION</text>
+
+          {/* Transition zone */}
+          <text x="310" y="258" textAnchor="middle" fontFamily={ff} fontSize="13" fontWeight="500" fontStyle="italic" fill="#888">
+            <tspan x="310" dy="0">Current product: neither integrated</tspan>
+            <tspan x="310" dy="18">nor separated</tspan>
+          </text>
+
+          {/* Arrow down to resolution */}
+          <line x1="310" y1="290" x2="310" y2="320" stroke="#888" strokeWidth="1.5" strokeDasharray="4,3" />
+          <polygon points="305,318 310,328 315,318" fill="#888" />
+
+          {/* Resolution box — Lineup Code */}
+          <rect x="180" y="340" width="260" height="100" rx="4" fill="#000" />
+          <text x="310" y="370" textAnchor="middle" fontFamily={ff} fontSize="9.5" fontWeight="700" letterSpacing="0.12em" fill="#888">RESOLUTION</text>
+          <text x="310" y="394" textAnchor="middle" fontFamily={ff} fontSize="14" fontWeight="700" fill="#fff">Lineup Code</text>
+          <text x="310" y="418" textAnchor="middle" fontFamily={ff} fontSize="12" fontWeight="500" fill="#999">The bridge between reading and using</text>
+        </svg>
+      </div>
+      <div style={{ maxWidth: PRINT_TXT, margin: "0 auto", width: "100%", padding: "0 4px" }}>
+        <div style={{ borderTop: "1px solid #e4e0d9", paddingTop: 12, display: "flex", gap: 32, fontSize: 11, lineHeight: 1.5 }}>
+          <span style={{ fontWeight: 600, color: "#333", flexShrink: 0, minWidth: 160 }}>Product tension diagram</span>
+          <span style={{ color: "#999", textAlign: "right", flex: 1 }}>The dual identity revealed by the walkthrough — a game guide site is inherently both something you read and something you use. Lineup Code resolves this by connecting content consumption with in-game action.</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function P2OldScreenshotsPage({ pageNum, pageStyle }) {
   return (
     <div className="print-page" style={pageStyle}>
@@ -5671,7 +5758,7 @@ function P2RoadmapPage({ pageNum, pageStyle }) {
           <text x="405" y="90" textAnchor="middle" fontFamily="'Noto Sans SC', system-ui, sans-serif" fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#6b6660">PHASE 2</text>
           <text x="405" y="114" textAnchor="middle" fontFamily="'Noto Sans SC', system-ui, sans-serif" fontSize="14" fontWeight="700" fill="#000">Horizontal Adaptation</text>
           <line x1="360" y1="128" x2="450" y2="128" stroke="#aaa" strokeWidth="1.5" />
-          <text x="405" y="152" textAnchor="middle" fontFamily="'Noto Sans SC', system-ui, sans-serif" fontSize="12" fontWeight="500" fill="#666"><tspan x="405" dy="0">Game UI is landscape.</tspan><tspan x="405" dy="18">Core users on</tspan><tspan x="405" dy="18">PC/emulator.</tspan><tspan x="405" dy="18">Portrait H5 breaks it.</tspan></text>
+          <text x="405" y="152" textAnchor="middle" fontFamily="'Noto Sans SC', system-ui, sans-serif" fontSize="12" fontWeight="500" fill="#666"><tspan x="405" dy="0">Game UI is landscape.</tspan><tspan x="405" dy="18">Core users on</tspan><tspan x="405" dy="18">PC/emulator.</tspan><tspan x="405" dy="18">Portrait H5 (mobile web)</tspan><tspan x="405" dy="18">breaks it.</tspan></text>
           <line x1="518" y1="160" x2="534" y2="160" stroke="#aaa" strokeWidth="2" markerEnd="url(#rm-arr)" />
           <rect x="540" y="60" width="210" height="200" fill="#000" />
           <text x="645" y="90" textAnchor="middle" fontFamily="'Noto Sans SC', system-ui, sans-serif" fontSize="10" fontWeight="700" letterSpacing="0.12em" fill="#888">PHASE 3</text>
@@ -5701,7 +5788,7 @@ function P2RoadmapPage({ pageNum, pageStyle }) {
 
 function P2LookingBackPage({ pageNum, pageStyle }) {
   return (
-    <div className="print-page" style={{ ...pageStyle, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+    <div id="print-p2-lookback" className="print-page" style={{ ...pageStyle, display: "flex", flexDirection: "column", justifyContent: "center" }}>
       <div className="print-page-num">{pageNum}</div>
       <div style={{ breakInside: "avoid", maxWidth: PRINT_TXT, margin: "0 auto", padding: "0 4px", width: "100%" }}>
         <div style={{ height: 1, backgroundColor: "#d4cfc7", marginBottom: 16 }} />
@@ -5819,7 +5906,7 @@ function P3ResultsPage({ pageNum, pageStyle }) {
 
 function P3LookingBackPage({ pageNum, pageStyle }) {
   return (
-    <div className="print-page" style={{ ...pageStyle, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+    <div id="print-p3-lookback" className="print-page" style={{ ...pageStyle, display: "flex", flexDirection: "column", justifyContent: "center" }}>
       <div className="print-page-num">{pageNum}</div>
       <div style={{ breakInside: "avoid", maxWidth: PRINT_TXT, margin: "0 auto", padding: "0 4px", width: "100%" }}>
         <div style={{ height: 1, backgroundColor: "#d4cfc7", marginBottom: 16 }} />
@@ -6086,11 +6173,11 @@ function PrintPage({ lang, th }) {
       {PROJECTS.map(project => {
         const bodyStart = pageMap.bodyStartPages[project.id] || 4;
         if (project.id === 2) {
-          // P2: 2 PaginatedBody segments + 5 fixed pages
+          // P2: 2 PaginatedBody segments + 6 fixed pages (tension + old screenshots + funnel + new screenshots + roadmap + looking back)
           const seg1Start = bodyStart;
           const seg1End = seg1Start + p2SegCounts.seg1;
-          const fixed1Start = seg1End; // old screenshots + diagnostic funnel
-          const seg2Start = fixed1Start + 2;
+          const fixed1Start = seg1End; // tension diagram + old screenshots + diagnostic funnel
+          const seg2Start = fixed1Start + 3;
           const seg2End = seg2Start + p2SegCounts.seg2;
           const fixed2Start = seg2End; // new screenshots + roadmap
           const lookingBackPage = fixed2Start + 2;
@@ -6110,9 +6197,10 @@ function PrintPage({ lang, th }) {
                 pageStyle={pageStyle}
                 parentZoom={1}
               />
-              {/* Fixed: old screenshots + diagnostic funnel */}
-              <P2OldScreenshotsPage pageNum={fixed1Start} pageStyle={pageStyle} />
-              <P2DiagnosticFunnelPage pageNum={fixed1Start + 1} pageStyle={pageStyle} />
+              {/* Fixed: tension diagram + old screenshots + diagnostic funnel */}
+              <P2TensionDiagramPage pageNum={fixed1Start} pageStyle={pageStyle} />
+              <P2OldScreenshotsPage pageNum={fixed1Start + 1} pageStyle={pageStyle} />
+              <P2DiagnosticFunnelPage pageNum={fixed1Start + 2} pageStyle={pageStyle} />
               {/* Segment 2: blocks 23-36 (验证 + 方案 text) */}
               <PaginatedBody
                 blocks={project.bodyStructure.slice(23, 37)}
@@ -6205,7 +6293,10 @@ function PrintPage({ lang, th }) {
 
       {/* ── End Page ── */}
       <div id="print-end" className="print-page" style={{ ...pageStyle, padding: 0, display: "flex", flexDirection: "column" }}>
-        <div style={{ padding: "420px 72px 0 72px", textAlign: "center" }}>
+        <div style={{ padding: "300px 72px 0 72px", textAlign: "center" }}>
+          <p style={{ fontFamily: FONT_BODY, fontSize: 13, lineHeight: 1.75, color: "#666", maxWidth: 480, margin: "0 auto 48px auto", fontWeight: 400 }}>
+            {"Collaboration failure that looked personal but was structural. A UI complaint that was really a positioning crisis. A training survey that revealed an unaddressed business need. The decisions that mattered most in my career weren\u2019t technical \u2014 they were diagnostic. I want to turn that pattern into a discipline."}
+          </p>
           <div style={{ width: 48, height: 2.5, backgroundColor: ACCENT_LIGHT, margin: "0 auto 40px auto" }} />
           <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: 30, fontWeight: 900, color: "#2A2A2A", lineHeight: 1.3, marginBottom: 28, maxWidth: 580, marginLeft: "auto", marginRight: "auto" }}>
             {"I'm looking for the next problem worth breaking down."}
