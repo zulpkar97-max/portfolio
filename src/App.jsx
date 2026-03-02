@@ -6076,7 +6076,7 @@ function PrintPage({ lang, th }) {
         <div style={{ padding: "0 72px 52px 72px", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: "#999", lineHeight: 2 }}>
             <div>{"zulpkar97@gmail.com"}</div>
-            <div>{"zulpkar.com"}</div>
+            <a href="https://zulpkar.com" style={{ color: "#999", textDecoration: "none" }}>{"zulpkar.com"}</a>
           </div>
           <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: "#ccc", letterSpacing: "0.06em" }}>{"1"}</div>
         </div>
@@ -6221,7 +6221,7 @@ function PrintPage({ lang, th }) {
             <div>{"zulpkar97@gmail.com"}</div>
           </div>
           <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: "#B8B0A3", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>{"Full interactive version"}</div>
-          <div style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#999", letterSpacing: "0.02em" }}>{"zulpkar.com"}</div>
+          <a href="https://zulpkar.com" style={{ fontFamily: FONT_MONO, fontSize: 12, color: "#999", letterSpacing: "0.02em", textDecoration: "none", display: "block" }}>{"zulpkar.com"}</a>
         </div>
         <div style={{ flex: 1 }} />
         <div style={{ padding: "0 72px 52px 72px", display: "flex", justifyContent: "flex-end", alignItems: "flex-end" }}>
