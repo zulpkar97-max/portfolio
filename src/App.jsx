@@ -1058,7 +1058,7 @@ function Footer({ isMobile, th }) {
           }}
         >{"zulpkar97@gmail.com"}</a>
         <a
-          href="/portfolio.pdf"
+          href="/portfolio.pdf" download="Zulpkar-Portfolio.pdf"
           target="_blank"
           rel="noopener noreferrer"
           onMouseEnter={() => setHBtn("pdf")}
@@ -1207,7 +1207,7 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, m
             }}
           ><ModeIcon size={14} color={hovered === "mode" ? th.navHoverText : th.navText} /></span>
           <a
-            href="/portfolio.pdf"
+            href="/portfolio.pdf" download="Zulpkar-Portfolio.pdf"
             target="_blank"
             rel="noopener noreferrer"
             onMouseEnter={() => setHovered("pdf")}
@@ -1275,7 +1275,7 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, m
                 }}
               ><ModeIcon color={th.text} /></span>
               <a
-                href="/portfolio.pdf"
+                href="/portfolio.pdf" download="Zulpkar-Portfolio.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -1956,7 +1956,7 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
             </a>
             <a
               ref={btnLinkedinRef}
-              href="/portfolio.pdf"
+              href="/portfolio.pdf" download="Zulpkar-Portfolio.pdf"
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={(e) => { setHoveredBtn("pdf"); setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
