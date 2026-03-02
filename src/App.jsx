@@ -5609,7 +5609,7 @@ function P2DiagnosticFunnelPage({ pageNum, pageStyle }) {
         </svg>
       </div>
       <div style={{ maxWidth: PRINT_TXT, margin: "0 auto", width: "100%", padding: "0 4px" }}>
-        <div style={{ display: "flex", gap: 32, fontSize: 11, lineHeight: 1.5 }}>
+        <div style={{ borderTop: "1px solid #e4e0d9", paddingTop: 12, display: "flex", gap: 32, fontSize: 11, lineHeight: 1.5 }}>
           <span style={{ fontWeight: 600, color: "#333", flexShrink: 0, minWidth: 160 }}>Diagnostic funnel</span>
           <span style={{ color: "#999", textAlign: "right", flex: 1 }}>Starting from the client's ask to "fix the UI," converging layer by layer through a full-site UX walkthrough and 30–40 user interviews, ultimately pinpointing the root cause: a product identity crisis.</span>
         </div>
@@ -5690,7 +5690,7 @@ function P2RoadmapPage({ pageNum, pageStyle }) {
         </svg>
       </div>
       <div style={{ maxWidth: PRINT_TXT, margin: "0 auto", width: "100%", padding: "0 4px" }}>
-        <div style={{ display: "flex", gap: 32, fontSize: 11, lineHeight: 1.5 }}>
+        <div style={{ borderTop: "1px solid #e4e0d9", paddingTop: 12, display: "flex", gap: 32, fontSize: 11, lineHeight: 1.5 }}>
           <span style={{ fontWeight: 600, color: "#333", flexShrink: 0, minWidth: 160 }}>Three-phase progression</span>
           <span style={{ color: "#999", textAlign: "right", flex: 1 }}>How a ¥100K UI redesign contract evolved into a ¥1.5M product overhaul delivered across three phases.</span>
         </div>
@@ -5773,7 +5773,7 @@ function P3IterationFlowPage({ pageNum, pageStyle }) {
         {IllComponent && <IllComponent />}
       </div>
       <div style={{ maxWidth: PRINT_TXT, margin: "0 auto", width: "100%", padding: "0 4px" }}>
-        <div style={{ display: "flex", gap: 32, fontSize: 11, lineHeight: 1.5 }}>
+        <div style={{ borderTop: "1px solid #e4e0d9", paddingTop: 12, display: "flex", gap: 32, fontSize: 11, lineHeight: 1.5 }}>
           <span style={{ fontWeight: 600, color: "#333", flexShrink: 0, minWidth: 160 }}>Linear iteration flow</span>
           <span style={{ color: "#999", textAlign: "right", flex: 1 }}>Five-step iteration path from MVP to business-ready, with key product decisions marked at each step.</span>
         </div>
