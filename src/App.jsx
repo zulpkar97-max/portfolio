@@ -5970,9 +5970,9 @@ function PrintPage({ lang, th }) {
       return { ...prev, [seg]: count };
     });
   }, []);
-  // P2 total: 2 segments + 5 fixed pages (old screenshots, diagnostic funnel, new screenshots, roadmap, looking back)
+  // P2 total: 2 segments + 6 fixed pages (tension diagram, old screenshots, diagnostic funnel, new screenshots, roadmap, looking back)
   useEffect(() => {
-    const total = p2SegCounts.seg1 + p2SegCounts.seg2 + 5;
+    const total = p2SegCounts.seg1 + p2SegCounts.seg2 + 6;
     setBodyPageCounts(prev => {
       if (prev[2] === total) return prev;
       return { ...prev, 2: total };
