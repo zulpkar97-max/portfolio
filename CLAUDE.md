@@ -11,7 +11,7 @@ React 19 + Vite 7.3 单页应用，hash 路由（#project-1/2/3）。
 - React 19 + Vite 7.3，无 TypeScript
 - 纯内联样式，无 CSS 框架
 - SVG 插图作为 React 组件，注册在 `ILLUSTRATION_MAP`
-- 部署：GitHub Pages（`/portfolio/` base path）
+- 部署：GitHub Pages → 自定义域名 `zulpkar.com`（`base: '/'`，`public/CNAME`）
 - Git 仓库：`zulpkar97-max/portfolio`，主分支 `master`
 
 ## 设计系统
@@ -70,6 +70,8 @@ index.html
   - zoom/pan/pinch，pointer capture
   - 容器用 `maxWidth`（非固定 width），图片自适应
   - SVG 内容包裹在显式宽度 div 中
+  - 移动端：`maxWidth: 95vw`, `initialScale: 1`, `padding: 10`
+  - Ghost-click 防护：关闭时插入 400ms 透明遮罩，防止点击穿透重新打开
 - **首页（LandingPage）**：搜索 `Project Entries`
   - 全屏 hero：typewriter 逐字符打字机动画（requestAnimationFrame）
   - 标题三行："产品、设计、项目管理、客户——"/"收拢成一个 PM 底座，"/"下一步方向：AI"
@@ -195,6 +197,15 @@ skillTagJumps: {
 - [x] Hero title 渲染改为 `<br/>` 换行（中英文统一）、红色下划线 EN 90 / ZH 180
 - [x] EN heroStat 定位重构：桌面端 `position:absolute, bottom:-100`，与标题完全独立；P2 居中对齐靶心 SVG
 - [x] SideNav Hooks 违规修复：`useRef` 移到 early return 之前，修复窗口缩放白屏崩溃
+- [x] 自定义域名部署：`zulpkar.com`（CNAME + Namecheap DNS + GitHub Pages + HTTPS）
+- [x] 移动端 UX 大修：汉堡菜单（居中下拉）、固定底部 Prev/Next 导航（50/50 平分居中）、BackToTop 定位调整
+- [x] Lightbox 移动端修复：ghost-click 防护（关闭后 400ms 透明遮罩防穿透）、图片放大（95vw, scale 1）、拖拽阈值提高
+- [x] 轮播移动端修复：stage 高度 +100px 防止标签栏截断
+- [x] Print P1 精细排版：key-stat-band ×3（合同/约束/结果）、variant:"callout"/"transition"、paragraph 拆分、skillTagJumps 重算（+4 blocks）、PaginatedBody slice(0,31)
+- [x] Print P2 精细排版：2-segment PaginatedBody + 3 固定页面（P2NewScreenshotsPage, P2RoadmapPage, P2LookingBackPage）
+- [x] Print P3 精细排版：2-segment PaginatedBody（slice(0,23) + slice(26,32)）+ 4 固定页面（P3SystemPage, P3IterationFlowPage, P3ResultsPage, P3LookingBackPage）
+- [x] Print 页面架构更新：Cover(1) + 3 项目各含 Hero + body + 固定页面 + End = 35 页总计（无 TOC）
+- [x] 最终替换清单：83 项英文文案校对（`最终替换清单.xlsx`），8 项实际修改（P1 #6/#15, P3 #55/#60/#61/#70/#71, Feishu dedup #83），web + Print 双端同步
 
 ## 宽度网格系统
 
@@ -218,6 +229,75 @@ npx vite --port 5173          # 开发服务器
 npx vite build                # 构建
 ```
 
+## Print/PDF 版本（`#print` 路由）
+
+仅 localhost 可用的打印预览，浏览器 `Ctrl+P → Save as PDF` 导出。
+
+### 页面架构
+
+两种页面类型：
+
+| 类型       | 页面                                                          | 控制方式                          |
+|------------|---------------------------------------------------------------|-----------------------------------|
+| **固定页面** | Cover(1), Hero×3, P1固定4页, P2固定3页, P3固定4页, End(35)       | 手写 JSX，完全自由排版              |
+| **动态页面** | 每个项目 Hero 后的 body 内容页                                   | `PaginatedBody` 自动 bin-pack 分页 |
+
+### 双页预览（Book Spread）
+
+- 预览采用书本式左右并排展开：封面在右侧，后续页面左右交替
+- `zoom` 自适应屏幕宽度（动态计算），小屏幕自动缩放
+- `PaginatedBody` 的测量容器用 `zoom: 1/parentZoom` 反向补偿，确保分页精度不受缩放影响
+- 右侧固定导航栏：section 跳转 + 当前页码
+
+### 分页控制
+
+**自动分页（默认行为）：**
+- `PaginatedBody` 测量每个 block 的像素高度，贪心装箱到 A4 页面（可用高度 1003px）
+- 改一个 block 的高度/间距 → 后续所有页面自动重排
+- 内置 heading orphan 保护（heading 不会孤悬在页底）
+
+**强制分页（`pageBreakBefore`）：**
+在 PROJECTS 数据的 `bodyStructure` 中，给任意 block 添加 `pageBreakBefore: true`，该 block 会强制从新页开始。
+
+```javascript
+// 示例：让某个 heading 强制另起一页
+{ type: "heading", text: { zh: "...", en: "..." }, pageBreakBefore: true }
+```
+
+用途：
+- 某个 heading 总是被挤到上一页底部 → 加 `pageBreakBefore: true` 让它另起一页
+- 想让某张重要截图从新页开始 → 加 `pageBreakBefore: true`
+- 没有任何 block 标记时，行为与之前完全一致
+
+### 关键组件
+
+- `PrintPage`：总入口，渲染所有固定页面 + 调用 PaginatedBody
+- `PaginatedBody`：接收 blocks 数组，测量→bin-pack→渲染分页结果
+- `PrintHero`：项目 Hero 页（静态版 5 层布局）
+- `PrintBlock`：单个 body block 的渲染器
+- `computePageMap`：计算页码映射（Cover=1, 项目按顺序排列, End=35）
+- P1 固定页面：`P1TurningPointPages`（转折点+娜娜+回头看+Supporting Materials, 4页）
+- P2 固定页面：`P2NewScreenshotsPage`, `P2RoadmapPage`, `P2LookingBackPage`（3页）
+- P3 固定页面：`P3SystemPage`, `P3IterationFlowPage`, `P3ResultsPage`, `P3LookingBackPage`（4页）
+
+### 常量
+
+- `A4_W = 794`, `A4_H = 1123`, `A4_PAD = 60`
+- `PRINT_TXT = 674`（内容区宽度 = A4_W - 2×A4_PAD）
+- 可用内容高度 = `A4_H - 2×A4_PAD = 1003px`
+
+### Print 与主站的隔离规则（强制）
+
+**以下规则具有最高优先级，任何情况下都不允许违反：**
+
+1. **Print 修改绝对不能影响主站** — Print 版本（`PrintPage`、`PrintHero`、`PrintBlock`、`PaginatedBody`）和主站（`LandingPage`、`ProjectPage`、`SideNav` 等）是完全隔离的两套组件。修改 Print 相关代码时，**绝对不允许修改**主站的组件、样式、或任何影响主站渲染的代码。
+
+2. **Print 文案必须硬写，不改 PROJECTS 数据** — `PROJECTS` 数组是主站和 Print 共享的数据源。如果 Print 版本需要删减、修改、或重写文案，必须在 Print 组件内**硬编码文案**（不再从 PROJECTS 读取），确保主站的 PROJECTS 数据一个字都不动。
+
+3. **新增/删除 Print 页面不影响主站** — 在 `PrintPage` 中新增或删除 `<div className="print-page">` 完全自由，页码由 `computePageMap` 自动计算。这些操作只涉及 Print 组件内部，与主站无关。
+
+4. **独立 HTML 文件工作流** — 固定页面（Cover、Contents、Hero、End）可导出为独立 HTML 文件供用户离线编辑，编辑完后同步回 `PrintPage` 组件。同步时只修改 Print 组件的 JSX，不动 PROJECTS 数据或主站代码。
+
 ## 截图数据字段扩展
 
 - `filter: "saturate(0.65) brightness(1.05)"` — 外部截图降饱和，ScreenshotInlineCard 用 `block.filter`，ScreenshotItem 用 `item.filter`
@@ -228,7 +308,12 @@ npx vite build                # 构建
 
 - 路由值：`"home"`, `"project-1"`, `"project-2"`, `"project-3"`（不是 "landing"）
 - `navigate(target, { scrollToBottom: true })` — 页面切换后滚到底部
-- Prev/Next 底部导航：无上/下一项时显示 "回到首页"，点击跳首页 footer CTA 区域
+- **桌面端**：Prev/Next 底部导航在页面底部，无上/下一项时显示 "回到首页"
+- **移动端**：
+  - 顶部：汉堡菜单（≡ 图标），点击展开居中下拉面板（项目链接 + 语言切换 + 深浅色切换）
+  - 底部：`position:fixed, bottom:0` 固定导航栏，两按钮 50/50 平分居中，height 60px
+  - BackToTop：`bottom: 70px`（在固定底部导航上方）
+  - 页面内容底部有 72px spacer 防止被导航遮挡
 
 ## EN 适配样式（2026-02-27）
 
