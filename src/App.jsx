@@ -1057,17 +1057,22 @@ function Footer({ isMobile, th }) {
             transition: "all 0.2s ease",
           }}
         >{"zulpkar97@gmail.com"}</a>
-        <span
-          title="Coming soon"
+        <a
+          href="/portfolio.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          onMouseEnter={() => setHBtn("pdf")}
+          onMouseLeave={() => setHBtn(null)}
           style={{
             fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
-            padding: "8px 20px", borderRadius: 2, cursor: "not-allowed",
-            display: "inline-flex", alignItems: "center",
-            border: `1px solid ${th.btnBorder}`,
-            color: th.btnText,
-            opacity: 0.4,
+            padding: "8px 20px", borderRadius: 2, cursor: "pointer",
+            textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6,
+            border: hBtn === "pdf" ? `1px solid ${th.btnHoverBorder}` : `1px solid ${th.btnBorder}`,
+            color: hBtn === "pdf" ? th.btnHoverText : th.btnText,
+            backgroundColor: hBtn === "pdf" ? th.btnHoverBg : "transparent",
+            transition: "all 0.2s ease",
           }}
-        >{"LinkedIn"}</span>
+        ><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>{"Portfolio PDF"}</a>
       </div>
       <p style={{ fontFamily: FONT_MONO, fontSize: 12, color: th.footerText, letterSpacing: "0.04em", marginTop: 16 }}>{"zulpkar.com"}</p>
     </footer>
@@ -1154,8 +1159,8 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, m
           )}
         </span>
       ) : (
-        /* ---- Desktop: inline items ---- */
-        <div style={{ display: "flex", alignItems: "center", gap: 6, justifyContent: "flex-end" }}>
+        /* ---- Desktop: single row ---- */
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           {PROJECTS.map((p) => {
             const isActive = currentPage === "project-" + p.id;
             const isItemHovered = hovered === p.id;
@@ -1176,20 +1181,20 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, m
               >{p.navName}</span>
             );
           })}
-          <span style={{ color: th.dividerColor, fontSize: 14, margin: "0 4px" }}>|</span>
+          <div style={{ width: 1, height: 16, background: th.borderLight, margin: "0 2px" }} />
           <span
             onClick={() => { if (onLangSwitch) onLangSwitch(); }}
             onMouseEnter={() => setHovered("lang")}
             onMouseLeave={() => setHovered(null)}
             style={{
-              fontFamily: FONT_MONO, fontSize: 14,
+              fontFamily: FONT_MONO, fontSize: 12,
               color: hovered === "lang" ? th.navHoverText : th.navText,
               cursor: "pointer", userSelect: "none", whiteSpace: "nowrap",
-              padding: "4px 10px", minWidth: 40, textAlign: "center", display: "inline-block",
+              padding: "4px 8px", display: "inline-flex", alignItems: "center", justifyContent: "center",
               backgroundColor: hovered === "lang" ? th.navHoverBg : "transparent",
               transition: "color 0.2s ease, background-color 0.2s ease",
             }}
-          >{lang === "en" ? "中文" : "EN"}</span>
+          >{lang === "en" ? "ZH" : "EN"}</span>
           <span
             onClick={() => setMode(mode === "light" ? "dark" : "light")}
             onMouseEnter={() => setHovered("mode")}
@@ -1200,7 +1205,25 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, m
               backgroundColor: hovered === "mode" ? th.navHoverBg : "transparent",
               transition: "background-color 0.2s ease", lineHeight: 0,
             }}
-          ><ModeIcon color={hovered === "mode" ? th.navHoverText : th.navText} /></span>
+          ><ModeIcon size={14} color={hovered === "mode" ? th.navHoverText : th.navText} /></span>
+          <a
+            href="/portfolio.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onMouseEnter={() => setHovered("pdf")}
+            onMouseLeave={() => setHovered(null)}
+            style={{
+              cursor: "pointer", userSelect: "none", padding: "4px 8px",
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              backgroundColor: hovered === "pdf" ? th.navHoverBg : "transparent",
+              transition: "background-color 0.2s ease", lineHeight: 0,
+              textDecoration: "none",
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={hovered === "pdf" ? th.navHoverText : th.navText} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </a>
         </div>
       )}
       </div>
@@ -1242,7 +1265,7 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, m
                   fontFamily: FONT_MONO, fontSize: 14, color: th.text,
                   cursor: "pointer", userSelect: "none", padding: "6px 10px",
                 }}
-              >{lang === "en" ? "中文" : "EN"}</span>
+              >{lang === "en" ? "ZH" : "EN"}</span>
               <span
                 onClick={() => setMode(mode === "light" ? "dark" : "light")}
                 style={{
@@ -1251,6 +1274,20 @@ function Nav({ currentPage, onNavigate, isMobile, lang, setLang, onLangSwitch, m
                   lineHeight: 0,
                 }}
               ><ModeIcon color={th.text} /></span>
+              <a
+                href="/portfolio.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  cursor: "pointer", userSelect: "none", padding: "6px 8px",
+                  display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  lineHeight: 0, textDecoration: "none",
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={th.text} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </a>
             </div>
           </div>
         </>
@@ -1917,20 +1954,27 @@ function HomePage({ onNavigate, isMobile, lang, th, mode }) {
             >
               {"zulpkar97@gmail.com"}
             </a>
-            <span
+            <a
               ref={btnLinkedinRef}
-              title="Coming soon"
+              href="/portfolio.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={(e) => { setHoveredBtn("pdf"); setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }); }}
+              onMouseMove={(e) => setBtnPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })}
+              onMouseLeave={() => setHoveredBtn(null)}
               style={{
                 fontFamily: FONT_BODY, fontSize: 14, fontWeight: 500,
-                padding: "12px 28px", borderRadius: 2, cursor: "not-allowed",
-                display: "inline-flex", alignItems: "center",
-                border: `1px solid ${th.btnBorder}`,
-                color: th.btnText,
-                opacity: 0.4,
+                padding: "12px 28px", borderRadius: 2, cursor: "pointer",
+                textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6,
+                border: hoveredBtn === "pdf" ? `1px solid ${th.btnHoverBorder}` : `1px solid ${th.btnBorder}`,
+                color: hoveredBtn === "pdf" ? th.btnHoverText : th.btnText,
+                backgroundColor: hoveredBtn === "pdf" ? th.btnHoverBg : "transparent",
+                transition: "all 0.2s ease",
               }}
             >
-              {"LinkedIn"}
-            </span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              {"Portfolio PDF"}
+            </a>
           </div>
 
           <p ref={detailBelowRef} style={{
@@ -5517,10 +5561,10 @@ function P2OldScreenshotsPage({ pageNum, pageStyle }) {
           { src: "images/case2-old-detail.png", label: "Old detail page", note: "Content and tools competing for space" },
           { src: "images/case2-old-editor.png", label: "Old editor", note: "Upload flow misaligned with in-game logic" },
         ].map((item, i) => (
-          <div key={i} style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ border: "1px solid #d4cdc2", borderRadius: 6, overflow: "hidden", backgroundColor: "#fff" }}>
-              <img alt={item.label} src={item.src} style={{ width: "100%", height: 560, objectFit: "cover", objectPosition: "center top", display: "block" }} />
-              <div style={{ padding: "8px 12px", borderTop: "1px solid #e8e3da", minHeight: 72 }}>
+          <div key={i} style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
+            <div style={{ flex: 1, border: "1px solid #d4cdc2", borderRadius: 6, overflow: "hidden", backgroundColor: "#fff", display: "flex", flexDirection: "column" }}>
+              <img alt={item.label} src={item.src} style={{ width: "100%", height: 560, objectFit: "cover", objectPosition: "center top", display: "block", flexShrink: 0 }} />
+              <div style={{ padding: "8px 12px", borderTop: "1px solid #e8e3da", flex: 1 }}>
                 <div style={{ fontFamily: "'Noto Sans SC', system-ui, sans-serif", fontSize: 11, fontWeight: 600, color: "#333", lineHeight: 1.4 }}>{item.label}</div>
                 <div style={{ fontFamily: "'Noto Sans SC', system-ui, sans-serif", fontSize: 10, color: "#777", lineHeight: 1.5, marginTop: 2 }}>{item.note}</div>
               </div>
@@ -5588,10 +5632,10 @@ function P2NewScreenshotsPage({ pageNum, pageStyle }) {
           { src: "images/case2-new-detail.png", label: "New detail page", note: "Content and tools cleanly separated" },
           { src: "images/case2-new-editor.jpg", label: "New editor", note: "Two-tier difficulty editor, aligned with in-game logic and user mental models", filter: "saturate(0.65) brightness(1.05)" },
         ].map((item, i) => (
-          <div key={i} style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ border: "1px solid #d4cdc2", borderRadius: 6, overflow: "hidden", backgroundColor: "#fff" }}>
-              <img alt={item.label} src={item.src} style={{ width: "100%", height: 560, objectFit: "cover", objectPosition: "center top", display: "block", filter: item.filter || "none" }} />
-              <div style={{ padding: "8px 12px", borderTop: "1px solid #e8e3da", minHeight: 72 }}>
+          <div key={i} style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
+            <div style={{ flex: 1, border: "1px solid #d4cdc2", borderRadius: 6, overflow: "hidden", backgroundColor: "#fff", display: "flex", flexDirection: "column" }}>
+              <img alt={item.label} src={item.src} style={{ width: "100%", height: 560, objectFit: "cover", objectPosition: "center top", display: "block", flexShrink: 0, filter: item.filter || "none" }} />
+              <div style={{ padding: "8px 12px", borderTop: "1px solid #e8e3da", flex: 1 }}>
                 <div style={{ fontFamily: "'Noto Sans SC', system-ui, sans-serif", fontSize: 11, fontWeight: 600, color: "#333", lineHeight: 1.4 }}>{item.label}</div>
                 <div style={{ fontFamily: "'Noto Sans SC', system-ui, sans-serif", fontSize: 10, color: "#777", lineHeight: 1.5, marginTop: 2 }}>{item.note}</div>
               </div>
@@ -6034,7 +6078,7 @@ function PrintPage({ lang, th }) {
             <div>{"zulpkar97@gmail.com"}</div>
             <div>{"zulpkar.com"}</div>
           </div>
-          <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: "#ccc", letterSpacing: "0.06em" }}>{"01 / 03"}</div>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: "#ccc", letterSpacing: "0.06em" }}>{"1"}</div>
         </div>
 
       </div>
